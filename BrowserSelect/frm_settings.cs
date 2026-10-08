@@ -237,6 +237,35 @@ namespace BrowserSelect
             MoveSelectedRule(1);
         }
 
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            gv_filters.EndEdit();
+            if (rulesBindingSource != null)
+                rulesBindingSource.EndEdit();
+
+            int rowIndex = gv_filters.CurrentCell == null
+                ? -1
+                : gv_filters.CurrentCell.RowIndex;
+            if (rowIndex < 0 || rowIndex >= rules.Count)
+                return;
+
+            int columnIndex = gv_filters.CurrentCell.ColumnIndex;
+            rules.RemoveAt(rowIndex);
+
+            if (rules.Count > 0)
+            {
+                int newIndex = Math.Min(rowIndex, rules.Count - 1);
+                if (columnIndex >= gv_filters.Columns.Count)
+                    columnIndex = 0;
+                gv_filters.ClearSelection();
+                gv_filters.CurrentCell = gv_filters.Rows[newIndex].Cells[columnIndex];
+                gv_filters.Rows[newIndex].Selected = true;
+            }
+
+            btn_apply.Enabled = true;
+            btn_cancel.Text = "Cancel";
+        }
+
         private void MoveSelectedRule(int offset)
         {
             gv_filters.EndEdit();

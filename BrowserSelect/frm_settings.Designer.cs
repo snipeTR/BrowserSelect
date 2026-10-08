@@ -37,6 +37,7 @@ namespace BrowserSelect {
             this.btn_apply = new System.Windows.Forms.Button();
             this.btn_move_up = new System.Windows.Forms.Button();
             this.btn_move_down = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
             this.gv_filters = new System.Windows.Forms.DataGridView();
             this.pattern = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.browser = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -119,12 +120,13 @@ namespace BrowserSelect {
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.linkLabel1);
             this.groupBox3.Controls.Add(this.btn_apply);
+            this.groupBox3.Controls.Add(this.btn_delete);
             this.groupBox3.Controls.Add(this.btn_move_down);
             this.groupBox3.Controls.Add(this.btn_move_up);
             this.groupBox3.Controls.Add(this.gv_filters);
             this.groupBox3.Location = new System.Drawing.Point(168, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(444, 360);
+            this.groupBox3.Size = new System.Drawing.Size(524, 360);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Auto Select Filters";
@@ -133,7 +135,7 @@ namespace BrowserSelect {
             // 
             this.btn_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_cancel.Location = new System.Drawing.Point(282, 331);
+            this.btn_cancel.Location = new System.Drawing.Point(362, 331);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 8;
@@ -158,7 +160,7 @@ namespace BrowserSelect {
             this.linkLabel1.LinkArea = new System.Windows.Forms.LinkArea(212, 235);
             this.linkLabel1.Location = new System.Drawing.Point(3, 16);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(438, 40);
+            this.linkLabel1.Size = new System.Drawing.Size(518, 40);
             this.linkLabel1.TabIndex = 6;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = resources.GetString("linkLabel1.Text");
@@ -169,7 +171,7 @@ namespace BrowserSelect {
             // 
             this.btn_apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_apply.Enabled = false;
-            this.btn_apply.Location = new System.Drawing.Point(363, 331);
+            this.btn_apply.Location = new System.Drawing.Point(443, 331);
             this.btn_apply.Name = "btn_apply";
             this.btn_apply.Size = new System.Drawing.Size(75, 23);
             this.btn_apply.TabIndex = 5;
@@ -198,6 +200,17 @@ namespace BrowserSelect {
             this.btn_move_down.Text = "Move Down";
             this.btn_move_down.UseVisualStyleBackColor = true;
             this.btn_move_down.Click += new System.EventHandler(this.btn_move_down_Click);
+            //
+            // btn_delete
+            //
+            this.btn_delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_delete.Location = new System.Drawing.Point(259, 331);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(75, 23);
+            this.btn_delete.TabIndex = 11;
+            this.btn_delete.Text = "Delete";
+            this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // gv_filters
             // 
@@ -210,7 +223,7 @@ namespace BrowserSelect {
             this.browser});
             this.gv_filters.Location = new System.Drawing.Point(6, 59);
             this.gv_filters.Name = "gv_filters";
-            this.gv_filters.Size = new System.Drawing.Size(432, 266);
+            this.gv_filters.Size = new System.Drawing.Size(512, 266);
             this.gv_filters.TabIndex = 1;
             this.gv_filters.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gv_filters_CellBeginEdit);
             this.gv_filters.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gv_filters_DataError);
@@ -280,7 +293,7 @@ namespace BrowserSelect {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;
-            this.ClientSize = new System.Drawing.Size(624, 381);
+            this.ClientSize = new System.Drawing.Size(704, 381);
             this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -320,6 +333,7 @@ namespace BrowserSelect {
         private System.Windows.Forms.Button btn_apply;
         private System.Windows.Forms.Button btn_move_up;
         private System.Windows.Forms.Button btn_move_down;
+        private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.DataGridViewTextBoxColumn pattern;
         private System.Windows.Forms.DataGridViewComboBoxColumn browser;
         private System.Windows.Forms.GroupBox groupBox4;
