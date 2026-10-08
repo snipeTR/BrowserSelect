@@ -30,6 +30,12 @@ namespace BrowserSelect
             ActiveControl = btn_close;
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            HelpText.PlaceCloseButton(this, btn_close);
+        }
+
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
@@ -49,6 +55,19 @@ namespace BrowserSelect
         public static string ForTextBox(string text)
         {
             return (text ?? "").Replace("\r\n", "\n").Replace("\n", "\r\n");
+        }
+
+        /// <summary>
+        /// puts the Close button in the free strip below the text (bottom padding of the window). This
+        /// window is designed at 150% and scaled down; with per-monitor DPI awareness (app.config) the
+        /// anchored button could otherwise end up over the text.
+        /// </summary>
+        public static void PlaceCloseButton(Form form, Button button)
+        {
+            var strip = form.Padding.Bottom;
+            var client = form.ClientSize;
+            button.Location = new Point(client.Width - form.Padding.Right - button.Width,
+                client.Height - strip + Math.Max(0, (strip - button.Height) / 2));
         }
 
         /// <summary>no selected text and the beginning of the help visible</summary>
