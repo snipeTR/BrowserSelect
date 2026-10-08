@@ -42,5 +42,48 @@ namespace Tests
                 Assert.AreEqual(check, test[1]);
             }
         }
+
+        private static bool Match(string type, string pattern, string url, string source = null)
+        {
+            var rule = new AutoMatchRule { MatchType = type, Pattern = pattern, Browser = "X" };
+            return rule.Matches(new LinkContext(url, source));
+        }
+
+        [TestMethod]
+        public void TestRuleMatchTypes()
+        {
+            Assert.IsTrue(Match("Domain", "*.google.com", "https://mail.google.com/x"));
+            Assert.IsFalse(Match("Domain", "github.com", "https://gitlab.com/"));
+            Assert.IsTrue(Match("URL", "github.com/snipeTR/*", "https://github.com/snipeTR/BrowserSelect"));
+            Assert.IsFalse(Match("URL", "github.com/other/*", "https://github.com/snipeTR/x"));
+            Assert.IsTrue(Match("Path", "/watch*", "https://www.youtube.com/watch?v=1"));
+            Assert.IsFalse(Match("Path", "/docs/*", "https://x.com/blog/a"));
+            Assert.IsTrue(Match("Keyword", "zoom, meet", "https://us02web.zoom.us/j/1"));
+            Assert.IsTrue(Match("Extension", "pdf, .zip", "https://x.com/a/file.PDF"));
+            Assert.IsTrue(Match("Extension", "html", "file:///C:/tmp/page.html"));
+            Assert.IsTrue(Match("Source App", "outlook.exe", "https://x.com", @"C:\Program Files\Office\OUTLOOK.EXE"));
+            Assert.IsTrue(Match("Source App", "slack", "https://x.com", @"C:\Users\a\slack.exe"));
+            Assert.IsFalse(Match("Source App", "outlook", "https://x.com", null));
+            Assert.IsTrue(Match("Regex", @"^https://(www\.)?example\.(com|org)/", "https://www.example.org/q"));
+            Assert.IsFalse(Match("Regex", "(", "https://x"));
+        }
+
+        [TestMethod]
+        public void TestRuleSerialization()
+        {
+            // rules saved by older versions only have pattern, browser and private flag
+            AutoMatchRule old = "a.com[#!][$~][?_]Chrome";
+            Assert.AreEqual("Domain", old.MatchType);
+            Assert.AreEqual("", old.Arguments);
+            Assert.IsFalse(old.IsPrivate);
+
+            AutoMatchRule rt = new AutoMatchRule
+            {
+                Pattern = "p", Browser = "B", IsPrivate = true, MatchType = "keyword", Arguments = "--x"
+            }.ToString();
+            Assert.AreEqual("Keyword", rt.MatchType);
+            Assert.AreEqual("--x", rt.Arguments);
+            Assert.IsTrue(rt.IsPrivate);
+        }
     }
 }

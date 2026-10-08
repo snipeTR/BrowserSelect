@@ -274,13 +274,15 @@ namespace BrowserSelect
                 open_url(uc.browser);
         }
 
-        public static void open_url(Browser b, bool privateMode = false)
+        public static void open_url(Browser b, bool privateMode = false, string extraArgs = null)
         {
             var args = new List<string>();
             if (!string.IsNullOrEmpty(b.additionalArgs))
                 args.Add(b.additionalArgs);
             if (privateMode)
                 args.Add(b.private_arg);
+            // custom flags from the matching rule (e.g. --incognito --disable-web-security)
+            args.AddRange(SplitArguments(extraArgs));
             if (System.IO.Path.GetFileName(b.exec).ToLowerInvariant().EndsWith("brave.exe"))
                 args.Add("--");
             args.Add(Program.url.Replace("\"", "%22"));
@@ -323,6 +325,18 @@ namespace BrowserSelect
                 Arguments = Program.Args2Str(args),
                 UseShellExecute = true
             });
+        }
+
+        /// <summary>splits a user typed argument string (supports "quoted values") into separate arguments</summary>
+        public static List<string> SplitArguments(string arguments)
+        {
+            var result = new List<string>();
+            if (string.IsNullOrWhiteSpace(arguments))
+                return result;
+            foreach (System.Text.RegularExpressions.Match m in
+                System.Text.RegularExpressions.Regex.Matches(arguments, @"(?:""[^""]*""|[^\s""])+"))
+                result.Add(m.Value.Replace("\"", ""));
+            return result;
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)

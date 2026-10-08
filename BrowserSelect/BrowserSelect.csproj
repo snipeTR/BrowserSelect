@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMatchRule.cs" />
     <Compile Include="Browser.cs" />
     <Compile Include="BrowserWindowFocus.cs" />
     <Compile Include="DefaultBrowserRegistration.cs" />
@@ -121,6 +122,7 @@
       <DependentUpon>frm_settings.cs</DependentUpon>
     </Compile>
     <Compile Include="IconExtractor.cs" />
+    <Compile Include="NativeProcess.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdateChecker.cs" />

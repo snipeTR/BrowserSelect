@@ -104,5 +104,17 @@ namespace BrowserSelect.Properties {
                 this["DefaultBrowser"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AltIgnoresRules {
+            get {
+                return ((bool)(this["AltIgnoresRules"]));
+            }
+            set {
+                this["AltIgnoresRules"] = value;
+            }
+        }
     }
 }

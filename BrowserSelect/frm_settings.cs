@@ -26,8 +26,6 @@ namespace BrowserSelect
         private BindingSource rulesBindingSource;
         private void frm_settings_Load(object sender, EventArgs e)
         {
-            ConfigurePrivateColumn();
-
             //check if browser select is the default browser or not
             //to disable/enable "set Browser select as default" button
             using (RegistryKey key = Registry.CurrentUser.OpenSubKey(
@@ -40,26 +38,48 @@ namespace BrowserSelect
                     btn_setdefault.Enabled = false;
             }
 
-            //populate list of browsers for Rule List ComboBox
-            var browsers = BrowserFinder.find();
-            var c = ((DataGridViewComboBoxColumn)gv_filters.Columns["browser"]);
-
-            foreach (Browser b in browsers)
-            {
-                browser_filter.Items.Add(b, !Settings.Default.HideBrowsers.Contains(b.Identifier));
-                c.Items.Add(b.ToString());
-            }
-            // add browser select to the list
-            c.Items.Add("display BrowserSelect");
+            // columns are defined in the designer; don't let the grid add one per rule property
+            gv_filters.AutoGenerateColumns = false;
+            matchType.Items.AddRange(AutoMatchRule.MatchTypes);
 
             //populate Rules in the gridview
             foreach (var rule in Settings.Default.AutoBrowser)
                 rules.Add(rule);
+
+            //populate list of browsers (browser filter + Rule List ComboBox)
+            PopulateBrowsers(BrowserFinder.find());
             rulesBindingSource = new BindingSource();
             rulesBindingSource.DataSource = rules;
             gv_filters.DataSource = rulesBindingSource;
 
             chk_check_update.Checked = Settings.Default.check_update != "nope";
+            chk_alt_ignore.Checked = Settings.Default.AltIgnoresRules;
+
+            // show which application opened the current link, to help writing "Source App" rules
+            if (!string.IsNullOrEmpty(Program.SourceApp))
+            {
+                lbl_source.Text = "Link opened from: " + System.IO.Path.GetFileName(Program.SourceApp);
+                toolTip1.SetToolTip(lbl_source, Program.SourceApp);
+            }
+        }
+
+        private void PopulateBrowsers(List<Browser> browsers)
+        {
+            var c = ((DataGridViewComboBoxColumn)gv_filters.Columns["browser"]);
+            c.Items.Clear();
+            browser_filter.Items.Clear();
+            foreach (Browser b in browsers)
+            {
+                browser_filter.Items.Add(b, !Settings.Default.HideBrowsers.Contains(b.Identifier));
+                c.Items.Add(b.ToString());
+            }
+            // add browser select and the "do nothing" option to the list
+            c.Items.Add(AutoMatchRule.DisplayBrowserSelect);
+            c.Items.Add(AutoMatchRule.IgnoreUrl);
+            // keep rules pointing at a browser that is no longer installed displayable/editable
+            foreach (var rule in rules)
+                if (!string.IsNullOrEmpty(rule.Browser) && !c.Items.Contains(rule.Browser))
+                    c.Items.Add(rule.Browser);
         }
 
         private void btn_setdefault_Click(object sender, EventArgs e)
@@ -211,20 +231,15 @@ namespace BrowserSelect
             btn_cancel.Text = "Cancel";
         }
 
-        private void ConfigurePrivateColumn()
+        private void gv_filters_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            if (gv_filters.Columns["Private"] != null)
+            if (!gv_filters.IsCurrentCellDirty)
                 return;
-
-            gv_filters.Columns.Add(new DataGridViewCheckBoxColumn
-            {
-                Name = "Private",
-                DataPropertyName = "IsPrivate",
-                HeaderText = "Private",
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells,
-                ThreeState = false,
-                Resizable = DataGridViewTriState.False
-            });
+            btn_apply.Enabled = true;
+            btn_cancel.Text = "Cancel";
+            // commit checkbox/combobox edits right away so they are not lost when clicking Apply
+            if (gv_filters.CurrentCell is DataGridViewCheckBoxCell || gv_filters.CurrentCell is DataGridViewComboBoxCell)
+                gv_filters.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
         private void btn_move_up_Click(object sender, EventArgs e)
@@ -344,74 +359,21 @@ namespace BrowserSelect
             Settings.Default.Save();
         }
 
+        private void chk_alt_ignore_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.AltIgnoresRules = chk_alt_ignore.Checked;
+            Settings.Default.Save();
+        }
+
         private void btn_refresh_Click(object sender, EventArgs e)
         {
-            List<Browser> browsers = BrowserFinder.find(true);
-            var c = ((DataGridViewComboBoxColumn)gv_filters.Columns["browser"]);
-            c.Items.Clear();
-            browser_filter.Items.Clear();
-            foreach (Browser b in browsers)
-            {
-                browser_filter.Items.Add(b, !Settings.Default.HideBrowsers.Contains(b.Identifier));
-                c.Items.Add(b.ToString());
-            }
-            // add browser select to the list
-            c.Items.Add("display BrowserSelect");
-
+            PopulateBrowsers(BrowserFinder.find(true));
             this.mainForm.updateBrowsers();
         }
 
         private void gv_filters_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             // to prevent System.ArgumentException: DataGridViewComboBoxCell value is not valid MessageBoxes
-        }
-    }
-    class AutoMatchRule
-    {
-        private const string Separator = "[#!][$~][?_]";
-
-        public string Pattern { get; set; }
-        public string Browser { get; set; }
-        public bool IsPrivate { get; set; }
-
-        public static implicit operator AutoMatchRule(System.String s)
-        {
-            var ss = (s ?? "").Split(new[] { Separator }, StringSplitOptions.None);
-            return new AutoMatchRule()
-            {
-                Pattern = ss.Length > 0 ? ss[0] : "",
-                Browser = ss.Length > 1 ? ss[1] : "",
-                IsPrivate = ss.Length > 2 &&
-                    (ss[2] == "1" || string.Equals(ss[2], "true", StringComparison.OrdinalIgnoreCase))
-            };
-        }
-
-        public override string ToString()
-        {
-            return Pattern + Separator + Browser + Separator + (IsPrivate ? "1" : "0");
-        }
-
-        public string error()
-        {
-            if (!string.IsNullOrEmpty(Pattern))
-                return string.Format("You forgot to select a Browser for '{0}' rule.", Pattern);
-            else if (!string.IsNullOrEmpty(Browser))
-                return "one of your rules has an Empty pattern. please refer to Help for more information.";
-            else
-                return "";
-        }
-
-        public bool valid()
-        {
-            try //because they may be null
-            {
-                return Browser.Length > 0 && Pattern.Length > 0;
-            }
-            catch
-            {
-                return false;
-            }
-
         }
     }
 }

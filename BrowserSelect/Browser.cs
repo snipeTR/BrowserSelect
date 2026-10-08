@@ -65,6 +65,11 @@ namespace BrowserSelect
     }
     static class BrowserFinder
     {
+        /// <summary>returns the browser with the given (display) name, or null if it is not installed.</summary>
+        public static Browser FindByName(string name)
+        {
+            return find().FirstOrDefault(b => b.name == name);
+        }
 
         public static string icon2String(Icon myIcon)
         {

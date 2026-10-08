@@ -13,6 +13,8 @@ namespace BrowserSelect
     static class Program
     {
         public static string url = "http://google.com/";
+        /// <summary>full path of the application that opened the current link (null if unknown)</summary>
+        public static string SourceApp;
 
         /// <summary>
         /// The main entry point for the application.
@@ -46,31 +48,32 @@ namespace BrowserSelect
             //checking if a url is being opened or app is ran from start menu (without arguments)
             if (args.Length > 0)
             {
-                //check to see if auto select rules match
                 url = args[0];
                 //add http:// to url if it is missing a protocol
-                var uri = new UriBuilder(url).Uri;
-                url = uri.AbsoluteUri;
+                var link = new LinkContext(url, NativeProcess.GetSourceApplicationPath());
+                url = link.Url;
+                SourceApp = link.SourceApp;
 
-                foreach (var rule in Settings.Default.AutoBrowser.Cast<string>()
-                    .Select(x => (AutoMatchRule)x)
-                    // to make sure * doesn't match when non-* rules exist.
-                    .OrderBy(x => ((x.Pattern.Contains("*")) ? 1 : 0) + (x.Pattern == "*" ? 1 : 0)))
+                // holding Alt while clicking a link skips the rules and always shows the selection dialogue
+                bool skipRules = Settings.Default.AltIgnoresRules && NativeProcess.IsAltKeyDown();
+
+                //check to see if auto select rules match
+                var rule = skipRules ? null : AutoMatchRule.FindMatch(
+                    Settings.Default.AutoBrowser.Cast<string>().Select(x => (AutoMatchRule)x), link);
+                if (rule != null)
                 {
-                    // matching the domain to pattern
-                    if (DoesDomainMatchPattern(uri.Host, rule.Pattern))
+                    if (rule.Browser == AutoMatchRule.IgnoreUrl)
+                        return; // rule says: do not open this link at all
+
+                    // "display BrowserSelect" simply falls through to the selection dialogue
+                    if (rule.Browser != AutoMatchRule.DisplayBrowserSelect)
                     {
-                        // ignore the display browser select entry to prevent app running itself
-                        if (rule.Browser != "display BrowserSelect")
+                        // if the browser no longer exists (uninstalled, imported settings, ...) show the dialogue
+                        var browser = BrowserFinder.FindByName(rule.Browser);
+                        if (browser != null)
                         {
-                            //todo: handle the case if browser is not found (e.g. imported settings or uninstalled browser)
-                            Form1.open_url((Browser)rule.Browser, rule.IsPrivate);
+                            Form1.open_url(browser, rule.IsPrivate, rule.Arguments);
                             return;
-                        }
-                        else
-                        {
-                            // simply break the loop to let the app display selection dialogue
-                            break;
                         }
                     }
                 }

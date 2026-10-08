@@ -57,17 +57,17 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 - [x] Make Settings persist across updates
 - [x] Shift-Click to open link in incognito/private mode
 - [ ] Option to display running browsers only
-- [ ] More Auto-Select rule options
-    - [ ] based on the source application
-    - [ ] based on file extension
-    - [ ] based on URL path
-    - [ ] based on keywords
-    - [ ] ignoring the URL as an option
-    - [ ] custom flags to browsers as an option (e.g. incognito mode or disable CSRF)
+- [x] More Auto-Select rule options
+    - [x] based on the source application
+    - [x] based on file extension
+    - [x] based on URL path
+    - [x] based on keywords
+    - [x] ignoring the URL as an option
+    - [x] custom flags to browsers as an option (e.g. incognito mode or disable CSRF)
 - [ ] export/import for rules/settings
 - [ ] Sorting browsers on the list
 - [ ] Custom Shortcuts
-- [ ] Ignoring the rules if Alt key is held down when clicking a link
+- [x] Ignoring the rules if Alt key is held down when clicking a link
 - [ ] an API to invoke BrowserSelect
 - [x] Bugfix for when Browser was launched with Maximize window state (browser select will launch maximized)
 - [ ] A browser extension to launch the correct browser based on the rules even if a link is clicked inside a browser
@@ -82,6 +82,13 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 - [ ] add file associations (e.g. .url files, or .html files)
 
 # Changelog
+
+Unreleased
+- Fixed BrowserSelect opening maximized when the link was clicked in an application running maximized
+- Auto Select rules can now match on Domain, URL, Path, Keyword, (file) Extension, Source App (the application the link was clicked in) or a Regex
+- Rules can pass custom arguments to the browser (e.g. `--incognito`) and can ignore a URL entirely ("ignore URL (do nothing)")
+- Rules pointing to a browser that is no longer installed now show the selection dialogue instead of crashing
+- Holding Alt while clicking a link skips the rules and shows the browser list (can be disabled in Settings)
 
 v1.4.1 [24/08/19]
 - Fixed couldn't hide chrome profiles separately (#52)
