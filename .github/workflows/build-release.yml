@@ -46,9 +46,18 @@ jobs:
         run: |
           $candidates = @("${env:ProgramFiles(x86)}\NSIS\makensis.exe", "$env:ProgramFiles\NSIS\makensis.exe")
           $makensis = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
-          if (-not $makensis) {
+          for ($i = 1; (-not $makensis) -and ($i -le 3); $i++) {
+            Write-Host "Installing NSIS via Chocolatey (attempt $i)"
             choco install nsis -y --no-progress
             $makensis = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+            if (-not $makensis) { Start-Sleep -Seconds 15 }
+          }
+          if (-not $makensis) {
+            Write-Host "Chocolatey failed; falling back to portable NSIS zip from SourceForge"
+            $zip = Join-Path $env:RUNNER_TEMP "nsis.zip"
+            Invoke-WebRequest -Uri "https://downloads.sourceforge.net/project/nsis/NSIS%203/3.11/nsis-3.11.zip" -OutFile $zip -UserAgent "Wget" -MaximumRetryCount 3 -RetryIntervalSec 10
+            Expand-Archive $zip -DestinationPath $env:RUNNER_TEMP -Force
+            $makensis = Get-ChildItem -Path $env:RUNNER_TEMP -Recurse -Filter makensis.exe | Select-Object -First 1 -ExpandProperty FullName
           }
           if (-not $makensis) { throw "makensis.exe not found" }
           Split-Path $makensis | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
