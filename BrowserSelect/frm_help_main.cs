@@ -30,15 +30,11 @@ namespace BrowserSelect
             ActiveControl = btn_close;
         }
 
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-            HelpText.PlaceCloseButton(this, btn_close);
-        }
-
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
+            // after the window got its final (DPI scaled) size
+            HelpText.PlaceCloseButton(this, btn_close);
             HelpText.ScrollToTop(txt_help);
         }
 
