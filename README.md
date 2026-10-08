@@ -69,7 +69,7 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 - [ ] Custom Shortcuts
 - [ ] Ignoring the rules if Alt key is held down when clicking a link
 - [ ] an API to invoke BrowserSelect
-- [ ] Bugfix for when Browser was launched with Maximize window state (browser select will launch maximized)
+- [x] Bugfix for when Browser was launched with Maximize window state (browser select will launch maximized)
 - [ ] A browser extension to launch the correct browser based on the rules even if a link is clicked inside a browser
 - [ ] support for portable browsers (adding browsers using a browse button rather than registry)
 - [ ] support for non-browser apps as an option (e.g. download managers)

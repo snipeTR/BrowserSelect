@@ -19,6 +19,41 @@ namespace BrowserSelect
         public Form1()
         {
             InitializeComponent();
+            // BrowserSelect is a small picker; it should never be maximized/minimized.
+            // (see EnsureNormalWindowState for why this is needed)
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        // Windows applies the launching application's STARTUPINFO.wShowWindow (e.g. SW_SHOWMAXIMIZED
+        // when the link was clicked in an app/shortcut that runs maximized) to the first window this
+        // process shows. That made BrowserSelect open maximized. Force it back to a normal, centered window.
+        private bool _shown;
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            EnsureNormalWindowState(true);
+            _shown = true;
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            EnsureNormalWindowState(!_shown);
+        }
+
+        private void EnsureNormalWindowState(bool includeMinimized)
+        {
+            if (!IsHandleCreated)
+                return;
+            if (WindowState == FormWindowState.Maximized ||
+                (includeMinimized && WindowState == FormWindowState.Minimized))
+            {
+                WindowState = FormWindowState.Normal;
+                center_me();
+            }
         }
 
         public void updateBrowsers()
