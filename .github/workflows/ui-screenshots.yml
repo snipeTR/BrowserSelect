@@ -4,6 +4,11 @@ name: UI screenshots (manual)
 # Settings and About windows in the Light and Dark themes as an artifact. Never creates a release.
 on:
   workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Commit/branch/tag to build (empty = the selected branch), e.g. b894d9a for the classic look before v1.5.0.0'
+        required: false
+        default: ''
 
 permissions:
   contents: read
@@ -13,6 +18,12 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.ref }}
+          fetch-depth: 0
+      - name: Screenshot script from the selected branch (also used for older commits)
+        shell: pwsh
+        run: git show "${{ github.sha }}:.github/scripts/ui-screenshots.ps1" | Out-File -Encoding utf8 "$env:RUNNER_TEMP\ui-screenshots.ps1"
       - uses: microsoft/setup-msbuild@v2
       - uses: NuGet/setup-nuget@v2
       - run: nuget restore BrowserSelect.sln
@@ -20,7 +31,7 @@ jobs:
       - name: Screenshots
         shell: pwsh
         timeout-minutes: 5
-        run: .github\scripts\ui-screenshots.ps1
+        run: '& "$env:RUNNER_TEMP\ui-screenshots.ps1"'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
