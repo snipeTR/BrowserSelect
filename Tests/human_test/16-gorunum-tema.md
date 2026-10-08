@@ -1,6 +1,6 @@
 # 16 – Windows 10/11 görünümü, Tema (Açık / Koyu / Windows'a uy) ve Mica
 
-> Bu reçete **UI test kopyası** (`snipeTR/BrowserSelect-ui-test`, v1.5.0.0) içindir. Değişiklikler sadece
+> Bu reçete **UI test kopyası** (`snipeTR/BrowserSelect-ui-test`, v1.5.1.0) içindir. Değişiklikler sadece
 > **görünümle** ilgilidir: pencerelerdeki kontrollerin yerleri, özellikler ve davranış aynı kalmalıdır.
 
 ## Amaç
@@ -16,10 +16,13 @@
 ## Ön koşullar
 
 - [00 – Hazırlık](00-hazirlik.md) tamam; UI test kopyasının draft release'indeki
-  `BrowserSelect-1.5.0.0-x64-Setup.exe` kurulu.
+  `BrowserSelect-1.5.1.0-x64-Setup.exe` kurulu.
   > Dikkat: test kurulumu ana BrowserSelect kurulumunun **üzerine** kurulur (aynı klasör, aynı ayarlar).
   > Test bitince ana repodaki son sürümü tekrar kurarak geri dönebilirsin.
-- Karşılaştırma için mümkünse eski sürümün (v1.4.6.0) ekran görüntülerini al.
+- Karşılaştırma için mümkünse eski sürümün (v1.4.6.0) ekran görüntülerini al. Otomatik karşılaştırma için:
+  GitHub → Actions → **UI screenshots (manual)** → *Run workflow* (boş bırak = yeni görünüm; `ref` alanına
+  `b894d9abc18ac61f8e2a15cb96d1f6a33a4b682c` yaz = eski görünüm). Sonuçlar *Artifacts → ui-screenshots* içinde
+  (Light/Dark, EN/TR; seçim penceresi, Ayarlar, Hakkında, ? yardım + kontrol konumları `.txt`).
 
 ## Test linkleri
 
@@ -33,7 +36,7 @@
    - [ ] Tarayıcı adı, kısayol satırı `( 1,c )` ve `Always` butonu kesilmeden okunuyor (Segoe UI).
    - [ ] `Always`, sağdaki dikey `About` / `Settings` butonları düz, ince kenarlı; üzerine gelince açık mavi oluyor.
 2. `Settings`'i aç.
-   - [ ] Kontroller eskisiyle aynı düzende; pencere orantılı olarak biraz daha büyük olabilir (yazı tipi büyüdüğü için).
+   - [ ] Kontroller ve pencere boyutu eskisiyle aynı (sadece görünüm değişti).
    - [ ] Hiçbir yazı kesik değil (özellikle grup başlıkları, `Hold Alt on a link to skip rules`, alt satırdaki butonlar).
    - [ ] Kural tablosu: başlıklar düz gri, çizgiler açık gri, seçili satır açık mavi + siyah yazı.
    - [ ] En altta `Theme:` + açılır liste + `Mica` görünüyor, `Language:`'ın hemen altında.

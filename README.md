@@ -2,7 +2,7 @@
 
 > **UI test copy (private).** This repository (`snipeTR/BrowserSelect-ui-test`) is a private, independent copy of
 > [snipeTR/BrowserSelect](https://github.com/snipeTR/BrowserSelect) (full history) used to try the Windows 10/11
-> visual refresh (v1.5.0.0, see the [Changelog](#changelog)) without touching the main project. Draft releases
+> visual refresh (v1.5.x, see the [Changelog](#changelog)) without touching the main project. Draft releases
 > here are test builds; if the new look is accepted, the same changes are applied to the main repository.
 > Note: the update checker of this build still looks at the main repository's releases.
 
@@ -76,6 +76,10 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 - [x] add file associations (e.g. .url files, or .html files)
 
 # Changelog
+
+v1.5.1.0 (UI test copy)
+- Checked on Windows (GitHub Actions runner, screenshots in Light/Dark, English/Turkish): the first try (v1.5.0.0) made the windows about 16% bigger because of the new font; now every window keeps its original size and control positions (verified control by control with UI Automation)
+- Short buttons (Refresh, Always) no longer clip their text; the help window's Close button stays below the text with per-monitor DPI; thin group box frames in the dark theme
 
 v1.5.0.0 (UI test copy)
 - Windows 10/11 look, appearance only: positions, features and behaviour are unchanged
