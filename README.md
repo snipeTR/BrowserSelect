@@ -87,6 +87,7 @@ v1.5.0.0 (UI test copy)
 - All appearance code in one place: `BrowserSelect/UI/Theme.cs` (called once per window); every step fails silently and keeps the classic look on older Windows
 - Help (**?** window) updated in English and Turkish; new texts in `Strings.resx` / `Strings.tr.resx`
 - Human test recipe: [Tests/human_test/16-gorunum-tema.md](Tests/human_test/16-gorunum-tema.md)
+- Manual GitHub Actions workflow **UI screenshots** (`.github/workflows/ui-screenshots.yml`, Actions → Run workflow): builds the app and uploads screenshots of the browser list, Settings and About in Light and Dark as an artifact (no release)
 
 v1.4.6.0
 - Updater: after the "update available" message BrowserSelect asks whether to download and run the new version. On *Yes* it finds the `BrowserSelect-<version>-x64-Setup.exe` asset of the latest published release via the GitHub API, downloads it to `%TEMP%` (progress window, can be cancelled) and starts the setup. Errors (no network, no installer in the release, incomplete file) show a message and offer to open the releases page instead

@@ -1,0 +1,29 @@
+name: UI screenshots (manual)
+
+# Manual check of the Windows 10/11 look: builds BrowserSelect and uploads screenshots of the browser list,
+# Settings and About windows in the Light and Dark themes as an artifact. Never creates a release.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  screenshots:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: microsoft/setup-msbuild@v2
+      - uses: NuGet/setup-nuget@v2
+      - run: nuget restore BrowserSelect.sln
+      - run: msbuild BrowserSelect\BrowserSelect.csproj /p:Configuration=Release /p:Platform=x64 /m /v:minimal
+      - name: Screenshots
+        shell: pwsh
+        timeout-minutes: 5
+        run: .github\scripts\ui-screenshots.ps1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ui-screenshots
+          path: screenshots-ci/*.png
+          if-no-files-found: warn
