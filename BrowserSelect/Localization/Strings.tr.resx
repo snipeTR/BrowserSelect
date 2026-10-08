@@ -151,6 +151,41 @@ Son sürüm: {0}
 Güncellemek için yeni sürümü şu adresten indirip kurun:
 {2}</value>
   </data>
+  <data name="Update_AskDownload" xml:space="preserve">
+    <value>Yeni sürümü ({0}) şimdi indirip çalıştırmak ister misiniz?
+
+Kurulum dosyası GitHub'dan indirilip başlatılacak. BrowserSelect hâlâ çalışıyorsa kurulum, programı kapatmak için izin isteyecek.</value>
+  </data>
+  <data name="Update_DownloadTitle" xml:space="preserve">
+    <value>BrowserSelect - Güncelleme indiriliyor</value>
+  </data>
+  <data name="Update_Finding" xml:space="preserve">
+    <value>Son sürümün kurulum dosyası aranıyor...</value>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>{0} indiriliyor...</value>
+  </data>
+  <data name="Update_Starting" xml:space="preserve">
+    <value>Kurulum başlatılıyor...</value>
+  </data>
+  <data name="Update_ErrorNetwork" xml:space="preserve">
+    <value>Güncelleme indirilemedi (ağ hatası: {0}).</value>
+  </data>
+  <data name="Update_ErrorNoAsset" xml:space="preserve">
+    <value>Son sürümde kurulum (.exe) dosyası bulunamadı.</value>
+  </data>
+  <data name="Update_ErrorIncomplete" xml:space="preserve">
+    <value>İndirilen kurulum dosyası eksik veya boş.</value>
+  </data>
+  <data name="Update_ErrorStart" xml:space="preserve">
+    <value>İndirilen kurulum dosyası başlatılamadı ({0}).</value>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>{0}
+
+Sürümler sayfasını açıp yeni sürümü elle indirmek ister misiniz?
+{1}</value>
+  </data>
   <data name="Main_About" xml:space="preserve">
     <value>Hakkında</value>
   </data>
@@ -542,7 +577,7 @@ AYARLAR
 - Yenile: BrowserSelect ilk çalıştığında kurulu tarayıcıları ve profilleri önbelleğe alır. Bir tarayıcı veya profil kurduktan ya da kaldırdıktan sonra tarayıcı listesinin yanındaki Yenile'ye tıklayın.
 - Varsayılan Tarayıcı: Varsayılan Yap; Dosya türü... BrowserSelect'i .html ve .url dosyaları için kaydeder.
 - Seçenekler: sadece çalışan tarayıcıları göster, Alt ile kuralları atla, kuralları ve ayarları .json dosyasına Dışa aktar... / dosyadan İçe aktar...
-- Güncelleme denetimi: GitHub'daki snipeTR/BrowserSelect sürümlerini denetler. Yeni sürüm çıktığında bu yardım düğmesi güncelleme düğmesine dönüşür.
+- Güncelleme denetimi: GitHub'daki snipeTR/BrowserSelect sürümlerini denetler. Yeni sürüm çıktığında bu yardım düğmesi güncelleme düğmesine dönüşür; güncelleme mesajından sonra BrowserSelect yeni kurulum dosyasını indirip çalıştırmayı önerir (BrowserSelect hâlâ açıksa kurulum, programı kapatmak için izin ister).
 - Dil (sol altta): arayüz dili; BrowserSelect bir sonraki açılışta bu dili kullanır.
 
 Çoğunlukla tek bir tarayıcı kullanıp bazı siteleri başka bir tarayıcıda açmak istiyorsanız (ör. her şey Firefox'ta, şirket sitesi IE'de), ana tarayıcınız için "*" kuralı, diğer siteler için de ayrı kurallar ekleyin.

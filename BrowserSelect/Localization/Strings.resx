@@ -161,6 +161,51 @@ To update, download and install the new version from:
 {2}</value>
     <comment>Update message. {0} = latest version, {1} = current version, {2} = releases page URL</comment>
   </data>
+  <data name="Update_AskDownload" xml:space="preserve">
+    <value>Do you want to download and run the new version ({0}) now?
+
+The installer will be downloaded from GitHub and started. If BrowserSelect is still running, the setup will ask for permission to close it.</value>
+    <comment>Asked after the "update available" message. {0} = latest version</comment>
+  </data>
+  <data name="Update_DownloadTitle" xml:space="preserve">
+    <value>BrowserSelect - Downloading update</value>
+    <comment>Title of the update download window</comment>
+  </data>
+  <data name="Update_Finding" xml:space="preserve">
+    <value>Looking for the installer of the latest release...</value>
+    <comment>Update download window: status while asking the GitHub API</comment>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>Downloading {0}...</value>
+    <comment>Update download window: status while downloading. {0} = installer file name</comment>
+  </data>
+  <data name="Update_Starting" xml:space="preserve">
+    <value>Starting the setup...</value>
+    <comment>Update download window: status after the download</comment>
+  </data>
+  <data name="Update_ErrorNetwork" xml:space="preserve">
+    <value>The update could not be downloaded (network error: {0}).</value>
+    <comment>Update error. {0} = technical error message</comment>
+  </data>
+  <data name="Update_ErrorNoAsset" xml:space="preserve">
+    <value>The latest release does not contain an installer (.exe) file.</value>
+    <comment>Update error</comment>
+  </data>
+  <data name="Update_ErrorIncomplete" xml:space="preserve">
+    <value>The downloaded installer is incomplete or empty.</value>
+    <comment>Update error</comment>
+  </data>
+  <data name="Update_ErrorStart" xml:space="preserve">
+    <value>The downloaded installer could not be started ({0}).</value>
+    <comment>Update error. {0} = technical error message</comment>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>{0}
+
+Do you want to open the releases page and download the new version manually?
+{1}</value>
+    <comment>Update error message (Yes/No). {0} = one of the Update_Error* texts, {1} = releases page URL</comment>
+  </data>
   <data name="Main_About" xml:space="preserve">
     <value>About</value>
     <comment>Selection window: vertical button on the right (max. ~10 characters)</comment>
@@ -669,7 +714,7 @@ SETTINGS
 - Refresh: BrowserSelect caches the list of installed browsers and profiles the first time it runs. After installing or removing a browser or profile, click Refresh next to the list of browsers.
 - Default Browser: Set as Default Browser; File types... registers BrowserSelect for .html and .url files.
 - Options: show only running browsers, skip the rules with Alt, Export... / Import... rules and settings to/from a .json file.
-- Update checker: checks the releases of snipeTR/BrowserSelect on GitHub. When a new version is available, this help button turns into an update button.
+- Update checker: checks the releases of snipeTR/BrowserSelect on GitHub. When a new version is available, this help button turns into an update button; after the update message BrowserSelect offers to download and run the new installer (the setup asks to close BrowserSelect if it is still running).
 - Language (bottom left): user interface language; it is used the next time BrowserSelect starts.
 
 If you mostly use one browser but want some websites to open in another one (e.g. Firefox for everything but IE for the company website), add a rule "*" for your main browser and separate rules for the other websites.

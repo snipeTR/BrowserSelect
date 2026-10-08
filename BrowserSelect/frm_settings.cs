@@ -678,7 +678,7 @@ namespace BrowserSelect
                     if (uc.Checked)
                     {
                         if (uc.Updated)
-                            MessageBox.Show(L10n.T("Common_UpdateAvailable", uc.LVer, uc.CVer, UpdateChecker.ReleasesUrl));
+                            UpdateInstaller.Offer(this, uc.LVer, uc.CVer);
                         else
                             MessageBox.Show(Strings.Settings_UpToDate);
                     }

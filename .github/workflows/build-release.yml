@@ -89,6 +89,42 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw "makensis failed" }
           Get-Item "BrowserSelect-$ver-x64-Setup.exe" | Format-List Name, Length
 
+      - name: Smoke test installer (silent install/uninstall closes a running BrowserSelect)
+        shell: pwsh
+        timeout-minutes: 5
+        run: |
+          $ver = "${{ steps.version.outputs.version }}"
+          $setup = (Resolve-Path "BrowserSelect\BrowserSelect-$ver-x64-Setup.exe").Path
+          $dir = Join-Path $env:RUNNER_TEMP "bs-smoke"
+          function Run-Wait($file, [string[]]$arguments) {
+            $p = Start-Process -FilePath $file -ArgumentList $arguments -PassThru
+            if (-not $p.WaitForExit(120000)) { $p.Kill(); throw "$file timed out" }
+            return $p.ExitCode
+          }
+          function Start-App {
+            $app = Start-Process -FilePath "$dir\BrowserSelect.exe" -PassThru
+            Start-Sleep -Seconds 5
+            if ($app.HasExited) { Write-Host "::warning::BrowserSelect exited on its own on the runner; close-running check skipped"; return $null }
+            return $app
+          }
+          # 1) fresh install
+          $code = Run-Wait $setup @("/S", "/D=$dir")
+          if ($code -ne 0) { throw "setup exit code $code" }
+          if (-not (Test-Path "$dir\BrowserSelect.exe")) { throw "BrowserSelect.exe not installed" }
+          # 2) install again while BrowserSelect is running -> setup must close it (silent mode = yes)
+          $app = Start-App
+          $code = Run-Wait $setup @("/S", "/D=$dir")
+          if ($code -ne 0) { throw "setup (app running) exit code $code" }
+          if ($app -and -not $app.HasExited) { throw "setup did not close the running BrowserSelect" }
+          if ($app) { Write-Host "setup closed the running BrowserSelect (pid $($app.Id))" }
+          # 3) uninstall while BrowserSelect is running -> uninstaller must close it
+          $app = Start-App
+          $code = Run-Wait "$dir\Uninstall.exe" @("/S", "_?=$dir")
+          if ($code -ne 0) { throw "uninstall exit code $code" }
+          if ($app -and -not $app.HasExited) { throw "uninstaller did not close the running BrowserSelect" }
+          if (Test-Path "$dir\BrowserSelect.exe") { throw "BrowserSelect.exe was not removed by the uninstaller" }
+          Write-Host "Installer smoke test passed"
+
       - name: Upload installer artifact
         uses: actions/upload-artifact@v4
         with:
