@@ -38,6 +38,14 @@ namespace BrowserSelect
             HelpText.ScrollToTop(txt_help);
         }
 
+        protected override void OnLayout(LayoutEventArgs e)
+        {
+            base.OnLayout(e);
+            // the Close button follows the bottom right corner itself instead of relying on its anchor
+            if (IsHandleCreated && Visible)
+                HelpText.PlaceCloseButton(this, btn_close);
+        }
+
         private void btn_close_Click(object sender, EventArgs e)
         {
             Close();
@@ -62,8 +70,10 @@ namespace BrowserSelect
         {
             var strip = form.Padding.Bottom;
             var client = form.ClientSize;
-            button.Location = new Point(client.Width - form.Padding.Right - button.Width,
+            var location = new Point(client.Width - form.Padding.Right - button.Width,
                 client.Height - strip + Math.Max(0, (strip - button.Height) / 2));
+            if (button.Location != location)
+                button.Location = location;
         }
 
         /// <summary>no selected text and the beginning of the help visible</summary>
