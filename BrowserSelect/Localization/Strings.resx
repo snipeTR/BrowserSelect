@@ -157,8 +157,9 @@
     <value>New Update Available!
 Current Version: {1}
 Last Version: {0}
-to Update download and install the new version from project's github.</value>
-    <comment>Update message. {0} = latest version, {1} = current version</comment>
+To update, download and install the new version from:
+{2}</value>
+    <comment>Update message. {0} = latest version, {1} = current version, {2} = releases page URL</comment>
   </data>
   <data name="Main_About" xml:space="preserve">
     <value>About</value>

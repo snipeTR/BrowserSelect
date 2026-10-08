@@ -71,6 +71,11 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 
 # Changelog
 
+v1.4.4.0
+- Update checker now looks at this fork's published releases (`https://github.com/snipeTR/BrowserSelect/releases/latest`) instead of upstream zumoshi/BrowserSelect
+- Versions are read from release tags like `v1.4.4.0-build.N` and compared numerically, so an update is only reported when the published release is newer than the installed version
+- The "update available" message shows the link to the releases page
+
 v1.4.3.0
 - Turkish translation (`Strings.tr.resx`): select *Türkçe (TR)* in Settings → Language, restart BrowserSelect
 - Texts of the Settings, browser Add/Edit and About windows, the About/Settings buttons and the messages moved to `Strings.resx`, so they follow the selected language (English stays the default)

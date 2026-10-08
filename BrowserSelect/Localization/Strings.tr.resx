@@ -148,7 +148,8 @@
     <value>Yeni güncelleme var!
 Mevcut sürüm: {1}
 Son sürüm: {0}
-Güncellemek için yeni sürümü projenin GitHub sayfasından indirip kurun.</value>
+Güncellemek için yeni sürümü şu adresten indirip kurun:
+{2}</value>
   </data>
   <data name="Main_About" xml:space="preserve">
     <value>Hakkında</value>

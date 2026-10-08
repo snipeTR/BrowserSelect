@@ -434,8 +434,7 @@ namespace BrowserSelect
         {
             var lv = Settings.Default.last_version;
             var cv = Application.ProductVersion;
-            cv = cv.Remove(cv.Length - 2);
-            MessageBox.Show(L10n.T("Common_UpdateAvailable", lv, cv));
+            MessageBox.Show(L10n.T("Common_UpdateAvailable", lv, cv, UpdateChecker.ReleasesUrl));
         }
     }
 }

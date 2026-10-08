@@ -137,7 +137,7 @@ namespace BrowserSelect.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New Update Available! Current Version: {1} Last Version: {0} to Update download and install the new ....
+        ///   Looks up a localized string similar to New Update Available! Current Version: {1} Last Version: {0} To update, download and install the new version ....
         /// </summary>
         internal static string Common_UpdateAvailable {
             get {
