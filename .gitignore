@@ -211,3 +211,6 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 /BrowserSelect/BrowserSelect.exe
+
+# NSIS installer output
+/BrowserSelect/BrowserSelect-*-Setup.exe
