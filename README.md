@@ -71,6 +71,13 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 
 # Changelog
 
+v1.4.6.0
+- Updater: after the "update available" message BrowserSelect asks whether to download and run the new version. On *Yes* it finds the `BrowserSelect-<version>-x64-Setup.exe` asset of the latest published release via the GitHub API, downloads it to `%TEMP%` (progress window, can be cancelled) and starts the setup. Errors (no network, no installer in the release, incomplete file) show a message and offer to open the releases page instead
+- Installer and uninstaller: if BrowserSelect is running (for the current user) they ask for permission to close it; *Yes* closes it (normally first, forced if needed), *No* shows "Please close the program and restart the setup" and quits. Silent mode (`/S`) closes it without asking
+- Installer is now available in English and Turkish (chosen automatically from the Windows display language)
+- All new texts in English and Turkish; GitHub Actions smoke-tests the installer's close-the-running-program flow on every build
+- Human test recipe: [Tests/human_test/15-guncelleme-indir-kur.md](Tests/human_test/15-guncelleme-indir-kur.md)
+
 v1.4.5.0
 - Settings → Auto Select Filters: the help link above the rule list opens this fork's rule documentation ([help/filters.md](help/filters.md)); with the Turkish UI it opens the Turkish page ([help/filters.tr.md](help/filters.tr.md))
 - `help/filters.md` rewritten for the new rule types (match types, Private, Arguments, ignore URL, priority order, Delete/Apply, Export/Import) and translated to Turkish
