@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>BrowserSelect - dosya iliskilendirme testi</title>
+  <style>
+    body { font-family: Segoe UI, Arial, sans-serif; margin: 3em; background: #f4f7fb; }
+    .ok { color: #0a7d32; font-size: 1.6em; font-weight: bold; }
+    code { background: #e6e9ef; padding: 2px 5px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <p class="ok">&#10004; BrowserSelect .html testi BASARILI</p>
+  <p>Bu sayfayi goruyorsan, <code>test-page.html</code> dosyasi BrowserSelect uzerinden
+     sectigin tarayicida acilmistir.</p>
+  <p>Adres cubugunda <code>file:///.../test-page.html</code> gorunmeli.</p>
+  <p id="ua"></p>
+  <script>document.getElementById('ua').textContent = 'Tarayici (User-Agent): ' + navigator.userAgent;</script>
+</body>
+</html>

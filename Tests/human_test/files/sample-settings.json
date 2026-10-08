@@ -1,0 +1,30 @@
+{
+  "format": "BrowserSelect-settings",
+  "version": 1,
+  "exported": "2026-10-08T17:30:00.0000000+03:00",
+  "rules": [
+    {
+      "match": "Domain",
+      "pattern": "example.net",
+      "browser": "ignore URL (do nothing)",
+      "private": false,
+      "arguments": ""
+    },
+    {
+      "match": "Keyword",
+      "pattern": "bs-import-test",
+      "browser": "display BrowserSelect",
+      "private": false,
+      "arguments": ""
+    },
+    {
+      "match": "Domain",
+      "pattern": "example.org",
+      "browser": "Olmayan Tarayici (test)",
+      "private": false,
+      "arguments": ""
+    }
+  ],
+  "sortMode": "Alphabetical",
+  "altIgnoresRules": true
+}

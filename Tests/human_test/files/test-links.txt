@@ -1,0 +1,45 @@
+BrowserSelect insan testi - test linkleri
+==========================================
+Bu linkleri tarayici DISINDAKI bir uygulamadan ac (Outlook, Teams, Slack, Word,
+Windows 11 Notepad, PowerShell vb.). Tarayici icinde tiklanan link BrowserSelect'e gitmez.
+
+Domain
+  https://example.com/
+  https://www.example.com/
+  https://example.org/
+  https://example.net/
+
+URL (wildcard)
+  https://github.com/snipeTR/BrowserSelect
+  https://github.com/snipeTR/BrowserSelect/releases
+  https://github.com/microsoft/vscode
+
+Path
+  https://example.com/docs/intro
+  https://example.com/docs/api/v2
+  https://example.com/blog/post-1
+
+Keyword
+  https://www.google.com/search?q=zoom+meeting
+  https://zoom.us/test
+  https://meet.google.com/
+  https://www.bing.com/search?q=hava+durumu
+
+Extension
+  https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
+  https://example.com/files/report.pdf
+  https://example.com/files/archive.zip
+  https://example.com/files/page.html
+
+Regex
+  https://example.com/regex-test
+  https://www.example.org/regex-test
+  https://example.net/regex-test
+
+Ignore URL / import testi
+  https://example.net/
+  https://example.com/?q=bs-import-test
+
+Arguments / Private
+  https://example.com/?bs-test=args
+  https://example.com/?bs-test=private
