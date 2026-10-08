@@ -16,6 +16,8 @@ namespace BrowserSelect
         public const string Repository = "snipeTR/BrowserSelect";
         public const string ReleasesUrl = "https://github.com/" + Repository + "/releases";
         public const string LatestReleaseUrl = ReleasesUrl + "/latest";
+        /// <summary>help folder of the repository (help/filters.md, help/filters.tr.md, ...)</summary>
+        public const string HelpUrl = "https://github.com/" + Repository + "/blob/master/help/";
 
         public String CVer => current_version;
         public String LVer => last_version;

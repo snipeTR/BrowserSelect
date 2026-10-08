@@ -118,22 +118,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label1.Text" xml:space="preserve">
-    <value>Match: what part of the link the Pattern is compared to:
+    <value>Every rule has five columns:
+
+Match: what part of the link the Pattern is compared to:
     - Domain: the host name, e.g. google.com, *.google.com, website.* or * (matches everything)
-    - URL: the whole link with * wildcards, e.g. github.com/myorg/* or https://*/login*
+    - URL: the whole link with * and ? wildcards, e.g. github.com/myorg/* or https://*/login*
     - Path: the path of the link, e.g. /watch* or /docs/*
-    - Keyword: comma separated words the link must contain, e.g. zoom, meet
+    - Keyword: comma separated words, the link must contain one of them, e.g. zoom, meet
     - Extension: file extension of the link or opened file, e.g. pdf, html
     - Source App: the application the link was clicked in, e.g. outlook.exe, slack, teams*
     - Regex: a .NET regular expression matched against the whole link
 
-Browser: what happens when the pattern matches: a browser to open the link with, "display BrowserSelect" to always ask, or "ignore URL (do nothing)" to not open the link at all.
-Private: open the link in a private/incognito window.  Arguments: extra command line flags for the browser (e.g. --incognito --disable-web-security).
+Pattern: the text the link is compared to (see Match). Comparisons are case-insensitive.
 
-Rules are checked from top to bottom (exact patterns before wildcard ones and * last); the first matching rule wins.
+Browser: what happens when the pattern matches: a browser to open the link with, "display BrowserSelect" to always show the browser list, or "ignore URL (do nothing)" to not open the link at all.
 
-Note: you can open BrowserSelect manually from startmenu to change the Filters. Hold Alt while clicking a link to skip the rules and choose manually.
+Private: open the link in a private/incognito window.
+Arguments: extra command line flags for the browser (e.g. --incognito --disable-web-security).
 
-Note 2: to Delete a rule select it and press the Delete button (or the " Del " key on keyboard).</value>
+Exact patterns are checked first, then wildcard patterns, and * last; rules with the same priority are checked from top to bottom (Move Up / Move Down). The first matching rule wins; if none matches, the browser list is shown.
+
+To delete a rule select it and click Delete (or press the Del key). Changes are saved with Apply.
+"Link opened from" (bottom of the window) shows the application to use in Source App rules.
+
+Note: you can open BrowserSelect manually from the Start menu to change the rules. Hold Alt while clicking a link to skip the rules and choose manually.
+More examples: the link above the rule list.</value>
   </data>
 </root>

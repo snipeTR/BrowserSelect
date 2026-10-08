@@ -118,28 +118,32 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label1.Text" xml:space="preserve">
-    <value>BrowserSelect helps you to use multiple browsers easier. when set as the default browser (you can do this from "settings" form), upon clicking on links outside a browser (e.g. IM, Email client, Pdf file, ...) you will be presented with a list of all installed browsers instead of one browser opening (which may not be the one you intended).
+    <value>BrowserSelect lets you choose a browser every time you click a link outside a browser (e-mail client, messenger, PDF file, ...) instead of always opening the same default browser. For this BrowserSelect must be set as the default browser: Settings &gt; Default Browser &gt; Set as Default Browser.
 
-in the main page you can see the Url being opened as Title of the window, here you have 3 options:
-1. press Esc key or click "x" to not open the URL 
-    (if you miss clicked or if a program wants to open a web page after installation but you don't want to see it)
-2. choose a browser to open the URL in
-    you can do this by :
-        1. clicking on the browser Icon
-                note: Holding the Shift key while clicking will open the link in incognito mode
-        2. pressing any of the letters displayed in parentheses under its icon on keyboard
-            (which is its index counting from the left , and first letter of each of its names words,
-             or the custom shortcut keys set in Settings &gt; Browsers &gt; Edit...)
-3. choose to always open such links in a browser by clicking on "always" button
-    this will create a rule for all subdomains of current URL, to undo this open BrowserSelect via start menu,
-    go to settings, highlight the rule for that domain, press Delete key on keyboard then press apply
+THE BROWSER LIST
+The link being opened is shown in the title of the window. You can:
+1. Press Esc or click "x" to not open the link at all
+   (e.g. if you clicked by mistake or a program opens a web page after installation).
+2. Open the link in a browser:
+   - click the icon of the browser, or
+   - press one of the keys shown in parentheses under the icon: 1-9 by position, letters from the name of the browser, or the custom shortcut keys set in Settings &gt; Browsers &gt; Edit...
+   - hold Shift while clicking (or pressing the key) to open the link in a private/incognito window; right-click an icon and choose "Open in Private Window" for the same.
+3. Click "Always" under a browser to always open links of this website in that browser. This creates a rule in Settings &gt; Auto Select Filters; to undo it, select the rule there, click Delete and then Apply.
 
-Hold the Alt key while clicking a link (in another application) to ignore your rules and choose the browser manually.
+AUTO SELECT RULES
+In Settings &gt; Auto Select Filters BrowserSelect can choose the browser automatically, by domain, whole URL, path, keyword, file extension, the application the link was clicked in, or a regular expression. A rule can also open the link in a private window, pass extra arguments to the browser, show the browser list anyway, or ignore the link. Click "Help" in that section for details, or the link above the rule list for examples.
+Hold Alt while clicking a link (in another application) to skip all rules and choose the browser manually (can be turned off in Settings &gt; Options).
 
-In Settings &gt; Browsers you can add portable browsers (Add...), set a custom icon/shortcut/arguments (Edit...), and change the order of the browsers (Sort). Settings &gt; Options can show only running browsers and export/import your settings.
+SETTINGS
+- Browsers: Add... a portable browser or any program; Edit... the name, icon, shortcut keys and arguments of a browser; Remove a manually added browser; uncheck a browser to hide it; change the order with Sort (Manual uses the arrow buttons).
+- Refresh: BrowserSelect caches the list of installed browsers and profiles the first time it runs. After installing or removing a browser or profile, click Refresh next to the list of browsers.
+- Default Browser: Set as Default Browser; File types... registers BrowserSelect for .html and .url files.
+- Options: show only running browsers, skip the rules with Alt, Export... / Import... rules and settings to/from a .json file.
+- Update checker: checks the releases of snipeTR/BrowserSelect on GitHub. When a new version is available, this help button turns into an update button.
+- Language (bottom left): user interface language; it is used the next time BrowserSelect starts.
 
-The first time you run BrowserSelect it caches your list of installed browsers and profiles. To update the browsers and profiles, go to Settings and hit the "Refresh" button next to the list of browsers.
+If you mostly use one browser but want some websites to open in another one (e.g. Firefox for everything but IE for the company website), add a rule "*" for your main browser and separate rules for the other websites.
 
-if you don't regularly use many browsers but instead open all URLs in one browser but one specific website in another (e.g. firefox for normal use but IE for company website) you can go to settings and add a rule for "*" to open with preferred browser then add separate rules for websites to open in other browsers. refer to "Help" section in settings for more details.</value>
+You can always open BrowserSelect from the Start menu to change its settings.</value>
   </data>
 </root>

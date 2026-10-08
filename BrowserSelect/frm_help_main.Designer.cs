@@ -29,20 +29,26 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_help_main));
-            this.label1 = new System.Windows.Forms.Label();
+            this.txt_help = new System.Windows.Forms.TextBox();
             this.btn_close = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // txt_help
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(936, 555);
-            this.label1.TabIndex = 0;
-            this.label1.Text = resources.GetString("label1.Text");
+            this.txt_help.BackColor = System.Drawing.SystemColors.Control;
+            this.txt_help.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_help.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt_help.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_help.Location = new System.Drawing.Point(12, 12);
+            this.txt_help.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.txt_help.Multiline = true;
+            this.txt_help.Name = "txt_help";
+            this.txt_help.ReadOnly = true;
+            this.txt_help.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txt_help.Size = new System.Drawing.Size(912, 487);
+            this.txt_help.TabIndex = 0;
+            this.txt_help.TabStop = false;
+            this.txt_help.Text = resources.GetString("label1.Text");
             // 
             // btn_close
             // 
@@ -64,18 +70,20 @@
             this.CancelButton = this.btn_close;
             this.ClientSize = new System.Drawing.Size(936, 555);
             this.Controls.Add(this.btn_close);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txt_help);
+            this.Padding = new System.Windows.Forms.Padding(12, 12, 12, 56);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frm_help_main";
             this.Text = "BrowserSelect - Help";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txt_help;
         private System.Windows.Forms.Button btn_close;
     }
 }

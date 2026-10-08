@@ -12,8 +12,6 @@ namespace BrowserSelect
 {
     public partial class frm_About : Form
     {
-        /// <summary>bitcoin address of the original author (Bor691)</summary>
-        private const string BitcoinOriginal = "1BA5Ndo24jtRgTEsvmGkrqRWTaJS4F3zNh";
         /// <summary>bitcoin address of the maintainer of this fork (snipeTR)</summary>
         private const string BitcoinFork = "bc1q3jqugh66ctwzqr7tqjafunlpaaejqgt265rwjq";
 
@@ -27,28 +25,28 @@ namespace BrowserSelect
         private void ApplyTexts()
         {
             Text = Strings.About_Title;
-            lbl_coded.Text = Strings.About_CodedBy;
-            lbl_contact.Text = Strings.About_Contact;
-            lbl_github.Text = Strings.About_GitHub;
             lbl_fork.Text = Strings.About_ForkBy;
             lbl_fork_github.Text = Strings.About_GitHub;
             label3.Text = Strings.About_Description;
             label5.Text = Strings.About_DonateText;
             lbl_btc_fork.Text = Strings.About_DonateFork;
-            label6.Text = Strings.About_DonateOriginal;
             btn_btc_fork_copy.Text = Strings.About_CopyAddress;
-            btn_bitcoin_copy.Text = Strings.About_CopyAddress;
+            btn_original.Text = Strings.About_OriginalButton;
             btn_close.Text = Strings.Common_Close;
             lnk_btc_fork.Text = BitcoinFork;
-            linkLabel3.Text = BitcoinOriginal;
 
             // links follow their (translated) labels
-            PlaceAfter(lbl_contact, linkLabel1);
-            PlaceAfter(lbl_github, linkLabel2);
             PlaceAfter(lbl_fork_github, lnk_fork);
         }
 
-        private static void PlaceAfter(Label label, Control link)
+        /// <summary>credits of the original project (Bor691 / zumoshi) are shown in their own window</summary>
+        private void btn_original_Click(object sender, EventArgs e)
+        {
+            using (var frm = new frm_about_original())
+                frm.ShowDialog(this);
+        }
+
+        internal static void PlaceAfter(Label label, Control link)
         {
             link.Left = label.Left + label.PreferredWidth + 2;
         }
@@ -61,14 +59,22 @@ namespace BrowserSelect
             lab_ver.Left = label1.Left + label1.PreferredWidth;
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("Mailto:me@bor691.ir");
-        }
-
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(((LinkLabel)sender).Text);
+            OpenLink(((LinkLabel)sender).Text);
+        }
+
+        /// <summary>opens a web/mail link; ignores the error if there is no application for it</summary>
+        internal static void OpenLink(string target)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(target);
+            }
+            catch (Exception)
+            {
+                // no default browser / mail client
+            }
         }
 
         private void frm_About_KeyDown(object sender, KeyEventArgs e)
@@ -77,24 +83,14 @@ namespace BrowserSelect
                 Close();
         }
 
-        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            OpenBitcoinUri(BitcoinOriginal);
-        }
-
         private void lnk_btc_fork_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenBitcoinUri(BitcoinFork);
+            OpenBitcoinUri(BitcoinFork, btn_btc_fork_copy);
         }
 
         private void btn_close_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void btn_bitcoin_copy_Click(object sender, EventArgs e)
-        {
-            CopyAddress(BitcoinOriginal, btn_bitcoin_copy);
         }
 
         private void btn_btc_fork_copy_Click(object sender, EventArgs e)
@@ -103,7 +99,7 @@ namespace BrowserSelect
         }
 
         /// <summary>opens the bitcoin: link in the installed wallet; copies the address if there is none</summary>
-        private void OpenBitcoinUri(string address)
+        internal static void OpenBitcoinUri(string address, Button copyButton)
         {
             try
             {
@@ -112,12 +108,12 @@ namespace BrowserSelect
             catch (Exception)
             {
                 // no application handles bitcoin: links
-                CopyAddress(address, address == BitcoinFork ? btn_btc_fork_copy : btn_bitcoin_copy);
+                CopyAddress(address, copyButton);
             }
         }
 
         /// <summary>copies the address to the clipboard and shows "Copied!" on the button for a moment</summary>
-        private void CopyAddress(string address, Button button)
+        internal static void CopyAddress(string address, Button button)
         {
             try
             {

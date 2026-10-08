@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using BrowserSelect.Localization;
 
 namespace BrowserSelect
 {
@@ -89,11 +90,11 @@ namespace BrowserSelect
         public string error()
         {
             if (!string.IsNullOrEmpty(Pattern) && string.IsNullOrEmpty(Browser))
-                return string.Format("You forgot to select a Browser for '{0}' rule.", Pattern);
+                return L10n.T("Rule_NoBrowser", Pattern);
             else if (string.IsNullOrEmpty(Pattern) && !string.IsNullOrEmpty(Browser))
-                return "one of your rules has an Empty pattern. please refer to Help for more information.";
+                return Strings.Rule_EmptyPattern;
             else if (MatchType == MatchRegex && !IsValidRegex(Pattern))
-                return string.Format("'{0}' is not a valid regular expression.", Pattern);
+                return L10n.T("Rule_InvalidRegex", Pattern);
             else
                 return "";
         }

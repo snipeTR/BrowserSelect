@@ -71,6 +71,13 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 
 # Changelog
 
+v1.4.5.0
+- Settings → Auto Select Filters: the help link above the rule list opens this fork's rule documentation ([help/filters.md](help/filters.md)); with the Turkish UI it opens the Turkish page ([help/filters.tr.md](help/filters.tr.md))
+- `help/filters.md` rewritten for the new rule types (match types, Private, Arguments, ignore URL, priority order, Delete/Apply, Export/Import) and translated to Turkish
+- About: the window now shows the fork maintainer snipeTR first; the original project's credits (Bor691, e-mail, zumoshi/BrowserSelect link and Bor691's bitcoin address) moved behind the new **Original project info...** button
+- The two help windows (the **?** button of the browser list and **Help** in Settings) were updated for the new features, translated to Turkish and made scrollable
+- "Always" button, "Open in Private Window" menu and the rule validation messages are translated too
+
 v1.4.4.0
 - Update checker now looks at this fork's published releases (`https://github.com/snipeTR/BrowserSelect/releases/latest`) instead of upstream zumoshi/BrowserSelect
 - Versions are read from release tags like `v1.4.4.0-build.N` and compared numerically, so an update is only reported when the published release is newer than the installed version

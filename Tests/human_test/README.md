@@ -29,7 +29,8 @@ testlerde kullanılan `tools\bs-open.ps1` yardımcı betiği orada anlatılıyor
 | 10 | Özel tarayıcı ikonları | [10-ozel-ikon.md](10-ozel-ikon.md) | 5 dk |
 | 11 | Kural silme butonu (`Delete`, Move Down’un sağında) | [11-kural-silme-butonu.md](11-kural-silme-butonu.md) | 5 dk |
 | 12 | Türkçe dil (Settings → Language) | [12-turkce-dil.md](12-turkce-dil.md) | 15 dk |
-| 13 | Hakkında: snipeTR ve bitcoin bağış adresi | [13-hakkinda-bagis.md](13-hakkinda-bagis.md) | 5 dk |
+| 13 | Hakkında: snipeTR, bağış adresi, Orijinal proje bilgileri butonu | [13-hakkinda-bagis.md](13-hakkinda-bagis.md) | 5 dk |
+| 14 | Yardım pencereleri (EN/TR) ve kural dokümanı linki | [14-yardim-ve-kural-dokumani.md](14-yardim-ve-kural-dokumani.md) | 10 dk |
 
 ## Klasör içeriği
 

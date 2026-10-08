@@ -109,7 +109,7 @@ namespace BrowserSelect
         private void AddPrivateContextMenu(BrowserUC browserControl)
         {
             var menu = new ContextMenuStrip();
-            var privateItem = new ToolStripMenuItem("Open in Private Window");
+            var privateItem = new ToolStripMenuItem(Strings.Main_OpenPrivate);
             Browser targetBrowser = browserControl.browser;
             privateItem.Click += (sender, args) => open_url(targetBrowser, true);
             menu.Items.Add(privateItem);

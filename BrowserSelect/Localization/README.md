@@ -11,8 +11,11 @@ English is the default and the fallback language. Shipped translations:
 The Settings, browser Add/Edit and About windows set their texts in an `ApplyTexts()` method called right
 after `InitializeComponent()`; the English texts in the `*.Designer.cs` files are only design-time defaults.
 The vertical About/Settings buttons, message boxes and file dialogs use `Strings.*` / `L10n.T(...)` directly.
-Not translated yet: the two help windows (`frm_help_main`, `frm_help_rules`) and the names of rule match types
-and sort modes (these are stored values that the program compares).
+The help windows (`frm_help_main`, `frm_help_rules`) and the "Original project" window read their texts from
+`HelpMain_Text`, `HelpRules_Text` and `AboutOriginal_*`. `Settings_RulesHelpFile` is the page of the GitHub `help`
+folder opened by the link above the rule list (`filters.md`, Turkish: `filters.tr.md`).
+Not translated on purpose: the names of rule match types, the special rule targets (`display BrowserSelect`,
+`ignore URL (do nothing)`) and sort modes, because these are stored values that the program compares.
 
 ## Pieces
 

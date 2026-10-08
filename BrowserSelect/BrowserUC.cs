@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using BrowserSelect.Localization;
 
 namespace BrowserSelect {
     public partial class BrowserUC : UserControl {
@@ -14,6 +15,7 @@ namespace BrowserSelect {
             InitializeComponent();
 
             this.browser = b;
+            button1.Text = Strings.Main_Always;
 
             name.Text = b.name;
             // number keys 1-9 select by position; letters come from the name or the custom shortcut

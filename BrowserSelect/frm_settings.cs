@@ -498,8 +498,18 @@ namespace BrowserSelect
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            // open RuleList help
-            Process.Start("https://github.com/zumoshi/BrowserSelect/blob/master/help/filters.md");
+            // open the rule list help (help/filters.md of this fork, translated page if there is one)
+            var file = Strings.Settings_RulesHelpFile;
+            if (string.IsNullOrWhiteSpace(file) || file.IndexOfAny(new[] { '/', '\\', ':' }) >= 0)
+                file = "filters.md";
+            try
+            {
+                Process.Start(UpdateChecker.HelpUrl + file.Trim());
+            }
+            catch (Exception)
+            {
+                // no default browser / association: nothing else to do
+            }
         }
 
         private void btn_apply_Click(object sender, EventArgs e)

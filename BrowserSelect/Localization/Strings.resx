@@ -562,7 +562,7 @@ Please make sure you are connected to internet.</value>
     <comment>Original author line</comment>
   </data>
   <data name="About_Contact" xml:space="preserve">
-    <value>Contact me:</value>
+    <value>Contact:</value>
     <comment>Label in front of the e-mail link</comment>
   </data>
   <data name="About_GitHub" xml:space="preserve">
@@ -598,5 +598,111 @@ this is an open source application with GPL v2 license. feel free to report bugs
   <data name="About_Copied" xml:space="preserve">
     <value>Copied!</value>
     <comment>Shown on the copy button for a moment after copying</comment>
+  </data>
+  <data name="Main_Always" xml:space="preserve">
+    <value>Always</value>
+    <comment>Button under every browser in the selection window (125 px)</comment>
+  </data>
+  <data name="Main_OpenPrivate" xml:space="preserve">
+    <value>Open in Private Window</value>
+    <comment>Right-click menu of a browser in the selection window</comment>
+  </data>
+  <data name="Rule_NoBrowser" xml:space="preserve">
+    <value>You forgot to select a Browser for '{0}' rule.</value>
+    <comment>{0} = rule pattern</comment>
+  </data>
+  <data name="Rule_EmptyPattern" xml:space="preserve">
+    <value>one of your rules has an Empty pattern. please refer to Help for more information.</value>
+    <comment>Rule validation message</comment>
+  </data>
+  <data name="Rule_InvalidRegex" xml:space="preserve">
+    <value>'{0}' is not a valid regular expression.</value>
+    <comment>{0} = rule pattern</comment>
+  </data>
+  <data name="Settings_RulesHelpFile" xml:space="preserve">
+    <value>filters.md</value>
+    <comment>File in the help folder of the GitHub repository opened by the link above the rule list (translated help page; use filters.md if there is none)</comment>
+  </data>
+  <data name="About_OriginalButton" xml:space="preserve">
+    <value>Original project info...</value>
+    <comment>About window: button that opens the original project credits</comment>
+  </data>
+  <data name="AboutOriginal_Title" xml:space="preserve">
+    <value>BrowserSelect: Original project</value>
+    <comment>Title of the original project info window</comment>
+  </data>
+  <data name="AboutOriginal_Header" xml:space="preserve">
+    <value>Original project</value>
+    <comment>Heading of the original project info window</comment>
+  </data>
+  <data name="AboutOriginal_Intro" xml:space="preserve">
+    <value>This version of BrowserSelect is a fork of the original BrowserSelect project created by Bor691 (zumoshi on GitHub). The original project is open source software released under the GPL v2 license. Many thanks to its author for the work this fork is built on.</value>
+    <comment>Text of the original project info window</comment>
+  </data>
+  <data name="HelpMain_Title" xml:space="preserve">
+    <value>BrowserSelect - Help</value>
+    <comment>Title of the help window (? button of the selection window)</comment>
+  </data>
+  <data name="HelpRules_Title" xml:space="preserve">
+    <value>BrowserSelect - Auto Select rules help</value>
+    <comment>Title of the rules help window (Help button in Settings)</comment>
+  </data>
+  <data name="HelpMain_Text" xml:space="preserve">
+    <value>BrowserSelect lets you choose a browser every time you click a link outside a browser (e-mail client, messenger, PDF file, ...) instead of always opening the same default browser. For this BrowserSelect must be set as the default browser: Settings &gt; Default Browser &gt; Set as Default Browser.
+
+THE BROWSER LIST
+The link being opened is shown in the title of the window. You can:
+1. Press Esc or click "x" to not open the link at all
+   (e.g. if you clicked by mistake or a program opens a web page after installation).
+2. Open the link in a browser:
+   - click the icon of the browser, or
+   - press one of the keys shown in parentheses under the icon: 1-9 by position, letters from the name of the browser, or the custom shortcut keys set in Settings &gt; Browsers &gt; Edit...
+   - hold Shift while clicking (or pressing the key) to open the link in a private/incognito window; right-click an icon and choose "Open in Private Window" for the same.
+3. Click "Always" under a browser to always open links of this website in that browser. This creates a rule in Settings &gt; Auto Select Filters; to undo it, select the rule there, click Delete and then Apply.
+
+AUTO SELECT RULES
+In Settings &gt; Auto Select Filters BrowserSelect can choose the browser automatically, by domain, whole URL, path, keyword, file extension, the application the link was clicked in, or a regular expression. A rule can also open the link in a private window, pass extra arguments to the browser, show the browser list anyway, or ignore the link. Click "Help" in that section for details, or the link above the rule list for examples.
+Hold Alt while clicking a link (in another application) to skip all rules and choose the browser manually (can be turned off in Settings &gt; Options).
+
+SETTINGS
+- Browsers: Add... a portable browser or any program; Edit... the name, icon, shortcut keys and arguments of a browser; Remove a manually added browser; uncheck a browser to hide it; change the order with Sort (Manual uses the arrow buttons).
+- Refresh: BrowserSelect caches the list of installed browsers and profiles the first time it runs. After installing or removing a browser or profile, click Refresh next to the list of browsers.
+- Default Browser: Set as Default Browser; File types... registers BrowserSelect for .html and .url files.
+- Options: show only running browsers, skip the rules with Alt, Export... / Import... rules and settings to/from a .json file.
+- Update checker: checks the releases of snipeTR/BrowserSelect on GitHub. When a new version is available, this help button turns into an update button.
+- Language (bottom left): user interface language; it is used the next time BrowserSelect starts.
+
+If you mostly use one browser but want some websites to open in another one (e.g. Firefox for everything but IE for the company website), add a rule "*" for your main browser and separate rules for the other websites.
+
+You can always open BrowserSelect from the Start menu to change its settings.</value>
+    <comment>Text of the help window opened with the ? button of the selection window</comment>
+  </data>
+  <data name="HelpRules_Text" xml:space="preserve">
+    <value>Every rule has five columns:
+
+Match: what part of the link the Pattern is compared to:
+    - Domain: the host name, e.g. google.com, *.google.com, website.* or * (matches everything)
+    - URL: the whole link with * and ? wildcards, e.g. github.com/myorg/* or https://*/login*
+    - Path: the path of the link, e.g. /watch* or /docs/*
+    - Keyword: comma separated words, the link must contain one of them, e.g. zoom, meet
+    - Extension: file extension of the link or opened file, e.g. pdf, html
+    - Source App: the application the link was clicked in, e.g. outlook.exe, slack, teams*
+    - Regex: a .NET regular expression matched against the whole link
+
+Pattern: the text the link is compared to (see Match). Comparisons are case-insensitive.
+
+Browser: what happens when the pattern matches: a browser to open the link with, "display BrowserSelect" to always show the browser list, or "ignore URL (do nothing)" to not open the link at all.
+
+Private: open the link in a private/incognito window.
+Arguments: extra command line flags for the browser (e.g. --incognito --disable-web-security).
+
+Exact patterns are checked first, then wildcard patterns, and * last; rules with the same priority are checked from top to bottom (Move Up / Move Down). The first matching rule wins; if none matches, the browser list is shown.
+
+To delete a rule select it and click Delete (or press the Del key). Changes are saved with Apply.
+"Link opened from" (bottom of the window) shows the application to use in Source App rules.
+
+Note: you can open BrowserSelect manually from the Start menu to change the rules. Hold Alt while clicking a link to skip the rules and choose manually.
+More examples: the link above the rule list.</value>
+    <comment>Text of the rules help window (Help button in Settings &gt; Auto Select Filters)</comment>
   </data>
 </root>

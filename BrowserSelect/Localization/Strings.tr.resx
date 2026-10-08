@@ -484,4 +484,96 @@ Bu, GPL v2 lisanslı açık kaynak bir uygulamadır. Hataları bildirmekten veya
   <data name="About_Copied" xml:space="preserve">
     <value>Kopyalandı!</value>
   </data>
+  <data name="Main_Always" xml:space="preserve">
+    <value>Her zaman</value>
+  </data>
+  <data name="Main_OpenPrivate" xml:space="preserve">
+    <value>Gizli pencerede aç</value>
+  </data>
+  <data name="Rule_NoBrowser" xml:space="preserve">
+    <value>'{0}' kuralı için tarayıcı seçmeyi unuttunuz.</value>
+  </data>
+  <data name="Rule_EmptyPattern" xml:space="preserve">
+    <value>Kurallarınızdan birinin deseni boş. Ayrıntılar için Yardım'a bakın.</value>
+  </data>
+  <data name="Rule_InvalidRegex" xml:space="preserve">
+    <value>'{0}' geçerli bir düzenli ifade (regex) değil.</value>
+  </data>
+  <data name="Settings_RulesHelpFile" xml:space="preserve">
+    <value>filters.tr.md</value>
+  </data>
+  <data name="About_OriginalButton" xml:space="preserve">
+    <value>Orijinal proje bilgileri...</value>
+  </data>
+  <data name="AboutOriginal_Title" xml:space="preserve">
+    <value>BrowserSelect: Orijinal proje</value>
+  </data>
+  <data name="AboutOriginal_Header" xml:space="preserve">
+    <value>Orijinal proje</value>
+  </data>
+  <data name="AboutOriginal_Intro" xml:space="preserve">
+    <value>Bu BrowserSelect sürümü, Bor691 (GitHub'da zumoshi) tarafından geliştirilen orijinal BrowserSelect projesinin bir fork'udur. Orijinal proje GPL v2 lisansıyla yayınlanmış açık kaynak bir yazılımdır. Bu fork'un üzerine kurulduğu emek için geliştiricisine çok teşekkürler.</value>
+  </data>
+  <data name="HelpMain_Title" xml:space="preserve">
+    <value>BrowserSelect - Yardım</value>
+  </data>
+  <data name="HelpRules_Title" xml:space="preserve">
+    <value>BrowserSelect - Otomatik seçim kuralları yardımı</value>
+  </data>
+  <data name="HelpMain_Text" xml:space="preserve">
+    <value>BrowserSelect, tarayıcı dışındaki bir yerde (e-posta istemcisi, mesajlaşma uygulaması, PDF dosyası, ...) bir linke her tıkladığınızda, linkin hep aynı varsayılan tarayıcıda açılması yerine tarayıcıyı seçmenizi sağlar. Bunun için BrowserSelect varsayılan tarayıcı olmalıdır: Ayarlar &gt; Varsayılan Tarayıcı &gt; Varsayılan Yap.
+
+TARAYICI LİSTESİ
+Açılan link pencerenin başlığında görünür. Şunları yapabilirsiniz:
+1. Linki hiç açmamak için Esc tuşuna basın veya "x"e tıklayın
+   (ör. yanlışlıkla tıkladıysanız ya da bir program kurulumdan sonra web sayfası açmak istiyorsa).
+2. Linki bir tarayıcıda açın:
+   - tarayıcının simgesine tıklayın veya
+   - simgenin altında parantez içinde gösterilen tuşlardan birine basın: sırasına göre 1-9, tarayıcı adındaki harfler ya da Ayarlar &gt; Tarayıcılar &gt; Düzenle... ile belirlenen özel kısayol tuşları.
+   - linki gizli/incognito pencerede açmak için tıklarken (veya tuşa basarken) Shift tuşunu basılı tutun; aynısı için simgeye sağ tıklayıp "Gizli pencerede aç"ı da seçebilirsiniz.
+3. Bu sitedeki linkleri hep o tarayıcıda açmak için tarayıcının altındaki "Her zaman" düğmesine tıklayın. Bu, Ayarlar &gt; Otomatik Seçim Kuralları bölümünde bir kural oluşturur; geri almak için kuralı orada seçin, Sil'e ve ardından Uygula'ya tıklayın.
+
+OTOMATİK SEÇİM KURALLARI
+Ayarlar &gt; Otomatik Seçim Kuralları bölümünde BrowserSelect tarayıcıyı alan adına, linkin tamamına, yoluna, anahtar kelimeye, dosya uzantısına, linke tıklanan uygulamaya veya düzenli ifadeye (regex) göre otomatik seçebilir. Bir kural linki gizli pencerede de açabilir, tarayıcıya ek parametreler verebilir, yine de tarayıcı listesini gösterebilir veya linki yok sayabilir. Ayrıntılar için o bölümdeki "Yardım" düğmesine, örnekler için kural listesinin üstündeki linke tıklayın.
+Tüm kuralları atlayıp tarayıcıyı elle seçmek için (başka bir uygulamada) linke tıklarken Alt tuşunu basılı tutun (Ayarlar &gt; Seçenekler bölümünden kapatılabilir).
+
+AYARLAR
+- Tarayıcılar: Ekle... ile taşınabilir (portable) bir tarayıcı veya herhangi bir program ekleyin; Düzenle... ile tarayıcının adını, simgesini, kısayol tuşlarını ve parametrelerini değiştirin; Kaldır ile elle eklenen bir tarayıcıyı silin; gizlemek için tarayıcının işaretini kaldırın; sırayı Sıra ile değiştirin (Manual sıralamada ok düğmeleri kullanılır).
+- Yenile: BrowserSelect ilk çalıştığında kurulu tarayıcıları ve profilleri önbelleğe alır. Bir tarayıcı veya profil kurduktan ya da kaldırdıktan sonra tarayıcı listesinin yanındaki Yenile'ye tıklayın.
+- Varsayılan Tarayıcı: Varsayılan Yap; Dosya türü... BrowserSelect'i .html ve .url dosyaları için kaydeder.
+- Seçenekler: sadece çalışan tarayıcıları göster, Alt ile kuralları atla, kuralları ve ayarları .json dosyasına Dışa aktar... / dosyadan İçe aktar...
+- Güncelleme denetimi: GitHub'daki snipeTR/BrowserSelect sürümlerini denetler. Yeni sürüm çıktığında bu yardım düğmesi güncelleme düğmesine dönüşür.
+- Dil (sol altta): arayüz dili; BrowserSelect bir sonraki açılışta bu dili kullanır.
+
+Çoğunlukla tek bir tarayıcı kullanıp bazı siteleri başka bir tarayıcıda açmak istiyorsanız (ör. her şey Firefox'ta, şirket sitesi IE'de), ana tarayıcınız için "*" kuralı, diğer siteler için de ayrı kurallar ekleyin.
+
+Ayarları değiştirmek için BrowserSelect'i her zaman Başlat menüsünden açabilirsiniz.</value>
+  </data>
+  <data name="HelpRules_Text" xml:space="preserve">
+    <value>Her kuralın beş sütunu vardır:
+
+Eşleşme: Desenin linkin hangi kısmıyla karşılaştırılacağı:
+    - Domain: alan adı, ör. google.com, *.google.com, website.* veya * (her şeyle eşleşir)
+    - URL: * ve ? joker karakterleriyle linkin tamamı, ör. github.com/myorg/* veya https://*/login*
+    - Path: linkin yolu, ör. /watch* veya /docs/*
+    - Keyword: virgülle ayrılmış kelimeler; link bunlardan birini içermelidir, ör. zoom, meet
+    - Extension: linkin veya açılan dosyanın uzantısı, ör. pdf, html
+    - Source App: linke tıklanan uygulama, ör. outlook.exe, slack, teams*
+    - Regex: linkin tamamıyla karşılaştırılan .NET düzenli ifadesi
+
+Desen: linkin karşılaştırıldığı metin (bkz. Eşleşme). Karşılaştırmalar büyük/küçük harfe duyarsızdır.
+
+Tarayıcı: desen eşleşince ne olacağı: linkin açılacağı tarayıcı, her zaman tarayıcı listesini göstermek için "display BrowserSelect" veya linki hiç açmamak için "ignore URL (do nothing)".
+
+Gizli: linki gizli/incognito pencerede açar.
+Argümanlar: tarayıcıya verilecek ek komut satırı parametreleri (ör. --incognito --disable-web-security).
+
+Önce tam desenler, sonra joker karakterli desenler, en son * denetlenir; aynı öncelikteki kurallar yukarıdan aşağıya denetlenir (Yukarı / Aşağı). İlk eşleşen kural uygulanır; hiçbiri eşleşmezse tarayıcı listesi gösterilir.
+
+Bir kuralı silmek için seçip Sil'e tıklayın (veya Del tuşuna basın). Değişiklikler Uygula ile kaydedilir.
+Pencerenin altındaki "Linki açan" bilgisi, Source App kurallarında kullanılacak uygulamayı gösterir.
+
+Not: Kuralları değiştirmek için BrowserSelect'i Başlat menüsünden elle açabilirsiniz. Kuralları atlayıp elle seçmek için linke tıklarken Alt tuşunu basılı tutun.
+Daha fazla örnek: kural listesinin üstündeki link.</value>
+  </data>
 </root>

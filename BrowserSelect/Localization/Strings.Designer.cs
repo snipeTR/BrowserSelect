@@ -1010,7 +1010,7 @@ namespace BrowserSelect.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contact me:.
+        ///   Looks up a localized string similar to Contact:.
         /// </summary>
         internal static string About_Contact {
             get {
@@ -1087,6 +1087,132 @@ namespace BrowserSelect.Localization {
         internal static string About_Copied {
             get {
                 return ResourceManager.GetString("About_Copied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Always.
+        /// </summary>
+        internal static string Main_Always {
+            get {
+                return ResourceManager.GetString("Main_Always", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open in Private Window.
+        /// </summary>
+        internal static string Main_OpenPrivate {
+            get {
+                return ResourceManager.GetString("Main_OpenPrivate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You forgot to select a Browser for '{0}' rule..
+        /// </summary>
+        internal static string Rule_NoBrowser {
+            get {
+                return ResourceManager.GetString("Rule_NoBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to one of your rules has an Empty pattern. please refer to Help for more information..
+        /// </summary>
+        internal static string Rule_EmptyPattern {
+            get {
+                return ResourceManager.GetString("Rule_EmptyPattern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to '{0}' is not a valid regular expression..
+        /// </summary>
+        internal static string Rule_InvalidRegex {
+            get {
+                return ResourceManager.GetString("Rule_InvalidRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to filters.md.
+        /// </summary>
+        internal static string Settings_RulesHelpFile {
+            get {
+                return ResourceManager.GetString("Settings_RulesHelpFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Original project info....
+        /// </summary>
+        internal static string About_OriginalButton {
+            get {
+                return ResourceManager.GetString("About_OriginalButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BrowserSelect: Original project.
+        /// </summary>
+        internal static string AboutOriginal_Title {
+            get {
+                return ResourceManager.GetString("AboutOriginal_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Original project.
+        /// </summary>
+        internal static string AboutOriginal_Header {
+            get {
+                return ResourceManager.GetString("AboutOriginal_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This version of BrowserSelect is a fork of the original BrowserSelect project created by Bor691 (zum....
+        /// </summary>
+        internal static string AboutOriginal_Intro {
+            get {
+                return ResourceManager.GetString("AboutOriginal_Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BrowserSelect - Help.
+        /// </summary>
+        internal static string HelpMain_Title {
+            get {
+                return ResourceManager.GetString("HelpMain_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BrowserSelect - Auto Select rules help.
+        /// </summary>
+        internal static string HelpRules_Title {
+            get {
+                return ResourceManager.GetString("HelpRules_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BrowserSelect lets you choose a browser every time you click a link outside a browser (e-mail client....
+        /// </summary>
+        internal static string HelpMain_Text {
+            get {
+                return ResourceManager.GetString("HelpMain_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Every rule has five columns:.
+        /// </summary>
+        internal static string HelpRules_Text {
+            get {
+                return ResourceManager.GetString("HelpRules_Text", resourceCulture);
             }
         }
     }

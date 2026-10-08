@@ -110,6 +110,12 @@
     <Compile Include="frm_browser_edit.Designer.cs">
       <DependentUpon>frm_browser_edit.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_about_original.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_about_original.Designer.cs">
+      <DependentUpon>frm_about_original.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_help_main.cs">
       <SubType>Form</SubType>
     </Compile>
