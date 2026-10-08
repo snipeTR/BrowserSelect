@@ -271,6 +271,8 @@ namespace BrowserSelect.UI
             {
                 // flat buttons lay out their text inside the border with some padding; keep a safe margin
                 var size = TextRenderer.MeasureText(text.Length > 0 ? text : "Ag", font);
+                if (c.Height < SmallButtonHeight)
+                    return size.Width + 6 <= c.Width && size.Height + 2 <= c.Height;
                 return size.Width + 16 <= c.Width && size.Height + 6 <= c.Height;
             }
             var label = (Label)c;
@@ -468,12 +470,50 @@ namespace BrowserSelect.UI
             }
             b.FlatStyle = FlatStyle.Flat;
             b.UseVisualStyleBackColor = false;
+            if (b.Height < SmallButtonHeight && !(b is VButton))
+            {
+                // flat buttons keep a few pixels of padding around the text, which clips it in short
+                // buttons (Refresh, Always); those draw their text themselves (see PaintSmallButton)
+                var info = Info(b);
+                if (!info.PaintHooked)
+                {
+                    info.PaintHooked = true;
+                    b.Paint += PaintSmallButton;
+                }
+            }
             b.FlatAppearance.BorderSize = 1;
             b.FlatAppearance.BorderColor = p.ButtonBorder;
             b.FlatAppearance.MouseOverBackColor = p.ButtonHover;
             b.FlatAppearance.MouseDownBackColor = p.ButtonPressed;
             b.BackColor = p.ButtonBack;
             b.ForeColor = p.Text;
+        }
+
+        /// <summary>buttons lower than this get their text painted without the flat button's inner padding</summary>
+        private const int SmallButtonHeight = 23;
+
+        private static void PaintSmallButton(object sender, PaintEventArgs e)
+        {
+            try
+            {
+                var b = (Button)sender;
+                if (b.FlatStyle != FlatStyle.Flat || string.IsNullOrEmpty(b.Text))
+                    return;
+                var p = Current;
+                var hot = b.Enabled && b.ClientRectangle.Contains(b.PointToClient(Control.MousePosition));
+                var pressed = hot && (Control.MouseButtons & MouseButtons.Left) != 0;
+                var back = pressed ? b.FlatAppearance.MouseDownBackColor
+                    : hot ? b.FlatAppearance.MouseOverBackColor
+                    : b.BackColor;
+                var inner = Rectangle.Inflate(b.ClientRectangle, -1, -1);
+                using (var brush = new SolidBrush(back))
+                    e.Graphics.FillRectangle(brush, inner);
+                TextRenderer.DrawText(e.Graphics, b.Text, b.Font, inner,
+                    b.Enabled ? b.ForeColor : p.SubtleText,
+                    TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine |
+                    TextFormatFlags.NoPadding | TextFormatFlags.EndEllipsis | TextFormatFlags.HidePrefix);
+            }
+            catch (Exception) { }
         }
 
         /// <summary>accent color for a button while it is busy (e.g. "check now" in Settings); false restores the theme</summary>
