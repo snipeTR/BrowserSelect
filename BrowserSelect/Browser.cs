@@ -37,18 +37,18 @@ namespace BrowserSelect
         {
             get
             {
-                var file = exec.Split(new[] { '/', '\\' }).Last().ToLower();
-                if (file.Contains("chrome") || file.Contains("chromium"))
-                    return "-incognito";
+                var file = Path.GetFileName(exec).ToLowerInvariant();
+                if (file.Contains("chrome") || file.Contains("chromium") || file.Contains("brave"))
+                    return "--incognito";
+                if (file.Contains("firefox"))
+                    return "-private-window";
+                if (file.Contains("msedge") || file.Contains("edge"))
+                    return "--inprivate";
                 if (file.Contains("opera"))
                     return "-newprivatetab";
                 if (file.Contains("iexplore"))
                     return "-private";
-                if (file.Contains("edge"))
-                    return "-private";
-                if (file.Contains("launcher"))
-                    return "-private";
-                return "-private-window";  // FF
+                return "-private-window";
             }
         }
 
@@ -121,6 +121,16 @@ namespace BrowserSelect
                 using (RegistryKey hkcu = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32))
                     browsers.AddRange(find(hkcu));
 
+                if (Environment.Is64BitOperatingSystem)
+                {
+                    using (RegistryKey hklm64 = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+                        browsers.AddRange(find(hklm64));
+                    using (RegistryKey hkcu64 = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64))
+                        browsers.AddRange(find(hkcu64));
+                }
+
+                AddStandaloneChromium(browsers);
+
                 //remove myself
                 browsers = browsers.Where(x => Path.GetFileName(x.exec).ToLower() !=
                      Path.GetFileName(Application.ExecutablePath).ToLower()).ToList();
@@ -128,11 +138,15 @@ namespace BrowserSelect
                 browsers = browsers.GroupBy(browser => browser.exec)
                     .Select(group => group.First()).ToList();
 
-                //check for edge chromium profiles
-                AddChromeProfiles(browsers, "Microsoft Edge", @"Microsoft\Edge\User Data", "Edge Profile.ico");
-                
-                //Check for Chrome Profiles
-                AddChromeProfiles(browsers, "Google Chrome", @"Google\Chrome\User Data", "Google Profile.ico");
+                string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                AddChromiumProfiles(browsers, new[] { "Microsoft Edge" },
+                    Path.Combine(localAppData, @"Microsoft\Edge\User Data"), "Edge Profile.ico");
+                AddChromiumProfiles(browsers, new[] { "Google Chrome" },
+                    Path.Combine(localAppData, @"Google\Chrome\User Data"), "Google Profile.ico");
+                AddChromiumProfiles(browsers, new[] { "Brave", "Brave Browser" },
+                    Path.Combine(localAppData, @"BraveSoftware\Brave-Browser\User Data"), "Brave Profile.ico");
+                AddChromiumProfiles(browsers, new[] { "Chromium" },
+                    Path.Combine(localAppData, @"Chromium\User Data"), "Google Profile.ico");
 
                 System.Diagnostics.Debug.WriteLine(JsonConvert.SerializeObject(browsers));
                 Properties.Settings.Default.BrowserList = JsonConvert.SerializeObject(browsers);
@@ -142,47 +156,128 @@ namespace BrowserSelect
             return browsers;
         }
 
-        private static void AddChromeProfiles(List<Browser> browsers, string BrowserName, string VendorDataFolder, string IconFilename)
+        private static void AddStandaloneChromium(List<Browser> browsers)
         {
-            Browser BrowserChrome = browsers.FirstOrDefault(x => x.name == BrowserName);
-            if (BrowserChrome != null)
+            string programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            string programFilesX86 = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var candidates = new[]
             {
-                string ChromeUserDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), VendorDataFolder);
-                List<string> ChromeProfiles = FindChromeProfiles(ChromeUserDataDir, IconFilename);
+                Path.Combine(programFiles, @"Chromium\Application\chrome.exe"),
+                Path.Combine(programFiles, @"Chromium\chrome.exe"),
+                Path.Combine(programFilesX86, @"Chromium\Application\chrome.exe"),
+                Path.Combine(programFilesX86, @"Chromium\chrome.exe"),
+                Path.Combine(localAppData, @"Chromium\Application\chrome.exe"),
+                Path.Combine(localAppData, @"Chromium\chrome.exe")
+            };
 
-                if (ChromeProfiles.Count > 1)
+            foreach (string path in candidates.Distinct(StringComparer.OrdinalIgnoreCase))
+            {
+                if (!File.Exists(path) || browsers.Any(x =>
+                    string.Equals(x.exec, path, StringComparison.OrdinalIgnoreCase)))
+                    continue;
+
+                browsers.Add(new Browser
                 {
-                    //add the Chrome instances and remove the default one
-                    foreach (string Profile in ChromeProfiles)
+                    name = "Chromium",
+                    exec = path,
+                    icon = icon2String(IconExtractor.fromFile(path))
+                });
+            }
+        }
+
+        private static void AddChromiumProfiles(
+            List<Browser> browsers, string[] browserNames, string userDataDirectory, string profileIconFile)
+        {
+            Browser baseBrowser = browsers.FirstOrDefault(x => browserNames.Contains(x.name,
+                StringComparer.OrdinalIgnoreCase));
+            if (baseBrowser == null || !Directory.Exists(userDataDirectory))
+                return;
+
+            var profiles = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            string localStatePath = Path.Combine(userDataDirectory, "Local State");
+            try
+            {
+                if (File.Exists(localStatePath))
+                {
+                    JObject localState = JObject.Parse(File.ReadAllText(localStatePath));
+                    JObject infoCache = localState.SelectToken("profile.info_cache") as JObject;
+                    if (infoCache != null)
                     {
-                        browsers.Add(new Browser()
+                        foreach (JProperty profile in infoCache.Properties())
                         {
-                            name = BrowserName + " (" + GetChromeProfileName(ChromeUserDataDir + "\\" + Profile) + ")",
-                            exec = BrowserChrome.exec,
-                            icon = icon2String(IconExtractor.fromFile(ChromeUserDataDir + "\\" + Profile + "\\" + IconFilename)),
-                            additionalArgs = String.Format("--profile-directory={0}", Profile)
-                        });
+                            if (!Directory.Exists(Path.Combine(userDataDirectory, profile.Name)))
+                                continue;
+                            string name = (string)profile.Value["name"];
+                            profiles[profile.Name] = string.IsNullOrWhiteSpace(name) ? profile.Name : name;
+                        }
                     }
-                    browsers.Remove(BrowserChrome);
-                    browsers = browsers.OrderBy(x => x.name).ToList();
                 }
             }
-        }
-        private static string GetChromeProfileName(string FullProfilePath)
-        {
-            dynamic ProfilePreferences = JObject.Parse(File.ReadAllText(FullProfilePath + @"\Preferences"));
-            return ProfilePreferences.profile.name;
-        }
-        
-        private static List<string> FindChromeProfiles(string ChromeUserDataDir, string IconFilename)
-        {
-            List<string> Profiles = new List<string>();
-            var ProfileDirs = Directory.GetFiles(ChromeUserDataDir, IconFilename, SearchOption.AllDirectories).Select(Path.GetDirectoryName);
-            foreach (var Profile in ProfileDirs)
+            catch
             {
-                Profiles.Add(Profile.Substring(ChromeUserDataDir.Length + 1));
+                // Profile directory discovery below is the fallback when Local State is unavailable.
             }
-            return Profiles;
+
+            string[] profileDirectories;
+            try
+            {
+                profileDirectories = Directory.GetDirectories(userDataDirectory);
+            }
+            catch
+            {
+                profileDirectories = new string[0];
+            }
+
+            foreach (string directory in profileDirectories)
+            {
+                string profileDirectory = Path.GetFileName(directory);
+                if (profileDirectory.Equals("Default", StringComparison.OrdinalIgnoreCase) ||
+                    profileDirectory.StartsWith("Profile ", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (!profiles.ContainsKey(profileDirectory))
+                        profiles[profileDirectory] = ReadProfileName(directory, profileDirectory);
+                }
+            }
+
+            if (profiles.Count <= 1)
+                return;
+
+            foreach (var profile in profiles)
+            {
+                string directory = Path.Combine(userDataDirectory, profile.Key);
+                string profileIconPath = Path.Combine(directory, profileIconFile);
+                string icon = File.Exists(profileIconPath)
+                    ? icon2String(IconExtractor.fromFile(profileIconPath))
+                    : baseBrowser.icon;
+
+                browsers.Add(new Browser
+                {
+                    name = baseBrowser.name + " (" + profile.Value + ")",
+                    exec = baseBrowser.exec,
+                    icon = icon,
+                    additionalArgs = "--profile-directory=" + profile.Key
+                });
+            }
+
+            browsers.Remove(baseBrowser);
+        }
+
+        private static string ReadProfileName(string profileDirectory, string fallback)
+        {
+            string preferencesPath = Path.Combine(profileDirectory, "Preferences");
+            try
+            {
+                if (File.Exists(preferencesPath))
+                {
+                    JObject preferences = JObject.Parse(File.ReadAllText(preferencesPath));
+                    string name = (string)preferences.SelectToken("profile.name");
+                    if (!string.IsNullOrWhiteSpace(name))
+                        return name;
+                }
+            }
+            catch { }
+            return fallback;
         }
 
         private static List<Browser> find(RegistryKey hklm)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -21,9 +22,12 @@ namespace BrowserSelect
             InitializeComponent();
         }
 
-        private List<AutoMatchRule> rules = new List<AutoMatchRule>();
+        private BindingList<AutoMatchRule> rules = new BindingList<AutoMatchRule>();
+        private BindingSource rulesBindingSource;
         private void frm_settings_Load(object sender, EventArgs e)
         {
+            ConfigurePrivateColumn();
+
             //check if browser select is the default browser or not
             //to disable/enable "set Browser select as default" button
             using (RegistryKey key = Registry.CurrentUser.OpenSubKey(
@@ -51,31 +55,68 @@ namespace BrowserSelect
             //populate Rules in the gridview
             foreach (var rule in Settings.Default.AutoBrowser)
                 rules.Add(rule);
-            var bs = new BindingSource();
-            bs.DataSource = rules;
-            gv_filters.DataSource = bs;
+            rulesBindingSource = new BindingSource();
+            rulesBindingSource.DataSource = rules;
+            gv_filters.DataSource = rulesBindingSource;
 
             chk_check_update.Checked = Settings.Default.check_update != "nope";
         }
 
         private void btn_setdefault_Click(object sender, EventArgs e)
         {
-            //set browser select as default in registry
-
-            //http
-            using (RegistryKey key = Registry.CurrentUser.CreateSubKey(
-                    @"Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice"))
+            // Preserve the current default before asking Windows to handle the association UI.
+            DefaultBrowserRegistration.CaptureExistingDefault();
+            IApplicationAssociationRegistrationUI associationUi = null;
+            try
             {
-                key.SetValue("ProgId", "bselectURL");
+                DefaultBrowserRegistration.EnsureApplicationRegistered();
+                associationUi = (IApplicationAssociationRegistrationUI)
+                    new ApplicationAssociationRegistrationUI();
+                Marshal.ThrowExceptionForHR(
+                    associationUi.LaunchAdvancedAssociationUI("BrowserSelect"));
             }
-            //https
-            using (RegistryKey key = Registry.CurrentUser.CreateSubKey(
-                    @"Software\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice"))
+            catch (Exception ex)
             {
-                key.SetValue("ProgId", "bselectURL");
+                // The documented association UI is not available on every Windows build.
+                // Fall back to the Windows Default apps page instead of writing UserChoice.
+                try
+                {
+                    Process.Start(new ProcessStartInfo("ms-settings:defaultapps")
+                    {
+                        UseShellExecute = true
+                    });
+                }
+                catch (Exception fallbackException)
+                {
+                    MessageBox.Show(
+                        "Windows could not open Default apps.\n\n" + fallbackException.Message +
+                        "\n\nAssociation UI error: " + ex.Message,
+                        "Unable to change default browser", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                }
             }
+            finally
+            {
+                if (associationUi != null && Marshal.IsComObject(associationUi))
+                    Marshal.ReleaseComObject(associationUi);
+            }
+        }
 
-            btn_setdefault.Enabled = false;
+        [ComImport]
+        [Guid("1F76A169-F994-40AC-8FC8-0959E8874710")]
+        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        private interface IApplicationAssociationRegistrationUI
+        {
+            [PreserveSig]
+            int LaunchAdvancedAssociationUI(
+                [MarshalAs(UnmanagedType.LPWStr)] string applicationRegistryName);
+        }
+
+        [ComImport]
+        [Guid("1968106D-F3B5-44CF-890E-116FCB9ECEF1")]
+        [ClassInterface(ClassInterfaceType.None)]
+        private class ApplicationAssociationRegistrationUI
+        {
         }
 
         private void browser_filter_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -113,6 +154,7 @@ namespace BrowserSelect
         private void btn_apply_Click(object sender, EventArgs e)
         {
             //save rules
+            gv_filters.EndEdit();
 
             //clear rules (instead of checking for changes we just overwrite the whole ruleset)
             Settings.Default.AutoBrowser.Clear();
@@ -165,6 +207,67 @@ namespace BrowserSelect
         private void gv_filters_CellBeginEdit(object sender, EventArgs e)
         {
             //set the unsaved changes flag to true
+            btn_apply.Enabled = true;
+            btn_cancel.Text = "Cancel";
+        }
+
+        private void ConfigurePrivateColumn()
+        {
+            if (gv_filters.Columns["Private"] != null)
+                return;
+
+            gv_filters.Columns.Add(new DataGridViewCheckBoxColumn
+            {
+                Name = "Private",
+                DataPropertyName = "IsPrivate",
+                HeaderText = "Private",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells,
+                ThreeState = false,
+                Resizable = DataGridViewTriState.False
+            });
+        }
+
+        private void btn_move_up_Click(object sender, EventArgs e)
+        {
+            MoveSelectedRule(-1);
+        }
+
+        private void btn_move_down_Click(object sender, EventArgs e)
+        {
+            MoveSelectedRule(1);
+        }
+
+        private void MoveSelectedRule(int offset)
+        {
+            gv_filters.EndEdit();
+            if (rulesBindingSource != null)
+                rulesBindingSource.EndEdit();
+
+            int rowIndex = gv_filters.CurrentCell == null
+                ? -1
+                : gv_filters.CurrentCell.RowIndex;
+            if (rowIndex < 0 || rowIndex >= rules.Count)
+                return;
+
+            int targetIndex = rowIndex + offset;
+            if (targetIndex < 0 || targetIndex >= rules.Count)
+                return;
+
+            int columnIndex = gv_filters.CurrentCell.ColumnIndex;
+            AutoMatchRule selectedRule = rules[rowIndex];
+
+            rules.RaiseListChangedEvents = false;
+            rules[rowIndex] = rules[targetIndex];
+            rules[targetIndex] = selectedRule;
+            rules.RaiseListChangedEvents = true;
+            rulesBindingSource.ResetBindings(false);
+
+            gv_filters.ClearSelection();
+            if (columnIndex >= gv_filters.Columns.Count)
+                columnIndex = 0;
+            gv_filters.CurrentCell = gv_filters.Rows[targetIndex].Cells[columnIndex];
+            gv_filters.Rows[targetIndex].Selected = true;
+
             btn_apply.Enabled = true;
             btn_cancel.Text = "Cancel";
         }
@@ -236,22 +339,27 @@ namespace BrowserSelect
     }
     class AutoMatchRule
     {
+        private const string Separator = "[#!][$~][?_]";
+
         public string Pattern { get; set; }
         public string Browser { get; set; }
+        public bool IsPrivate { get; set; }
 
         public static implicit operator AutoMatchRule(System.String s)
         {
-            var ss = s.Split(new[] { "[#!][$~][?_]" }, StringSplitOptions.None);
+            var ss = (s ?? "").Split(new[] { Separator }, StringSplitOptions.None);
             return new AutoMatchRule()
             {
-                Pattern = ss[0],
-                Browser = ss[1]
+                Pattern = ss.Length > 0 ? ss[0] : "",
+                Browser = ss.Length > 1 ? ss[1] : "",
+                IsPrivate = ss.Length > 2 &&
+                    (ss[2] == "1" || string.Equals(ss[2], "true", StringComparison.OrdinalIgnoreCase))
             };
         }
 
         public override string ToString()
         {
-            return Pattern + "[#!][$~][?_]" + Browser;
+            return Pattern + Separator + Browser + Separator + (IsPrivate ? "1" : "0");
         }
 
         public string error()

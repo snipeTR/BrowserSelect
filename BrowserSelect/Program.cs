@@ -52,23 +52,19 @@ namespace BrowserSelect
                 var uri = new UriBuilder(url).Uri;
                 url = uri.AbsoluteUri;
 
-                foreach (var sr in Settings.Default.AutoBrowser.Cast<string>()
-                    // maybe i should use a better way to split the pattern and browser name ?
-                    .Select(x => x.Split(new[] { "[#!][$~][?_]" }, StringSplitOptions.None))
+                foreach (var rule in Settings.Default.AutoBrowser.Cast<string>()
+                    .Select(x => (AutoMatchRule)x)
                     // to make sure * doesn't match when non-* rules exist.
-                    .OrderBy(x => ((x[0].Contains("*")) ? 1 : 0) + (x[0] == "*" ? 1 : 0)))
+                    .OrderBy(x => ((x.Pattern.Contains("*")) ? 1 : 0) + (x.Pattern == "*" ? 1 : 0)))
                 {
-                    var pattern = sr[0];
-                    var browser = sr[1];
-
                     // matching the domain to pattern
-                    if (DoesDomainMatchPattern(uri.Host, pattern))
+                    if (DoesDomainMatchPattern(uri.Host, rule.Pattern))
                     {
                         // ignore the display browser select entry to prevent app running itself
-                        if (browser != "display BrowserSelect")
+                        if (rule.Browser != "display BrowserSelect")
                         {
                             //todo: handle the case if browser is not found (e.g. imported settings or uninstalled browser)
-                            Form1.open_url((Browser)browser);
+                            Form1.open_url((Browser)rule.Browser, rule.IsPrivate);
                             return;
                         }
                         else

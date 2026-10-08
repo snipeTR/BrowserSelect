@@ -37,6 +37,7 @@ namespace BrowserSelect
             foreach (var browser in browsers)
             {
                 var buc = new BrowserUC(browser, i);
+                AddPrivateContextMenu(buc);
                 width = buc.Width;  // buc.Width = 128*dpi Scale
                 buc.Left = width * i++;
                 buc.Click += browser_click;
@@ -47,6 +48,26 @@ namespace BrowserSelect
             btn_help.Left = i * width;
             btn_help.Top = buc.Height - btn_help.Height;
             // this.Width = i * 128 + 20 + 20;
+        }
+
+        private void AddPrivateContextMenu(BrowserUC browserControl)
+        {
+            var menu = new ContextMenuStrip();
+            var privateItem = new ToolStripMenuItem("Open in Private Window");
+            Browser targetBrowser = browserControl.browser;
+            privateItem.Click += (sender, args) => open_url(targetBrowser, true);
+            menu.Items.Add(privateItem);
+
+            browserControl.ContextMenuStrip = menu;
+            foreach (Control child in browserControl.Controls)
+                SetContextMenuRecursively(child, menu);
+        }
+
+        private static void SetContextMenuRecursively(Control control, ContextMenuStrip menu)
+        {
+            control.ContextMenuStrip = menu;
+            foreach (Control child in control.Controls)
+                SetContextMenuRecursively(child, menu);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -212,24 +233,24 @@ namespace BrowserSelect
             // check if Always was clicked
             if (uc.Always)
                 add_rule(uc.browser);
-            else if ((ModifierKeys & Keys.Shift) != 0 || (ModifierKeys & Keys.Alt) != 0)    // open in incognito
+            else if ((ModifierKeys & Keys.Shift) != 0 || (ModifierKeys & Keys.Alt) != 0)    // open in private mode
                 open_url(uc.browser, true);
             else
                 open_url(uc.browser);
         }
 
-        public static void open_url(Browser b, bool incognito = false)
+        public static void open_url(Browser b, bool privateMode = false)
         {
             var args = new List<string>();
             if (!string.IsNullOrEmpty(b.additionalArgs))
                 args.Add(b.additionalArgs);
-            if (incognito)
+            if (privateMode)
                 args.Add(b.private_arg);
-            if (b.exec.ToLower().EndsWith("brave.exe"))
+            if (System.IO.Path.GetFileName(b.exec).ToLowerInvariant().EndsWith("brave.exe"))
                 args.Add("--");
             args.Add(Program.url.Replace("\"", "%22"));
 
-            if (b.exec.EndsWith("iexplore.exe") && !incognito)
+            if (b.exec.EndsWith("iexplore.exe", StringComparison.OrdinalIgnoreCase) && !privateMode)
             {
                 // IE tends to open in a new window instead of a new tab
                 // code borrowed from http://stackoverflow.com/a/3713470/1461004
@@ -241,31 +262,43 @@ namespace BrowserSelect
                     {
                         iExplorer.Navigate(Program.url, 0x800);
                         // for issue #10 (bring IE to focus after opening link)
-                        ForegroundAgent.RestoreWindow(iExplorer.HWND);
+                        ForegroundAgent.RestoreWindow((int)iExplorer.HWND);
                         found = true;
                         break;
                     }
                 }
                 if (!found)
                 {
-                    Process.Start(b.exec, Program.Args2Str(args));
+                    StartBrowser(b.exec, args);
                 }
             }
             else
             {
-                Process.Start(b.exec, Program.Args2Str(args));
+                BrowserWindowFocus.FocusWindowOnFirstMonitor(b.exec);
+                StartBrowser(b.exec, args);
             }
             Application.Exit();
         }
 
+        private static void StartBrowser(string executable, List<string> args)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = executable,
+                Arguments = Program.Args2Str(args),
+                UseShellExecute = true
+            });
+        }
+
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
+            bool privateMode = (ModifierKeys & Keys.Shift) != 0;
             int i = 1;
             foreach (var browser in browsers)
             {
                 if (browser.shortcuts.Contains(e.KeyChar) || e.KeyChar == (Convert.ToString(i++))[0])
                 {
-                    open_url(browser);
+                    open_url(browser, privateMode);
                     return;
                 }
             }

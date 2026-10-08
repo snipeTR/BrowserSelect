@@ -1,4 +1,4 @@
-﻿namespace BrowserSelect {
+namespace BrowserSelect {
     partial class frm_settings {
         /// <summary>
         /// Required designer variable.
@@ -35,6 +35,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.btn_apply = new System.Windows.Forms.Button();
+            this.btn_move_up = new System.Windows.Forms.Button();
+            this.btn_move_down = new System.Windows.Forms.Button();
             this.gv_filters = new System.Windows.Forms.DataGridView();
             this.pattern = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.browser = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -48,9 +50,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_filters)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // btn_setdefault
-            // 
+            //
             this.btn_setdefault.Location = new System.Drawing.Point(6, 87);
             this.btn_setdefault.Name = "btn_setdefault";
             this.btn_setdefault.Size = new System.Drawing.Size(135, 31);
@@ -58,9 +60,9 @@
             this.btn_setdefault.Text = "Set as Default Browser";
             this.btn_setdefault.UseVisualStyleBackColor = true;
             this.btn_setdefault.Click += new System.EventHandler(this.btn_setdefault_Click);
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(135, 75);
@@ -117,6 +119,8 @@
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.linkLabel1);
             this.groupBox3.Controls.Add(this.btn_apply);
+            this.groupBox3.Controls.Add(this.btn_move_down);
+            this.groupBox3.Controls.Add(this.btn_move_up);
             this.groupBox3.Controls.Add(this.gv_filters);
             this.groupBox3.Location = new System.Drawing.Point(168, 12);
             this.groupBox3.Name = "groupBox3";
@@ -172,6 +176,28 @@
             this.btn_apply.Text = "Apply";
             this.btn_apply.UseVisualStyleBackColor = true;
             this.btn_apply.Click += new System.EventHandler(this.btn_apply_Click);
+            //
+            // btn_move_up
+            //
+            this.btn_move_up.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_move_up.Location = new System.Drawing.Point(87, 331);
+            this.btn_move_up.Name = "btn_move_up";
+            this.btn_move_up.Size = new System.Drawing.Size(75, 23);
+            this.btn_move_up.TabIndex = 9;
+            this.btn_move_up.Text = "Move Up";
+            this.btn_move_up.UseVisualStyleBackColor = true;
+            this.btn_move_up.Click += new System.EventHandler(this.btn_move_up_Click);
+            //
+            // btn_move_down
+            //
+            this.btn_move_down.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_move_down.Location = new System.Drawing.Point(168, 331);
+            this.btn_move_down.Name = "btn_move_down";
+            this.btn_move_down.Size = new System.Drawing.Size(85, 23);
+            this.btn_move_down.TabIndex = 10;
+            this.btn_move_down.Text = "Move Down";
+            this.btn_move_down.UseVisualStyleBackColor = true;
+            this.btn_move_down.Click += new System.EventHandler(this.btn_move_down_Click);
             // 
             // gv_filters
             // 
@@ -292,6 +318,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button btn_apply;
+        private System.Windows.Forms.Button btn_move_up;
+        private System.Windows.Forms.Button btn_move_down;
         private System.Windows.Forms.DataGridViewTextBoxColumn pattern;
         private System.Windows.Forms.DataGridViewComboBoxColumn browser;
         private System.Windows.Forms.GroupBox groupBox4;
