@@ -186,100 +186,142 @@ namespace BrowserSelect.UI
         }
 
         /// <summary>
-        /// Windows whose layout scales with the font (AutoScaleMode.Font) get Segoe UI 9pt on the form
-        /// itself: WinForms then scales the whole layout proportionally, so nothing is clipped and the
-        /// relative positions stay the same. Other windows (the browser picker uses AutoScaleMode.Dpi)
-        /// keep their exact size: only the individual controls get the new font, and a fixed-size label
-        /// keeps its old font if the new one would not fit.
+        /// Segoe UI is set on the individual controls, never on the window itself: a font change on a
+        /// window (or user control) with AutoScaleMode.Font would rescale the whole layout and make the
+        /// windows bigger. This way every window keeps its exact size and control positions.
+        /// Fixed-size buttons and labels are checked whenever their text changes (texts are translated):
+        /// if the text does not fit in Segoe UI 9pt, Segoe UI 8.25pt is used, and if that does not fit
+        /// either, the original font is kept, so nothing is clipped by the new font.
         /// </summary>
-        private static void ApplyFonts(Form form)
-        {
-            var baseFont = BaseFont;
-            if (baseFont == null)
-                return;
-            if (form.AutoScaleMode == AutoScaleMode.Font)
-            {
-                if (!IsModernFont(form.Font))
-                    form.Font = baseFont;
-                ReplaceExplicitFonts(form);
-            }
-            else
-            {
-                ApplyLeafFonts(form);
-            }
-        }
-
-        /// <summary>controls with an explicitly set classic font (titles, bold labels, ...) get Segoe UI in the same size/style</summary>
-        private static void ReplaceExplicitFonts(Control parent)
+        private static void ApplyFonts(Control parent)
         {
             foreach (Control c in parent.Controls)
             {
-                if (!IsModernFont(c.Font))
-                {
-                    var size = Math.Abs(c.Font.SizeInPoints - ClassicFontSize) < 0.1f ? FontSize : c.Font.SizeInPoints;
-                    var font = CreateFont(size, c.Font.Style);
-                    if (font != null)
-                        c.Font = font;
-                }
-                if (c.HasChildren)
-                    ReplaceExplicitFonts(c);
+                // children first: they get their own (explicit) font before a group box caption changes
+                // the font they would otherwise inherit
+                if (c.HasChildren && !(c is DataGridView))
+                    ApplyFonts(c);
+                if (!(c is ContainerControl))
+                    SetModernFont(c);
             }
         }
 
-        private static void ApplyLeafFonts(Control parent)
+        private static void SetModernFont(Control c)
         {
-            foreach (Control c in parent.Controls)
+            var info = Info(c);
+            if (info.Original == null)
             {
-                if (c.HasChildren || c is ContainerControl)
-                {
-                    ApplyLeafFonts(c);
-                    continue;
-                }
                 if (IsModernFont(c.Font))
-                    continue;
-                var size = Math.Abs(c.Font.SizeInPoints - ClassicFontSize) < 0.1f ? FontSize : c.Font.SizeInPoints;
-                var font = CreateFont(size, c.Font.Style);
-                if (font == null)
-                    continue;
-                var label = c as Label;
-                if (label != null && !label.AutoSize &&
-                    TextRenderer.MeasureText("Ag(", font).Height > label.Height)
-                {
-                    font.Dispose();
-                    continue; // would be clipped: keep the classic font
-                }
-                c.Font = font;
+                    return; // already Segoe UI (inherited from a themed parent or set in code)
+                info.Original = c.Font;
+                var classic = Math.Abs(c.Font.SizeInPoints - ClassicFontSize) < 0.1f;
+                info.Preferred = CreateFont(classic ? FontSize : c.Font.SizeInPoints, c.Font.Style);
+                info.Smaller = classic ? CreateFont(ClassicFontSize, c.Font.Style) : null;
+                if (info.Preferred == null)
+                    return;
+                if (NeedsFitting(c))
+                    c.TextChanged += (s, e) => FitFont((Control)s);
             }
+            if (info.Preferred == null)
+                return;
+            if (NeedsFitting(c))
+                FitFont(c);
+            else
+                c.Font = info.Preferred;
+        }
+
+        /// <summary>fixed-size buttons and labels can clip a bigger font</summary>
+        private static bool NeedsFitting(Control c)
+        {
+            if (c is VButton)
+                return false; // vertical text, sized for it
+            if (c is Button)
+                return !((Button)c).AutoSize;
+            if (c is Label)
+                return !((Label)c).AutoSize;
+            return false;
+        }
+
+        private static void FitFont(Control c)
+        {
+            try
+            {
+                var info = Info(c);
+                if (info.Preferred == null)
+                    return;
+                // always assigned (no-op if unchanged) so the font is set on the control itself and not
+                // inherited from a parent whose font changes later
+                foreach (var font in new[] { info.Preferred, info.Smaller })
+                {
+                    if (font != null && Fits(c, font))
+                    {
+                        c.Font = font;
+                        return;
+                    }
+                }
+                c.Font = info.Original;
+            }
+            catch (Exception) { }
+        }
+
+        private static bool Fits(Control c, Font font)
+        {
+            var text = c.Text ?? "";
+            if (c is Button)
+            {
+                var size = TextRenderer.MeasureText(text.Length > 0 ? text : "Ag", font);
+                return size.Width <= c.Width - 8 && size.Height <= c.Height - 4;
+            }
+            var label = (Label)c;
+            var lineHeight = TextRenderer.MeasureText("Ag(", font).Height;
+            if (lineHeight > label.Height)
+                return false;
+            if (label.AutoEllipsis || text.Length == 0)
+                return true;
+            var width = Math.Max(1, label.ClientSize.Width - label.Padding.Horizontal);
+            var needed = TextRenderer.MeasureText(text, font, new Size(width, int.MaxValue),
+                TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+            return needed.Height <= label.ClientSize.Height && needed.Width <= width + 1;
         }
 
         // ---- colors ---------------------------------------------------------------------------
 
         private enum Role { Normal, Subtle, Separator, IconButton }
 
-        private sealed class RoleBox
+        /// <summary>what the theme remembers about a control (decided the first time it is themed)</summary>
+        private sealed class ControlInfo
         {
+            public bool RoleKnown;
             public Role Role;
+            public Font Original, Preferred, Smaller;
         }
 
-        // role of a control is decided once (the first time it is themed) from its designer properties
-        private static readonly ConditionalWeakTable<Control, RoleBox> Roles = new ConditionalWeakTable<Control, RoleBox>();
+        private static readonly ConditionalWeakTable<Control, ControlInfo> Infos = new ConditionalWeakTable<Control, ControlInfo>();
+
+        private static ControlInfo Info(Control c)
+        {
+            return Infos.GetValue(c, ctl => new ControlInfo());
+        }
 
         private static Role GetRole(Control c)
         {
-            return Roles.GetValue(c, ctl =>
+            var info = Info(c);
+            if (!info.RoleKnown)
             {
                 var role = Role.Normal;
-                var label = ctl as Label;
-                var button = ctl as Button;
+                var label = c as Label;
+                var button = c as Button;
                 if (label != null && label.BorderStyle == BorderStyle.Fixed3D && label.Height <= 3)
                     role = Role.Separator;
-                else if (ctl.ForeColor.IsKnownColor && ctl.ForeColor.ToKnownColor() == KnownColor.GrayText)
+                else if (c.ForeColor.IsKnownColor && c.ForeColor.ToKnownColor() == KnownColor.GrayText)
                     role = Role.Subtle;
                 else if (button != null && button.FlatStyle == FlatStyle.Flat &&
                          button.FlatAppearance.BorderSize == 0 && button.BackgroundImage != null)
                     role = Role.IconButton;
-                return new RoleBox { Role = role };
-            }).Role;
+                info.Role = role;
+                info.RoleKnown = true;
+            }
+            return info.Role;
         }
 
         private static void ApplyColors(Control root, Palette p, bool dark)

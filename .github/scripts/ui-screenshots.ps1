@@ -51,9 +51,12 @@ $config = Join-Path $BuildDir "BrowserSelect.exe.config"
 $original = Get-Content $config -Raw
 $exe = (Resolve-Path (Join-Path $BuildDir "BrowserSelect.exe")).Path
 
-foreach ($theme in @("Light", "Dark")) {
+foreach ($run in @(@("Light", "en"), @("Dark", "en"), @("Light", "tr"), @("Dark", "tr"))) {
+    $theme = $run[0]; $lang = $run[1]
     # no user.config on the runner: the defaults in BrowserSelect.exe.config are used
     $xml = $original -replace '(<setting name="Theme" serializeAs="String">\s*<value>)[^<]*(</value>)', "`${1}$theme`${2}"
+    $xml = $xml -replace '(<setting name="Language" serializeAs="String">\s*<value>)[^<]*(</value>)', "`${1}$lang`${2}"
+    $theme = "$theme-$lang"
     Set-Content -Path $config -Value $xml -Encoding UTF8
 
     $p = Start-Process -FilePath $exe -ArgumentList "https://example.com/?bs-test=screenshot" -PassThru
@@ -84,6 +87,16 @@ foreach ($theme in @("Light", "Dark")) {
     $fg = [W]::GetForegroundWindow()
     if ($fg -ne $main) { Shot $fg "$theme-3-about"; [W]::Esc(); Start-Sleep -Seconds 1 }
     else { Write-Host "::warning::About window did not open ($theme)" }
+
+    # ? (help) button at the bottom right
+    [W]::SetForegroundWindow($main) | Out-Null
+    Start-Sleep -Milliseconds 500
+    $help = ClientPoint $main ($cr.R - 12) ($cr.B - 12)
+    [W]::Click($help.X, $help.Y)
+    Start-Sleep -Seconds 3
+    $fg = [W]::GetForegroundWindow()
+    if ($fg -ne $main) { Shot $fg "$theme-4-help"; [W]::Esc(); Start-Sleep -Seconds 1 }
+    else { Write-Host "::warning::Help window did not open ($theme)" }
 
     if (-not $p.HasExited) { $p.Kill() }
     Start-Sleep -Seconds 1
