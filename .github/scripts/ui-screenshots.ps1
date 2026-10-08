@@ -6,6 +6,8 @@ param(
 )
 $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName System.Drawing
+Add-Type -AssemblyName UIAutomationClient
+Add-Type -AssemblyName UIAutomationTypes
 Add-Type @"
 using System;
 using System.Runtime.InteropServices;
@@ -38,6 +40,16 @@ function Shot([IntPtr]$h, [string]$name) {
     $bmp.Save((Join-Path $OutDir "$name.png"), [System.Drawing.Imaging.ImageFormat]::Png)
     $g.Dispose(); $bmp.Dispose()
     Write-Host "saved $name.png ($w x $hgt)"
+    # control bounds (window coordinates) to spot clipped/overlapping controls
+    try {
+        $root = [System.Windows.Automation.AutomationElement]::FromHandle($h)
+        $all = $root.FindAll([System.Windows.Automation.TreeScope]::Descendants, [System.Windows.Automation.Condition]::TrueCondition)
+        $lines = foreach ($el in $all) {
+            $b = $el.Current.BoundingRectangle
+            "{0,-12} {1,5},{2,5} {3,4}x{4,-4} {5}" -f $el.Current.ControlType.ProgrammaticName.Replace("ControlType.", ""), ($b.X - $r.L), ($b.Y - $r.T), $b.Width, $b.Height, $el.Current.Name
+        }
+        $lines | Out-File -Encoding utf8 (Join-Path $OutDir "$name.txt")
+    } catch { Write-Host "::warning::UI Automation dump failed for $name" }
 }
 
 function ClientPoint([IntPtr]$h, [int]$x, [int]$y) {

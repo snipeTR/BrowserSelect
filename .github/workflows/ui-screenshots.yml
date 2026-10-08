@@ -36,5 +36,5 @@ jobs:
         if: always()
         with:
           name: ui-screenshots
-          path: screenshots-ci/*.png
+          path: screenshots-ci/*
           if-no-files-found: warn
