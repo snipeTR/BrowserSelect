@@ -61,6 +61,8 @@ namespace BrowserSelect {
             this.btn_browser_up = new System.Windows.Forms.Button();
             this.btn_browser_down = new System.Windows.Forms.Button();
             this.chk_running_only = new System.Windows.Forms.CheckBox();
+            this.btn_export = new System.Windows.Forms.Button();
+            this.btn_import = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -434,6 +436,8 @@ namespace BrowserSelect {
             //
             // groupBox5
             //
+            this.groupBox5.Controls.Add(this.btn_import);
+            this.groupBox5.Controls.Add(this.btn_export);
             this.groupBox5.Controls.Add(this.chk_running_only);
             this.groupBox5.Controls.Add(this.chk_alt_ignore);
             this.groupBox5.Location = new System.Drawing.Point(12, 346);
@@ -442,6 +446,28 @@ namespace BrowserSelect {
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Options";
+            //
+            // btn_export
+            //
+            this.btn_export.Location = new System.Drawing.Point(6, 68);
+            this.btn_export.Name = "btn_export";
+            this.btn_export.Size = new System.Drawing.Size(101, 23);
+            this.btn_export.TabIndex = 2;
+            this.btn_export.Text = "Export...";
+            this.toolTip1.SetToolTip(this.btn_export, "Save rules and settings to a file");
+            this.btn_export.UseVisualStyleBackColor = true;
+            this.btn_export.Click += new System.EventHandler(this.btn_export_Click);
+            //
+            // btn_import
+            //
+            this.btn_import.Location = new System.Drawing.Point(113, 68);
+            this.btn_import.Name = "btn_import";
+            this.btn_import.Size = new System.Drawing.Size(101, 23);
+            this.btn_import.TabIndex = 3;
+            this.btn_import.Text = "Import...";
+            this.toolTip1.SetToolTip(this.btn_import, "Load rules and settings from a file (replaces the current ones)");
+            this.btn_import.UseVisualStyleBackColor = true;
+            this.btn_import.Click += new System.EventHandler(this.btn_import_Click);
             //
             // chk_running_only
             //
@@ -537,5 +563,7 @@ namespace BrowserSelect {
         private System.Windows.Forms.Button btn_browser_up;
         private System.Windows.Forms.Button btn_browser_down;
         private System.Windows.Forms.CheckBox chk_running_only;
+        private System.Windows.Forms.Button btn_export;
+        private System.Windows.Forms.Button btn_import;
     }
 }

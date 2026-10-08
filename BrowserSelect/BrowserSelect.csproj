@@ -132,6 +132,7 @@
     <Compile Include="NativeProcess.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingsTransfer.cs" />
     <Compile Include="UpdateChecker.cs" />
     <Compile Include="VButton.cs">
       <SubType>Component</SubType>

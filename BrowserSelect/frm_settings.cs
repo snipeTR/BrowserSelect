@@ -62,8 +62,10 @@ namespace BrowserSelect
             rulesBindingSource.DataSource = rules;
             gv_filters.DataSource = rulesBindingSource;
 
+            _populating = true;
             chk_check_update.Checked = Settings.Default.check_update != "nope";
             chk_alt_ignore.Checked = Settings.Default.AltIgnoresRules;
+            _populating = false;
 
             // show which application opened the current link, to help writing "Source App" rules
             if (!string.IsNullOrEmpty(Program.SourceApp))
@@ -557,14 +559,108 @@ namespace BrowserSelect
         }
         private void chk_check_update_CheckedChanged(object sender, EventArgs e)
         {
+            if (_populating)
+                return;
             Settings.Default.check_update = (((CheckBox)sender).Checked) ? "0" : "nope";
             Settings.Default.Save();
         }
 
         private void chk_alt_ignore_CheckedChanged(object sender, EventArgs e)
         {
+            if (_populating)
+                return;
             Settings.Default.AltIgnoresRules = chk_alt_ignore.Checked;
             Settings.Default.Save();
+        }
+
+        private void btn_export_Click(object sender, EventArgs e)
+        {
+            if (btn_apply.Enabled)
+            {
+                var answer = MessageBox.Show(this,
+                    "You have unsaved rule changes. Apply them before exporting?\n" +
+                    "(No exports the last applied rules)", "Export", MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+                if (answer == DialogResult.Cancel)
+                    return;
+                if (answer == DialogResult.Yes)
+                    btn_apply_Click(sender, e);
+            }
+            using (var dialog = new SaveFileDialog
+            {
+                Title = "Export BrowserSelect settings",
+                Filter = "BrowserSelect settings (*.json)|*.json|All files (*.*)|*.*",
+                FileName = "BrowserSelect-settings.json"
+            })
+            {
+                if (dialog.ShowDialog(this) != DialogResult.OK)
+                    return;
+                try
+                {
+                    SettingsTransfer.Export(dialog.FileName);
+                    MessageBox.Show(this, "Rules and settings exported to\n" + dialog.FileName, "Export",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, "Export failed:\n" + ex.Message, "Export", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btn_import_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new OpenFileDialog
+            {
+                Title = "Import BrowserSelect settings",
+                Filter = "BrowserSelect settings (*.json)|*.json|All files (*.*)|*.*",
+                CheckFileExists = true
+            })
+            {
+                if (dialog.ShowDialog(this) != DialogResult.OK)
+                    return;
+                if (MessageBox.Show(this,
+                        "Importing replaces your current rules, browser list customizations and options " +
+                        "with the ones from the file. Continue?", "Import", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning) != DialogResult.Yes)
+                    return;
+                try
+                {
+                    int count = SettingsTransfer.Import(dialog.FileName);
+                    ReloadFromSettings();
+                    MessageBox.Show(this, string.Format("Settings imported ({0} rules).", count), "Import",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, "Import failed:\n" + ex.Message, "Import", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        /// <summary>reloads every control from the saved settings (used after an import)</summary>
+        private void ReloadFromSettings()
+        {
+            gv_filters.CancelEdit();
+            rules.Clear();
+            foreach (var rule in Settings.Default.AutoBrowser)
+                rules.Add(rule);
+            rulesBindingSource.ResetBindings(false);
+            btn_apply.Enabled = false;
+            btn_cancel.Text = "Close";
+
+            _populating = true;
+            cmb_sort.SelectedItem = BrowserCustomizations.SortModes.Contains(Settings.Default.SortMode)
+                ? Settings.Default.SortMode
+                : BrowserCustomizations.SortManual;
+            chk_running_only.Checked = Settings.Default.ShowRunningOnly;
+            chk_alt_ignore.Checked = Settings.Default.AltIgnoresRules;
+            chk_check_update.Checked = Settings.Default.check_update != "nope";
+            _populating = false;
+
+            RefreshBrowsers(null);
         }
 
         private void btn_refresh_Click(object sender, EventArgs e)

@@ -64,7 +64,7 @@ Just a list of some ideas that can be integrated into BrowserSelect.
     - [x] based on keywords
     - [x] ignoring the URL as an option
     - [x] custom flags to browsers as an option (e.g. incognito mode or disable CSRF)
-- [ ] export/import for rules/settings
+- [x] export/import for rules/settings
 - [x] Sorting browsers on the list
 - [x] Custom Shortcuts
 - [x] Ignoring the rules if Alt key is held down when clicking a link
@@ -93,6 +93,7 @@ Unreleased
 - Settings > Browsers > Edit... sets a custom icon (.ico/.exe/.dll/.png/.jpg/...), custom shortcut keys and extra arguments per browser
 - Browsers can be sorted manually (up/down buttons), alphabetically or by most used
 - Option to display only the browsers that are currently running
+- Export/Import of rules and settings to a JSON file (Settings > Options)
 
 v1.4.1 [24/08/19]
 - Fixed couldn't hide chrome profiles separately (#52)
