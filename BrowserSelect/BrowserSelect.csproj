@@ -58,6 +58,9 @@
   <PropertyGroup>
     <ApplicationIcon>bs.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -147,6 +150,7 @@
     <Compile Include="SettingsTransfer.cs" />
     <Compile Include="UpdateChecker.cs" />
     <Compile Include="UpdateInstaller.cs" />
+    <Compile Include="UI\Theme.cs" />
     <Compile Include="VButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -192,6 +196,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="app.manifest" />
     <None Include="installer.nsi" />
     <None Include="Localization\README.md" />
     <None Include="packages.config" />

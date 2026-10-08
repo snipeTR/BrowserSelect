@@ -40,7 +40,9 @@ namespace BrowserSelect
                 ["showRunningOnly"] = s.ShowRunningOnly,
                 ["altIgnoresRules"] = s.AltIgnoresRules,
                 ["checkForUpdates"] = s.check_update != "nope",
-                ["language"] = s.Language ?? Localization.L10n.DefaultLanguage
+                ["language"] = s.Language ?? Localization.L10n.DefaultLanguage,
+                ["theme"] = UI.Theme.Mode,
+                ["mica"] = s.Mica
             };
             File.WriteAllText(path, root.ToString(Formatting.Indented));
         }
@@ -122,6 +124,15 @@ namespace BrowserSelect
             if (language != null && Localization.L10n.Available()
                     .Any(l => l.Code.Equals(language, StringComparison.OrdinalIgnoreCase)))
                 s.Language = language;
+            var theme = (string)root["theme"];
+            if (theme != null)
+            {
+                var mode = UI.Theme.Modes.FirstOrDefault(m => m.Equals(theme, StringComparison.OrdinalIgnoreCase));
+                if (mode != null)
+                    s.Theme = mode;
+            }
+            if (root["mica"] != null)
+                s.Mica = (bool)root["mica"];
             if (root["checkForUpdates"] != null)
             {
                 bool check = (bool)root["checkForUpdates"];

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using BrowserSelect.Localization;
+using BrowserSelect.UI;
 
 namespace BrowserSelect
 {
@@ -38,6 +39,8 @@ namespace BrowserSelect
         public frm_browser_edit(Browser browser, IEnumerable<Browser> allBrowsers)
         {
             InitializeComponent();
+            // Windows 10/11 look (fonts, colors, title bar); before the texts so labels are measured with the final font
+            Theme.Apply(this);
             ApplyTexts();
             _browser = browser;
             _others = allBrowsers.Where(b => !ReferenceEquals(b, browser)).ToList();

@@ -8,6 +8,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrowserSelect.Localization;
+using BrowserSelect.UI;
 using Newtonsoft.Json.Linq;
 
 namespace BrowserSelect
@@ -192,6 +193,7 @@ namespace BrowserSelect
             Controls.Add(lbl_status);
             Controls.Add(progress);
             Controls.Add(btn_cancel);
+            Theme.Apply(this);
 
             Shown += async (s, e) => await Run();
             FormClosing += (s, e) =>

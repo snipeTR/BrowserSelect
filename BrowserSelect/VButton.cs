@@ -23,7 +23,8 @@ namespace BrowserSelect {
             base.OnPaint(pevent);
             pevent.Graphics.TranslateTransform(Width, 0);
             pevent.Graphics.RotateTransform(90);
-            pevent.Graphics.DrawString(faketext, Font, Brushes.Black, new Rectangle(0, 0, Height, Width), Fmt);
+            using (var brush = new SolidBrush(Enabled ? ForeColor : SystemColors.GrayText))
+                pevent.Graphics.DrawString(faketext, Font, brush, new Rectangle(0, 0, Height, Width), Fmt);
         }
     }
 }

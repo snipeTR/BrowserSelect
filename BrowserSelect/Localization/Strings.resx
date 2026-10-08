@@ -133,6 +133,34 @@
     <value>Language</value>
     <comment>Title of the language change message</comment>
   </data>
+  <data name="Theme_Label" xml:space="preserve">
+    <value>Theme:</value>
+    <comment>Settings window: label of the theme drop-down (bottom left, below Language)</comment>
+  </data>
+  <data name="Theme_Tooltip" xml:space="preserve">
+    <value>Appearance of the BrowserSelect windows: Light, Dark or Follow Windows (the app mode chosen in Windows Settings &gt; Personalization &gt; Colors). Applied immediately.</value>
+    <comment>Settings window: tooltip of the theme drop-down</comment>
+  </data>
+  <data name="Theme_Light" xml:space="preserve">
+    <value>Light</value>
+    <comment>Theme drop-down entry</comment>
+  </data>
+  <data name="Theme_Dark" xml:space="preserve">
+    <value>Dark</value>
+    <comment>Theme drop-down entry</comment>
+  </data>
+  <data name="Theme_System" xml:space="preserve">
+    <value>Follow Windows</value>
+    <comment>Theme drop-down entry: use the dark theme when Windows apps use dark mode</comment>
+  </data>
+  <data name="Theme_Mica" xml:space="preserve">
+    <value>Mica</value>
+    <comment>Settings window: check box next to the theme drop-down</comment>
+  </data>
+  <data name="Theme_MicaTooltip" xml:space="preserve">
+    <value>Windows 11 (22H2 or newer) only: Mica effect on the title bar of the BrowserSelect windows. Has no effect on Windows 10.</value>
+    <comment>Settings window: tooltip of the Mica check box</comment>
+  </data>
   <data name="Settings_UnsavedChanges" xml:space="preserve">
     <value>You have unsaved changes, are you sure you want to close without saving ?</value>
     <comment>Settings window: closing with unapplied rule changes</comment>
@@ -716,6 +744,7 @@ SETTINGS
 - Options: show only running browsers, skip the rules with Alt, Export... / Import... rules and settings to/from a .json file.
 - Update checker: checks the releases of snipeTR/BrowserSelect on GitHub. When a new version is available, this help button turns into an update button; after the update message BrowserSelect offers to download and run the new installer (the setup asks to close BrowserSelect if it is still running).
 - Language (bottom left): user interface language; it is used the next time BrowserSelect starts.
+- Theme (bottom left, below Language): Light, Dark or Follow Windows (uses Dark when the Windows app mode is Dark). The new theme is applied at once. Mica: Windows 11 (22H2 or newer) only, adds the Mica effect to the title bar. On Windows 11 the windows also get rounded corners.
 
 If you mostly use one browser but want some websites to open in another one (e.g. Firefox for everything but IE for the company website), add a rule "*" for your main browser and separate rules for the other websites.
 

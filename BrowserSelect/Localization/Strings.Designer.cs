@@ -65,6 +65,69 @@ namespace BrowserSelect.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Theme:.
+        /// </summary>
+        internal static string Theme_Label {
+            get {
+                return ResourceManager.GetString("Theme_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Appearance of the BrowserSelect windows: Light, Dark or F....
+        /// </summary>
+        internal static string Theme_Tooltip {
+            get {
+                return ResourceManager.GetString("Theme_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Light.
+        /// </summary>
+        internal static string Theme_Light {
+            get {
+                return ResourceManager.GetString("Theme_Light", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dark.
+        /// </summary>
+        internal static string Theme_Dark {
+            get {
+                return ResourceManager.GetString("Theme_Dark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Follow Windows.
+        /// </summary>
+        internal static string Theme_System {
+            get {
+                return ResourceManager.GetString("Theme_System", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mica.
+        /// </summary>
+        internal static string Theme_Mica {
+            get {
+                return ResourceManager.GetString("Theme_Mica", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows 11 (22H2 or newer) only: Mica effect on the title....
+        /// </summary>
+        internal static string Theme_MicaTooltip {
+            get {
+                return ResourceManager.GetString("Theme_MicaTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User interface language. Every language added to BrowserSelect is listed here..
         /// </summary>
         internal static string Language_Tooltip {

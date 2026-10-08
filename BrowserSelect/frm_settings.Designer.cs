@@ -66,6 +66,9 @@ namespace BrowserSelect {
             this.btn_import = new System.Windows.Forms.Button();
             this.lbl_language = new System.Windows.Forms.Label();
             this.cmb_language = new System.Windows.Forms.ComboBox();
+            this.lbl_theme = new System.Windows.Forms.Label();
+            this.cmb_theme = new System.Windows.Forms.ComboBox();
+            this.chk_mica = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -471,6 +474,39 @@ namespace BrowserSelect {
             this.toolTip1.SetToolTip(this.cmb_language, "User interface language. Every language added to BrowserSelect is listed here.");
             this.cmb_language.SelectedIndexChanged += new System.EventHandler(this.cmb_language_SelectedIndexChanged);
             //
+            // lbl_theme
+            //
+            this.lbl_theme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl_theme.AutoSize = true;
+            this.lbl_theme.Location = new System.Drawing.Point(12, 568);
+            this.lbl_theme.Name = "lbl_theme";
+            this.lbl_theme.Size = new System.Drawing.Size(43, 13);
+            this.lbl_theme.TabIndex = 9;
+            this.lbl_theme.Text = "Theme:";
+            //
+            // cmb_theme
+            //
+            this.cmb_theme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmb_theme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_theme.FormattingEnabled = true;
+            this.cmb_theme.Location = new System.Drawing.Point(80, 564);
+            this.cmb_theme.Name = "cmb_theme";
+            this.cmb_theme.Size = new System.Drawing.Size(98, 21);
+            this.cmb_theme.TabIndex = 10;
+            this.cmb_theme.SelectedIndexChanged += new System.EventHandler(this.cmb_theme_SelectedIndexChanged);
+            //
+            // chk_mica
+            //
+            this.chk_mica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chk_mica.AutoSize = true;
+            this.chk_mica.Location = new System.Drawing.Point(184, 566);
+            this.chk_mica.Name = "chk_mica";
+            this.chk_mica.Size = new System.Drawing.Size(48, 17);
+            this.chk_mica.TabIndex = 11;
+            this.chk_mica.Text = "Mica";
+            this.chk_mica.UseVisualStyleBackColor = true;
+            this.chk_mica.CheckedChanged += new System.EventHandler(this.chk_mica_CheckedChanged);
+            //
             // groupBox5
             //
             this.groupBox5.Controls.Add(this.btn_import);
@@ -535,7 +571,10 @@ namespace BrowserSelect {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;
-            this.ClientSize = new System.Drawing.Size(900, 568);
+            this.ClientSize = new System.Drawing.Size(900, 595);
+            this.Controls.Add(this.chk_mica);
+            this.Controls.Add(this.cmb_theme);
+            this.Controls.Add(this.lbl_theme);
             this.Controls.Add(this.cmb_language);
             this.Controls.Add(this.lbl_language);
             this.Controls.Add(this.btn_refresh);
@@ -546,7 +585,7 @@ namespace BrowserSelect {
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MinimumSize = new System.Drawing.Size(700, 607);
+            this.MinimumSize = new System.Drawing.Size(700, 634);
             this.Name = "frm_settings";
             this.Text = "Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frm_settings_FormClosing);
@@ -608,5 +647,8 @@ namespace BrowserSelect {
         private System.Windows.Forms.Button btn_import;
         private System.Windows.Forms.Label lbl_language;
         private System.Windows.Forms.ComboBox cmb_language;
+        private System.Windows.Forms.Label lbl_theme;
+        private System.Windows.Forms.ComboBox cmb_theme;
+        private System.Windows.Forms.CheckBox chk_mica;
     }
 }

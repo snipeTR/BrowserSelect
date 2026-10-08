@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using BrowserSelect.Localization;
+using BrowserSelect.UI;
 using BrowserSelect.Properties;
 using SHDocVw;
 
@@ -25,6 +26,8 @@ namespace BrowserSelect
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.WindowState = FormWindowState.Normal;
+            // Windows 10/11 look; applied again in updateBrowsers for the browser tiles added at run time
+            Theme.Apply(this);
         }
 
         // Windows applies the launching application's STARTUPINFO.wShowWindow (e.g. SW_SHOWMAXIMIZED
@@ -90,6 +93,7 @@ namespace BrowserSelect
             buc.Left = i * width;
             btn_help.Left = i * width;
             btn_help.Top = buc.Height - btn_help.Height;
+            Theme.Apply(this);
             // this.Width = i * 128 + 20 + 20;
         }
 
@@ -113,6 +117,7 @@ namespace BrowserSelect
             Browser targetBrowser = browserControl.browser;
             privateItem.Click += (sender, args) => open_url(targetBrowser, true);
             menu.Items.Add(privateItem);
+            Theme.StyleMenu(menu);
 
             browserControl.ContextMenuStrip = menu;
             foreach (Control child in browserControl.Controls)

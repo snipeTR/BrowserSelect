@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrowserSelect.Localization;
+using BrowserSelect.UI;
 using BrowserSelect.Properties;
 using Microsoft.Win32;
 
@@ -22,6 +23,8 @@ namespace BrowserSelect
         {
             this.mainForm = (Form1)mainForm;
             InitializeComponent();
+            // Windows 10/11 look (fonts, colors, title bar); before the texts so labels are measured with the final font
+            Theme.Apply(this);
             ApplyTexts();
         }
 
@@ -133,6 +136,7 @@ namespace BrowserSelect
             _populating = false;
 
             PopulateLanguages();
+            PopulateThemes();
 
             // show which application opened the current link, to help writing "Source App" rules
             if (!string.IsNullOrEmpty(Program.SourceApp))
@@ -475,6 +479,70 @@ namespace BrowserSelect
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        /// <summary>an entry of the theme drop-down (bottom left)</summary>
+        private class ThemeChoice
+        {
+            public string Mode;
+            public string Text;
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
+
+        /// <summary>
+        /// fills the theme drop-down (Light / Dark / Follow Windows) and the Mica check box (bottom left)
+        /// from the settings; see UI\Theme.cs
+        /// </summary>
+        private void PopulateThemes()
+        {
+            lbl_theme.Text = Strings.Theme_Label;
+            toolTip1.SetToolTip(cmb_theme, Strings.Theme_Tooltip);
+            chk_mica.Text = Strings.Theme_Mica;
+            toolTip1.SetToolTip(chk_mica, Strings.Theme_MicaTooltip);
+
+            _populating = true;
+            cmb_theme.Items.Clear();
+            var choices = new[]
+            {
+                new ThemeChoice { Mode = Theme.ModeLight, Text = Strings.Theme_Light },
+                new ThemeChoice { Mode = Theme.ModeDark, Text = Strings.Theme_Dark },
+                new ThemeChoice { Mode = Theme.ModeSystem, Text = Strings.Theme_System },
+            };
+            cmb_theme.Items.AddRange(choices);
+            cmb_theme.SelectedItem = choices.FirstOrDefault(c => c.Mode == Theme.Mode) ?? choices[0];
+            chk_mica.Checked = Theme.UseMica;
+            _populating = false;
+        }
+
+        private void cmb_theme_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var choice = cmb_theme.SelectedItem as ThemeChoice;
+            if (_populating || choice == null || choice.Mode == Theme.Mode)
+                return;
+            Settings.Default.Theme = choice.Mode;
+            Settings.Default.Save();
+            ApplyThemeNow();
+        }
+
+        private void chk_mica_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_populating)
+                return;
+            Settings.Default.Mica = chk_mica.Checked;
+            Settings.Default.Save();
+            ApplyThemeNow();
+        }
+
+        /// <summary>the new theme is applied at once to this window and the browser list behind it</summary>
+        private void ApplyThemeNow()
+        {
+            Theme.Apply(this);
+            if (mainForm != null)
+                Theme.Apply(mainForm);
+        }
+
         private void chk_running_only_CheckedChanged(object sender, EventArgs e)
         {
             if (_populating)
@@ -668,7 +736,7 @@ namespace BrowserSelect
             var btn = ((Button)sender);
             var uc = new UpdateChecker();
             // color the button to indicate request, disable it to prevent multiple instances
-            btn.BackColor = Color.Blue;
+            Theme.SetBusy(btn, true);
             btn.Enabled = false;
             // run inside a Task to prevent freezing the UI
             Task.Factory.StartNew(() => uc.check()).ContinueWith(x =>
@@ -684,7 +752,7 @@ namespace BrowserSelect
                     }
                     else
                         MessageBox.Show(Strings.Settings_UpdateFailed);
-                    btn.UseVisualStyleBackColor = true;
+                    Theme.SetBusy(btn, false);
                     btn.Enabled = true;
                 }
                 catch (Exception) { }

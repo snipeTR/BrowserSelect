@@ -23,6 +23,9 @@ namespace BrowserSelect
         [STAThread]
         static void Main(string[] args)
         {
+            // modern (themed) controls for every window and message box, set before any UI is created
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
             // fix #28
             LeaveDotsAndSlashesEscaped();
@@ -84,8 +87,6 @@ namespace BrowserSelect
             }
 
             // display main form
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
 

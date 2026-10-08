@@ -1,5 +1,11 @@
 # Browser Select
 
+> **UI test copy (private).** This repository (`snipeTR/BrowserSelect-ui-test`) is a private, independent copy of
+> [snipeTR/BrowserSelect](https://github.com/snipeTR/BrowserSelect) (full history) used to try the Windows 10/11
+> visual refresh (v1.5.0.0, see the [Changelog](#changelog)) without touching the main project. Draft releases
+> here are test builds; if the new look is accepted, the same changes are applied to the main repository.
+> Note: the update checker of this build still looks at the main repository's releases.
+
 Browser Select is a utility to dynamically select the browser you want instead of just having one default for all links. Similar to the prompt in android to choose a browser when a link in a non-browser app is clicked/touched. It may not be useful for everyone but it helps when you use multiple browsers for different things (e.g. one with proxy and one without) and open many links from other applications (e.g. Messengers).
 
 This is an actively maintained fork of [zumoshi/BrowserSelect](https://github.com/zumoshi/BrowserSelect) with Windows **64-bit** installer builds via GitHub Actions, maintained by [snipeTR](https://github.com/snipeTR). Available in English and Turkish (Settings → Language).
@@ -61,7 +67,7 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 - [ ] A browser extension to launch the correct browser based on the rules even if a link is clicked inside a browser
 - [x] support for portable browsers (adding browsers using a browse button rather than registry)
 - [ ] support for non-browser apps as an option (e.g. download managers)
-- [ ] themes ? or at least an optional transparent Aero glass mode
+- [x] themes ? or at least an optional transparent Aero glass mode (Windows 10/11 look: Light / Dark / Follow Windows, Windows 11 rounded corners and optional Mica; UI test copy)
 - [x] Ability to choose custom icons for browsers
 - [ ] display the unshortened version of adf.ly or goo.gl links when selecting the browser
 - [x] Localization (English and Turkish; texts in `BrowserSelect/Localization/Strings*.resx`, language selection in Settings)
@@ -70,6 +76,17 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 - [x] add file associations (e.g. .url files, or .html files)
 
 # Changelog
+
+v1.5.0.0 (UI test copy)
+- Windows 10/11 look, appearance only: positions, features and behaviour are unchanged
+- New application manifest: Common Controls 6 (themed controls and message boxes) and Windows 7–11 compatibility; per-monitor (PerMonitorV2) DPI awareness via `app.config`, so text stays sharp on high DPI screens and when moving between monitors
+- Segoe UI 9pt everywhere (the windows whose layout scales with the font grow proportionally so nothing is clipped; the browser list keeps its exact size)
+- Flat buttons with a thin border and a subtle hover/pressed color; cleaner Windows 11 light colors; rule grid with flat headers, light grid lines and soft selection color; separators drawn as thin lines
+- Windows 11: rounded window corners; optional **Mica** effect on the title bar (Settings → Mica, Windows 11 22H2+, no effect on Windows 10)
+- **Theme** drop-down at the bottom left of Settings (below Language): Light (default), Dark (dark title bar, dark windows, lists, grid, menus and scroll bars) or Follow Windows (uses the Windows app mode). Applied immediately, included in settings export/import
+- All appearance code in one place: `BrowserSelect/UI/Theme.cs` (called once per window); every step fails silently and keeps the classic look on older Windows
+- Help (**?** window) updated in English and Turkish; new texts in `Strings.resx` / `Strings.tr.resx`
+- Human test recipe: [Tests/human_test/16-gorunum-tema.md](Tests/human_test/16-gorunum-tema.md)
 
 v1.4.6.0
 - Updater: after the "update available" message BrowserSelect asks whether to download and run the new version. On *Yes* it finds the `BrowserSelect-<version>-x64-Setup.exe` asset of the latest published release via the GitHub API, downloads it to `%TEMP%` (progress window, can be cancelled) and starts the setup. Errors (no network, no installer in the release, incomplete file) show a message and offer to open the releases page instead

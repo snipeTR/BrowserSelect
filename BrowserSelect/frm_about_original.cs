@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using BrowserSelect.Localization;
+using BrowserSelect.UI;
 
 namespace BrowserSelect
 {
@@ -18,6 +19,8 @@ namespace BrowserSelect
         public frm_about_original()
         {
             InitializeComponent();
+            // Windows 10/11 look (fonts, colors, title bar); before the texts so labels are measured with the final font
+            Theme.Apply(this);
             ApplyTexts();
         }
 

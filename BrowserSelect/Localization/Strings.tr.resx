@@ -129,6 +129,27 @@
   <data name="Language_RestartTitle" xml:space="preserve">
     <value>Dil</value>
   </data>
+  <data name="Theme_Label" xml:space="preserve">
+    <value>Tema:</value>
+  </data>
+  <data name="Theme_Tooltip" xml:space="preserve">
+    <value>BrowserSelect pencerelerinin görünümü: Açık, Koyu veya Windows'a uy (Windows Ayarlar &gt; Kişiselleştirme &gt; Renkler'de seçilen uygulama modu). Hemen uygulanır.</value>
+  </data>
+  <data name="Theme_Light" xml:space="preserve">
+    <value>Açık</value>
+  </data>
+  <data name="Theme_Dark" xml:space="preserve">
+    <value>Koyu</value>
+  </data>
+  <data name="Theme_System" xml:space="preserve">
+    <value>Windows'a uy</value>
+  </data>
+  <data name="Theme_Mica" xml:space="preserve">
+    <value>Mica</value>
+  </data>
+  <data name="Theme_MicaTooltip" xml:space="preserve">
+    <value>Sadece Windows 11 (22H2 veya daha yeni): BrowserSelect pencerelerinin başlık çubuğunda Mica efekti. Windows 10'da etkisi yoktur.</value>
+  </data>
   <data name="Settings_UnsavedChanges" xml:space="preserve">
     <value>Kaydedilmemiş değişiklikler var. Kaydetmeden kapatmak istediğinize emin misiniz?</value>
   </data>
@@ -579,6 +600,7 @@ AYARLAR
 - Seçenekler: sadece çalışan tarayıcıları göster, Alt ile kuralları atla, kuralları ve ayarları .json dosyasına Dışa aktar... / dosyadan İçe aktar...
 - Güncelleme denetimi: GitHub'daki snipeTR/BrowserSelect sürümlerini denetler. Yeni sürüm çıktığında bu yardım düğmesi güncelleme düğmesine dönüşür; güncelleme mesajından sonra BrowserSelect yeni kurulum dosyasını indirip çalıştırmayı önerir (BrowserSelect hâlâ açıksa kurulum, programı kapatmak için izin ister).
 - Dil (sol altta): arayüz dili; BrowserSelect bir sonraki açılışta bu dili kullanır.
+- Tema (sol altta, Dil'in altında): Açık, Koyu veya Windows'a uy (Windows uygulama modu Koyu ise Koyu kullanılır). Yeni tema hemen uygulanır. Mica: sadece Windows 11 (22H2 veya daha yeni), başlık çubuğuna Mica efekti ekler. Windows 11'de pencerelerin köşeleri de yuvarlatılır.
 
 Çoğunlukla tek bir tarayıcı kullanıp bazı siteleri başka bir tarayıcıda açmak istiyorsanız (ör. her şey Firefox'ta, şirket sitesi IE'de), ana tarayıcınız için "*" kuralı, diğer siteler için de ayrı kurallar ekleyin.
 
