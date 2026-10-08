@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -48,6 +49,15 @@ namespace BrowserSelect
 
             //populate list of browsers (browser filter + Rule List ComboBox)
             PopulateBrowsers(BrowserFinder.find());
+
+            _populating = true;
+            cmb_sort.Items.AddRange(BrowserCustomizations.SortModes);
+            cmb_sort.SelectedItem = BrowserCustomizations.SortModes.Contains(Settings.Default.SortMode)
+                ? Settings.Default.SortMode
+                : BrowserCustomizations.SortManual;
+            chk_running_only.Checked = Settings.Default.ShowRunningOnly;
+            _populating = false;
+            UpdateBrowserButtons();
             rulesBindingSource = new BindingSource();
             rulesBindingSource.DataSource = rules;
             gv_filters.DataSource = rulesBindingSource;
@@ -63,16 +73,34 @@ namespace BrowserSelect
             }
         }
 
-        private void PopulateBrowsers(List<Browser> browsers)
+        // set while the controls are filled programmatically, to ignore their change events
+        private bool _populating;
+        // browsers in the order they are displayed in browser_filter
+        private List<Browser> _browsers = new List<Browser>();
+
+        private void PopulateBrowsers(List<Browser> browsers, string selectIdentifier = null)
         {
             var c = ((DataGridViewComboBoxColumn)gv_filters.Columns["browser"]);
-            c.Items.Clear();
-            browser_filter.Items.Clear();
-            foreach (Browser b in browsers)
+            _populating = true;
+            try
             {
-                browser_filter.Items.Add(b, !Settings.Default.HideBrowsers.Contains(b.Identifier));
-                c.Items.Add(b.ToString());
+                _browsers = browsers;
+                c.Items.Clear();
+                browser_filter.Items.Clear();
+                foreach (Browser b in browsers)
+                {
+                    browser_filter.Items.Add(b, !Settings.Default.HideBrowsers.Contains(b.Identifier));
+                    if (!c.Items.Contains(b.ToString()))
+                        c.Items.Add(b.ToString());
+                }
+                if (selectIdentifier != null)
+                    browser_filter.SelectedIndex = browsers.FindIndex(b => b.Identifier == selectIdentifier);
             }
+            finally
+            {
+                _populating = false;
+            }
+            UpdateBrowserButtons();
             // add browser select and the "do nothing" option to the list
             c.Items.Add(AutoMatchRule.DisplayBrowserSelect);
             c.Items.Add(AutoMatchRule.IgnoreUrl);
@@ -141,16 +169,190 @@ namespace BrowserSelect
 
         private void browser_filter_ItemCheck(object sender, ItemCheckEventArgs e)
         {
+            if (_populating)
+                return;
             //Save changes to the BrowserFilter List
+            var identifier = ((Browser)browser_filter.Items[e.Index]).Identifier;
             if (e.NewValue == CheckState.Checked)
             {
-                Settings.Default.HideBrowsers.Remove(((Browser)browser_filter.Items[e.Index]).Identifier);
+                Settings.Default.HideBrowsers.Remove(identifier);
             }
-            else
+            else if (!Settings.Default.HideBrowsers.Contains(identifier))
             {
-                Settings.Default.HideBrowsers.Add(((Browser)browser_filter.Items[e.Index]).Identifier);
+                Settings.Default.HideBrowsers.Add(identifier);
             }
             Settings.Default.Save();
+        }
+
+        private Browser SelectedBrowser => browser_filter.SelectedItem as Browser;
+
+        private void browser_filter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateBrowserButtons();
+        }
+
+        private void UpdateBrowserButtons()
+        {
+            var selected = SelectedBrowser;
+            int index = browser_filter.SelectedIndex;
+            bool manual = (cmb_sort.SelectedItem as string ?? BrowserCustomizations.SortManual) ==
+                          BrowserCustomizations.SortManual;
+            btn_browser_edit.Enabled = selected != null;
+            btn_browser_remove.Enabled = selected != null && selected.isCustom;
+            btn_browser_up.Enabled = manual && selected != null && index > 0;
+            btn_browser_down.Enabled = manual && selected != null && index < browser_filter.Items.Count - 1;
+        }
+
+        /// <summary>reloads the browser list (keeping the selection) and updates the main window</summary>
+        private void RefreshBrowsers(string selectIdentifier)
+        {
+            PopulateBrowsers(BrowserFinder.find(), selectIdentifier);
+            mainForm?.updateBrowsers();
+        }
+
+        private void btn_browser_add_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new frm_browser_edit(null, _browsers))
+            {
+                if (dialog.ShowDialog(this) != DialogResult.OK)
+                    return;
+                var browser = new Browser
+                {
+                    name = dialog.BrowserName,
+                    exec = dialog.Executable,
+                    additionalArgs = dialog.Arguments,
+                    icon = dialog.DefaultIcon
+                };
+                var custom = BrowserCustomizations.LoadCustomBrowsers();
+                custom.Add(browser);
+                BrowserCustomizations.SaveCustomBrowsers(custom);
+                BrowserCustomizations.SetOverride(browser.Identifier,
+                    new BrowserOverride { icon = dialog.CustomIcon, shortcut = dialog.Shortcut });
+                RefreshBrowsers(browser.Identifier);
+            }
+        }
+
+        private void btn_browser_edit_Click(object sender, EventArgs e)
+        {
+            var browser = SelectedBrowser;
+            if (browser == null)
+                return;
+            using (var dialog = new frm_browser_edit(browser, _browsers))
+            {
+                if (dialog.ShowDialog(this) != DialogResult.OK)
+                    return;
+                string identifier = browser.Identifier;
+                if (browser.isCustom)
+                {
+                    var custom = BrowserCustomizations.LoadCustomBrowsers();
+                    var stored = custom.FirstOrDefault(x =>
+                        string.Equals(x.Identifier, identifier, StringComparison.OrdinalIgnoreCase));
+                    if (stored != null)
+                    {
+                        string oldName = stored.name;
+                        stored.name = dialog.BrowserName;
+                        stored.exec = dialog.Executable;
+                        stored.additionalArgs = dialog.Arguments;
+                        stored.icon = dialog.DefaultIcon ?? stored.icon;
+                        BrowserCustomizations.SaveCustomBrowsers(custom);
+                        BrowserCustomizations.RenameIdentifier(identifier, stored.Identifier);
+                        if (oldName != stored.name)
+                            RenameBrowserInRules(oldName, stored.name);
+                        identifier = stored.Identifier;
+                    }
+                    BrowserCustomizations.SetOverride(identifier,
+                        new BrowserOverride { icon = dialog.CustomIcon, shortcut = dialog.Shortcut });
+                }
+                else
+                {
+                    BrowserCustomizations.SetOverride(identifier, new BrowserOverride
+                    {
+                        icon = dialog.CustomIcon,
+                        shortcut = dialog.Shortcut,
+                        args = dialog.Arguments
+                    });
+                }
+                RefreshBrowsers(identifier);
+            }
+        }
+
+        /// <summary>rules refer to browsers by name; keep them working when a browser is renamed</summary>
+        private void RenameBrowserInRules(string oldName, string newName)
+        {
+            foreach (var rule in rules)
+                if (rule.Browser == oldName)
+                    rule.Browser = newName;
+            rulesBindingSource?.ResetBindings(false);
+
+            for (int i = 0; i < Settings.Default.AutoBrowser.Count; i++)
+            {
+                AutoMatchRule rule = Settings.Default.AutoBrowser[i];
+                if (rule.Browser == oldName)
+                {
+                    rule.Browser = newName;
+                    Settings.Default.AutoBrowser[i] = rule.ToString();
+                }
+            }
+            Settings.Default.Save();
+        }
+
+        private void btn_browser_remove_Click(object sender, EventArgs e)
+        {
+            var browser = SelectedBrowser;
+            if (browser == null || !browser.isCustom)
+                return;
+            if (MessageBox.Show(this, "Remove '" + browser.name + "' from the list?", "Remove Browser",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+            var custom = BrowserCustomizations.LoadCustomBrowsers();
+            custom.RemoveAll(x => string.Equals(x.Identifier, browser.Identifier, StringComparison.OrdinalIgnoreCase));
+            BrowserCustomizations.SaveCustomBrowsers(custom);
+            BrowserCustomizations.SetOverride(browser.Identifier, null);
+            Settings.Default.HideBrowsers.Remove(browser.Identifier);
+            Settings.Default.Save();
+            RefreshBrowsers(null);
+        }
+
+        private void btn_browser_up_Click(object sender, EventArgs e)
+        {
+            MoveBrowser(-1);
+        }
+
+        private void btn_browser_down_Click(object sender, EventArgs e)
+        {
+            MoveBrowser(1);
+        }
+
+        private void MoveBrowser(int offset)
+        {
+            int index = browser_filter.SelectedIndex;
+            int target = index + offset;
+            if (index < 0 || target < 0 || target >= _browsers.Count)
+                return;
+            var order = _browsers.Select(b => b.Identifier).ToList();
+            var moved = order[index];
+            order[index] = order[target];
+            order[target] = moved;
+            BrowserCustomizations.SaveOrder(order);
+            RefreshBrowsers(moved);
+        }
+
+        private void cmb_sort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_populating || cmb_sort.SelectedItem == null)
+                return;
+            Settings.Default.SortMode = (string)cmb_sort.SelectedItem;
+            Settings.Default.Save();
+            RefreshBrowsers(SelectedBrowser?.Identifier);
+        }
+
+        private void chk_running_only_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_populating)
+                return;
+            Settings.Default.ShowRunningOnly = chk_running_only.Checked;
+            Settings.Default.Save();
+            mainForm?.updateBrowsers();
         }
 
         private void frm_settings_FormClosing(object sender, FormClosingEventArgs e)
@@ -367,7 +569,7 @@ namespace BrowserSelect
 
         private void btn_refresh_Click(object sender, EventArgs e)
         {
-            PopulateBrowsers(BrowserFinder.find(true));
+            PopulateBrowsers(BrowserFinder.find(true), SelectedBrowser?.Identifier);
             this.mainForm.updateBrowsers();
         }
 

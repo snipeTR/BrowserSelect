@@ -116,5 +116,77 @@ namespace BrowserSelect.Properties {
                 this["AltIgnoresRules"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowRunningOnly {
+            get {
+                return ((bool)(this["ShowRunningOnly"]));
+            }
+            set {
+                this["ShowRunningOnly"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Manual")]
+        public string SortMode {
+            get {
+                return ((string)(this["SortMode"]));
+            }
+            set {
+                this["SortMode"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BrowserOrder {
+            get {
+                return ((string)(this["BrowserOrder"]));
+            }
+            set {
+                this["BrowserOrder"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BrowserUsage {
+            get {
+                return ((string)(this["BrowserUsage"]));
+            }
+            set {
+                this["BrowserUsage"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BrowserOverrides {
+            get {
+                return ((string)(this["BrowserOverrides"]));
+            }
+            set {
+                this["BrowserOverrides"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CustomBrowsers {
+            get {
+                return ((string)(this["CustomBrowsers"]));
+            }
+            set {
+                this["CustomBrowsers"] = value;
+            }
+        }
     }
 }

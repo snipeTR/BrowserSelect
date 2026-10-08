@@ -28,6 +28,8 @@ namespace BrowserSelect
         private void show_setting(object sender, EventArgs e)
         {
             new frm_settings(this.callingForm).ShowDialog();
+            // pick up changes made in settings (hidden browsers, order, icons, shortcuts, ...)
+            (this.callingForm as Form1)?.updateBrowsers();
         }
 
         private void show_about(object sender, EventArgs e)

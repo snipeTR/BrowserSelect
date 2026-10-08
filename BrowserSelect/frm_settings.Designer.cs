@@ -53,6 +53,14 @@ namespace BrowserSelect {
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.chk_alt_ignore = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btn_browser_add = new System.Windows.Forms.Button();
+            this.btn_browser_edit = new System.Windows.Forms.Button();
+            this.btn_browser_remove = new System.Windows.Forms.Button();
+            this.lbl_sort = new System.Windows.Forms.Label();
+            this.cmb_sort = new System.Windows.Forms.ComboBox();
+            this.btn_browser_up = new System.Windows.Forms.Button();
+            this.btn_browser_down = new System.Windows.Forms.Button();
+            this.chk_running_only = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -91,22 +99,106 @@ namespace BrowserSelect {
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn_browser_down);
+            this.groupBox1.Controls.Add(this.btn_browser_up);
+            this.groupBox1.Controls.Add(this.cmb_sort);
+            this.groupBox1.Controls.Add(this.lbl_sort);
+            this.groupBox1.Controls.Add(this.btn_browser_remove);
+            this.groupBox1.Controls.Add(this.btn_browser_edit);
+            this.groupBox1.Controls.Add(this.btn_browser_add);
             this.groupBox1.Controls.Add(this.browser_filter);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(220, 232);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Select Browsers";
+            this.groupBox1.Text = "Browsers";
             // 
             // browser_filter
             // 
             this.browser_filter.FormattingEnabled = true;
             this.browser_filter.Location = new System.Drawing.Point(6, 19);
             this.browser_filter.Name = "browser_filter";
-            this.browser_filter.Size = new System.Drawing.Size(208, 199);
+            this.browser_filter.Size = new System.Drawing.Size(208, 139);
             this.browser_filter.TabIndex = 0;
             this.browser_filter.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.browser_filter_ItemCheck);
+            this.browser_filter.SelectedIndexChanged += new System.EventHandler(this.browser_filter_SelectedIndexChanged);
+            this.browser_filter.DoubleClick += new System.EventHandler(this.btn_browser_edit_Click);
+            //
+            // btn_browser_add
+            //
+            this.btn_browser_add.Location = new System.Drawing.Point(6, 170);
+            this.btn_browser_add.Name = "btn_browser_add";
+            this.btn_browser_add.Size = new System.Drawing.Size(66, 23);
+            this.btn_browser_add.TabIndex = 1;
+            this.btn_browser_add.Text = "Add...";
+            this.toolTip1.SetToolTip(this.btn_browser_add, "Add a portable browser (or any program) by selecting its executable");
+            this.btn_browser_add.UseVisualStyleBackColor = true;
+            this.btn_browser_add.Click += new System.EventHandler(this.btn_browser_add_Click);
+            //
+            // btn_browser_edit
+            //
+            this.btn_browser_edit.Location = new System.Drawing.Point(77, 170);
+            this.btn_browser_edit.Name = "btn_browser_edit";
+            this.btn_browser_edit.Size = new System.Drawing.Size(66, 23);
+            this.btn_browser_edit.TabIndex = 2;
+            this.btn_browser_edit.Text = "Edit...";
+            this.toolTip1.SetToolTip(this.btn_browser_edit, "Change the icon, shortcut keys and arguments of the selected browser");
+            this.btn_browser_edit.UseVisualStyleBackColor = true;
+            this.btn_browser_edit.Click += new System.EventHandler(this.btn_browser_edit_Click);
+            //
+            // btn_browser_remove
+            //
+            this.btn_browser_remove.Location = new System.Drawing.Point(148, 170);
+            this.btn_browser_remove.Name = "btn_browser_remove";
+            this.btn_browser_remove.Size = new System.Drawing.Size(66, 23);
+            this.btn_browser_remove.TabIndex = 3;
+            this.btn_browser_remove.Text = "Remove";
+            this.toolTip1.SetToolTip(this.btn_browser_remove, "Remove a manually added browser (uncheck a browser to hide it)");
+            this.btn_browser_remove.UseVisualStyleBackColor = true;
+            this.btn_browser_remove.Click += new System.EventHandler(this.btn_browser_remove_Click);
+            //
+            // lbl_sort
+            //
+            this.lbl_sort.AutoSize = true;
+            this.lbl_sort.Location = new System.Drawing.Point(6, 205);
+            this.lbl_sort.Name = "lbl_sort";
+            this.lbl_sort.Size = new System.Drawing.Size(29, 13);
+            this.lbl_sort.TabIndex = 4;
+            this.lbl_sort.Text = "Sort:";
+            //
+            // cmb_sort
+            //
+            this.cmb_sort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_sort.FormattingEnabled = true;
+            this.cmb_sort.Location = new System.Drawing.Point(38, 201);
+            this.cmb_sort.Name = "cmb_sort";
+            this.cmb_sort.Size = new System.Drawing.Size(100, 21);
+            this.cmb_sort.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.cmb_sort, "Order of the browsers in the selection window");
+            this.cmb_sort.SelectedIndexChanged += new System.EventHandler(this.cmb_sort_SelectedIndexChanged);
+            //
+            // btn_browser_up
+            //
+            this.btn_browser_up.Location = new System.Drawing.Point(144, 200);
+            this.btn_browser_up.Name = "btn_browser_up";
+            this.btn_browser_up.Size = new System.Drawing.Size(33, 23);
+            this.btn_browser_up.TabIndex = 6;
+            this.btn_browser_up.Text = "\u25B2";
+            this.toolTip1.SetToolTip(this.btn_browser_up, "Move the selected browser up (Manual sort)");
+            this.btn_browser_up.UseVisualStyleBackColor = true;
+            this.btn_browser_up.Click += new System.EventHandler(this.btn_browser_up_Click);
+            //
+            // btn_browser_down
+            //
+            this.btn_browser_down.Location = new System.Drawing.Point(181, 200);
+            this.btn_browser_down.Name = "btn_browser_down";
+            this.btn_browser_down.Size = new System.Drawing.Size(33, 23);
+            this.btn_browser_down.TabIndex = 7;
+            this.btn_browser_down.Text = "\u25BC";
+            this.toolTip1.SetToolTip(this.btn_browser_down, "Move the selected browser down (Manual sort)");
+            this.btn_browser_down.UseVisualStyleBackColor = true;
+            this.btn_browser_down.Click += new System.EventHandler(this.btn_browser_down_Click);
             // 
             // groupBox2
             // 
@@ -342,6 +434,7 @@ namespace BrowserSelect {
             //
             // groupBox5
             //
+            this.groupBox5.Controls.Add(this.chk_running_only);
             this.groupBox5.Controls.Add(this.chk_alt_ignore);
             this.groupBox5.Location = new System.Drawing.Point(12, 346);
             this.groupBox5.Name = "groupBox5";
@@ -349,6 +442,18 @@ namespace BrowserSelect {
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Options";
+            //
+            // chk_running_only
+            //
+            this.chk_running_only.AutoSize = true;
+            this.chk_running_only.Location = new System.Drawing.Point(9, 19);
+            this.chk_running_only.Name = "chk_running_only";
+            this.chk_running_only.Size = new System.Drawing.Size(158, 17);
+            this.chk_running_only.TabIndex = 0;
+            this.chk_running_only.Text = "Show running browsers only";
+            this.toolTip1.SetToolTip(this.chk_running_only, "Only list browsers that are currently running (all browsers are shown if none is running)");
+            this.chk_running_only.UseVisualStyleBackColor = true;
+            this.chk_running_only.CheckedChanged += new System.EventHandler(this.chk_running_only_CheckedChanged);
             //
             // chk_alt_ignore
             //
@@ -424,5 +529,13 @@ namespace BrowserSelect {
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.CheckBox chk_alt_ignore;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btn_browser_add;
+        private System.Windows.Forms.Button btn_browser_edit;
+        private System.Windows.Forms.Button btn_browser_remove;
+        private System.Windows.Forms.Label lbl_sort;
+        private System.Windows.Forms.ComboBox cmb_sort;
+        private System.Windows.Forms.Button btn_browser_up;
+        private System.Windows.Forms.Button btn_browser_down;
+        private System.Windows.Forms.CheckBox chk_running_only;
     }
 }

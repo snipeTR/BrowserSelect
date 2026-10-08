@@ -19,6 +19,19 @@ namespace BrowserSelect
         public string icon;
         public string additionalArgs = "";
 
+        /// <summary>user defined shortcut characters (see BrowserCustomizations), empty = automatic</summary>
+        [JsonIgnore]
+        public string customShortcut = "";
+        /// <summary>user defined extra arguments for a detected browser (see BrowserCustomizations)</summary>
+        [JsonIgnore]
+        public string extraArgs = "";
+        /// <summary>the browser's own icon (before a custom icon is applied)</summary>
+        [JsonIgnore]
+        public string defaultIcon;
+        /// <summary>true for browsers added manually (portable browsers)</summary>
+        [JsonIgnore]
+        public bool isCustom;
+
         public string Identifier => $"{exec} {additionalArgs}";
 
         public Image string2Icon()
@@ -52,8 +65,10 @@ namespace BrowserSelect
             }
         }
 
-        public List<char> shortcuts => Regex.Replace(name, @"[^A-Za-z\s]", "").Split(' ')
-            .Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Substring(0, 1).ToLower()[0]).ToList();
+        public List<char> shortcuts => !string.IsNullOrWhiteSpace(customShortcut)
+            ? customShortcut.ToLowerInvariant().Where(c => !char.IsWhiteSpace(c) && c != ',').Distinct().ToList()
+            : Regex.Replace(name, @"[^A-Za-z\s]", "").Split(' ')
+                .Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Substring(0, 1).ToLower()[0]).ToList();
         public override string ToString()
         {
             return name;
@@ -85,9 +100,24 @@ namespace BrowserSelect
             return iconString;
         }
 
+        /// <summary>
+        /// returns all browsers: detected ones (cached in settings unless update is true) plus the
+        /// manually added (portable) browsers, with the user's customizations applied and sorted
+        /// according to the selected sort mode.
+        /// </summary>
         public static List<Browser> find(bool update = false)
         {
-          
+            var browsers = findDetected(update);
+            foreach (var custom in BrowserCustomizations.LoadCustomBrowsers())
+                if (!browsers.Any(b => string.Equals(b.Identifier, custom.Identifier,
+                        StringComparison.OrdinalIgnoreCase)))
+                    browsers.Add(custom);
+            BrowserCustomizations.Apply(browsers);
+            return BrowserCustomizations.Sort(browsers);
+        }
+
+        private static List<Browser> findDetected(bool update)
+        {
             List<Browser> browsers = new List<Browser>();
             if (Properties.Settings.Default.BrowserList != "" && !update)
             {

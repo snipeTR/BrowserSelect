@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="AutoMatchRule.cs" />
     <Compile Include="Browser.cs" />
+    <Compile Include="BrowserCustomizations.cs" />
     <Compile Include="BrowserWindowFocus.cs" />
     <Compile Include="DefaultBrowserRegistration.cs" />
     <Compile Include="BrowserUC.cs">
@@ -102,6 +103,12 @@
     </Compile>
     <Compile Include="frm_About.Designer.cs">
       <DependentUpon>frm_About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_browser_edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_browser_edit.Designer.cs">
+      <DependentUpon>frm_browser_edit.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_help_main.cs">
       <SubType>Form</SubType>

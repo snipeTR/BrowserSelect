@@ -60,6 +60,13 @@ namespace BrowserSelect
         {
             SuspendLayout();
             browsers = BrowserFinder.find().Where(b => !Settings.Default.HideBrowsers.Contains(b.Identifier)).ToList();
+            if (Settings.Default.ShowRunningOnly)
+            {
+                // only list browsers that are currently running (fall back to all if none is running)
+                var running = RunningBrowsers(browsers);
+                if (running.Count > 0)
+                    browsers = running;
+            }
             int i = 0;
             int width = 0;
             for (int k = Controls.Count - 1; k >= 0; k--)
@@ -83,6 +90,19 @@ namespace BrowserSelect
             btn_help.Left = i * width;
             btn_help.Top = buc.Height - btn_help.Height;
             // this.Width = i * 128 + 20 + 20;
+        }
+
+        private static List<Browser> RunningBrowsers(List<Browser> browsers)
+        {
+            var paths = NativeProcess.GetRunningExecutables();
+            var names = new HashSet<string>(paths.Select(p => System.IO.Path.GetFileName(p)),
+                StringComparer.OrdinalIgnoreCase);
+            return browsers.Where(b =>
+            {
+                if (b.exec.StartsWith("shell:", StringComparison.OrdinalIgnoreCase))
+                    return names.Contains("MicrosoftEdge.exe"); // legacy (UWP) Edge
+                return paths.Contains(b.exec);
+            }).ToList();
         }
 
         private void AddPrivateContextMenu(BrowserUC browserControl)
@@ -279,10 +299,14 @@ namespace BrowserSelect
             var args = new List<string>();
             if (!string.IsNullOrEmpty(b.additionalArgs))
                 args.Add(b.additionalArgs);
+            // extra arguments configured for this browser in Settings > Edit...
+            args.AddRange(SplitArguments(b.extraArgs));
             if (privateMode)
                 args.Add(b.private_arg);
             // custom flags from the matching rule (e.g. --incognito --disable-web-security)
             args.AddRange(SplitArguments(extraArgs));
+            // used by the "Most used" sort mode
+            BrowserCustomizations.IncrementUsage(b);
             if (System.IO.Path.GetFileName(b.exec).ToLowerInvariant().EndsWith("brave.exe"))
                 args.Add("--");
             args.Add(Program.url.Replace("\"", "%22"));
@@ -342,10 +366,22 @@ namespace BrowserSelect
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
             bool privateMode = (ModifierKeys & Keys.Shift) != 0;
+            char key = char.ToLowerInvariant(e.KeyChar);
+            // user defined shortcuts win over automatic ones
+            foreach (var browser in browsers)
+            {
+                if (!string.IsNullOrWhiteSpace(browser.customShortcut) && browser.shortcuts.Contains(key))
+                {
+                    open_url(browser, privateMode);
+                    return;
+                }
+            }
             int i = 1;
             foreach (var browser in browsers)
             {
-                if (browser.shortcuts.Contains(e.KeyChar) || e.KeyChar == (Convert.ToString(i++))[0])
+                bool indexKey = i <= 9 && key == (Convert.ToString(i))[0];
+                i++;
+                if (browser.shortcuts.Contains(key) || indexKey)
                 {
                     open_url(browser, privateMode);
                     return;

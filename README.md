@@ -56,7 +56,7 @@ Note: Mirrors may have outdated versions of BrowserSelect. You can always downlo
 Just a list of some ideas that can be integrated into BrowserSelect.
 - [x] Make Settings persist across updates
 - [x] Shift-Click to open link in incognito/private mode
-- [ ] Option to display running browsers only
+- [x] Option to display running browsers only
 - [x] More Auto-Select rule options
     - [x] based on the source application
     - [x] based on file extension
@@ -65,16 +65,16 @@ Just a list of some ideas that can be integrated into BrowserSelect.
     - [x] ignoring the URL as an option
     - [x] custom flags to browsers as an option (e.g. incognito mode or disable CSRF)
 - [ ] export/import for rules/settings
-- [ ] Sorting browsers on the list
-- [ ] Custom Shortcuts
+- [x] Sorting browsers on the list
+- [x] Custom Shortcuts
 - [x] Ignoring the rules if Alt key is held down when clicking a link
 - [ ] an API to invoke BrowserSelect
 - [x] Bugfix for when Browser was launched with Maximize window state (browser select will launch maximized)
 - [ ] A browser extension to launch the correct browser based on the rules even if a link is clicked inside a browser
-- [ ] support for portable browsers (adding browsers using a browse button rather than registry)
+- [x] support for portable browsers (adding browsers using a browse button rather than registry)
 - [ ] support for non-browser apps as an option (e.g. download managers)
 - [ ] themes ? or at least an optional transparent Aero glass mode
-- [ ] Ability to choose custom icons for browsers
+- [x] Ability to choose custom icons for browsers
 - [ ] display the unshortened version of adf.ly or goo.gl links when selecting the browser
 - [ ] Localization
 - [ ] handling of other link types (e.g. `mail:` in case you have both outlook and thunderbird installed [or maybe as a sister app])
@@ -89,6 +89,10 @@ Unreleased
 - Rules can pass custom arguments to the browser (e.g. `--incognito`) and can ignore a URL entirely ("ignore URL (do nothing)")
 - Rules pointing to a browser that is no longer installed now show the selection dialogue instead of crashing
 - Holding Alt while clicking a link skips the rules and shows the browser list (can be disabled in Settings)
+- Portable browsers (or any program) can be added with Settings > Browsers > Add... (browse for the executable)
+- Settings > Browsers > Edit... sets a custom icon (.ico/.exe/.dll/.png/.jpg/...), custom shortcut keys and extra arguments per browser
+- Browsers can be sorted manually (up/down buttons), alphabetically or by most used
+- Option to display only the browsers that are currently running
 
 v1.4.1 [24/08/19]
 - Fixed couldn't hide chrome profiles separately (#52)
