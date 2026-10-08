@@ -1,7 +1,7 @@
 ; BrowserSelect installer (Windows 64-bit)
 ;
 ; Build (from the BrowserSelect project folder, after a Release|x64 build):
-;   makensis /DVERSION=1.4.1.0 installer.nsi
+;   makensis /DVERSION=1.4.2.0 installer.nsi
 ; Optional defines:
 ;   /DBUILD_DIR=<path to build output>   (default: .\bin\x64\Release)
 ;   /DOUTFILE=<installer file name>      (default: BrowserSelect-<VERSION>-x64-Setup.exe)
@@ -9,7 +9,7 @@
 Unicode true
 
 !ifndef VERSION
-  !define VERSION "1.4.1.0"
+  !define VERSION "1.4.2.0"
 !endif
 !ifndef BUILD_DIR
   !define BUILD_DIR ".\bin\x64\Release"
@@ -86,6 +86,8 @@ Section "BrowserSelect" SecMain
   File "/oname=BrowserSelect.exe.config" "${BUILD_DIR}\BrowserSelect.exe.config"
   File "/oname=Newtonsoft.Json.dll" "${BUILD_DIR}\Newtonsoft.Json.dll"
   File "/oname=License.txt" ".\License.txt"
+  ;translations: satellite assemblies <culture>\BrowserSelect.resources.dll (none while only English exists)
+  File /nonfatal /r "${BUILD_DIR}\BrowserSelect.resources.dll"
   CreateShortCut "$SMPROGRAMS\BrowserSelect.lnk" "$INSTDIR\BrowserSelect.exe"
 
   ;Store installation folder
@@ -178,6 +180,16 @@ Section "Uninstall"
   Delete "$INSTDIR\Newtonsoft.Json.dll"
   Delete "$INSTDIR\License.txt"
   Delete "$SMPROGRAMS\BrowserSelect.lnk"
+  ;translations (<culture>\BrowserSelect.resources.dll)
+  FindFirst $0 $1 "$INSTDIR\*"
+  ${DoWhile} $1 != ""
+    ${If} ${FileExists} "$INSTDIR\$1\BrowserSelect.resources.dll"
+      Delete "$INSTDIR\$1\BrowserSelect.resources.dll"
+      RMDir "$INSTDIR\$1"
+    ${EndIf}
+    FindNext $0 $1
+  ${Loop}
+  FindClose $0
 
   ; todo: remove user.conf file(s) after asking user
   RMDir "$INSTDIR"

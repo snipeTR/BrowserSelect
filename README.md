@@ -25,7 +25,7 @@ Windows 64-bit installer: [BrowserSelect 1.4.1.0 (x64) Setup](https://github.com
 
 Latest release: [github.com/snipeTR/BrowserSelect/releases/latest](https://github.com/snipeTR/BrowserSelect/releases/latest)
 
-CI builds (MSBuild + NSIS) run on GitHub Actions and publish a draft release with the installer; tagged/published releases are available on the Releases page.
+CI builds (MSBuild + NSIS) run on GitHub Actions on every push to `master`. When the version in `BrowserSelect/Properties/AssemblyInfo.cs` changes, a draft release with the installer is created automatically (no manual run needed); published releases are available on the Releases page.
 
 # Related links
 
@@ -64,12 +64,18 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 - [ ] themes ? or at least an optional transparent Aero glass mode
 - [x] Ability to choose custom icons for browsers
 - [ ] display the unshortened version of adf.ly or goo.gl links when selecting the browser
-- [ ] Localization
+- [ ] Localization (infrastructure in place: texts in `BrowserSelect/Localization/Strings.resx`, language selection in Settings; English only so far)
 - [ ] handling of other link types (e.g. `mail:` in case you have both outlook and thunderbird installed [or maybe as a sister app])
 - [x] update checker (not as a popup or messagebox, a tiny icon somewhere on the main form that appears when you don't have the last version)
 - [x] add file associations (e.g. .url files, or .html files)
 
 # Changelog
+
+v1.4.2.0
+- Localization infrastructure: UI texts come from a single English file (`BrowserSelect/Localization/Strings.resx`), see `BrowserSelect/Localization/README.md`
+- Language drop-down at the bottom left of the Settings window (lists English and every installed translation; saved in the settings and applied at startup)
+- The selected language is included in settings export/import
+- GitHub Actions: every push to master builds the installer; a draft release is created automatically when the version changes
 
 v1.4.1.0-build.4 [08/10/26]
 - Fixed BrowserSelect opening maximized when the link was clicked in an application running maximized

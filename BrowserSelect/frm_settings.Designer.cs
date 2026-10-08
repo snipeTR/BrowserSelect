@@ -64,6 +64,8 @@ namespace BrowserSelect {
             this.btn_export = new System.Windows.Forms.Button();
             this.btn_filetypes = new System.Windows.Forms.Button();
             this.btn_import = new System.Windows.Forms.Button();
+            this.lbl_language = new System.Windows.Forms.Label();
+            this.cmb_language = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -447,6 +449,28 @@ namespace BrowserSelect {
             this.btn_refresh.UseVisualStyleBackColor = true;
             this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             //
+            // lbl_language
+            //
+            this.lbl_language.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl_language.AutoSize = true;
+            this.lbl_language.Location = new System.Drawing.Point(12, 541);
+            this.lbl_language.Name = "lbl_language";
+            this.lbl_language.Size = new System.Drawing.Size(58, 13);
+            this.lbl_language.TabIndex = 7;
+            this.lbl_language.Text = "Language:";
+            //
+            // cmb_language
+            //
+            this.cmb_language.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmb_language.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_language.FormattingEnabled = true;
+            this.cmb_language.Location = new System.Drawing.Point(80, 537);
+            this.cmb_language.Name = "cmb_language";
+            this.cmb_language.Size = new System.Drawing.Size(152, 21);
+            this.cmb_language.TabIndex = 8;
+            this.toolTip1.SetToolTip(this.cmb_language, "User interface language. Every language added to BrowserSelect is listed here.");
+            this.cmb_language.SelectedIndexChanged += new System.EventHandler(this.cmb_language_SelectedIndexChanged);
+            //
             // groupBox5
             //
             this.groupBox5.Controls.Add(this.btn_import);
@@ -511,7 +535,9 @@ namespace BrowserSelect {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;
-            this.ClientSize = new System.Drawing.Size(900, 540);
+            this.ClientSize = new System.Drawing.Size(900, 568);
+            this.Controls.Add(this.cmb_language);
+            this.Controls.Add(this.lbl_language);
             this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -520,7 +546,7 @@ namespace BrowserSelect {
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MinimumSize = new System.Drawing.Size(700, 579);
+            this.MinimumSize = new System.Drawing.Size(700, 607);
             this.Name = "frm_settings";
             this.Text = "Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frm_settings_FormClosing);
@@ -535,6 +561,7 @@ namespace BrowserSelect {
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -579,5 +606,7 @@ namespace BrowserSelect {
         private System.Windows.Forms.Button btn_export;
         private System.Windows.Forms.Button btn_filetypes;
         private System.Windows.Forms.Button btn_import;
+        private System.Windows.Forms.Label lbl_language;
+        private System.Windows.Forms.ComboBox cmb_language;
     }
 }

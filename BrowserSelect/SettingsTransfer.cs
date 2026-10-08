@@ -39,7 +39,8 @@ namespace BrowserSelect
                 ["sortMode"] = s.SortMode,
                 ["showRunningOnly"] = s.ShowRunningOnly,
                 ["altIgnoresRules"] = s.AltIgnoresRules,
-                ["checkForUpdates"] = s.check_update != "nope"
+                ["checkForUpdates"] = s.check_update != "nope",
+                ["language"] = s.Language ?? Localization.L10n.DefaultLanguage
             };
             File.WriteAllText(path, root.ToString(Formatting.Indented));
         }
@@ -116,6 +117,11 @@ namespace BrowserSelect
                 s.ShowRunningOnly = (bool)root["showRunningOnly"];
             if (root["altIgnoresRules"] != null)
                 s.AltIgnoresRules = (bool)root["altIgnoresRules"];
+            // only languages installed on this computer are taken over
+            var language = (string)root["language"];
+            if (language != null && Localization.L10n.Available()
+                    .Any(l => l.Code.Equals(language, StringComparison.OrdinalIgnoreCase)))
+                s.Language = language;
             if (root["checkForUpdates"] != null)
             {
                 bool check = (bool)root["checkForUpdates"];

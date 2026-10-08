@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BrowserSelect.Localization;
 using BrowserSelect.Properties;
 using Microsoft.Win32;
 
@@ -66,6 +67,8 @@ namespace BrowserSelect
             chk_check_update.Checked = Settings.Default.check_update != "nope";
             chk_alt_ignore.Checked = Settings.Default.AltIgnoresRules;
             _populating = false;
+
+            PopulateLanguages();
 
             // show which application opened the current link, to help writing "Source App" rules
             if (!string.IsNullOrEmpty(Program.SourceApp))
@@ -375,6 +378,42 @@ namespace BrowserSelect
             RefreshBrowsers(SelectedBrowser?.Identifier);
         }
 
+        /// <summary>
+        /// fills the language drop-down (bottom left) with English plus every installed translation
+        /// (see Localization\L10n.cs) and selects the one stored in the settings
+        /// </summary>
+        private void PopulateLanguages()
+        {
+            lbl_language.Text = Strings.Language_Label;
+            toolTip1.SetToolTip(cmb_language, Strings.Language_Tooltip);
+
+            _populating = true;
+            cmb_language.Items.Clear();
+            var languages = L10n.Available();
+            foreach (var language in languages)
+                cmb_language.Items.Add(language);
+            var saved = string.IsNullOrWhiteSpace(Settings.Default.Language) ? L10n.Current : Settings.Default.Language;
+            var selected = languages.FirstOrDefault(l => l.Code.Equals(saved, StringComparison.OrdinalIgnoreCase))
+                           ?? languages[0];
+            cmb_language.SelectedItem = selected;
+            _populating = false;
+        }
+
+        private void cmb_language_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var language = cmb_language.SelectedItem as LanguageOption;
+            if (_populating || language == null)
+                return;
+            if (language.Code.Equals(Settings.Default.Language, StringComparison.OrdinalIgnoreCase))
+                return;
+            Settings.Default.Language = language.Code;
+            Settings.Default.Save();
+            // forms already open keep their texts; the new language is used from the next start
+            if (!language.Code.Equals(L10n.Current, StringComparison.OrdinalIgnoreCase))
+                MessageBox.Show(Strings.Language_RestartRequired, Strings.Language_RestartTitle,
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void chk_running_only_CheckedChanged(object sender, EventArgs e)
         {
             if (_populating)
@@ -389,8 +428,8 @@ namespace BrowserSelect
             // alert user of unsaved changes
             if (btn_apply.Enabled)
             {
-                var window = MessageBox.Show("You have unsaved changes, are you sure you want to close without saving ?",
-                    "Unsaved Changes", MessageBoxButtons.YesNo);
+                var window = MessageBox.Show(Strings.Settings_UnsavedChanges,
+                    Strings.Settings_UnsavedChangesTitle, MessageBoxButtons.YesNo);
                 if (window == DialogResult.No) e.Cancel = true;
                 else e.Cancel = false;
             }

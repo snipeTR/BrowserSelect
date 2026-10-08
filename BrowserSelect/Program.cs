@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BrowserSelect.Localization;
 using BrowserSelect.Properties;
 
 namespace BrowserSelect
@@ -38,6 +39,8 @@ namespace BrowserSelect
                     Settings.Default.AutoBrowser = new StringCollection();
                 Settings.Default.Save();
             }
+            // user interface language (Localization\Strings.resx); English unless another installed language is selected
+            L10n.Apply(Settings.Default.Language);
             // check for update
             if (Settings.Default.check_update != "nope" &&
                 DateTime.Now.Subtract(time(Settings.Default.check_update)).TotalDays > 7)
