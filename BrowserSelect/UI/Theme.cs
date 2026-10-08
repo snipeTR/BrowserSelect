@@ -269,8 +269,9 @@ namespace BrowserSelect.UI
             var text = c.Text ?? "";
             if (c is Button)
             {
+                // flat buttons lay out their text inside the border with some padding; keep a safe margin
                 var size = TextRenderer.MeasureText(text.Length > 0 ? text : "Ag", font);
-                return size.Width <= c.Width - 8 && size.Height <= c.Height - 4;
+                return size.Width + 16 <= c.Width && size.Height + 6 <= c.Height;
             }
             var label = (Label)c;
             var lineHeight = TextRenderer.MeasureText("Ag(", font).Height;
@@ -278,10 +279,20 @@ namespace BrowserSelect.UI
                 return false;
             if (label.AutoEllipsis || text.Length == 0)
                 return true;
-            var width = Math.Max(1, label.ClientSize.Width - label.Padding.Horizontal);
-            var needed = TextRenderer.MeasureText(text, font, new Size(width, int.MaxValue),
-                TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
-            return needed.Height <= label.ClientSize.Height && needed.Width <= width + 1;
+            // a few pixels narrower than the label: the label wraps words a little earlier than the measurement
+            var width = Math.Max(1, label.ClientSize.Width - label.Padding.Horizontal - 6);
+            int neededHeight;
+            if (label.UseCompatibleTextRendering)
+            {
+                using (var g = label.CreateGraphics())
+                    neededHeight = (int)Math.Ceiling(g.MeasureString(text, font, width).Height);
+            }
+            else
+            {
+                neededHeight = TextRenderer.MeasureText(text, font, new Size(width, int.MaxValue),
+                    TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl).Height;
+            }
+            return neededHeight <= label.ClientSize.Height - label.Padding.Vertical;
         }
 
         // ---- colors ---------------------------------------------------------------------------
@@ -294,6 +305,7 @@ namespace BrowserSelect.UI
             public bool RoleKnown;
             public Role Role;
             public Font Original, Preferred, Smaller;
+            public bool PaintHooked;
         }
 
         private static readonly ConditionalWeakTable<Control, ControlInfo> Infos = new ConditionalWeakTable<Control, ControlInfo>();
@@ -396,6 +408,13 @@ namespace BrowserSelect.UI
             {
                 // an explicitly set ForeColor makes the themed group box draw its caption in that color
                 c.ForeColor = p.Text;
+                // the themed frame is drawn almost white; in the dark theme it is painted over (see PaintGroupBox)
+                var info = Info(c);
+                if (!info.PaintHooked)
+                {
+                    info.PaintHooked = true;
+                    c.Paint += PaintGroupBox;
+                }
             }
             else if (c is CheckBox || c is RadioButton)
             {
@@ -405,6 +424,37 @@ namespace BrowserSelect.UI
             {
                 SetDarkScrollbars(c, dark);
             }
+        }
+
+        /// <summary>dark theme: repaints the frame and caption of a group box in the palette colors</summary>
+        private static void PaintGroupBox(object sender, PaintEventArgs e)
+        {
+            try
+            {
+                if (!IsDark)
+                    return;
+                var box = (GroupBox)sender;
+                var p = Dark;
+                var g = e.Graphics;
+                const TextFormatFlags flags = TextFormatFlags.SingleLine | TextFormatFlags.NoPadding;
+                var textSize = TextRenderer.MeasureText(g, box.Text ?? "", box.Font, Size.Empty, flags);
+                var top = textSize.Height / 2;
+                // erase the themed frame (incl. its rounded corners) with the background, then draw a thin one
+                var frame = new Rectangle(0, top, box.Width - 1, box.Height - top - 1);
+                using (var erase = new Pen(box.BackColor, 4))
+                    g.DrawRectangle(erase, frame);
+                using (var pen = new Pen(p.Border))
+                    g.DrawRectangle(pen, frame);
+                if (!string.IsNullOrEmpty(box.Text))
+                {
+                    var textRect = new Rectangle(7, 0, textSize.Width + 2, textSize.Height);
+                    using (var back = new SolidBrush(box.BackColor))
+                        g.FillRectangle(back, textRect);
+                    TextRenderer.DrawText(g, box.Text, box.Font, new Point(8, 0),
+                        box.Enabled ? p.Text : p.SubtleText, flags);
+                }
+            }
+            catch (Exception) { }
         }
 
         private static void StyleButton(Button b, Palette p, Role role)

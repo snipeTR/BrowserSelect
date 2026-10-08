@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: 'Commit/branch/tag to build (empty = the selected branch), e.g. b894d9a for the classic look before v1.5.0.0'
+        description: 'Commit/branch/tag to build (empty = the selected branch), e.g. b894d9abc18ac61f8e2a15cb96d1f6a33a4b682c (full SHA) for the classic look before v1.5.0.0'
         required: false
         default: ''
 
