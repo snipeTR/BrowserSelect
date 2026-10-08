@@ -116,6 +116,33 @@ namespace BrowserSelect
         {
             // Preserve the current default before asking Windows to handle the association UI.
             DefaultBrowserRegistration.CaptureExistingDefault();
+            OpenAssociationUI();
+        }
+
+        private void btn_filetypes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DefaultBrowserRegistration.EnsureApplicationRegistered();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, "Unable to register the file types.\n\n" + ex.Message, "File types",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            MessageBox.Show(this,
+                "BrowserSelect is now registered for " + string.Join(", ", DefaultBrowserRegistration.FileExtensions) +
+                " files and appears in their \"Open with\" menu.\n\n" +
+                "To open these files with BrowserSelect by default, choose BrowserSelect for them in the " +
+                "Windows Default apps window that opens next.", "File types", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+            OpenAssociationUI();
+        }
+
+        /// <summary>opens the Windows UI where the user picks BrowserSelect for protocols and file types</summary>
+        private void OpenAssociationUI()
+        {
             IApplicationAssociationRegistrationUI associationUi = null;
             try
             {

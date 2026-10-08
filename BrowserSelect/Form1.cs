@@ -161,6 +161,22 @@ namespace BrowserSelect
         private ContextMenu _alwaysAsk;
         public void add_rule(Browser b)
         {
+            // local files (opened through the .html file association) have no domain:
+            // remember the browser for this file extension instead
+            var uri = new Uri(Program.url);
+            if (string.IsNullOrEmpty(uri.Host))
+            {
+                var extension = AutoMatchRule.GetExtension(uri);
+                if (extension.Length > 0)
+                    save_rule(new AutoMatchRule
+                    {
+                        MatchType = AutoMatchRule.MatchExtension,
+                        Pattern = extension.ToLowerInvariant(),
+                        Browser = b.name
+                    });
+                open_url(b);
+                return;
+            }
             // check if desired pattern is ambiguous
             if (_alwaysRule.mode == 3)
             {
@@ -194,12 +210,17 @@ namespace BrowserSelect
 
         private void save_rule(string pattern, Browser b)
         {
-            // save a rule and save app settings
-            Settings.Default.AutoBrowser.Add((new AutoMatchRule()
+            save_rule(new AutoMatchRule()
             {
                 Pattern = pattern,
                 Browser = b.name
-            }).ToString());
+            });
+        }
+
+        private void save_rule(AutoMatchRule rule)
+        {
+            // save a rule and save app settings
+            Settings.Default.AutoBrowser.Add(rule.ToString());
             Settings.Default.Save();
         }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Microsoft.Win32;
 using System.Windows.Forms;
 using BrowserSelect.Properties;
@@ -58,7 +59,64 @@ namespace BrowserSelect
             {
                 command.SetValue(null, "\"" + executable + "\" \"%1\"");
             }
+
+            RegisterFileAssociations(executable);
         }
+
+        /// <summary>ProgID used for the file types BrowserSelect can open (.html, .url, ...)</summary>
+        public const string FileProgId = "bselectHTML";
+
+        /// <summary>file types BrowserSelect offers to handle (Default apps / "Open with")</summary>
+        public static readonly string[] FileExtensions = { ".htm", ".html", ".shtml", ".xht", ".xhtml", ".url" };
+
+        /// <summary>
+        /// Registers BrowserSelect as a handler for .html/.url files: a ProgID, the FileAssociations
+        /// capabilities (so it can be picked in Windows Default apps) and OpenWithProgids entries
+        /// (so it shows up in the "Open with" menu). The user's current default is not changed.
+        /// </summary>
+        public static void RegisterFileAssociations(string executable)
+        {
+            using (RegistryKey progId = Registry.CurrentUser.CreateSubKey(@"Software\Classes\" + FileProgId))
+            {
+                progId.SetValue(null, "BrowserSelect Document");
+                progId.SetValue("FriendlyTypeName", "BrowserSelect Document");
+            }
+            using (RegistryKey icon = Registry.CurrentUser.CreateSubKey(
+                @"Software\Classes\" + FileProgId + @"\DefaultIcon"))
+            {
+                icon.SetValue(null, executable + ",0");
+            }
+            using (RegistryKey command = Registry.CurrentUser.CreateSubKey(
+                @"Software\Classes\" + FileProgId + @"\shell\open\command"))
+            {
+                command.SetValue(null, "\"" + executable + "\" \"%1\"");
+            }
+
+            using (RegistryKey associations = Registry.CurrentUser.CreateSubKey(
+                CapabilitiesPath + @"\FileAssociations"))
+            {
+                foreach (var extension in FileExtensions)
+                    associations.SetValue(extension, FileProgId);
+            }
+
+            foreach (var extension in FileExtensions)
+            {
+                using (RegistryKey openWith = Registry.CurrentUser.CreateSubKey(
+                    @"Software\Classes\" + extension + @"\OpenWithProgids"))
+                {
+                    openWith.SetValue(FileProgId, new byte[0], RegistryValueKind.None);
+                }
+            }
+
+            // tell Explorer that associations changed
+            SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
+        }
+
+        private const int SHCNE_ASSOCCHANGED = 0x08000000;
+        private const uint SHCNF_IDLIST = 0x0000;
+
+        [DllImport("shell32.dll")]
+        private static extern void SHChangeNotify(int eventId, uint flags, IntPtr item1, IntPtr item2);
 
         private const string AssociationPath =
             @"Software\Microsoft\Windows\Shell\Associations\UrlAssociations\";

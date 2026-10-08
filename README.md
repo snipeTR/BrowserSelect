@@ -79,7 +79,7 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 - [ ] Localization
 - [ ] handling of other link types (e.g. `mail:` in case you have both outlook and thunderbird installed [or maybe as a sister app])
 - [x] update checker (not as a popup or messagebox, a tiny icon somewhere on the main form that appears when you don't have the last version)
-- [ ] add file associations (e.g. .url files, or .html files)
+- [x] add file associations (e.g. .url files, or .html files)
 
 # Changelog
 
@@ -94,6 +94,7 @@ Unreleased
 - Browsers can be sorted manually (up/down buttons), alphabetically or by most used
 - Option to display only the browsers that are currently running
 - Export/Import of rules and settings to a JSON file (Settings > Options)
+- File associations: BrowserSelect can open .htm/.html/.shtml/.xht/.xhtml files and .url Internet Shortcuts (Settings > Default Browser > File types..., also registered by the installer). The "Always" button on a local file creates an Extension rule
 
 v1.4.1 [24/08/19]
 - Fixed couldn't hide chrome profiles separately (#52)

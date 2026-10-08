@@ -62,6 +62,7 @@ namespace BrowserSelect {
             this.btn_browser_down = new System.Windows.Forms.Button();
             this.chk_running_only = new System.Windows.Forms.CheckBox();
             this.btn_export = new System.Windows.Forms.Button();
+            this.btn_filetypes = new System.Windows.Forms.Button();
             this.btn_import = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -75,11 +76,22 @@ namespace BrowserSelect {
             //
             this.btn_setdefault.Location = new System.Drawing.Point(6, 58);
             this.btn_setdefault.Name = "btn_setdefault";
-            this.btn_setdefault.Size = new System.Drawing.Size(208, 26);
+            this.btn_setdefault.Size = new System.Drawing.Size(130, 26);
             this.btn_setdefault.TabIndex = 0;
             this.btn_setdefault.Text = "Set as Default Browser";
             this.btn_setdefault.UseVisualStyleBackColor = true;
             this.btn_setdefault.Click += new System.EventHandler(this.btn_setdefault_Click);
+            //
+            // btn_filetypes
+            //
+            this.btn_filetypes.Location = new System.Drawing.Point(140, 58);
+            this.btn_filetypes.Name = "btn_filetypes";
+            this.btn_filetypes.Size = new System.Drawing.Size(74, 26);
+            this.btn_filetypes.TabIndex = 2;
+            this.btn_filetypes.Text = "File types...";
+            this.toolTip1.SetToolTip(this.btn_filetypes, "Register BrowserSelect for .htm/.html/.shtml/.xhtml/.url files (adds it to \"Open with\" and Default apps)");
+            this.btn_filetypes.UseVisualStyleBackColor = true;
+            this.btn_filetypes.Click += new System.EventHandler(this.btn_filetypes_Click);
             //
             // label1
             //
@@ -87,8 +99,8 @@ namespace BrowserSelect {
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(208, 40);
             this.label1.TabIndex = 1;
-            this.label1.Text = "BrowserSelect must be set as default browser for it to function correctly. this b" +
-    "utton will set it as the default browser.";
+            this.label1.Text = "BrowserSelect must be set as default browser for it to function correctly. It can" +
+    " also open .html and .url files.";
             // 
             // label2
             // 
@@ -204,6 +216,7 @@ namespace BrowserSelect {
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btn_filetypes);
             this.groupBox2.Controls.Add(this.btn_setdefault);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(12, 250);
@@ -564,6 +577,7 @@ namespace BrowserSelect {
         private System.Windows.Forms.Button btn_browser_down;
         private System.Windows.Forms.CheckBox chk_running_only;
         private System.Windows.Forms.Button btn_export;
+        private System.Windows.Forms.Button btn_filetypes;
         private System.Windows.Forms.Button btn_import;
     }
 }

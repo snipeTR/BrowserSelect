@@ -48,7 +48,8 @@ namespace BrowserSelect
             //checking if a url is being opened or app is ran from start menu (without arguments)
             if (args.Length > 0)
             {
-                url = args[0];
+                // a .url (Internet Shortcut) file opened via file association -> open its target
+                url = ResolveInput(args[0]);
                 //add http:// to url if it is missing a protocol
                 var link = new LinkContext(url, NativeProcess.GetSourceApplicationPath());
                 url = link.Url;
@@ -83,6 +84,38 @@ namespace BrowserSelect
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+        }
+
+        /// <summary>
+        /// BrowserSelect can be associated with .html/.url files. For .url (Internet Shortcut) files the
+        /// link inside the file is returned; other files are returned unchanged (they become file:/// URLs).
+        /// </summary>
+        public static string ResolveInput(string argument)
+        {
+            try
+            {
+                if (argument.EndsWith(".url", StringComparison.OrdinalIgnoreCase) && System.IO.File.Exists(argument))
+                {
+                    bool inSection = false;
+                    foreach (var raw in System.IO.File.ReadAllLines(argument))
+                    {
+                        var line = raw.Trim();
+                        if (line.StartsWith("["))
+                            inSection = line.Equals("[InternetShortcut]", StringComparison.OrdinalIgnoreCase);
+                        else if (inSection && line.StartsWith("URL=", StringComparison.OrdinalIgnoreCase))
+                        {
+                            var target = line.Substring(4).Trim();
+                            if (target.Length > 0)
+                                return target;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // unreadable shortcut: fall back to opening the file itself
+            }
+            return argument;
         }
 
         // from : http://stackoverflow.com/a/250400/1461004

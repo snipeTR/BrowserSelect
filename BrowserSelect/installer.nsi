@@ -137,6 +137,30 @@ Section "BrowserSelect" SecMain
                  "" "BrowserSelect Url"
   WriteRegStr HKCU "Software\Classes\bselectURL\shell\open\command" \
                  "" "$\"$INSTDIR\BrowserSelect.exe$\" $\"%1$\""
+;file associations (.html, .url, ...): offered in Default apps and the "Open with" menu
+  WriteRegStr HKCU "Software\Classes\bselectHTML" "" "BrowserSelect Document"
+  WriteRegStr HKCU "Software\Classes\bselectHTML\DefaultIcon" "" "$INSTDIR\BrowserSelect.exe,0"
+  WriteRegStr HKCU "Software\Classes\bselectHTML\shell\open\command" \
+                 "" "$\"$INSTDIR\BrowserSelect.exe$\" $\"%1$\""
+  WriteRegStr HKCU "Software\Clients\StartMenuInternet\BROWSERSELECT.EXE\Capabilities\FileAssociations" \
+                 ".htm" "bselectHTML"
+  WriteRegStr HKCU "Software\Clients\StartMenuInternet\BROWSERSELECT.EXE\Capabilities\FileAssociations" \
+                 ".html" "bselectHTML"
+  WriteRegStr HKCU "Software\Clients\StartMenuInternet\BROWSERSELECT.EXE\Capabilities\FileAssociations" \
+                 ".shtml" "bselectHTML"
+  WriteRegStr HKCU "Software\Clients\StartMenuInternet\BROWSERSELECT.EXE\Capabilities\FileAssociations" \
+                 ".xht" "bselectHTML"
+  WriteRegStr HKCU "Software\Clients\StartMenuInternet\BROWSERSELECT.EXE\Capabilities\FileAssociations" \
+                 ".xhtml" "bselectHTML"
+  WriteRegStr HKCU "Software\Clients\StartMenuInternet\BROWSERSELECT.EXE\Capabilities\FileAssociations" \
+                 ".url" "bselectHTML"
+  WriteRegStr HKCU "Software\Classes\.htm\OpenWithProgids" "bselectHTML" ""
+  WriteRegStr HKCU "Software\Classes\.html\OpenWithProgids" "bselectHTML" ""
+  WriteRegStr HKCU "Software\Classes\.shtml\OpenWithProgids" "bselectHTML" ""
+  WriteRegStr HKCU "Software\Classes\.xht\OpenWithProgids" "bselectHTML" ""
+  WriteRegStr HKCU "Software\Classes\.xhtml\OpenWithProgids" "bselectHTML" ""
+  WriteRegStr HKCU "Software\Classes\.url\OpenWithProgids" "bselectHTML" ""
+  System::Call 'shell32::SHChangeNotify(i 0x08000000, i 0, p 0, p 0)'
 
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
@@ -163,5 +187,13 @@ Section "Uninstall"
   DeleteRegKey HKCU "Software\Clients\StartMenuInternet\BROWSERSELECT.EXE"
   DeleteRegValue  HKCU "Software\RegisteredApplications" "BrowserSelect"
   DeleteRegKey HKCU "Software\Classes\bselectURL"
+  DeleteRegKey HKCU "Software\Classes\bselectHTML"
+  DeleteRegValue HKCU "Software\Classes\.htm\OpenWithProgids" "bselectHTML"
+  DeleteRegValue HKCU "Software\Classes\.html\OpenWithProgids" "bselectHTML"
+  DeleteRegValue HKCU "Software\Classes\.shtml\OpenWithProgids" "bselectHTML"
+  DeleteRegValue HKCU "Software\Classes\.xht\OpenWithProgids" "bselectHTML"
+  DeleteRegValue HKCU "Software\Classes\.xhtml\OpenWithProgids" "bselectHTML"
+  DeleteRegValue HKCU "Software\Classes\.url\OpenWithProgids" "bselectHTML"
+  System::Call 'shell32::SHChangeNotify(i 0x08000000, i 0, p 0, p 0)'
 
 SectionEnd
