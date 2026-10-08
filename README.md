@@ -1,14 +1,8 @@
-Due to lack of time this repo has not gotten new updates in a while. While I have not abandoned the project and may update it in the future, for the time being if there are bugs or lack of features that makes this unusable to you, you can instead use one of these alternatives:
-- [Hurl](https://github.com/U-C-S/Hurl)
-- [Browser Tamer](https://www.aloneguid.uk/projects/bt/)
-- [Browser Choose 2](https://browserchooser2.com/)
-- [Browser Picker](https://github.com/mortenn/BrowserPicker)
-- [Browser Selector](https://github.com/DanTup/BrowserSelector)
-
----
-
 # Browser Select
+
 Browser Select is a utility to dynamically select the browser you want instead of just having one default for all links. Similar to the prompt in android to choose a browser when a link in a non-browser app is clicked/touched. It may not be useful for everyone but it helps when you use multiple browsers for different things (e.g. one with proxy and one without) and open many links from other applications (e.g. Messengers).
+
+This is an actively maintained fork of [zumoshi/BrowserSelect](https://github.com/zumoshi/BrowserSelect) with Windows **64-bit** installer builds via GitHub Actions.
 
 ![screenshot1](https://raw.githubusercontent.com/zumoshi/BrowserSelect/master/screenshots/photo_2016-07-11_13-44-19.png)
 
@@ -19,18 +13,19 @@ Instead of having to copy the link, open the desired (non-default) browser then 
 You may click on the desired browser or press one of the shortcuts (its index or the first letter of its name), for example for chrome you can press 2, g or c.
 you may also press Esc (or click the X) to not open the URL.
 
-To install Download this file then set it as the default browser.
+To install, download the installer below then set BrowserSelect as the default browser.
 
 ![select default browser](https://raw.githubusercontent.com/zumoshi/BrowserSelect/master/screenshots/photo_2015-10-12_16-43-08.jpg)
 
-BrowserSelect has been tested on windows 7, windows 8.1 and windows 10. requires **.net framework 4**.
+BrowserSelect has been tested on windows 7, windows 8.1 and windows 10/11. Requires **.NET Framework 4.8**.
 
 # Download
 
-You can download browser select here : [Browser select v1.4.1 (412KB)](https://github.com/zumoshi/BrowserSelect/releases/download/1.4.1/BrowserSelect.exe)
+Windows 64-bit installer: [BrowserSelect 1.4.1.0 (x64) Setup](https://github.com/snipeTR/BrowserSelect/releases/download/v1.4.1.0-build.4/BrowserSelect-1.4.1.0-x64-Setup.exe)
 
-[![100% safe Award from softpedia](http://s1.softpedia-static.com/_img/sp100free.png?1)](http://www.softpedia.com/get/Internet/Browsers/Browser-Select.shtml#status)
+Latest release: [github.com/snipeTR/BrowserSelect/releases/latest](https://github.com/snipeTR/BrowserSelect/releases/latest)
 
+CI builds (MSBuild + NSIS) run on GitHub Actions and publish a draft release with the installer; tagged/published releases are available on the Releases page.
 
 # Related links
 
@@ -40,16 +35,9 @@ Reviews: [DSTech](http://dipendrashekhawat.com/choose-specific-browser-every-tim
 [TrishTech](http://www.trishtech.com/2016/07/use-different-browsers-for-different-links-with-browserselect/)
 [DonationCoder](http://www.donationcoder.com/forum/index.php?topic=42860.msg401447)
 
-Download Mirrors: 
-[GitHub](https://github.com/zumoshi/BrowserSelect/releases/latest)
+Upstream / mirrors (may be outdated):
+[zumoshi/BrowserSelect](https://github.com/zumoshi/BrowserSelect/releases)
 [SoftPedia](http://www.softpedia.com/get/Internet/Browsers/Browser-Select.shtml)
-[SnapFiles](http://www.snapfiles.com/get/browserselect.html)
-[FindmySoft](http://browserselect.findmysoft.com/)
-[browserss](http://browserss.ru/m.browser-select.php)
-[ComputerBild](http://www.computerbild.de/download/BrowserSelect-15967517.html)
-
-Note: Mirrors may have outdated versions of BrowserSelect. You can always download the latest version [here](https://github.com/zumoshi/BrowserSelect/releases).
-
 
 # ToDo
 
@@ -83,11 +71,12 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 
 # Changelog
 
-Unreleased
+v1.4.1.0-build.4 [08/10/26]
 - Fixed BrowserSelect opening maximized when the link was clicked in an application running maximized
 - Auto Select rules can now match on Domain, URL, Path, Keyword, (file) Extension, Source App (the application the link was clicked in) or a Regex
 - Rules can pass custom arguments to the browser (e.g. `--incognito`) and can ignore a URL entirely ("ignore URL (do nothing)")
 - Rules pointing to a browser that is no longer installed now show the selection dialogue instead of crashing
+- Delete button for rules (next to Move Down) in Settings
 - Holding Alt while clicking a link skips the rules and shows the browser list (can be disabled in Settings)
 - Portable browsers (or any program) can be added with Settings > Browsers > Add... (browse for the executable)
 - Settings > Browsers > Edit... sets a custom icon (.ico/.exe/.dll/.png/.jpg/...), custom shortcut keys and extra arguments per browser
@@ -95,6 +84,7 @@ Unreleased
 - Option to display only the browsers that are currently running
 - Export/Import of rules and settings to a JSON file (Settings > Options)
 - File associations: BrowserSelect can open .htm/.html/.shtml/.xht/.xhtml files and .url Internet Shortcuts (Settings > Default Browser > File types..., also registered by the installer). The "Always" button on a local file creates an Extension rule
+- Windows x64 NSIS installer built and published via GitHub Actions
 
 v1.4.1 [24/08/19]
 - Fixed couldn't hide chrome profiles separately (#52)
