@@ -73,6 +73,16 @@ namespace BrowserSelect.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bitcoin_snipetr {
+            get {
+                object obj = ResourceManager.GetObject("bitcoin_snipetr", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Button_help_icon {
             get {
                 object obj = ResourceManager.GetObject("Button-help-icon", resourceCulture);

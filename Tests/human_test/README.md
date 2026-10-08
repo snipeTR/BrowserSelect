@@ -4,8 +4,8 @@ Bu klasör, snipeTR fork’unda **yeni eklenen** özelliklerin elle (insan taraf
 adım adım reçeteler içerir. Her reçetede: amaç, ön koşullar, tıklama adımları, test linkleri,
 beklenen sonuç (geçti/kaldı ölçütü) ve dikkat edilecek noktalar var.
 
-> Uygulamanın arayüzü İngilizcedir; buton ve menü adları reçetelerde **uygulamada göründüğü gibi**
-> (ör. `Settings`, `Apply`, `Move Down`) yazılmıştır.
+> Reçeteler varsayılan İngilizce arayüze göre yazılmıştır; buton ve menü adları **uygulamada göründüğü gibi**
+> (ör. `Settings`, `Apply`, `Move Down`) geçer. Türkçe arayüz için bkz. [12 – Türkçe dil](12-turkce-dil.md).
 
 ## Başlamadan önce
 
@@ -28,13 +28,15 @@ testlerde kullanılan `tools\bs-open.ps1` yardımcı betiği orada anlatılıyor
 | 09 | Dosya ilişkilendirmeleri (.html / .url) | [09-dosya-iliskilendirme.md](09-dosya-iliskilendirme.md) | 10 dk |
 | 10 | Özel tarayıcı ikonları | [10-ozel-ikon.md](10-ozel-ikon.md) | 5 dk |
 | 11 | Kural silme butonu (`Delete`, Move Down’un sağında) | [11-kural-silme-butonu.md](11-kural-silme-butonu.md) | 5 dk |
+| 12 | Türkçe dil (Settings → Language) | [12-turkce-dil.md](12-turkce-dil.md) | 15 dk |
+| 13 | Hakkında: snipeTR ve bitcoin bağış adresi | [13-hakkinda-bagis.md](13-hakkinda-bagis.md) | 5 dk |
 
 ## Klasör içeriği
 
 ```
 Tests/human_test/
 ├─ README.md                  ← bu dosya (indeks + sonuç tablosu)
-├─ 00-hazirlik.md … 11-*.md   ← reçeteler
+├─ 00-hazirlik.md … 13-*.md   ← reçeteler
 ├─ tools/
 │  └─ bs-open.ps1             ← bir linki BrowserSelect ile açan yardımcı betik
 └─ files/
@@ -102,6 +104,8 @@ Testleri bitirdikçe bu tabloyu kopyalayıp doldurabilirsin (issue açarken ekle
 | 09 | Dosya ilişkilendirme | | |
 | 10 | Özel ikon | | |
 | 11 | Kural silme butonu | | |
+| 12 | Türkçe dil | | |
+| 13 | Hakkında / bağış | | |
 
 Test ortamı: Windows sürümü: ______  BrowserSelect sürümü: ______  Yüklü tarayıcılar: ______
 
