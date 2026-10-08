@@ -1,13 +1,30 @@
 name: Build x64 installer and draft release
 
+# Runs automatically on every push to master that touches the application (docs/tests only pushes are skipped).
+# Every run builds Release|x64 and the NSIS installer (uploaded as an artifact).
+# A DRAFT release is created automatically only when the app version (AssemblyFileVersion in
+# BrowserSelect/Properties/AssemblyInfo.cs) has no release yet - so bumping the version is all that is
+# needed to get a new draft; no manual run is required.
+# There is deliberately no tag trigger: publishing a draft creates its tag, and that must not start
+# another build/draft.
 on:
-  workflow_dispatch:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+      - 'Tests/**'
+      - 'help/**'
+      - 'screenshots/**'
+      - 'LICENSE'
 
 permissions:
   contents: write
+
+# one run at a time, so two quick pushes of the same new version can't both create a draft
+concurrency:
+  group: build-release-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -79,18 +96,38 @@ jobs:
           path: BrowserSelect/BrowserSelect-*-x64-Setup.exe
           if-no-files-found: error
 
-      - name: Create draft release
+      - name: Check whether this version already has a release
+        id: check
         shell: pwsh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           $ver = "${{ steps.version.outputs.version }}"
-          if ("${{ github.ref_type }}" -eq "tag") {
-            $tag = "${{ github.ref_name }}"
+          # drafts are included (the token has write access); tags look like v<version> or v<version>-build.<n>
+          $tags = gh release list --repo "${{ github.repository }}" --limit 1000 --json tagName --jq '.[].tagName'
+          if ($LASTEXITCODE -ne 0) { throw "gh release list failed" }
+          $pattern = '^v' + [regex]::Escape($ver) + '($|-)'
+          $existing = @($tags | Where-Object { $_ -match $pattern })
+          if ($existing.Count -gt 0) {
+            Write-Host "Version $ver already released as: $($existing -join ', ') - no new draft."
+            "release=false" >> $env:GITHUB_OUTPUT
+            $list = $existing -join ', '
+            "Version **$ver** already has a release ($list); build verified, no draft created. Bump the version in BrowserSelect/Properties/AssemblyInfo.cs to get a new draft." >> $env:GITHUB_STEP_SUMMARY
           } else {
-            $tag = "v$ver-build.${{ github.run_number }}"
+            Write-Host "New version $ver - a draft release will be created."
+            "release=true" >> $env:GITHUB_OUTPUT
           }
+
+      - name: Create draft release
+        if: steps.check.outputs.release == 'true'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ver = "${{ steps.version.outputs.version }}"
+          $tag = "v$ver-build.${{ github.run_number }}"
           $installer = "BrowserSelect/BrowserSelect-$ver-x64-Setup.exe"
           $notes = "Automated Windows x64 build of BrowserSelect $ver from commit ${{ github.sha }}.`n`nInstaller: per-user install (no admin rights), requires 64-bit Windows and .NET Framework 4.8."
           gh release create $tag $installer --draft --target "${{ github.sha }}" --title "BrowserSelect $ver (x64) - $tag" --notes $notes --repo "${{ github.repository }}"
           if ($LASTEXITCODE -ne 0) { throw "gh release create failed" }
+          "Draft release **$tag** created for version **$ver**." >> $env:GITHUB_STEP_SUMMARY
