@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using BrowserSelect.Localization;
 
 namespace BrowserSelect
 {
@@ -37,6 +38,7 @@ namespace BrowserSelect
         public frm_browser_edit(Browser browser, IEnumerable<Browser> allBrowsers)
         {
             InitializeComponent();
+            ApplyTexts();
             _browser = browser;
             _others = allBrowsers.Where(b => !ReferenceEquals(b, browser)).ToList();
             IsNew = browser == null;
@@ -44,11 +46,11 @@ namespace BrowserSelect
 
             if (IsNew)
             {
-                Text = "Add Browser";
+                Text = Strings.BrowserEdit_AddTitle;
             }
             else
             {
-                Text = "Edit Browser - " + browser.name;
+                Text = L10n.T("BrowserEdit_EditTitle", browser.name);
                 txt_name.Text = browser.name;
                 txt_exec.Text = browser.exec;
                 txt_args.Text = IsCustom ? browser.additionalArgs : browser.extraArgs;
@@ -62,8 +64,26 @@ namespace BrowserSelect
             txt_exec.ReadOnly = !IsCustom;
             btn_browse.Enabled = IsCustom;
             if (!IsCustom)
-                toolTip1.SetToolTip(txt_args, "Extra command line arguments always passed to this browser");
+                toolTip1.SetToolTip(txt_args, Strings.BrowserEdit_ExtraArgumentsTooltip);
             UpdatePreview();
+        }
+
+        /// <summary>sets every visible text from Localization\Strings.resx (current UI language)</summary>
+        private void ApplyTexts()
+        {
+            lbl_name.Text = Strings.BrowserEdit_Name;
+            lbl_exec.Text = Strings.BrowserEdit_Executable;
+            btn_browse.Text = Strings.BrowserEdit_Browse;
+            lbl_args.Text = Strings.BrowserEdit_Arguments;
+            toolTip1.SetToolTip(txt_args, Strings.BrowserEdit_ArgumentsTooltip);
+            lbl_shortcut.Text = Strings.BrowserEdit_Shortcut;
+            toolTip1.SetToolTip(txt_shortcut, Strings.BrowserEdit_ShortcutTooltip);
+            lbl_shortcut_hint.Text = Strings.BrowserEdit_ShortcutHint;
+            lbl_icon.Text = Strings.BrowserEdit_Icon;
+            btn_icon.Text = Strings.BrowserEdit_ChangeIcon;
+            btn_icon_reset.Text = Strings.BrowserEdit_DefaultIcon;
+            btn_ok.Text = Strings.Common_OK;
+            btn_cancel.Text = Strings.Common_Cancel;
         }
 
         private void UpdatePreview()
@@ -79,8 +99,8 @@ namespace BrowserSelect
         {
             using (var dialog = new OpenFileDialog
             {
-                Title = "Select the browser executable",
-                Filter = "Programs (*.exe)|*.exe|All files (*.*)|*.*",
+                Title = Strings.BrowserEdit_SelectExecutable,
+                Filter = Strings.BrowserEdit_ProgramsFilter,
                 CheckFileExists = true
             })
             {
@@ -117,8 +137,8 @@ namespace BrowserSelect
         {
             using (var dialog = new OpenFileDialog
             {
-                Title = "Select an icon",
-                Filter = "Icons and images|*.ico;*.exe;*.dll;*.png;*.jpg;*.jpeg;*.bmp;*.gif|All files (*.*)|*.*",
+                Title = Strings.BrowserEdit_SelectIcon,
+                Filter = Strings.BrowserEdit_IconFilter,
                 CheckFileExists = true
             })
             {
@@ -131,8 +151,8 @@ namespace BrowserSelect
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(this, "Unable to load an icon from this file.\n\n" + ex.Message,
-                        "Custom icon", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(this, L10n.T("BrowserEdit_IconError", ex.Message),
+                        Strings.BrowserEdit_IconErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -163,16 +183,16 @@ namespace BrowserSelect
             if (!IsCustom)
                 return null;
             if (BrowserName.Length == 0)
-                return "Please enter a name for the browser.";
+                return Strings.BrowserEdit_NameRequired;
             if (BrowserName == AutoMatchRule.DisplayBrowserSelect || BrowserName == AutoMatchRule.IgnoreUrl)
-                return "This name is reserved, please choose another one.";
+                return Strings.BrowserEdit_NameReserved;
             if (_others.Any(b => string.Equals(b.name, BrowserName, StringComparison.OrdinalIgnoreCase)))
-                return "A browser named '" + BrowserName + "' already exists, please choose another name.";
+                return L10n.T("BrowserEdit_NameExists", BrowserName);
             if (Executable.Length == 0 || !File.Exists(Executable))
-                return "Please select an existing executable (use Browse...).";
+                return Strings.BrowserEdit_ExecutableRequired;
             var identifier = $"{Executable} {Arguments}";
             if (_others.Any(b => string.Equals(b.Identifier, identifier, StringComparison.OrdinalIgnoreCase)))
-                return "This browser (same executable and arguments) is already in the list.";
+                return Strings.BrowserEdit_AlreadyListed;
             return null;
         }
     }

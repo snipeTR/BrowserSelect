@@ -65,6 +65,15 @@ namespace BrowserSelect.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User interface language. Every language added to BrowserSelect is listed here..
+        /// </summary>
+        internal static string Language_Tooltip {
+            get {
+                return ResourceManager.GetString("Language_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The new language will be used the next time BrowserSelect starts..
         /// </summary>
         internal static string Language_RestartRequired {
@@ -83,15 +92,6 @@ namespace BrowserSelect.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User interface language. Every language added to BrowserSelect is listed here..
-        /// </summary>
-        internal static string Language_Tooltip {
-            get {
-                return ResourceManager.GetString("Language_Tooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You have unsaved changes, are you sure you want to close without saving ?.
         /// </summary>
         internal static string Settings_UnsavedChanges {
@@ -106,6 +106,987 @@ namespace BrowserSelect.Localization {
         internal static string Settings_UnsavedChangesTitle {
             get {
                 return ResourceManager.GetString("Settings_UnsavedChangesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        internal static string Common_OK {
+            get {
+                return ResourceManager.GetString("Common_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        internal static string Common_Close {
+            get {
+                return ResourceManager.GetString("Common_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Common_Cancel {
+            get {
+                return ResourceManager.GetString("Common_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Update Available! Current Version: {1} Last Version: {0} to Update download and install the new ....
+        /// </summary>
+        internal static string Common_UpdateAvailable {
+            get {
+                return ResourceManager.GetString("Common_UpdateAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string Main_About {
+            get {
+                return ResourceManager.GetString("Main_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Main_Settings {
+            get {
+                return ResourceManager.GetString("Main_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while generating pattern from url. Please include the following url in your bug report: {0}.
+        /// </summary>
+        internal static string Main_PatternError {
+            get {
+                return ResourceManager.GetString("Main_PatternError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Settings_Title {
+            get {
+                return ResourceManager.GetString("Settings_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browsers.
+        /// </summary>
+        internal static string Settings_BrowsersGroup {
+            get {
+                return ResourceManager.GetString("Settings_BrowsersGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add....
+        /// </summary>
+        internal static string Settings_BrowserAdd {
+            get {
+                return ResourceManager.GetString("Settings_BrowserAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a portable browser (or any program) by selecting its executable.
+        /// </summary>
+        internal static string Settings_BrowserAddTooltip {
+            get {
+                return ResourceManager.GetString("Settings_BrowserAddTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit....
+        /// </summary>
+        internal static string Settings_BrowserEdit {
+            get {
+                return ResourceManager.GetString("Settings_BrowserEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change the icon, shortcut keys and arguments of the selected browser.
+        /// </summary>
+        internal static string Settings_BrowserEditTooltip {
+            get {
+                return ResourceManager.GetString("Settings_BrowserEditTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string Settings_BrowserRemove {
+            get {
+                return ResourceManager.GetString("Settings_BrowserRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove a manually added browser (uncheck a browser to hide it).
+        /// </summary>
+        internal static string Settings_BrowserRemoveTooltip {
+            get {
+                return ResourceManager.GetString("Settings_BrowserRemoveTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort:.
+        /// </summary>
+        internal static string Settings_SortLabel {
+            get {
+                return ResourceManager.GetString("Settings_SortLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order of the browsers in the selection window.
+        /// </summary>
+        internal static string Settings_SortTooltip {
+            get {
+                return ResourceManager.GetString("Settings_SortTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move the selected browser up (Manual sort).
+        /// </summary>
+        internal static string Settings_BrowserUpTooltip {
+            get {
+                return ResourceManager.GetString("Settings_BrowserUpTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move the selected browser down (Manual sort).
+        /// </summary>
+        internal static string Settings_BrowserDownTooltip {
+            get {
+                return ResourceManager.GetString("Settings_BrowserDownTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Browser.
+        /// </summary>
+        internal static string Settings_DefaultGroup {
+            get {
+                return ResourceManager.GetString("Settings_DefaultGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BrowserSelect must be set as default browser for it to function correctly. It can also open .html an....
+        /// </summary>
+        internal static string Settings_DefaultInfo {
+            get {
+                return ResourceManager.GetString("Settings_DefaultInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set as Default Browser.
+        /// </summary>
+        internal static string Settings_SetDefault {
+            get {
+                return ResourceManager.GetString("Settings_SetDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File types....
+        /// </summary>
+        internal static string Settings_FileTypes {
+            get {
+                return ResourceManager.GetString("Settings_FileTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register BrowserSelect for .htm/.html/.shtml/.xhtml/.url files (adds it to "Open with" and Default a....
+        /// </summary>
+        internal static string Settings_FileTypesTooltip {
+            get {
+                return ResourceManager.GetString("Settings_FileTypesTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File types.
+        /// </summary>
+        internal static string Settings_FileTypesTitle {
+            get {
+                return ResourceManager.GetString("Settings_FileTypesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to register the file types.  {0}.
+        /// </summary>
+        internal static string Settings_FileTypesError {
+            get {
+                return ResourceManager.GetString("Settings_FileTypesError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BrowserSelect is now registered for {0} files and appears in their "Open with" menu.  To open these ....
+        /// </summary>
+        internal static string Settings_FileTypesDone {
+            get {
+                return ResourceManager.GetString("Settings_FileTypesDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows could not open Default apps.  {0}  Association UI error: {1}.
+        /// </summary>
+        internal static string Settings_DefaultAppsError {
+            get {
+                return ResourceManager.GetString("Settings_DefaultAppsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to change default browser.
+        /// </summary>
+        internal static string Settings_DefaultAppsErrorTitle {
+            get {
+                return ResourceManager.GetString("Settings_DefaultAppsErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        internal static string Settings_OptionsGroup {
+            get {
+                return ResourceManager.GetString("Settings_OptionsGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show running browsers only.
+        /// </summary>
+        internal static string Settings_RunningOnly {
+            get {
+                return ResourceManager.GetString("Settings_RunningOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only list browsers that are currently running (all browsers are shown if none is running).
+        /// </summary>
+        internal static string Settings_RunningOnlyTooltip {
+            get {
+                return ResourceManager.GetString("Settings_RunningOnlyTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hold Alt on a link to skip rules.
+        /// </summary>
+        internal static string Settings_AltIgnore {
+            get {
+                return ResourceManager.GetString("Settings_AltIgnore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If Alt is held down while a link is clicked, the Auto Select rules are ignored and the browser list ....
+        /// </summary>
+        internal static string Settings_AltIgnoreTooltip {
+            get {
+                return ResourceManager.GetString("Settings_AltIgnoreTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export....
+        /// </summary>
+        internal static string Settings_Export {
+            get {
+                return ResourceManager.GetString("Settings_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save rules and settings to a file.
+        /// </summary>
+        internal static string Settings_ExportTooltip {
+            get {
+                return ResourceManager.GetString("Settings_ExportTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import....
+        /// </summary>
+        internal static string Settings_Import {
+            get {
+                return ResourceManager.GetString("Settings_Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load rules and settings from a file (replaces the current ones).
+        /// </summary>
+        internal static string Settings_ImportTooltip {
+            get {
+                return ResourceManager.GetString("Settings_ImportTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update checker.
+        /// </summary>
+        internal static string Settings_UpdateGroup {
+            get {
+                return ResourceManager.GetString("Settings_UpdateGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to enable.
+        /// </summary>
+        internal static string Settings_UpdateEnable {
+            get {
+                return ResourceManager.GetString("Settings_UpdateEnable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to check now.
+        /// </summary>
+        internal static string Settings_UpdateCheckNow {
+            get {
+                return ResourceManager.GetString("Settings_UpdateCheckNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are running the latest version..
+        /// </summary>
+        internal static string Settings_UpToDate {
+            get {
+                return ResourceManager.GetString("Settings_UpToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to check for updates. Please make sure you are connected to internet..
+        /// </summary>
+        internal static string Settings_UpdateFailed {
+            get {
+                return ResourceManager.GetString("Settings_UpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to if you have feature requests,bug reports or suggestions please submit an issue on the project's Gith....
+        /// </summary>
+        internal static string Settings_FeedbackInfo {
+            get {
+                return ResourceManager.GetString("Settings_FeedbackInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto Select Filters.
+        /// </summary>
+        internal static string Settings_RulesGroup {
+            get {
+                return ResourceManager.GetString("Settings_RulesGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using this section you can add rules that based on them browser select will automatically choose a b....
+        /// </summary>
+        internal static string Settings_RulesInfo {
+            get {
+                return ResourceManager.GetString("Settings_RulesInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the project's github..
+        /// </summary>
+        internal static string Settings_RulesInfoLink {
+            get {
+                return ResourceManager.GetString("Settings_RulesInfoLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match.
+        /// </summary>
+        internal static string Settings_ColMatch {
+            get {
+                return ResourceManager.GetString("Settings_ColMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pattern.
+        /// </summary>
+        internal static string Settings_ColPattern {
+            get {
+                return ResourceManager.GetString("Settings_ColPattern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browser.
+        /// </summary>
+        internal static string Settings_ColBrowser {
+            get {
+                return ResourceManager.GetString("Settings_ColBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Private.
+        /// </summary>
+        internal static string Settings_ColPrivate {
+            get {
+                return ResourceManager.GetString("Settings_ColPrivate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arguments.
+        /// </summary>
+        internal static string Settings_ColArguments {
+            get {
+                return ResourceManager.GetString("Settings_ColArguments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        internal static string Settings_Help {
+            get {
+                return ResourceManager.GetString("Settings_Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Up.
+        /// </summary>
+        internal static string Settings_MoveUp {
+            get {
+                return ResourceManager.GetString("Settings_MoveUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Down.
+        /// </summary>
+        internal static string Settings_MoveDown {
+            get {
+                return ResourceManager.GetString("Settings_MoveDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string Settings_Delete {
+            get {
+                return ResourceManager.GetString("Settings_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        internal static string Settings_Apply {
+            get {
+                return ResourceManager.GetString("Settings_Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        internal static string Settings_Refresh {
+            get {
+                return ResourceManager.GetString("Settings_Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Link opened from: {0}.
+        /// </summary>
+        internal static string Settings_LinkOpenedFrom {
+            get {
+                return ResourceManager.GetString("Settings_LinkOpenedFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Rule: {0}.
+        /// </summary>
+        internal static string Settings_InvalidRule {
+            get {
+                return ResourceManager.GetString("Settings_InvalidRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove '{0}' from the list?.
+        /// </summary>
+        internal static string Settings_RemoveBrowserConfirm {
+            get {
+                return ResourceManager.GetString("Settings_RemoveBrowserConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Browser.
+        /// </summary>
+        internal static string Settings_RemoveBrowserTitle {
+            get {
+                return ResourceManager.GetString("Settings_RemoveBrowserTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BrowserSelect settings (*.json)|*.json|All files (*.*)|*.*.
+        /// </summary>
+        internal static string Settings_SettingsFileFilter {
+            get {
+                return ResourceManager.GetString("Settings_SettingsFileFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        internal static string Settings_ExportTitle {
+            get {
+                return ResourceManager.GetString("Settings_ExportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export BrowserSelect settings.
+        /// </summary>
+        internal static string Settings_ExportDialogTitle {
+            get {
+                return ResourceManager.GetString("Settings_ExportDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have unsaved rule changes. Apply them before exporting? (No exports the last applied rules).
+        /// </summary>
+        internal static string Settings_ExportUnsaved {
+            get {
+                return ResourceManager.GetString("Settings_ExportUnsaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rules and settings exported to {0}.
+        /// </summary>
+        internal static string Settings_ExportDone {
+            get {
+                return ResourceManager.GetString("Settings_ExportDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export failed: {0}.
+        /// </summary>
+        internal static string Settings_ExportFailed {
+            get {
+                return ResourceManager.GetString("Settings_ExportFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        internal static string Settings_ImportTitle {
+            get {
+                return ResourceManager.GetString("Settings_ImportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import BrowserSelect settings.
+        /// </summary>
+        internal static string Settings_ImportDialogTitle {
+            get {
+                return ResourceManager.GetString("Settings_ImportDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing replaces your current rules, browser list customizations and options with the ones from th....
+        /// </summary>
+        internal static string Settings_ImportConfirm {
+            get {
+                return ResourceManager.GetString("Settings_ImportConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings imported ({0} rules)..
+        /// </summary>
+        internal static string Settings_ImportDone {
+            get {
+                return ResourceManager.GetString("Settings_ImportDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import failed: {0}.
+        /// </summary>
+        internal static string Settings_ImportFailed {
+            get {
+                return ResourceManager.GetString("Settings_ImportFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Browser.
+        /// </summary>
+        internal static string BrowserEdit_AddTitle {
+            get {
+                return ResourceManager.GetString("BrowserEdit_AddTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Browser - {0}.
+        /// </summary>
+        internal static string BrowserEdit_EditTitle {
+            get {
+                return ResourceManager.GetString("BrowserEdit_EditTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name:.
+        /// </summary>
+        internal static string BrowserEdit_Name {
+            get {
+                return ResourceManager.GetString("BrowserEdit_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Executable:.
+        /// </summary>
+        internal static string BrowserEdit_Executable {
+            get {
+                return ResourceManager.GetString("BrowserEdit_Executable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse....
+        /// </summary>
+        internal static string BrowserEdit_Browse {
+            get {
+                return ResourceManager.GetString("BrowserEdit_Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arguments:.
+        /// </summary>
+        internal static string BrowserEdit_Arguments {
+            get {
+                return ResourceManager.GetString("BrowserEdit_Arguments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Command line arguments always passed to this browser (e.g. --profile-directory="Profile 1" or -P wor....
+        /// </summary>
+        internal static string BrowserEdit_ArgumentsTooltip {
+            get {
+                return ResourceManager.GetString("BrowserEdit_ArgumentsTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extra command line arguments always passed to this browser.
+        /// </summary>
+        internal static string BrowserEdit_ExtraArgumentsTooltip {
+            get {
+                return ResourceManager.GetString("BrowserEdit_ExtraArgumentsTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shortcut keys:.
+        /// </summary>
+        internal static string BrowserEdit_Shortcut {
+            get {
+                return ResourceManager.GetString("BrowserEdit_Shortcut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keys that open this browser in the selection window (each character is a shortcut).
+        /// </summary>
+        internal static string BrowserEdit_ShortcutTooltip {
+            get {
+                return ResourceManager.GetString("BrowserEdit_ShortcutTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to e.g. w (leave empty for automatic).
+        /// </summary>
+        internal static string BrowserEdit_ShortcutHint {
+            get {
+                return ResourceManager.GetString("BrowserEdit_ShortcutHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Icon:.
+        /// </summary>
+        internal static string BrowserEdit_Icon {
+            get {
+                return ResourceManager.GetString("BrowserEdit_Icon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change....
+        /// </summary>
+        internal static string BrowserEdit_ChangeIcon {
+            get {
+                return ResourceManager.GetString("BrowserEdit_ChangeIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default.
+        /// </summary>
+        internal static string BrowserEdit_DefaultIcon {
+            get {
+                return ResourceManager.GetString("BrowserEdit_DefaultIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the browser executable.
+        /// </summary>
+        internal static string BrowserEdit_SelectExecutable {
+            get {
+                return ResourceManager.GetString("BrowserEdit_SelectExecutable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Programs (*.exe)|*.exe|All files (*.*)|*.*.
+        /// </summary>
+        internal static string BrowserEdit_ProgramsFilter {
+            get {
+                return ResourceManager.GetString("BrowserEdit_ProgramsFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an icon.
+        /// </summary>
+        internal static string BrowserEdit_SelectIcon {
+            get {
+                return ResourceManager.GetString("BrowserEdit_SelectIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Icons and images|*.ico;*.exe;*.dll;*.png;*.jpg;*.jpeg;*.bmp;*.gif|All files (*.*)|*.*.
+        /// </summary>
+        internal static string BrowserEdit_IconFilter {
+            get {
+                return ResourceManager.GetString("BrowserEdit_IconFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to load an icon from this file.  {0}.
+        /// </summary>
+        internal static string BrowserEdit_IconError {
+            get {
+                return ResourceManager.GetString("BrowserEdit_IconError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom icon.
+        /// </summary>
+        internal static string BrowserEdit_IconErrorTitle {
+            get {
+                return ResourceManager.GetString("BrowserEdit_IconErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a name for the browser..
+        /// </summary>
+        internal static string BrowserEdit_NameRequired {
+            get {
+                return ResourceManager.GetString("BrowserEdit_NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This name is reserved, please choose another one..
+        /// </summary>
+        internal static string BrowserEdit_NameReserved {
+            get {
+                return ResourceManager.GetString("BrowserEdit_NameReserved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A browser named '{0}' already exists, please choose another name..
+        /// </summary>
+        internal static string BrowserEdit_NameExists {
+            get {
+                return ResourceManager.GetString("BrowserEdit_NameExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select an existing executable (use Browse...)..
+        /// </summary>
+        internal static string BrowserEdit_ExecutableRequired {
+            get {
+                return ResourceManager.GetString("BrowserEdit_ExecutableRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This browser (same executable and arguments) is already in the list..
+        /// </summary>
+        internal static string BrowserEdit_AlreadyListed {
+            get {
+                return ResourceManager.GetString("BrowserEdit_AlreadyListed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browser Select: About.
+        /// </summary>
+        internal static string About_Title {
+            get {
+                return ResourceManager.GetString("About_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Coded By: Bor691.
+        /// </summary>
+        internal static string About_CodedBy {
+            get {
+                return ResourceManager.GetString("About_CodedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact me:.
+        /// </summary>
+        internal static string About_Contact {
+            get {
+                return ResourceManager.GetString("About_Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GitHub:.
+        /// </summary>
+        internal static string About_GitHub {
+            get {
+                return ResourceManager.GetString("About_GitHub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This fork is maintained by: snipeTR.
+        /// </summary>
+        internal static string About_ForkBy {
+            get {
+                return ResourceManager.GetString("About_ForkBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browser Select is a utility to dynamically select the browser you want instead of just having one de....
+        /// </summary>
+        internal static string About_Description {
+            get {
+                return ResourceManager.GetString("About_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you find this program useful and would like to thank the developers you may donate using bitcoin..
+        /// </summary>
+        internal static string About_DonateText {
+            get {
+                return ResourceManager.GetString("About_DonateText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to snipeTR (this fork) - Bitcoin:.
+        /// </summary>
+        internal static string About_DonateFork {
+            get {
+                return ResourceManager.GetString("About_DonateFork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bor691 (original author) - Bitcoin:.
+        /// </summary>
+        internal static string About_DonateOriginal {
+            get {
+                return ResourceManager.GetString("About_DonateOriginal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy Address.
+        /// </summary>
+        internal static string About_CopyAddress {
+            get {
+                return ResourceManager.GetString("About_CopyAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copied!.
+        /// </summary>
+        internal static string About_Copied {
+            get {
+                return ResourceManager.GetString("About_Copied", resourceCulture);
             }
         }
     }

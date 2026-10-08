@@ -1,7 +1,18 @@
 # Localization
 
 BrowserSelect reads its user interface texts from **one file**: `Strings.resx` (English).
-English is the default and the fallback language, and currently the only one shipped.
+English is the default and the fallback language. Shipped translations:
+
+| Language | File |
+|----------|------|
+| English (default) | `Strings.resx` |
+| Türkçe (TR) | `Strings.tr.resx` |
+
+The Settings, browser Add/Edit and About windows set their texts in an `ApplyTexts()` method called right
+after `InitializeComponent()`; the English texts in the `*.Designer.cs` files are only design-time defaults.
+The vertical About/Settings buttons, message boxes and file dialogs use `Strings.*` / `L10n.T(...)` directly.
+Not translated yet: the two help windows (`frm_help_main`, `frm_help_rules`) and the names of rule match types
+and sort modes (these are stored values that the program compares).
 
 ## Pieces
 
@@ -30,7 +41,7 @@ Moving a hard-coded text: add a key to `Strings.resx` (same English text), add t
 `Strings.Designer.cs` (or let Visual Studio regenerate it), replace the literal with `Strings.Key`.
 Do not move browser names, URLs, registry paths, rule patterns or other values the program compares.
 
-## Adding a language (later)
+## Adding a language
 
 1. Copy `Strings.resx` to `Strings.<culture>.resx` (e.g. `Strings.tr.resx`) and translate the `<value>`s.
    Missing keys automatically fall back to English.

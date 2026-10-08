@@ -118,484 +118,369 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Language_Label" xml:space="preserve">
-    <value>Language:</value>
-    <comment>Settings window: label of the language drop-down (bottom left)</comment>
+    <value>Dil:</value>
   </data>
   <data name="Language_Tooltip" xml:space="preserve">
-    <value>User interface language. Every language added to BrowserSelect is listed here.</value>
-    <comment>Settings window: tooltip of the language drop-down</comment>
+    <value>Arayüz dili. BrowserSelect'e eklenen tüm diller burada listelenir.</value>
   </data>
   <data name="Language_RestartRequired" xml:space="preserve">
-    <value>The new language will be used the next time BrowserSelect starts.</value>
-    <comment>Shown after another language is selected</comment>
+    <value>Yeni dil, BrowserSelect bir sonraki açılışında kullanılacak.</value>
   </data>
   <data name="Language_RestartTitle" xml:space="preserve">
-    <value>Language</value>
-    <comment>Title of the language change message</comment>
+    <value>Dil</value>
   </data>
   <data name="Settings_UnsavedChanges" xml:space="preserve">
-    <value>You have unsaved changes, are you sure you want to close without saving ?</value>
-    <comment>Settings window: closing with unapplied rule changes</comment>
+    <value>Kaydedilmemiş değişiklikler var. Kaydetmeden kapatmak istediğinize emin misiniz?</value>
   </data>
   <data name="Settings_UnsavedChangesTitle" xml:space="preserve">
-    <value>Unsaved Changes</value>
-    <comment>Title of the unsaved changes message</comment>
+    <value>Kaydedilmemiş Değişiklikler</value>
   </data>
   <data name="Common_OK" xml:space="preserve">
-    <value>OK</value>
-    <comment>OK button</comment>
+    <value>Tamam</value>
   </data>
   <data name="Common_Close" xml:space="preserve">
-    <value>Close</value>
-    <comment>Close button</comment>
+    <value>Kapat</value>
   </data>
   <data name="Common_Cancel" xml:space="preserve">
-    <value>Cancel</value>
-    <comment>Cancel button</comment>
+    <value>İptal</value>
   </data>
   <data name="Common_UpdateAvailable" xml:space="preserve">
-    <value>New Update Available!
-Current Version: {1}
-Last Version: {0}
-to Update download and install the new version from project's github.</value>
-    <comment>Update message. {0} = latest version, {1} = current version</comment>
+    <value>Yeni güncelleme var!
+Mevcut sürüm: {1}
+Son sürüm: {0}
+Güncellemek için yeni sürümü projenin GitHub sayfasından indirip kurun.</value>
   </data>
   <data name="Main_About" xml:space="preserve">
-    <value>About</value>
-    <comment>Selection window: vertical button on the right (max. ~10 characters)</comment>
+    <value>Hakkında</value>
   </data>
   <data name="Main_Settings" xml:space="preserve">
-    <value>Settings</value>
-    <comment>Selection window: vertical button on the right (max. ~10 characters)</comment>
+    <value>Ayarlar</value>
   </data>
   <data name="Main_PatternError" xml:space="preserve">
-    <value>Error while generating pattern from url. Please include the following url in your bug report:
+    <value>URL'den desen oluşturulurken hata oluştu. Lütfen hata bildiriminize şu URL'yi ekleyin:
 {0}</value>
-    <comment>{0} = url</comment>
   </data>
   <data name="Settings_Title" xml:space="preserve">
-    <value>Settings</value>
-    <comment>Settings window title</comment>
+    <value>Ayarlar</value>
   </data>
   <data name="Settings_BrowsersGroup" xml:space="preserve">
-    <value>Browsers</value>
-    <comment>Group box title</comment>
+    <value>Tarayıcılar</value>
   </data>
   <data name="Settings_BrowserAdd" xml:space="preserve">
-    <value>Add...</value>
-    <comment>Button (66 px wide)</comment>
+    <value>Ekle...</value>
   </data>
   <data name="Settings_BrowserAddTooltip" xml:space="preserve">
-    <value>Add a portable browser (or any program) by selecting its executable</value>
-    <comment>Tooltip</comment>
+    <value>Exe dosyasını seçerek portable bir tarayıcı (veya herhangi bir program) ekleyin</value>
   </data>
   <data name="Settings_BrowserEdit" xml:space="preserve">
-    <value>Edit...</value>
-    <comment>Button (66 px wide)</comment>
+    <value>Düzenle...</value>
   </data>
   <data name="Settings_BrowserEditTooltip" xml:space="preserve">
-    <value>Change the icon, shortcut keys and arguments of the selected browser</value>
-    <comment>Tooltip</comment>
+    <value>Seçili tarayıcının simgesini, kısayol tuşlarını ve argümanlarını değiştirin</value>
   </data>
   <data name="Settings_BrowserRemove" xml:space="preserve">
-    <value>Remove</value>
-    <comment>Button (66 px wide)</comment>
+    <value>Kaldır</value>
   </data>
   <data name="Settings_BrowserRemoveTooltip" xml:space="preserve">
-    <value>Remove a manually added browser (uncheck a browser to hide it)</value>
-    <comment>Tooltip</comment>
+    <value>Elle eklenen bir tarayıcıyı kaldırın (gizlemek için tarayıcının işaretini kaldırın)</value>
   </data>
   <data name="Settings_SortLabel" xml:space="preserve">
-    <value>Sort:</value>
-    <comment>Label in front of the sort drop-down (max. ~30 px)</comment>
+    <value>Sıra:</value>
   </data>
   <data name="Settings_SortTooltip" xml:space="preserve">
-    <value>Order of the browsers in the selection window</value>
-    <comment>Tooltip</comment>
+    <value>Seçim penceresindeki tarayıcıların sırası</value>
   </data>
   <data name="Settings_BrowserUpTooltip" xml:space="preserve">
-    <value>Move the selected browser up (Manual sort)</value>
-    <comment>Tooltip</comment>
+    <value>Seçili tarayıcıyı yukarı taşı (Manual sıralama)</value>
   </data>
   <data name="Settings_BrowserDownTooltip" xml:space="preserve">
-    <value>Move the selected browser down (Manual sort)</value>
-    <comment>Tooltip</comment>
+    <value>Seçili tarayıcıyı aşağı taşı (Manual sıralama)</value>
   </data>
   <data name="Settings_DefaultGroup" xml:space="preserve">
-    <value>Default Browser</value>
-    <comment>Group box title</comment>
+    <value>Varsayılan Tarayıcı</value>
   </data>
   <data name="Settings_DefaultInfo" xml:space="preserve">
-    <value>BrowserSelect must be set as default browser for it to function correctly. It can also open .html and .url files.</value>
-    <comment>Label (208 x 40 px, 3 lines)</comment>
+    <value>Düzgün çalışması için BrowserSelect varsayılan tarayıcı olmalıdır. .html ve .url dosyalarını da açar.</value>
   </data>
   <data name="Settings_SetDefault" xml:space="preserve">
-    <value>Set as Default Browser</value>
-    <comment>Button (130 px wide)</comment>
+    <value>Varsayılan Yap</value>
   </data>
   <data name="Settings_FileTypes" xml:space="preserve">
-    <value>File types...</value>
-    <comment>Button (74 px wide)</comment>
+    <value>Dosya türü...</value>
   </data>
   <data name="Settings_FileTypesTooltip" xml:space="preserve">
-    <value>Register BrowserSelect for .htm/.html/.shtml/.xhtml/.url files (adds it to "Open with" and Default apps)</value>
-    <comment>Tooltip</comment>
+    <value>BrowserSelect'i .htm/.html/.shtml/.xhtml/.url dosyaları için kaydeder ("Birlikte aç" menüsüne ve Varsayılan uygulamalara ekler)</value>
   </data>
   <data name="Settings_FileTypesTitle" xml:space="preserve">
-    <value>File types</value>
-    <comment>Message title</comment>
+    <value>Dosya türleri</value>
   </data>
   <data name="Settings_FileTypesError" xml:space="preserve">
-    <value>Unable to register the file types.
+    <value>Dosya türleri kaydedilemedi.
 
 {0}</value>
-    <comment>{0} = error message</comment>
   </data>
   <data name="Settings_FileTypesDone" xml:space="preserve">
-    <value>BrowserSelect is now registered for {0} files and appears in their "Open with" menu.
+    <value>BrowserSelect artık {0} dosyaları için kayıtlı ve "Birlikte aç" menüsünde görünüyor.
 
-To open these files with BrowserSelect by default, choose BrowserSelect for them in the Windows Default apps window that opens next.</value>
-    <comment>{0} = list of file extensions</comment>
+Bu dosyaları varsayılan olarak BrowserSelect ile açmak için, birazdan açılacak Windows Varsayılan uygulamalar penceresinde BrowserSelect'i seçin.</value>
   </data>
   <data name="Settings_DefaultAppsError" xml:space="preserve">
-    <value>Windows could not open Default apps.
+    <value>Windows, Varsayılan uygulamalar sayfasını açamadı.
 
 {0}
 
-Association UI error: {1}</value>
-    <comment>{0}, {1} = error messages</comment>
+İlişkilendirme arayüzü hatası: {1}</value>
   </data>
   <data name="Settings_DefaultAppsErrorTitle" xml:space="preserve">
-    <value>Unable to change default browser</value>
-    <comment>Message title</comment>
+    <value>Varsayılan tarayıcı değiştirilemedi</value>
   </data>
   <data name="Settings_OptionsGroup" xml:space="preserve">
-    <value>Options</value>
-    <comment>Group box title</comment>
+    <value>Seçenekler</value>
   </data>
   <data name="Settings_RunningOnly" xml:space="preserve">
-    <value>Show running browsers only</value>
-    <comment>Check box (max. ~200 px)</comment>
+    <value>Sadece çalışan tarayıcılar</value>
   </data>
   <data name="Settings_RunningOnlyTooltip" xml:space="preserve">
-    <value>Only list browsers that are currently running (all browsers are shown if none is running)</value>
-    <comment>Tooltip</comment>
+    <value>Yalnızca o an çalışan tarayıcıları listele (hiçbiri çalışmıyorsa tümü gösterilir)</value>
   </data>
   <data name="Settings_AltIgnore" xml:space="preserve">
-    <value>Hold Alt on a link to skip rules</value>
-    <comment>Check box (max. ~200 px)</comment>
+    <value>Alt basılıyken kuralları atla</value>
   </data>
   <data name="Settings_AltIgnoreTooltip" xml:space="preserve">
-    <value>If Alt is held down while a link is clicked, the Auto Select rules are ignored and the browser list is shown.</value>
-    <comment>Tooltip</comment>
+    <value>Linke tıklanırken Alt basılı tutulursa otomatik seçim kuralları yok sayılır ve tarayıcı listesi gösterilir.</value>
   </data>
   <data name="Settings_Export" xml:space="preserve">
-    <value>Export...</value>
-    <comment>Button (101 px wide)</comment>
+    <value>Dışa aktar...</value>
   </data>
   <data name="Settings_ExportTooltip" xml:space="preserve">
-    <value>Save rules and settings to a file</value>
-    <comment>Tooltip</comment>
+    <value>Kuralları ve ayarları bir dosyaya kaydet</value>
   </data>
   <data name="Settings_Import" xml:space="preserve">
-    <value>Import...</value>
-    <comment>Button (101 px wide)</comment>
+    <value>İçe aktar...</value>
   </data>
   <data name="Settings_ImportTooltip" xml:space="preserve">
-    <value>Load rules and settings from a file (replaces the current ones)</value>
-    <comment>Tooltip</comment>
+    <value>Kuralları ve ayarları bir dosyadan yükle (mevcut olanların yerine geçer)</value>
   </data>
   <data name="Settings_UpdateGroup" xml:space="preserve">
-    <value>Update checker</value>
-    <comment>Group box title</comment>
+    <value>Güncelleme denetimi</value>
   </data>
   <data name="Settings_UpdateEnable" xml:space="preserve">
-    <value>enable</value>
-    <comment>Check box</comment>
+    <value>etkin</value>
   </data>
   <data name="Settings_UpdateCheckNow" xml:space="preserve">
-    <value>check now</value>
-    <comment>Button (75 px wide)</comment>
+    <value>denetle</value>
   </data>
   <data name="Settings_UpToDate" xml:space="preserve">
-    <value>You are running the latest version.</value>
-    <comment>Update check result</comment>
+    <value>En son sürümü kullanıyorsunuz.</value>
   </data>
   <data name="Settings_UpdateFailed" xml:space="preserve">
-    <value>Unable to check for updates.
-Please make sure you are connected to internet.</value>
-    <comment>Update check result</comment>
+    <value>Güncellemeler denetlenemedi.
+Lütfen internete bağlı olduğunuzdan emin olun.</value>
   </data>
   <data name="Settings_FeedbackInfo" xml:space="preserve">
-    <value>if you have feature requests,bug reports or suggestions please submit an issue on the project's Github.</value>
-    <comment>Label bottom left (220 x 32 px, 2 lines)</comment>
+    <value>İstek, hata ve önerileriniz için projenin GitHub sayfasında issue açın.</value>
   </data>
   <data name="Settings_RulesGroup" xml:space="preserve">
-    <value>Auto Select Filters</value>
-    <comment>Group box title</comment>
+    <value>Otomatik Seçim Kuralları</value>
   </data>
   <data name="Settings_RulesInfo" xml:space="preserve">
-    <value>Using this section you can add rules that based on them browser select will automatically choose a browser instead of displaying the list for you to choose manually. more information and examples can be found on the project's github.</value>
-    <comment>Text above the rule list; must contain the text of Settings_RulesInfoLink</comment>
+    <value>Bu bölümde kurallar ekleyebilirsiniz; BrowserSelect bu kurallara göre listeyi göstermek yerine tarayıcıyı otomatik olarak seçer. Daha fazla bilgi ve örnek projenin GitHub sayfasında bulunabilir.</value>
   </data>
   <data name="Settings_RulesInfoLink" xml:space="preserve">
-    <value>the project's github.</value>
-    <comment>Part of Settings_RulesInfo that is shown as a link</comment>
+    <value>projenin GitHub sayfasında</value>
   </data>
   <data name="Settings_ColMatch" xml:space="preserve">
-    <value>Match</value>
-    <comment>Rule list column</comment>
+    <value>Eşleşme</value>
   </data>
   <data name="Settings_ColPattern" xml:space="preserve">
-    <value>Pattern</value>
-    <comment>Rule list column</comment>
+    <value>Desen</value>
   </data>
   <data name="Settings_ColBrowser" xml:space="preserve">
-    <value>Browser</value>
-    <comment>Rule list column</comment>
+    <value>Tarayıcı</value>
   </data>
   <data name="Settings_ColPrivate" xml:space="preserve">
-    <value>Private</value>
-    <comment>Rule list column</comment>
+    <value>Gizli</value>
   </data>
   <data name="Settings_ColArguments" xml:space="preserve">
-    <value>Arguments</value>
-    <comment>Rule list column</comment>
+    <value>Argümanlar</value>
   </data>
   <data name="Settings_Help" xml:space="preserve">
-    <value>Help</value>
-    <comment>Button (75 px wide)</comment>
+    <value>Yardım</value>
   </data>
   <data name="Settings_MoveUp" xml:space="preserve">
-    <value>Move Up</value>
-    <comment>Button (75 px wide)</comment>
+    <value>Yukarı</value>
   </data>
   <data name="Settings_MoveDown" xml:space="preserve">
-    <value>Move Down</value>
-    <comment>Button (85 px wide)</comment>
+    <value>Aşağı</value>
   </data>
   <data name="Settings_Delete" xml:space="preserve">
-    <value>Delete</value>
-    <comment>Button (75 px wide)</comment>
+    <value>Sil</value>
   </data>
   <data name="Settings_Apply" xml:space="preserve">
-    <value>Apply</value>
-    <comment>Button (75 px wide)</comment>
+    <value>Uygula</value>
   </data>
   <data name="Settings_Refresh" xml:space="preserve">
-    <value>Refresh</value>
-    <comment>Button (59 px wide)</comment>
+    <value>Yenile</value>
   </data>
   <data name="Settings_LinkOpenedFrom" xml:space="preserve">
-    <value>Link opened from: {0}</value>
-    <comment>{0} = program file name</comment>
+    <value>Linki açan: {0}</value>
   </data>
   <data name="Settings_InvalidRule" xml:space="preserve">
-    <value>Invalid Rule: {0}</value>
-    <comment>{0} = reason</comment>
+    <value>Geçersiz kural: {0}</value>
   </data>
   <data name="Settings_RemoveBrowserConfirm" xml:space="preserve">
-    <value>Remove '{0}' from the list?</value>
-    <comment>{0} = browser name</comment>
+    <value>'{0}' listeden kaldırılsın mı?</value>
   </data>
   <data name="Settings_RemoveBrowserTitle" xml:space="preserve">
-    <value>Remove Browser</value>
-    <comment>Message title</comment>
+    <value>Tarayıcıyı Kaldır</value>
   </data>
   <data name="Settings_SettingsFileFilter" xml:space="preserve">
-    <value>BrowserSelect settings (*.json)|*.json|All files (*.*)|*.*</value>
-    <comment>File dialog filter: keep the | separators and the *.json / *.* patterns</comment>
+    <value>BrowserSelect ayarları (*.json)|*.json|Tüm dosyalar (*.*)|*.*</value>
   </data>
   <data name="Settings_ExportTitle" xml:space="preserve">
-    <value>Export</value>
-    <comment>Message title</comment>
+    <value>Dışa Aktar</value>
   </data>
   <data name="Settings_ExportDialogTitle" xml:space="preserve">
-    <value>Export BrowserSelect settings</value>
-    <comment>File dialog title</comment>
+    <value>BrowserSelect ayarlarını dışa aktar</value>
   </data>
   <data name="Settings_ExportUnsaved" xml:space="preserve">
-    <value>You have unsaved rule changes. Apply them before exporting?
-(No exports the last applied rules)</value>
-    <comment>Question before export</comment>
+    <value>Kaydedilmemiş kural değişiklikleri var. Dışa aktarmadan önce uygulansın mı?
+(Hayır: en son uygulanan kurallar dışa aktarılır)</value>
   </data>
   <data name="Settings_ExportDone" xml:space="preserve">
-    <value>Rules and settings exported to
+    <value>Kurallar ve ayarlar şuraya aktarıldı:
 {0}</value>
-    <comment>{0} = file name</comment>
   </data>
   <data name="Settings_ExportFailed" xml:space="preserve">
-    <value>Export failed:
+    <value>Dışa aktarma başarısız:
 {0}</value>
-    <comment>{0} = error message</comment>
   </data>
   <data name="Settings_ImportTitle" xml:space="preserve">
-    <value>Import</value>
-    <comment>Message title</comment>
+    <value>İçe Aktar</value>
   </data>
   <data name="Settings_ImportDialogTitle" xml:space="preserve">
-    <value>Import BrowserSelect settings</value>
-    <comment>File dialog title</comment>
+    <value>BrowserSelect ayarlarını içe aktar</value>
   </data>
   <data name="Settings_ImportConfirm" xml:space="preserve">
-    <value>Importing replaces your current rules, browser list customizations and options with the ones from the file. Continue?</value>
-    <comment>Question before import</comment>
+    <value>İçe aktarma; mevcut kurallarınızı, tarayıcı listesi özelleştirmelerinizi ve seçeneklerinizi dosyadakilerle değiştirir. Devam edilsin mi?</value>
   </data>
   <data name="Settings_ImportDone" xml:space="preserve">
-    <value>Settings imported ({0} rules).</value>
-    <comment>{0} = number of rules</comment>
+    <value>Ayarlar içe aktarıldı ({0} kural).</value>
   </data>
   <data name="Settings_ImportFailed" xml:space="preserve">
-    <value>Import failed:
+    <value>İçe aktarma başarısız:
 {0}</value>
-    <comment>{0} = error message</comment>
   </data>
   <data name="BrowserEdit_AddTitle" xml:space="preserve">
-    <value>Add Browser</value>
-    <comment>Dialog title</comment>
+    <value>Tarayıcı Ekle</value>
   </data>
   <data name="BrowserEdit_EditTitle" xml:space="preserve">
-    <value>Edit Browser - {0}</value>
-    <comment>Dialog title, {0} = browser name</comment>
+    <value>Tarayıcıyı Düzenle - {0}</value>
   </data>
   <data name="BrowserEdit_Name" xml:space="preserve">
-    <value>Name:</value>
-    <comment>Label (max. ~80 px)</comment>
+    <value>Ad:</value>
   </data>
   <data name="BrowserEdit_Executable" xml:space="preserve">
-    <value>Executable:</value>
-    <comment>Label (max. ~80 px)</comment>
+    <value>Program:</value>
   </data>
   <data name="BrowserEdit_Browse" xml:space="preserve">
-    <value>Browse...</value>
-    <comment>Button (75 px wide)</comment>
+    <value>Gözat...</value>
   </data>
   <data name="BrowserEdit_Arguments" xml:space="preserve">
-    <value>Arguments:</value>
-    <comment>Label (max. ~80 px)</comment>
+    <value>Argümanlar:</value>
   </data>
   <data name="BrowserEdit_ArgumentsTooltip" xml:space="preserve">
-    <value>Command line arguments always passed to this browser (e.g. --profile-directory="Profile 1" or -P work)</value>
-    <comment>Tooltip</comment>
+    <value>Bu tarayıcıya her zaman verilen komut satırı argümanları (ör. --profile-directory="Profile 1" veya -P work)</value>
   </data>
   <data name="BrowserEdit_ExtraArgumentsTooltip" xml:space="preserve">
-    <value>Extra command line arguments always passed to this browser</value>
-    <comment>Tooltip (detected browsers)</comment>
+    <value>Bu tarayıcıya her zaman verilen ek komut satırı argümanları</value>
   </data>
   <data name="BrowserEdit_Shortcut" xml:space="preserve">
-    <value>Shortcut keys:</value>
-    <comment>Label (max. ~80 px)</comment>
+    <value>Kısayol tuşları:</value>
   </data>
   <data name="BrowserEdit_ShortcutTooltip" xml:space="preserve">
-    <value>Keys that open this browser in the selection window (each character is a shortcut)</value>
-    <comment>Tooltip</comment>
+    <value>Seçim penceresinde bu tarayıcıyı açan tuşlar (her karakter bir kısayoldur)</value>
   </data>
   <data name="BrowserEdit_ShortcutHint" xml:space="preserve">
-    <value>e.g. w (leave empty for automatic)</value>
-    <comment>Hint next to the shortcut box</comment>
+    <value>ör. w (otomatik için boş bırakın)</value>
   </data>
   <data name="BrowserEdit_Icon" xml:space="preserve">
-    <value>Icon:</value>
-    <comment>Label (max. ~80 px)</comment>
+    <value>Simge:</value>
   </data>
   <data name="BrowserEdit_ChangeIcon" xml:space="preserve">
-    <value>Change...</value>
-    <comment>Button (75 px wide)</comment>
+    <value>Değiştir...</value>
   </data>
   <data name="BrowserEdit_DefaultIcon" xml:space="preserve">
-    <value>Default</value>
-    <comment>Button (75 px wide)</comment>
+    <value>Varsayılan</value>
   </data>
   <data name="BrowserEdit_SelectExecutable" xml:space="preserve">
-    <value>Select the browser executable</value>
-    <comment>File dialog title</comment>
+    <value>Tarayıcının exe dosyasını seçin</value>
   </data>
   <data name="BrowserEdit_ProgramsFilter" xml:space="preserve">
-    <value>Programs (*.exe)|*.exe|All files (*.*)|*.*</value>
-    <comment>File dialog filter: keep the | separators and patterns</comment>
+    <value>Programlar (*.exe)|*.exe|Tüm dosyalar (*.*)|*.*</value>
   </data>
   <data name="BrowserEdit_SelectIcon" xml:space="preserve">
-    <value>Select an icon</value>
-    <comment>File dialog title</comment>
+    <value>Bir simge seçin</value>
   </data>
   <data name="BrowserEdit_IconFilter" xml:space="preserve">
-    <value>Icons and images|*.ico;*.exe;*.dll;*.png;*.jpg;*.jpeg;*.bmp;*.gif|All files (*.*)|*.*</value>
-    <comment>File dialog filter: keep the | separators and patterns</comment>
+    <value>Simgeler ve resimler|*.ico;*.exe;*.dll;*.png;*.jpg;*.jpeg;*.bmp;*.gif|Tüm dosyalar (*.*)|*.*</value>
   </data>
   <data name="BrowserEdit_IconError" xml:space="preserve">
-    <value>Unable to load an icon from this file.
+    <value>Bu dosyadan simge yüklenemedi.
 
 {0}</value>
-    <comment>{0} = error message</comment>
   </data>
   <data name="BrowserEdit_IconErrorTitle" xml:space="preserve">
-    <value>Custom icon</value>
-    <comment>Message title</comment>
+    <value>Özel simge</value>
   </data>
   <data name="BrowserEdit_NameRequired" xml:space="preserve">
-    <value>Please enter a name for the browser.</value>
-    <comment>Validation</comment>
+    <value>Lütfen tarayıcı için bir ad girin.</value>
   </data>
   <data name="BrowserEdit_NameReserved" xml:space="preserve">
-    <value>This name is reserved, please choose another one.</value>
-    <comment>Validation</comment>
+    <value>Bu ad ayrılmış, lütfen başka bir ad seçin.</value>
   </data>
   <data name="BrowserEdit_NameExists" xml:space="preserve">
-    <value>A browser named '{0}' already exists, please choose another name.</value>
-    <comment>Validation, {0} = name</comment>
+    <value>'{0}' adında bir tarayıcı zaten var, lütfen başka bir ad seçin.</value>
   </data>
   <data name="BrowserEdit_ExecutableRequired" xml:space="preserve">
-    <value>Please select an existing executable (use Browse...).</value>
-    <comment>Validation</comment>
+    <value>Lütfen var olan bir exe dosyası seçin (Gözat... ile).</value>
   </data>
   <data name="BrowserEdit_AlreadyListed" xml:space="preserve">
-    <value>This browser (same executable and arguments) is already in the list.</value>
-    <comment>Validation</comment>
+    <value>Bu tarayıcı (aynı program ve argümanlar) zaten listede.</value>
   </data>
   <data name="About_Title" xml:space="preserve">
-    <value>Browser Select: About</value>
-    <comment>About window title</comment>
+    <value>Browser Select: Hakkında</value>
   </data>
   <data name="About_CodedBy" xml:space="preserve">
-    <value>Coded By: Bor691</value>
-    <comment>Original author line</comment>
+    <value>Geliştiren: Bor691</value>
   </data>
   <data name="About_Contact" xml:space="preserve">
-    <value>Contact me:</value>
-    <comment>Label in front of the e-mail link</comment>
+    <value>İletişim:</value>
   </data>
   <data name="About_GitHub" xml:space="preserve">
     <value>GitHub:</value>
-    <comment>Label in front of a GitHub link</comment>
   </data>
   <data name="About_ForkBy" xml:space="preserve">
-    <value>This fork is maintained by: snipeTR</value>
-    <comment>Fork maintainer line</comment>
+    <value>Bu fork'un geliştiricisi: snipeTR</value>
   </data>
   <data name="About_Description" xml:space="preserve">
-    <value>Browser Select is a utility to dynamically select the browser you want instead of just having one default for all links. similar to the prompt in android to choose a browser when a link in a non-browser app is clicked/touched. it may not be useful for everyone but it really helps when you use multiple browsers for different things (e.g. one with proxy and one without) and open many links from other applications (e.g. Messengers).
+    <value>Browser Select, tüm linkler için tek bir varsayılan tarayıcı yerine istediğiniz tarayıcıyı o anda seçmenizi sağlayan bir araçtır. Android'de tarayıcı olmayan bir uygulamada linke dokunulduğunda çıkan tarayıcı seçme penceresine benzer. Herkes için gerekli olmayabilir; ancak farklı işler için birden fazla tarayıcı kullanıyorsanız (ör. biri proxy'li, biri proxy'siz) ve diğer uygulamalardan (ör. mesajlaşma uygulamaları) çok sayıda link açıyorsanız çok işe yarar.
 
-this is an open source application with GPL v2 license. feel free to report bugs or suggest a feature at GitHub.</value>
-    <comment>About window description</comment>
+Bu, GPL v2 lisanslı açık kaynak bir uygulamadır. Hataları bildirmekten veya GitHub üzerinden özellik önermekten çekinmeyin.</value>
   </data>
   <data name="About_DonateText" xml:space="preserve">
-    <value>If you find this program useful and would like to thank the developers you may donate using bitcoin.</value>
-    <comment>Donate section text</comment>
+    <value>Bu programı faydalı bulduysanız ve geliştiricilere teşekkür etmek isterseniz bitcoin ile bağış yapabilirsiniz.</value>
   </data>
   <data name="About_DonateFork" xml:space="preserve">
-    <value>snipeTR (this fork) - Bitcoin:</value>
-    <comment>Donate: heading of the fork maintainer's bitcoin address</comment>
+    <value>snipeTR (bu fork) - Bitcoin:</value>
   </data>
   <data name="About_DonateOriginal" xml:space="preserve">
-    <value>Bor691 (original author) - Bitcoin:</value>
-    <comment>Donate: heading of the original author's bitcoin address</comment>
+    <value>Bor691 (asıl geliştirici) - Bitcoin:</value>
   </data>
   <data name="About_CopyAddress" xml:space="preserve">
-    <value>Copy Address</value>
-    <comment>Button (150 px wide)</comment>
+    <value>Adresi Kopyala</value>
   </data>
   <data name="About_Copied" xml:space="preserve">
-    <value>Copied!</value>
-    <comment>Shown on the copy button for a moment after copying</comment>
+    <value>Kopyalandı!</value>
   </data>
 </root>

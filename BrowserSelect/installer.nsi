@@ -86,7 +86,7 @@ Section "BrowserSelect" SecMain
   File "/oname=BrowserSelect.exe.config" "${BUILD_DIR}\BrowserSelect.exe.config"
   File "/oname=Newtonsoft.Json.dll" "${BUILD_DIR}\Newtonsoft.Json.dll"
   File "/oname=License.txt" ".\License.txt"
-  ;translations: satellite assemblies <culture>\BrowserSelect.resources.dll (none while only English exists)
+  ;translations: satellite assemblies <culture>\BrowserSelect.resources.dll (e.g. tr\BrowserSelect.resources.dll)
   File /nonfatal /r "${BUILD_DIR}\BrowserSelect.resources.dll"
   CreateShortCut "$SMPROGRAMS\BrowserSelect.lnk" "$INSTDIR\BrowserSelect.exe"
 

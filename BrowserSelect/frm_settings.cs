@@ -22,6 +22,70 @@ namespace BrowserSelect
         {
             this.mainForm = (Form1)mainForm;
             InitializeComponent();
+            ApplyTexts();
+        }
+
+        /// <summary>
+        /// sets every visible text from Localization\Strings.resx (current UI language);
+        /// the English texts in the designer are only the design-time defaults
+        /// </summary>
+        private void ApplyTexts()
+        {
+            Text = Strings.Settings_Title;
+
+            groupBox1.Text = Strings.Settings_BrowsersGroup;
+            btn_browser_add.Text = Strings.Settings_BrowserAdd;
+            toolTip1.SetToolTip(btn_browser_add, Strings.Settings_BrowserAddTooltip);
+            btn_browser_edit.Text = Strings.Settings_BrowserEdit;
+            toolTip1.SetToolTip(btn_browser_edit, Strings.Settings_BrowserEditTooltip);
+            btn_browser_remove.Text = Strings.Settings_BrowserRemove;
+            toolTip1.SetToolTip(btn_browser_remove, Strings.Settings_BrowserRemoveTooltip);
+            lbl_sort.Text = Strings.Settings_SortLabel;
+            toolTip1.SetToolTip(cmb_sort, Strings.Settings_SortTooltip);
+            toolTip1.SetToolTip(btn_browser_up, Strings.Settings_BrowserUpTooltip);
+            toolTip1.SetToolTip(btn_browser_down, Strings.Settings_BrowserDownTooltip);
+            btn_refresh.Text = Strings.Settings_Refresh;
+
+            groupBox2.Text = Strings.Settings_DefaultGroup;
+            label1.Text = Strings.Settings_DefaultInfo;
+            btn_setdefault.Text = Strings.Settings_SetDefault;
+            btn_filetypes.Text = Strings.Settings_FileTypes;
+            toolTip1.SetToolTip(btn_filetypes, Strings.Settings_FileTypesTooltip);
+
+            groupBox5.Text = Strings.Settings_OptionsGroup;
+            chk_running_only.Text = Strings.Settings_RunningOnly;
+            toolTip1.SetToolTip(chk_running_only, Strings.Settings_RunningOnlyTooltip);
+            chk_alt_ignore.Text = Strings.Settings_AltIgnore;
+            toolTip1.SetToolTip(chk_alt_ignore, Strings.Settings_AltIgnoreTooltip);
+            btn_export.Text = Strings.Settings_Export;
+            toolTip1.SetToolTip(btn_export, Strings.Settings_ExportTooltip);
+            btn_import.Text = Strings.Settings_Import;
+            toolTip1.SetToolTip(btn_import, Strings.Settings_ImportTooltip);
+
+            groupBox4.Text = Strings.Settings_UpdateGroup;
+            chk_check_update.Text = Strings.Settings_UpdateEnable;
+            btn_check_update.Text = Strings.Settings_UpdateCheckNow;
+            label2.Text = Strings.Settings_FeedbackInfo;
+
+            groupBox3.Text = Strings.Settings_RulesGroup;
+            var info = Strings.Settings_RulesInfo ?? "";
+            var link = Strings.Settings_RulesInfoLink ?? "";
+            linkLabel1.Text = info;
+            var linkStart = link.Length > 0 ? info.IndexOf(link, StringComparison.Ordinal) : -1;
+            linkLabel1.LinkArea = linkStart >= 0
+                ? new LinkArea(linkStart, link.Length)
+                : new LinkArea(0, info.Length);
+            matchType.HeaderText = Strings.Settings_ColMatch;
+            pattern.HeaderText = Strings.Settings_ColPattern;
+            browser.HeaderText = Strings.Settings_ColBrowser;
+            isPrivate.HeaderText = Strings.Settings_ColPrivate;
+            arguments.HeaderText = Strings.Settings_ColArguments;
+            button1.Text = Strings.Settings_Help;
+            btn_move_up.Text = Strings.Settings_MoveUp;
+            btn_move_down.Text = Strings.Settings_MoveDown;
+            btn_delete.Text = Strings.Settings_Delete;
+            btn_apply.Text = Strings.Settings_Apply;
+            btn_cancel.Text = Strings.Common_Close;
         }
 
         private BindingList<AutoMatchRule> rules = new BindingList<AutoMatchRule>();
@@ -73,7 +137,7 @@ namespace BrowserSelect
             // show which application opened the current link, to help writing "Source App" rules
             if (!string.IsNullOrEmpty(Program.SourceApp))
             {
-                lbl_source.Text = "Link opened from: " + System.IO.Path.GetFileName(Program.SourceApp);
+                lbl_source.Text = L10n.T("Settings_LinkOpenedFrom", System.IO.Path.GetFileName(Program.SourceApp));
                 toolTip1.SetToolTip(lbl_source, Program.SourceApp);
             }
         }
@@ -130,15 +194,13 @@ namespace BrowserSelect
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, "Unable to register the file types.\n\n" + ex.Message, "File types",
+                MessageBox.Show(this, L10n.T("Settings_FileTypesError", ex.Message), Strings.Settings_FileTypesTitle,
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             MessageBox.Show(this,
-                "BrowserSelect is now registered for " + string.Join(", ", DefaultBrowserRegistration.FileExtensions) +
-                " files and appears in their \"Open with\" menu.\n\n" +
-                "To open these files with BrowserSelect by default, choose BrowserSelect for them in the " +
-                "Windows Default apps window that opens next.", "File types", MessageBoxButtons.OK,
+                L10n.T("Settings_FileTypesDone", string.Join(", ", DefaultBrowserRegistration.FileExtensions)),
+                Strings.Settings_FileTypesTitle, MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
             OpenAssociationUI();
         }
@@ -169,9 +231,8 @@ namespace BrowserSelect
                 catch (Exception fallbackException)
                 {
                     MessageBox.Show(
-                        "Windows could not open Default apps.\n\n" + fallbackException.Message +
-                        "\n\nAssociation UI error: " + ex.Message,
-                        "Unable to change default browser", MessageBoxButtons.OK,
+                        L10n.T("Settings_DefaultAppsError", fallbackException.Message, ex.Message),
+                        Strings.Settings_DefaultAppsErrorTitle, MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
                 }
             }
@@ -333,7 +394,7 @@ namespace BrowserSelect
             var browser = SelectedBrowser;
             if (browser == null || !browser.isCustom)
                 return;
-            if (MessageBox.Show(this, "Remove '" + browser.name + "' from the list?", "Remove Browser",
+            if (MessageBox.Show(this, L10n.T("Settings_RemoveBrowserConfirm", browser.name), Strings.Settings_RemoveBrowserTitle,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
             var custom = BrowserCustomizations.LoadCustomBrowsers();
@@ -460,7 +521,7 @@ namespace BrowserSelect
                     var err = rule.error();
                     if (err.Length > 0)
                     {
-                        MessageBox.Show("Invalid Rule: " + err);
+                        MessageBox.Show(L10n.T("Settings_InvalidRule", err));
                     }
                 }
 
@@ -469,7 +530,7 @@ namespace BrowserSelect
             Settings.Default.Save();
             //Enabled property of apply button is used as a flag for unsaved changes
             btn_apply.Enabled = false;
-            btn_cancel.Text = "Close";
+            btn_cancel.Text = Strings.Common_Close;
         }
 
         private frm_help_rules _frmHelp;
@@ -498,7 +559,7 @@ namespace BrowserSelect
         {
             //set the unsaved changes flag to true
             btn_apply.Enabled = true;
-            btn_cancel.Text = "Cancel";
+            btn_cancel.Text = Strings.Common_Cancel;
         }
 
         private void gv_filters_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -506,7 +567,7 @@ namespace BrowserSelect
             if (!gv_filters.IsCurrentCellDirty)
                 return;
             btn_apply.Enabled = true;
-            btn_cancel.Text = "Cancel";
+            btn_cancel.Text = Strings.Common_Cancel;
             // commit checkbox/combobox edits right away so they are not lost when clicking Apply
             if (gv_filters.CurrentCell is DataGridViewCheckBoxCell || gv_filters.CurrentCell is DataGridViewComboBoxCell)
                 gv_filters.CommitEdit(DataGridViewDataErrorContexts.Commit);
@@ -548,7 +609,7 @@ namespace BrowserSelect
             }
 
             btn_apply.Enabled = true;
-            btn_cancel.Text = "Cancel";
+            btn_cancel.Text = Strings.Common_Cancel;
         }
 
         private void MoveSelectedRule(int offset)
@@ -583,7 +644,7 @@ namespace BrowserSelect
             gv_filters.Rows[targetIndex].Selected = true;
 
             btn_apply.Enabled = true;
-            btn_cancel.Text = "Cancel";
+            btn_cancel.Text = Strings.Common_Cancel;
         }
 
         private void frm_settings_FormClosed(object sender, FormClosedEventArgs e)
@@ -607,15 +668,12 @@ namespace BrowserSelect
                     if (uc.Checked)
                     {
                         if (uc.Updated)
-                            MessageBox.Show(String.Format(
-                                "New Update Available!\nCurrent Version: {1}\nLast Version: {0}" +
-                                "\nto Update download and install the new version from project's github.",
-                                uc.LVer, uc.CVer));
+                            MessageBox.Show(L10n.T("Common_UpdateAvailable", uc.LVer, uc.CVer));
                         else
-                            MessageBox.Show("You are running the lastest version.");
+                            MessageBox.Show(Strings.Settings_UpToDate);
                     }
                     else
-                        MessageBox.Show("Unable to check for updates.\nPlease make sure you are connected to internet.");
+                        MessageBox.Show(Strings.Settings_UpdateFailed);
                     btn.UseVisualStyleBackColor = true;
                     btn.Enabled = true;
                 }
@@ -644,8 +702,7 @@ namespace BrowserSelect
             if (btn_apply.Enabled)
             {
                 var answer = MessageBox.Show(this,
-                    "You have unsaved rule changes. Apply them before exporting?\n" +
-                    "(No exports the last applied rules)", "Export", MessageBoxButtons.YesNoCancel,
+                    Strings.Settings_ExportUnsaved, Strings.Settings_ExportTitle, MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
                 if (answer == DialogResult.Cancel)
                     return;
@@ -654,8 +711,8 @@ namespace BrowserSelect
             }
             using (var dialog = new SaveFileDialog
             {
-                Title = "Export BrowserSelect settings",
-                Filter = "BrowserSelect settings (*.json)|*.json|All files (*.*)|*.*",
+                Title = Strings.Settings_ExportDialogTitle,
+                Filter = Strings.Settings_SettingsFileFilter,
                 FileName = "BrowserSelect-settings.json"
             })
             {
@@ -664,12 +721,12 @@ namespace BrowserSelect
                 try
                 {
                     SettingsTransfer.Export(dialog.FileName);
-                    MessageBox.Show(this, "Rules and settings exported to\n" + dialog.FileName, "Export",
+                    MessageBox.Show(this, L10n.T("Settings_ExportDone", dialog.FileName), Strings.Settings_ExportTitle,
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(this, "Export failed:\n" + ex.Message, "Export", MessageBoxButtons.OK,
+                    MessageBox.Show(this, L10n.T("Settings_ExportFailed", ex.Message), Strings.Settings_ExportTitle, MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
             }
@@ -679,28 +736,27 @@ namespace BrowserSelect
         {
             using (var dialog = new OpenFileDialog
             {
-                Title = "Import BrowserSelect settings",
-                Filter = "BrowserSelect settings (*.json)|*.json|All files (*.*)|*.*",
+                Title = Strings.Settings_ImportDialogTitle,
+                Filter = Strings.Settings_SettingsFileFilter,
                 CheckFileExists = true
             })
             {
                 if (dialog.ShowDialog(this) != DialogResult.OK)
                     return;
                 if (MessageBox.Show(this,
-                        "Importing replaces your current rules, browser list customizations and options " +
-                        "with the ones from the file. Continue?", "Import", MessageBoxButtons.YesNo,
+                        Strings.Settings_ImportConfirm, Strings.Settings_ImportTitle, MessageBoxButtons.YesNo,
                         MessageBoxIcon.Warning) != DialogResult.Yes)
                     return;
                 try
                 {
                     int count = SettingsTransfer.Import(dialog.FileName);
                     ReloadFromSettings();
-                    MessageBox.Show(this, string.Format("Settings imported ({0} rules).", count), "Import",
+                    MessageBox.Show(this, L10n.T("Settings_ImportDone", count), Strings.Settings_ImportTitle,
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(this, "Import failed:\n" + ex.Message, "Import", MessageBoxButtons.OK,
+                    MessageBox.Show(this, L10n.T("Settings_ImportFailed", ex.Message), Strings.Settings_ImportTitle, MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
             }
@@ -715,7 +771,7 @@ namespace BrowserSelect
                 rules.Add(rule);
             rulesBindingSource.ResetBindings(false);
             btn_apply.Enabled = false;
-            btn_cancel.Text = "Close";
+            btn_cancel.Text = Strings.Common_Close;
 
             _populating = true;
             cmb_sort.SelectedItem = BrowserCustomizations.SortModes.Contains(Settings.Default.SortMode)

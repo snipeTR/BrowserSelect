@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using BrowserSelect.Localization;
 
 namespace BrowserSelect
 {
@@ -17,8 +18,8 @@ namespace BrowserSelect
         {
             this.callingForm = callingForm;
             InitializeComponent();
-            add_button("About", show_about, 0);
-            add_button("Settings", show_setting, 1);
+            add_button(Strings.Main_About, show_about, 0);
+            add_button(Strings.Main_Settings, show_setting, 1);
 
             // http://www.telerik.com/blogs/winforms-scaling-at-large-dpi-settings-is-it-even-possible-
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

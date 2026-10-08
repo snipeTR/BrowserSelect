@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using BrowserSelect.Localization;
 using BrowserSelect.Properties;
 using SHDocVw;
 
@@ -190,9 +191,7 @@ namespace BrowserSelect
             else if (_alwaysRule.mode == 0)
             {
                 // in case ambiguousness of pattern was not determined, should not happen
-                MessageBox.Show(String.Format("Error while generating pattern from url." +
-                    " Please include the following url in your bug report:\n{0}",
-                    Program.url));
+                MessageBox.Show(L10n.T("Main_PatternError", Program.url));
             }
             else
             {
@@ -436,10 +435,7 @@ namespace BrowserSelect
             var lv = Settings.Default.last_version;
             var cv = Application.ProductVersion;
             cv = cv.Remove(cv.Length - 2);
-            MessageBox.Show(String.Format(
-                "New Update Available!\nCurrent Version: {1}\nLast Version: {0}" +
-                "\nto Update download and install the new version from project's github.",
-                lv, cv));
+            MessageBox.Show(L10n.T("Common_UpdateAvailable", lv, cv));
         }
     }
 }
