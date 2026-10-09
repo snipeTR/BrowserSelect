@@ -26,18 +26,18 @@ namespace BrowserSelect {
             keys.AddRange(b.shortcuts.Select(c => c.ToString()));
             shortcuts.Text = "( " + String.Join(",", keys) + " )";
             shortcuts.ForeColor = Color.FromKnownColor(KnownColor.GrayText);
-            // Windows 10/11 look: the shortcut keys row is secondary text in Segoe UI 8pt; the row is
-            // 1px taller so the new font is not clipped (it still ends exactly where the Always button starts)
+            // Windows 10/11 look: the shortcut keys row is secondary text in the UI font at 8pt; the row is
+            // 1px taller so the new font is not clipped (it still ends exactly where the Always button starts).
+            // Japanese/Chinese UI: Latin-only keys keep Segoe UI 8pt (the row has no room for a 9pt CJK
+            // font); keys with other characters get the CJK UI font at 9pt (see Theme.CreateUiFont)
             try
             {
-                var small = new Font(Theme.FontName, 8f, FontStyle.Regular, GraphicsUnit.Point);
-                if (small.Name == Theme.FontName)
+                var small = Theme.CreateUiFont(8f, FontStyle.Regular, shortcuts.Text);
+                if (small != null)
                 {
                     shortcuts.Font = small;
                     shortcuts.Height = Math.Max(shortcuts.Height, button1.Top - shortcuts.Top);
                 }
-                else
-                    small.Dispose();
             }
             catch (Exception) { }
             icon.Image = b.string2Icon();//.ToBitmap();

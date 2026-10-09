@@ -1,8 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
+using System.Globalization;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
+using BrowserSelect.Localization;
 using BrowserSelect.Properties;
 using Microsoft.Win32;
 
@@ -150,29 +156,177 @@ namespace BrowserSelect.UI
 
         // ---- fonts ----------------------------------------------------------------------------
 
-        public const string FontName = "Segoe UI";
+        /// <summary>Latin UI font of Windows 10/11; used for every language without its own entry below</summary>
+        public const string LatinFontName = "Segoe UI";
         public const float FontSize = 9f;
         private const float ClassicFontSize = 8.25f;
+        /// <summary>Japanese and Chinese text is never drawn smaller than this</summary>
+        public const float MinCjkFontSize = 9f;
+
+        /// <summary>
+        /// UI font candidates per UI language, tried from left to right; the first installed one is used,
+        /// Segoe UI if none is. The keys are matched against the selected UI culture and its parents
+        /// (zh-CN -> zh-Hans, zh-TW -> zh-Hant, ...). Only the font name is used: no font files are shipped,
+        /// these fonts come with Windows and may not be redistributed.
+        /// </summary>
+        private static readonly KeyValuePair<string, string[]>[] FontCandidates =
+        {
+            new KeyValuePair<string, string[]>("ja", new[] { "Yu Gothic UI", "Meiryo UI" }),
+            new KeyValuePair<string, string[]>("zh-Hans", new[] { "Microsoft YaHei UI", "Microsoft YaHei" }),
+            new KeyValuePair<string, string[]>("zh-CN", new[] { "Microsoft YaHei UI", "Microsoft YaHei" }),
+            new KeyValuePair<string, string[]>("zh-SG", new[] { "Microsoft YaHei UI", "Microsoft YaHei" }),
+            new KeyValuePair<string, string[]>("zh-Hant", new[] { "Microsoft JhengHei UI", "Microsoft JhengHei" }),
+            new KeyValuePair<string, string[]>("zh-TW", new[] { "Microsoft JhengHei UI", "Microsoft JhengHei" }),
+            new KeyValuePair<string, string[]>("zh-HK", new[] { "Microsoft JhengHei UI", "Microsoft JhengHei" }),
+            new KeyValuePair<string, string[]>("zh-MO", new[] { "Microsoft JhengHei UI", "Microsoft JhengHei" }),
+        };
+
+        private static HashSet<string> _installedFonts;
+        private static string _fontCulture;
+        private static string _fontName;
+        private static bool _isCjk;
+
+        /// <summary>font families installed on this computer (read once)</summary>
+        private static bool IsInstalled(string family)
+        {
+            if (_installedFonts == null)
+            {
+                var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                try
+                {
+                    using (var fonts = new InstalledFontCollection())
+                        foreach (var f in fonts.Families)
+                            set.Add(f.Name);
+                }
+                catch (Exception) { }
+                _installedFonts = set;
+            }
+            if (_installedFonts.Contains(family))
+                return true;
+            // a family the collection does not list (e.g. a face of a .ttc): GDI+ substitutes missing
+            // fonts, so it is installed if the created font keeps the requested name
+            try
+            {
+                using (var font = new Font(family, FontSize, FontStyle.Regular, GraphicsUnit.Point))
+                    return string.Equals(font.Name, family, StringComparison.OrdinalIgnoreCase);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// The one place the UI font is chosen: the first installed candidate for the selected UI language
+        /// (L10n / Strings.Culture, not the Windows language), otherwise Segoe UI. A language change takes
+        /// effect on the next start, the result is still re-evaluated whenever the UI culture changes.
+        /// </summary>
+        private static void ResolveFont()
+        {
+            CultureInfo culture;
+            try
+            {
+                culture = Strings.Culture ?? Thread.CurrentThread.CurrentUICulture;
+            }
+            catch (Exception)
+            {
+                culture = CultureInfo.InvariantCulture;
+            }
+            var key = culture.Name;
+            if (_fontName != null && key == _fontCulture)
+                return;
+            var name = LatinFontName;
+            var cjk = false;
+            try
+            {
+                string[] candidates = null;
+                for (var c = culture; c != null && !c.Equals(CultureInfo.InvariantCulture) && candidates == null; c = c.Parent)
+                    foreach (var entry in FontCandidates)
+                        if (string.Equals(entry.Key, c.Name, StringComparison.OrdinalIgnoreCase))
+                        {
+                            candidates = entry.Value;
+                            break;
+                        }
+                if (candidates != null)
+                {
+                    cjk = true;
+                    name = candidates.FirstOrDefault(IsInstalled) ?? LatinFontName;
+                }
+            }
+            catch (Exception) { }
+            _fontName = name;
+            _isCjk = cjk;
+            _fontCulture = key;
+        }
+
+        /// <summary>UI font family for the selected UI language (Segoe UI, Yu Gothic UI, Microsoft YaHei UI, ...)</summary>
+        public static string FontName
+        {
+            get
+            {
+                ResolveFont();
+                return _fontName;
+            }
+        }
+
+        /// <summary>true if the UI language is Japanese or Chinese (min. 9pt, no italics, no shrinking)</summary>
+        public static bool IsCjk
+        {
+            get
+            {
+                ResolveFont();
+                return _isCjk;
+            }
+        }
+
+        /// <summary>
+        /// UI font for code that sets a font itself (always use this instead of a font name). For Japanese
+        /// and Chinese the size is at least 9pt and italic becomes bold (these fonts have no real italic).
+        /// <paramref name="latinOnlyText"/>: the control only ever shows this ASCII text (digits, Latin
+        /// letters), so a CJK UI language may keep the Latin font at the requested size.
+        /// Returns null if no suitable font can be created.
+        /// </summary>
+        public static Font CreateUiFont(float size, FontStyle style, string latinOnlyText = null)
+        {
+            if (IsCjk && latinOnlyText != null && latinOnlyText.All(ch => ch < 128))
+                return CreateFont(LatinFontName, size, style);
+            return CreateFont(size, style);
+        }
 
         private static Font _baseFont;
+        private static string _baseFontName;
 
-        /// <summary>Segoe UI 9pt (null if the font is not installed)</summary>
+        /// <summary>UI font at 9pt (Segoe UI, or the Japanese/Chinese UI font); null if not installed</summary>
         public static Font BaseFont
         {
             get
             {
-                if (_baseFont == null)
+                if (_baseFont == null || _baseFontName != FontName)
+                {
                     _baseFont = CreateFont(FontSize, FontStyle.Regular);
+                    _baseFontName = FontName;
+                }
                 return _baseFont;
             }
         }
 
         private static Font CreateFont(float size, FontStyle style)
         {
+            if (IsCjk)
+            {
+                size = Math.Max(size, MinCjkFontSize);
+                if ((style & FontStyle.Italic) != 0)
+                    style = (style & ~FontStyle.Italic) | FontStyle.Bold;
+            }
+            return CreateFont(FontName, size, style);
+        }
+
+        private static Font CreateFont(string family, float size, FontStyle style)
+        {
             try
             {
-                var font = new Font(FontName, size, style, GraphicsUnit.Point);
-                if (string.Equals(font.Name, FontName, StringComparison.OrdinalIgnoreCase))
+                var font = new Font(family, size, style, GraphicsUnit.Point);
+                if (string.Equals(font.Name, family, StringComparison.OrdinalIgnoreCase))
                     return font;
                 font.Dispose();
             }
@@ -182,16 +336,21 @@ namespace BrowserSelect.UI
 
         private static bool IsModernFont(Font font)
         {
-            return font != null && string.Equals(font.Name, FontName, StringComparison.OrdinalIgnoreCase);
+            // Segoe UI also counts for Japanese/Chinese: set in code only for Latin-only text (CreateUiFont)
+            return font != null && (string.Equals(font.Name, FontName, StringComparison.OrdinalIgnoreCase) ||
+                                    string.Equals(font.Name, LatinFontName, StringComparison.OrdinalIgnoreCase));
         }
 
         /// <summary>
-        /// Segoe UI is set on the individual controls, never on the window itself: a font change on a
+        /// The UI font (see FontName) is set on the individual controls, never on the window itself: a font change on a
         /// window (or user control) with AutoScaleMode.Font would rescale the whole layout and make the
         /// windows bigger. This way every window keeps its exact size and control positions.
         /// Fixed-size buttons and labels are checked whenever their text changes (texts are translated):
         /// if the text does not fit in Segoe UI 9pt, Segoe UI 8.25pt is used, and if that does not fit
         /// either, the original font is kept, so nothing is clipped by the new font.
+        /// Japanese/Chinese: never smaller than 9pt; a label that does not fit uses the free space around
+        /// it instead (see GrowLabel), and the 9pt font is kept even if it does not fit (the original
+        /// 8.25pt font would be smaller than 9pt).
         /// </summary>
         private static void ApplyFonts(Control parent)
         {
@@ -212,11 +371,12 @@ namespace BrowserSelect.UI
             if (info.Original == null)
             {
                 if (IsModernFont(c.Font))
-                    return; // already Segoe UI (inherited from a themed parent or set in code)
+                    return; // already the UI font (inherited from a themed parent or set in code)
                 info.Original = c.Font;
                 var classic = Math.Abs(c.Font.SizeInPoints - ClassicFontSize) < 0.1f;
                 info.Preferred = CreateFont(classic ? FontSize : c.Font.SizeInPoints, c.Font.Style);
-                info.Smaller = classic ? CreateFont(ClassicFontSize, c.Font.Style) : null;
+                // Japanese/Chinese: no smaller fallback (min. 9pt)
+                info.Smaller = classic && !IsCjk ? CreateFont(ClassicFontSize, c.Font.Style) : null;
                 if (info.Preferred == null)
                     return;
                 if (NeedsFitting(c))
@@ -260,9 +420,12 @@ namespace BrowserSelect.UI
                     }
                 }
                 // once the window has its final (DPI scaled) size: a label may use free space below it
+                var cjk = IsCjk;
                 if (info.Laidout && c is Label)
                 {
-                    foreach (var font in new[] { info.Preferred, info.Smaller, info.Original })
+                    // Japanese/Chinese: only the 9pt font may grow, the original font can be below 9pt
+                    var candidates = cjk ? new[] { info.Preferred } : new[] { info.Preferred, info.Smaller, info.Original };
+                    foreach (var font in candidates)
                     {
                         if (font != null && GrowLabel((Label)c, font))
                         {
@@ -271,7 +434,9 @@ namespace BrowserSelect.UI
                         }
                     }
                 }
-                c.Font = info.Original;
+                // Japanese/Chinese keep the 9pt UI font (the original font may be smaller than 9pt and
+                // has no Japanese/Chinese glyphs of its own)
+                c.Font = cjk ? info.Preferred : info.Original;
             }
             catch (Exception) { }
         }
