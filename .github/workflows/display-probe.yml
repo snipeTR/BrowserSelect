@@ -1,0 +1,13 @@
+name: display probe (temporary)
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - shell: pwsh
+        run: .github\scripts\display-probe.ps1
+      - shell: powershell
+        run: .github\scripts\display-probe.ps1
