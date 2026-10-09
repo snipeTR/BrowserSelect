@@ -98,7 +98,7 @@ v1.5.1.0 (UI test copy)
 
 v1.5.0.0 (UI test copy)
 - Windows 10/11 look, appearance only: positions, features and behaviour are unchanged
-- New application manifest: Common Controls 6 (themed controls and message boxes) and Windows 7–11 compatibility; per-monitor (PerMonitorV2) DPI awareness via `app.config`, so text stays sharp on high DPI screens and when moving between monitors
+- New application manifest: Common Controls 6 (themed controls and message boxes) and Windows 7–11 compatibility; per-monitor (PerMonitorV2) DPI awareness via `app.config`, so text stays sharp on high DPI screens and when moving between monitors (replaced by system DPI awareness in v1.5.2.0, see above)
 - Segoe UI 9pt everywhere; every window keeps its exact size and control positions. Fixed-size buttons/labels whose (translated) text would not fit fall back to Segoe UI 8.25pt or the original font, so the new font clips nothing
 - Flat buttons with a thin border and a subtle hover/pressed color (short buttons such as Refresh and Always draw their text themselves so it is not clipped); cleaner Windows 11 light colors; rule grid with flat headers, light grid lines and soft selection color; separators drawn as thin lines
 - Windows 11: rounded window corners; optional **Mica** effect on the title bar (Settings → Mica, Windows 11 22H2+, no effect on Windows 10)
