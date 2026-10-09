@@ -741,11 +741,17 @@ SETTINGS
 - Browsers: Add... a portable browser or any program; Edit... the name, icon, shortcut keys and arguments of a browser; Remove a manually added browser; uncheck a browser to hide it; change the order with Sort (Manual uses the arrow buttons).
 - Refresh: BrowserSelect caches the list of installed browsers and profiles the first time it runs. After installing or removing a browser or profile, click Refresh next to the list of browsers.
 - Default Browser: Set as Default Browser; File types... registers BrowserSelect for .html and .url files.
-- Options: show only running browsers, skip the rules with Alt, Export... / Import... rules and settings to/from a .json file.
+- Options: show only running browsers, skip the rules with Alt, avoid full-screen windows (see below), Export... / Import... rules and settings to/from a .json file.
 - Update checker: checks the releases of snipeTR/BrowserSelect on GitHub. When a new version is available, this help button turns into an update button; after the update message BrowserSelect offers to download and run the new installer (the setup asks to close BrowserSelect if it is still running).
 - Language (bottom left): user interface language; it is used the next time BrowserSelect starts.
 - Theme (bottom left, below Language): Light, Dark or Follow Windows (uses Dark when the Windows app mode is Dark). The new theme is applied at once. Mica: Windows 11 (22H2 or newer) only, adds the Mica effect to the title bar. On Windows 11 the windows also get rounded corners.
 - Display scale (100-200 %): the windows are drawn sharp at the scale you signed in to Windows with. If a window (e.g. Settings at 175 % on a 1920x1080 screen) is bigger than the screen, it gets scroll bars instead of hiding controls below the taskbar.
+
+FULL-SCREEN WINDOWS AND SEVERAL MONITORS
+A browser opens a new link in the window you used last. If that window is playing a full-screen video (e.g. on a second monitor), the link would interrupt it. With Settings &gt; Options &gt; "Avoid full-screen windows" (on by default) BrowserSelect brings the browser's most recently used window that is NOT full screen to the front just before opening the link, so the link opens there (a minimized window is only used, and restored, if there is no other).
+If every window of the browser is full screen, "If all windows are full screen" decides: "Window on primary monitor" (default) uses the browser window on the main monitor (Windows Settings &gt; Display &gt; "Make this my main display"); "Last used window" leaves it to the browser.
+Nothing is changed when the browser is not running, when the link is opened in a private window, or when the browser/rule arguments open a new window (--new-window, --incognito, -private-window, --app=..., --kiosk, ...). With one monitor the same logic applies. Turn the option off to always let the browser decide.
+Notes: a maximized window is not full screen (also with an auto-hidden taskbar); only real full screen (F11, full-screen video) counts. Windows of different profiles of the same browser (same .exe) are treated as one browser. Rarely Windows does not allow bringing a window to the front; then it only flashes in the taskbar.
 
 If you mostly use one browser but want some websites to open in another one (e.g. Firefox for everything but IE for the company website), add a rule "*" for your main browser and separate rules for the other websites.
 
@@ -769,7 +775,7 @@ Pattern: the text the link is compared to (see Match). Comparisons are case-inse
 Browser: what happens when the pattern matches: a browser to open the link with, "display BrowserSelect" to always show the browser list, or "ignore URL (do nothing)" to not open the link at all.
 
 Private: open the link in a private/incognito window.
-Arguments: extra command line flags for the browser (e.g. --incognito --disable-web-security).
+Arguments: extra command line flags for the browser (e.g. --incognito --disable-web-security). Private rules and arguments that open a new window (--new-window, --incognito, ...) skip "Avoid full-screen windows" (Settings &gt; Options), because the link gets a new window anyway.
 
 Exact patterns are checked first, then wildcard patterns, and * last; rules with the same priority are checked from top to bottom (Move Up / Move Down). The first matching rule wins; if none matches, the browser list is shown.
 
@@ -779,5 +785,29 @@ To delete a rule select it and click Delete (or press the Del key). Changes are 
 Note: you can open BrowserSelect manually from the Start menu to change the rules. Hold Alt while clicking a link to skip the rules and choose manually.
 More examples: the link above the rule list.</value>
     <comment>Text of the rules help window (Help button in Settings &gt; Auto Select Filters)</comment>
+  </data>
+  <data name="Settings_AvoidFullscreen" xml:space="preserve">
+    <value>Avoid full-screen windows</value>
+    <comment>Check box in Settings &gt; Options (max. ~200 px)</comment>
+  </data>
+  <data name="Settings_AvoidFullscreenTooltip" xml:space="preserve">
+    <value>When a browser has several windows, open the link in its last used window that is not full screen (e.g. not the one playing a full-screen video on another monitor). Off: the browser decides (its last used window).</value>
+    <comment>Tooltip</comment>
+  </data>
+  <data name="Settings_FullscreenFallback" xml:space="preserve">
+    <value>If all windows are full screen:</value>
+    <comment>Label above the drop-down in Settings &gt; Options (max. ~200 px)</comment>
+  </data>
+  <data name="Settings_FullscreenFallbackTooltip" xml:space="preserve">
+    <value>What to do when every window of the browser is full screen: use the window on the primary (main) monitor, or leave it to the browser (its last used window).</value>
+    <comment>Tooltip</comment>
+  </data>
+  <data name="Settings_FallbackPrimary" xml:space="preserve">
+    <value>Window on primary monitor</value>
+    <comment>Drop-down item (max. ~190 px)</comment>
+  </data>
+  <data name="Settings_FallbackLastUsed" xml:space="preserve">
+    <value>Last used window</value>
+    <comment>Drop-down item (max. ~190 px)</comment>
   </data>
 </root>

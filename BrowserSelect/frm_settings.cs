@@ -60,6 +60,11 @@ namespace BrowserSelect
             toolTip1.SetToolTip(chk_running_only, Strings.Settings_RunningOnlyTooltip);
             chk_alt_ignore.Text = Strings.Settings_AltIgnore;
             toolTip1.SetToolTip(chk_alt_ignore, Strings.Settings_AltIgnoreTooltip);
+            chk_avoid_fullscreen.Text = Strings.Settings_AvoidFullscreen;
+            toolTip1.SetToolTip(chk_avoid_fullscreen, Strings.Settings_AvoidFullscreenTooltip);
+            lbl_fullscreen_fallback.Text = Strings.Settings_FullscreenFallback;
+            toolTip1.SetToolTip(lbl_fullscreen_fallback, Strings.Settings_FullscreenFallbackTooltip);
+            toolTip1.SetToolTip(cmb_fullscreen_fallback, Strings.Settings_FullscreenFallbackTooltip);
             btn_export.Text = Strings.Settings_Export;
             toolTip1.SetToolTip(btn_export, Strings.Settings_ExportTooltip);
             btn_import.Text = Strings.Settings_Import;
@@ -134,6 +139,7 @@ namespace BrowserSelect
             chk_check_update.Checked = Settings.Default.check_update != "nope";
             chk_alt_ignore.Checked = Settings.Default.AltIgnoresRules;
             _populating = false;
+            PopulateFullscreenOptions();
 
             PopulateLanguages();
             PopulateThemes();
@@ -543,6 +549,64 @@ namespace BrowserSelect
                 Theme.Apply(mainForm);
         }
 
+        /// <summary>an entry of the "If all windows are full screen" drop-down (Settings &gt; Options)</summary>
+        private class FallbackChoice
+        {
+            public string Value;
+            public string Text;
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
+
+        /// <summary>
+        /// "Avoid full-screen windows" check box and the "If all windows are full screen" drop-down
+        /// (see BrowserWindowFocus.cs)
+        /// </summary>
+        private void PopulateFullscreenOptions()
+        {
+            _populating = true;
+            var choices = new[]
+            {
+                new FallbackChoice { Value = BrowserWindowFocus.FallbackPrimary, Text = Strings.Settings_FallbackPrimary },
+                new FallbackChoice { Value = BrowserWindowFocus.FallbackLastUsed, Text = Strings.Settings_FallbackLastUsed },
+            };
+            cmb_fullscreen_fallback.Items.Clear();
+            cmb_fullscreen_fallback.Items.AddRange(choices);
+            cmb_fullscreen_fallback.SelectedItem = choices.FirstOrDefault(c =>
+                    c.Value.Equals(Settings.Default.FullscreenFallback, StringComparison.OrdinalIgnoreCase))
+                ?? choices[0];
+            chk_avoid_fullscreen.Checked = Settings.Default.AvoidFullscreen;
+            UpdateFullscreenControls();
+            _populating = false;
+        }
+
+        private void UpdateFullscreenControls()
+        {
+            lbl_fullscreen_fallback.Enabled = chk_avoid_fullscreen.Checked;
+            cmb_fullscreen_fallback.Enabled = chk_avoid_fullscreen.Checked;
+        }
+
+        private void chk_avoid_fullscreen_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateFullscreenControls();
+            if (_populating)
+                return;
+            Settings.Default.AvoidFullscreen = chk_avoid_fullscreen.Checked;
+            Settings.Default.Save();
+        }
+
+        private void cmb_fullscreen_fallback_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var choice = cmb_fullscreen_fallback.SelectedItem as FallbackChoice;
+            if (_populating || choice == null)
+                return;
+            Settings.Default.FullscreenFallback = choice.Value;
+            Settings.Default.Save();
+        }
+
         private void chk_running_only_CheckedChanged(object sender, EventArgs e)
         {
             if (_populating)
@@ -859,6 +923,7 @@ namespace BrowserSelect
             chk_alt_ignore.Checked = Settings.Default.AltIgnoresRules;
             chk_check_update.Checked = Settings.Default.check_update != "nope";
             _populating = false;
+            PopulateFullscreenOptions();
 
             RefreshBrowsers(null);
         }

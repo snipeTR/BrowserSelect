@@ -360,7 +360,12 @@ namespace BrowserSelect
             }
             else
             {
-                BrowserWindowFocus.FocusWindowOnFirstMonitor(b.exec);
+                // "Avoid full-screen windows": bring the browser's last used window that is not full screen
+                // to the front, so the link doesn't land on a full-screen video. Not needed when a new
+                // window is opened anyway (private mode, --new-window/--incognito/... arguments).
+                if (!privateMode && !BrowserWindowFocus.OpensNewWindow(
+                        new[] { b.additionalArgs, b.extraArgs, extraArgs }))
+                    BrowserWindowFocus.PrepareForLink(b.exec);
                 StartBrowser(b.exec, args);
             }
             Application.Exit();

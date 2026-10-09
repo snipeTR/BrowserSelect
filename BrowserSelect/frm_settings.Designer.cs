@@ -69,6 +69,9 @@ namespace BrowserSelect {
             this.lbl_theme = new System.Windows.Forms.Label();
             this.cmb_theme = new System.Windows.Forms.ComboBox();
             this.chk_mica = new System.Windows.Forms.CheckBox();
+            this.chk_avoid_fullscreen = new System.Windows.Forms.CheckBox();
+            this.lbl_fullscreen_fallback = new System.Windows.Forms.Label();
+            this.cmb_fullscreen_fallback = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -109,7 +112,7 @@ namespace BrowserSelect {
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(12, 499);
+            this.label2.Location = new System.Drawing.Point(12, 563);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(220, 32);
             this.label2.TabIndex = 2;
@@ -247,7 +250,7 @@ namespace BrowserSelect {
             this.groupBox3.Controls.Add(this.gv_filters);
             this.groupBox3.Location = new System.Drawing.Point(238, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(650, 516);
+            this.groupBox3.Size = new System.Drawing.Size(650, 580);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Auto Select Filters";
@@ -257,7 +260,7 @@ namespace BrowserSelect {
             this.lbl_source.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_source.AutoEllipsis = true;
-            this.lbl_source.Location = new System.Drawing.Point(340, 492);
+            this.lbl_source.Location = new System.Drawing.Point(340, 556);
             this.lbl_source.Name = "lbl_source";
             this.lbl_source.Size = new System.Drawing.Size(142, 13);
             this.lbl_source.TabIndex = 12;
@@ -267,7 +270,7 @@ namespace BrowserSelect {
             // 
             this.btn_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_cancel.Location = new System.Drawing.Point(488, 487);
+            this.btn_cancel.Location = new System.Drawing.Point(488, 551);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 8;
@@ -278,7 +281,7 @@ namespace BrowserSelect {
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(6, 487);
+            this.button1.Location = new System.Drawing.Point(6, 551);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 7;
@@ -303,7 +306,7 @@ namespace BrowserSelect {
             // 
             this.btn_apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_apply.Enabled = false;
-            this.btn_apply.Location = new System.Drawing.Point(569, 487);
+            this.btn_apply.Location = new System.Drawing.Point(569, 551);
             this.btn_apply.Name = "btn_apply";
             this.btn_apply.Size = new System.Drawing.Size(75, 23);
             this.btn_apply.TabIndex = 5;
@@ -314,7 +317,7 @@ namespace BrowserSelect {
             // btn_move_up
             //
             this.btn_move_up.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_move_up.Location = new System.Drawing.Point(87, 487);
+            this.btn_move_up.Location = new System.Drawing.Point(87, 551);
             this.btn_move_up.Name = "btn_move_up";
             this.btn_move_up.Size = new System.Drawing.Size(75, 23);
             this.btn_move_up.TabIndex = 9;
@@ -325,7 +328,7 @@ namespace BrowserSelect {
             // btn_move_down
             //
             this.btn_move_down.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_move_down.Location = new System.Drawing.Point(168, 487);
+            this.btn_move_down.Location = new System.Drawing.Point(168, 551);
             this.btn_move_down.Name = "btn_move_down";
             this.btn_move_down.Size = new System.Drawing.Size(85, 23);
             this.btn_move_down.TabIndex = 10;
@@ -336,7 +339,7 @@ namespace BrowserSelect {
             // btn_delete
             //
             this.btn_delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_delete.Location = new System.Drawing.Point(259, 487);
+            this.btn_delete.Location = new System.Drawing.Point(259, 551);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(75, 23);
             this.btn_delete.TabIndex = 11;
@@ -358,7 +361,7 @@ namespace BrowserSelect {
             this.arguments});
             this.gv_filters.Location = new System.Drawing.Point(6, 59);
             this.gv_filters.Name = "gv_filters";
-            this.gv_filters.Size = new System.Drawing.Size(638, 422);
+            this.gv_filters.Size = new System.Drawing.Size(638, 486);
             this.gv_filters.TabIndex = 1;
             this.gv_filters.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gv_filters_CellBeginEdit);
             this.gv_filters.CurrentCellDirtyStateChanged += new System.EventHandler(this.gv_filters_CurrentCellDirtyStateChanged);
@@ -414,7 +417,7 @@ namespace BrowserSelect {
             // 
             this.groupBox4.Controls.Add(this.chk_check_update);
             this.groupBox4.Controls.Add(this.btn_check_update);
-            this.groupBox4.Location = new System.Drawing.Point(12, 452);
+            this.groupBox4.Location = new System.Drawing.Point(12, 516);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(220, 41);
             this.groupBox4.TabIndex = 5;
@@ -456,7 +459,7 @@ namespace BrowserSelect {
             //
             this.lbl_language.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl_language.AutoSize = true;
-            this.lbl_language.Location = new System.Drawing.Point(12, 541);
+            this.lbl_language.Location = new System.Drawing.Point(12, 605);
             this.lbl_language.Name = "lbl_language";
             this.lbl_language.Size = new System.Drawing.Size(58, 13);
             this.lbl_language.TabIndex = 7;
@@ -467,7 +470,7 @@ namespace BrowserSelect {
             this.cmb_language.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmb_language.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_language.FormattingEnabled = true;
-            this.cmb_language.Location = new System.Drawing.Point(80, 537);
+            this.cmb_language.Location = new System.Drawing.Point(80, 601);
             this.cmb_language.Name = "cmb_language";
             this.cmb_language.Size = new System.Drawing.Size(152, 21);
             this.cmb_language.TabIndex = 8;
@@ -478,7 +481,7 @@ namespace BrowserSelect {
             //
             this.lbl_theme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl_theme.AutoSize = true;
-            this.lbl_theme.Location = new System.Drawing.Point(12, 568);
+            this.lbl_theme.Location = new System.Drawing.Point(12, 632);
             this.lbl_theme.Name = "lbl_theme";
             this.lbl_theme.Size = new System.Drawing.Size(43, 13);
             this.lbl_theme.TabIndex = 9;
@@ -489,7 +492,7 @@ namespace BrowserSelect {
             this.cmb_theme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmb_theme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_theme.FormattingEnabled = true;
-            this.cmb_theme.Location = new System.Drawing.Point(80, 564);
+            this.cmb_theme.Location = new System.Drawing.Point(80, 628);
             this.cmb_theme.Name = "cmb_theme";
             this.cmb_theme.Size = new System.Drawing.Size(98, 21);
             this.cmb_theme.TabIndex = 10;
@@ -499,7 +502,7 @@ namespace BrowserSelect {
             //
             this.chk_mica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chk_mica.AutoSize = true;
-            this.chk_mica.Location = new System.Drawing.Point(184, 566);
+            this.chk_mica.Location = new System.Drawing.Point(184, 630);
             this.chk_mica.Name = "chk_mica";
             this.chk_mica.Size = new System.Drawing.Size(48, 17);
             this.chk_mica.TabIndex = 11;
@@ -509,23 +512,26 @@ namespace BrowserSelect {
             //
             // groupBox5
             //
+            this.groupBox5.Controls.Add(this.cmb_fullscreen_fallback);
+            this.groupBox5.Controls.Add(this.lbl_fullscreen_fallback);
+            this.groupBox5.Controls.Add(this.chk_avoid_fullscreen);
             this.groupBox5.Controls.Add(this.btn_import);
             this.groupBox5.Controls.Add(this.btn_export);
             this.groupBox5.Controls.Add(this.chk_running_only);
             this.groupBox5.Controls.Add(this.chk_alt_ignore);
             this.groupBox5.Location = new System.Drawing.Point(12, 346);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(220, 100);
+            this.groupBox5.Size = new System.Drawing.Size(220, 164);
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Options";
             //
             // btn_export
             //
-            this.btn_export.Location = new System.Drawing.Point(6, 68);
+            this.btn_export.Location = new System.Drawing.Point(6, 132);
             this.btn_export.Name = "btn_export";
             this.btn_export.Size = new System.Drawing.Size(101, 23);
-            this.btn_export.TabIndex = 2;
+            this.btn_export.TabIndex = 5;
             this.btn_export.Text = "Export...";
             this.toolTip1.SetToolTip(this.btn_export, "Save rules and settings to a file");
             this.btn_export.UseVisualStyleBackColor = true;
@@ -533,10 +539,10 @@ namespace BrowserSelect {
             //
             // btn_import
             //
-            this.btn_import.Location = new System.Drawing.Point(113, 68);
+            this.btn_import.Location = new System.Drawing.Point(113, 132);
             this.btn_import.Name = "btn_import";
             this.btn_import.Size = new System.Drawing.Size(101, 23);
-            this.btn_import.TabIndex = 3;
+            this.btn_import.TabIndex = 6;
             this.btn_import.Text = "Import...";
             this.toolTip1.SetToolTip(this.btn_import, "Load rules and settings from a file (replaces the current ones)");
             this.btn_import.UseVisualStyleBackColor = true;
@@ -553,6 +559,36 @@ namespace BrowserSelect {
             this.toolTip1.SetToolTip(this.chk_running_only, "Only list browsers that are currently running (all browsers are shown if none is running)");
             this.chk_running_only.UseVisualStyleBackColor = true;
             this.chk_running_only.CheckedChanged += new System.EventHandler(this.chk_running_only_CheckedChanged);
+            //
+            // chk_avoid_fullscreen
+            //
+            this.chk_avoid_fullscreen.AutoSize = true;
+            this.chk_avoid_fullscreen.Location = new System.Drawing.Point(9, 65);
+            this.chk_avoid_fullscreen.Name = "chk_avoid_fullscreen";
+            this.chk_avoid_fullscreen.Size = new System.Drawing.Size(150, 17);
+            this.chk_avoid_fullscreen.TabIndex = 2;
+            this.chk_avoid_fullscreen.Text = "Avoid full-screen windows";
+            this.chk_avoid_fullscreen.UseVisualStyleBackColor = true;
+            this.chk_avoid_fullscreen.CheckedChanged += new System.EventHandler(this.chk_avoid_fullscreen_CheckedChanged);
+            //
+            // lbl_fullscreen_fallback
+            //
+            this.lbl_fullscreen_fallback.AutoSize = true;
+            this.lbl_fullscreen_fallback.Location = new System.Drawing.Point(24, 88);
+            this.lbl_fullscreen_fallback.Name = "lbl_fullscreen_fallback";
+            this.lbl_fullscreen_fallback.Size = new System.Drawing.Size(150, 13);
+            this.lbl_fullscreen_fallback.TabIndex = 3;
+            this.lbl_fullscreen_fallback.Text = "If all windows are full screen:";
+            //
+            // cmb_fullscreen_fallback
+            //
+            this.cmb_fullscreen_fallback.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_fullscreen_fallback.FormattingEnabled = true;
+            this.cmb_fullscreen_fallback.Location = new System.Drawing.Point(24, 105);
+            this.cmb_fullscreen_fallback.Name = "cmb_fullscreen_fallback";
+            this.cmb_fullscreen_fallback.Size = new System.Drawing.Size(190, 21);
+            this.cmb_fullscreen_fallback.TabIndex = 4;
+            this.cmb_fullscreen_fallback.SelectedIndexChanged += new System.EventHandler(this.cmb_fullscreen_fallback_SelectedIndexChanged);
             //
             // chk_alt_ignore
             //
@@ -571,7 +607,7 @@ namespace BrowserSelect {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;
-            this.ClientSize = new System.Drawing.Size(900, 595);
+            this.ClientSize = new System.Drawing.Size(900, 659);
             this.Controls.Add(this.chk_mica);
             this.Controls.Add(this.cmb_theme);
             this.Controls.Add(this.lbl_theme);
@@ -585,7 +621,7 @@ namespace BrowserSelect {
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MinimumSize = new System.Drawing.Size(700, 634);
+            this.MinimumSize = new System.Drawing.Size(700, 698);
             this.Name = "frm_settings";
             this.Text = "Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frm_settings_FormClosing);
@@ -650,5 +686,8 @@ namespace BrowserSelect {
         private System.Windows.Forms.Label lbl_theme;
         private System.Windows.Forms.ComboBox cmb_theme;
         private System.Windows.Forms.CheckBox chk_mica;
+        private System.Windows.Forms.CheckBox chk_avoid_fullscreen;
+        private System.Windows.Forms.Label lbl_fullscreen_fallback;
+        private System.Windows.Forms.ComboBox cmb_fullscreen_fallback;
     }
 }

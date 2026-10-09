@@ -39,6 +39,8 @@ namespace BrowserSelect
                 ["sortMode"] = s.SortMode,
                 ["showRunningOnly"] = s.ShowRunningOnly,
                 ["altIgnoresRules"] = s.AltIgnoresRules,
+                ["avoidFullscreen"] = s.AvoidFullscreen,
+                ["fullscreenFallback"] = s.FullscreenFallback,
                 ["checkForUpdates"] = s.check_update != "nope",
                 ["language"] = s.Language ?? Localization.L10n.DefaultLanguage,
                 ["theme"] = UI.Theme.Mode,
@@ -119,6 +121,15 @@ namespace BrowserSelect
                 s.ShowRunningOnly = (bool)root["showRunningOnly"];
             if (root["altIgnoresRules"] != null)
                 s.AltIgnoresRules = (bool)root["altIgnoresRules"];
+            if (root["avoidFullscreen"] != null)
+                s.AvoidFullscreen = (bool)root["avoidFullscreen"];
+            var fallback = (string)root["fullscreenFallback"];
+            if (fallback != null)
+            {
+                var value = BrowserWindowFocus.Fallbacks.FirstOrDefault(f => f.Equals(fallback, StringComparison.OrdinalIgnoreCase));
+                if (value != null)
+                    s.FullscreenFallback = value;
+            }
             // only languages installed on this computer are taken over
             var language = (string)root["language"];
             if (language != null && Localization.L10n.Available()

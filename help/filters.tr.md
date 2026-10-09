@@ -34,6 +34,10 @@ Tüm karşılaştırmalar büyük/küçük harfe duyarsızdır. Eşleşme türle
 **Argümanlar (Arguments)**: tarayıcıya verilecek ek komut satırı parametreleri, ör. `--incognito`,
 `--disable-web-security --user-data-dir="C:\temp\chrome"` veya Firefox profili için `-P work`.
 
+Gizli kurallar ve yeni pencere açan parametreler (`--new-window`, `--incognito`, `-private-window`, `--app=...`,
+`--kiosk`, ...) *Ayarlar → Seçenekler → Tam ekran pencereleri atla* adımını atlar: link zaten yeni pencerede açıldığı
+için mevcut bir tarayıcı penceresi öne getirilmez.
+
 Sıra ve öncelik
 ---
 

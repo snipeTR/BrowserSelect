@@ -33,13 +33,14 @@ testlerde kullanılan `tools\bs-open.ps1` yardımcı betiği orada anlatılıyor
 | 14 | Yardım pencereleri (EN/TR) ve kural dokümanı linki | [14-yardim-ve-kural-dokumani.md](14-yardim-ve-kural-dokumani.md) | 10 dk |
 | 15 | Güncellemeyi indirip kurma; kurulum/kaldırmada çalışan programı kapatma (EN/TR) | [15-guncelleme-indir-kur.md](15-guncelleme-indir-kur.md) | 20 dk |
 | 16 | Windows 10/11 görünümü: Segoe UI, düz butonlar, Tema (Açık/Koyu/Windows'a uy), Mica, yüksek DPI | [16-gorunum-tema.md](16-gorunum-tema.md) | 20 dk |
+| 17 | Tam ekran pencereleri atla (tek ve **çoklu monitör**), "Tüm pencereler tam ekransa" yedek ayarı | [17-tam-ekran-pencere.md](17-tam-ekran-pencere.md) | 30 dk |
 
 ## Klasör içeriği
 
 ```
 Tests/human_test/
 ├─ README.md                  ← bu dosya (indeks + sonuç tablosu)
-├─ 00-hazirlik.md … 16-*.md   ← reçeteler
+├─ 00-hazirlik.md … 17-*.md   ← reçeteler
 ├─ tools/
 │  └─ bs-open.ps1             ← bir linki BrowserSelect ile açan yardımcı betik
 └─ files/
@@ -112,6 +113,7 @@ Testleri bitirdikçe bu tabloyu kopyalayıp doldurabilirsin (issue açarken ekle
 | 14 | Yardım pencereleri | | |
 | 15 | Güncelleme indir-kur / programı kapatma | | |
 | 16 | Windows 10/11 görünümü / Tema / Mica | | |
+| 17 | Tam ekran pencereleri atla / çoklu monitör | | |
 
 Test ortamı: Windows sürümü: ______  BrowserSelect sürümü: ______  Yüklü tarayıcılar: ______
 

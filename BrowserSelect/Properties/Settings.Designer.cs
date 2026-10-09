@@ -224,5 +224,29 @@ namespace BrowserSelect.Properties {
                 this["Mica"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AvoidFullscreen {
+            get {
+                return ((bool)(this["AvoidFullscreen"]));
+            }
+            set {
+                this["AvoidFullscreen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Primary")]
+        public string FullscreenFallback {
+            get {
+                return ((string)(this["FullscreenFallback"]));
+            }
+            set {
+                this["FullscreenFallback"] = value;
+            }
+        }
     }
 }

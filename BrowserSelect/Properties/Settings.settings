@@ -53,5 +53,11 @@
     <Setting Name="Mica" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="AvoidFullscreen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="FullscreenFallback" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Primary</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -1278,5 +1278,41 @@ namespace BrowserSelect.Localization {
                 return ResourceManager.GetString("HelpRules_Text", resourceCulture);
             }
         }
+        
+        internal static string Settings_AvoidFullscreen {
+            get {
+                return ResourceManager.GetString("Settings_AvoidFullscreen", resourceCulture);
+            }
+        }
+        
+        internal static string Settings_AvoidFullscreenTooltip {
+            get {
+                return ResourceManager.GetString("Settings_AvoidFullscreenTooltip", resourceCulture);
+            }
+        }
+        
+        internal static string Settings_FullscreenFallback {
+            get {
+                return ResourceManager.GetString("Settings_FullscreenFallback", resourceCulture);
+            }
+        }
+        
+        internal static string Settings_FullscreenFallbackTooltip {
+            get {
+                return ResourceManager.GetString("Settings_FullscreenFallbackTooltip", resourceCulture);
+            }
+        }
+        
+        internal static string Settings_FallbackPrimary {
+            get {
+                return ResourceManager.GetString("Settings_FallbackPrimary", resourceCulture);
+            }
+        }
+        
+        internal static string Settings_FallbackLastUsed {
+            get {
+                return ResourceManager.GetString("Settings_FallbackLastUsed", resourceCulture);
+            }
+        }
     }
 }

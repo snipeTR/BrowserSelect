@@ -34,6 +34,10 @@ All comparisons are case-insensitive.
 **Arguments**: custom command line flags passed to the browser, e.g. `--incognito`,
 `--disable-web-security --user-data-dir="C:\temp\chrome"` or `-P work` for a Firefox profile.
 
+Private rules and arguments that open a new window (`--new-window`, `--incognito`, `-private-window`, `--app=...`,
+`--kiosk`, ...) skip *Settings → Options → Avoid full-screen windows*: the link gets a new window anyway, so no
+existing browser window is brought to the front.
+
 Order and priority
 ---
 

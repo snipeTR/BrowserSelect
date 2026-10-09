@@ -13,6 +13,8 @@ Instead of having to copy the link, open the desired (non-default) browser then 
 You may click on the desired browser or press one of the shortcuts (its index or the first letter of its name), for example for chrome you can press 2, g or c.
 you may also press Esc (or click the X) to not open the URL.
 
+**Full-screen windows and several monitors:** a browser opens a new link in the window you used last, which may be a full-screen video on your second monitor. With *Settings → Options → Avoid full-screen windows* (on by default) BrowserSelect brings the browser's most recently used window that is **not** full screen to the front just before opening the link, so the video is not interrupted. If all of the browser's windows are full screen, *If all windows are full screen* decides: **Window on primary monitor** (default) or **Last used window** (the browser decides). Maximized windows are not full screen; private windows, new-window arguments and a browser that is not running are left alone. Works the same with one monitor.
+
 To install, download the installer below then set BrowserSelect as the default browser.
 
 Settings (Set as Default Browser, browser list, auto select rules, language and theme):
@@ -76,6 +78,16 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 - [x] add file associations (e.g. .url files, or .html files)
 
 # Changelog
+
+v1.5.3.0
+- **Avoid full-screen windows** (Settings → Options, on by default; based on the original "focus the window on the first monitor" idea by Cihan Uygun): before a link is handed to a running browser, BrowserSelect brings the browser's most recently used (top of the Z-order) visible window that is not full screen to the front, so the browser opens the link there instead of in a full-screen video on another monitor. A minimized window is only used (and restored) if there is no other. Replaces the old always-on behaviour that focused the window on the leftmost/topmost monitor
+- **If all windows are full screen:** drop-down below it: *Window on primary monitor* (default; the browser window on Windows' main display) or *Last used window* (nothing is changed, the browser decides). With the check box off BrowserSelect never changes the focus
+- Full screen = the window's visible bounds (DWM extended frame bounds) cover the whole monitor including the taskbar area **and** the window has no title bar (`WS_CAPTION`), so maximized windows (also with an auto-hidden taskbar) are not full screen. Tool windows, owned/popup windows, cloaked windows (other virtual desktops), untitled and zero-size windows are ignored
+- Skipped when the link opens in a private window, when the browser's or the rule's arguments open a new window (`--new-window`, `--incognito`, `-private-window`, `--app=...`, `--kiosk`, ...), when the browser is not running, for legacy (UWP) Edge and Internet Explorer, and for *ignore URL* rules
+- Both settings are saved like the others and included in settings Export/Import (`avoidFullscreen`, `fullscreenFallback`)
+- Settings → Options group is taller (new check box, label and drop-down); the window is 64 px (at 100 %) taller, the rest of the layout is unchanged
+- Help (**?**, Settings → Help) and `help/filters*.md` updated in English and Turkish
+- Human test recipe incl. multi-monitor scenarios: [Tests/human_test/17-tam-ekran-pencere.md](Tests/human_test/17-tam-ekran-pencere.md)
 
 v1.5.2.0
 Windows 10/11 look (appearance only: window sizes, control positions, features and behaviour are unchanged). Earlier 1.5.0.0/1.5.1.0 builds were internal test builds and were not released.
