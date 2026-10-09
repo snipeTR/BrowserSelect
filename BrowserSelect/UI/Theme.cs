@@ -643,6 +643,7 @@ namespace BrowserSelect.UI
             if (form.IsHandleCreated)
                 ApplyWindowAttributes(form, dark, true);
             form.Invalidate(true);
+            LayoutCheck.Hook(form);
         }
 
         private static void Form_HandleCreated(object sender, EventArgs e)
