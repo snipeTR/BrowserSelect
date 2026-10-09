@@ -509,7 +509,7 @@ Lütfen internete bağlı olduğunuzdan emin olun.</value>
     <value>Browser Select: Hakkında</value>
   </data>
   <data name="About_CodedBy" xml:space="preserve">
-    <value>Geliştiren: Bor691</value>
+    <value>Kodlayan: Bor691</value>
   </data>
   <data name="About_Contact" xml:space="preserve">
     <value>İletişim:</value>
@@ -590,23 +590,23 @@ Açılan link pencerenin başlığında görünür. Şunları yapabilirsiniz:
 3. Bu sitedeki linkleri hep o tarayıcıda açmak için tarayıcının altındaki "Her zaman" düğmesine tıklayın. Bu, Ayarlar &gt; Otomatik Seçim Kuralları bölümünde bir kural oluşturur; geri almak için kuralı orada seçin, Sil'e ve ardından Uygula'ya tıklayın.
 
 OTOMATİK SEÇİM KURALLARI
-Ayarlar &gt; Otomatik Seçim Kuralları bölümünde BrowserSelect tarayıcıyı alan adına, linkin tamamına, yoluna, anahtar kelimeye, dosya uzantısına, linke tıklanan uygulamaya veya düzenli ifadeye (regex) göre otomatik seçebilir. Bir kural linki gizli pencerede de açabilir, tarayıcıya ek parametreler verebilir, yine de tarayıcı listesini gösterebilir veya linki yok sayabilir. Ayrıntılar için o bölümdeki "Yardım" düğmesine, örnekler için kural listesinin üstündeki linke tıklayın.
+Ayarlar &gt; Otomatik Seçim Kuralları bölümünde BrowserSelect tarayıcıyı alan adına, linkin tamamına, yoluna, anahtar kelimeye, dosya uzantısına, linke tıklanan uygulamaya veya düzenli ifadeye (regex) göre otomatik seçebilir. Bir kural linki gizli pencerede de açabilir, tarayıcıya ek argümanlar verebilir, yine de tarayıcı listesini gösterebilir veya linki yok sayabilir. Ayrıntılar için o bölümdeki "Yardım" düğmesine, örnekler için kural listesinin üstündeki linke tıklayın.
 Tüm kuralları atlayıp tarayıcıyı elle seçmek için (başka bir uygulamada) linke tıklarken Alt tuşunu basılı tutun (Ayarlar &gt; Seçenekler bölümünden kapatılabilir).
 
 AYARLAR
-- Tarayıcılar: Ekle... ile taşınabilir (portable) bir tarayıcı veya herhangi bir program ekleyin; Düzenle... ile tarayıcının adını, simgesini, kısayol tuşlarını ve parametrelerini değiştirin; Kaldır ile elle eklenen bir tarayıcıyı silin; gizlemek için tarayıcının işaretini kaldırın; sırayı Sıra ile değiştirin (Manual sıralamada ok düğmeleri kullanılır).
+- Tarayıcılar: Ekle... ile taşınabilir (portable) bir tarayıcı veya herhangi bir program ekleyin; Düzenle... ile tarayıcının adını, simgesini, kısayol tuşlarını ve argümanlarını değiştirin; Kaldır ile elle eklenen bir tarayıcıyı kaldırın; gizlemek için tarayıcının işaretini kaldırın; sırayı Sıra ile değiştirin (Manual sıralamada ok düğmeleri kullanılır).
 - Yenile: BrowserSelect ilk çalıştığında kurulu tarayıcıları ve profilleri önbelleğe alır. Bir tarayıcı veya profil kurduktan ya da kaldırdıktan sonra tarayıcı listesinin yanındaki Yenile'ye tıklayın.
 - Varsayılan Tarayıcı: Varsayılan Yap; Dosya türü... BrowserSelect'i .html ve .url dosyaları için kaydeder.
-- Seçenekler: sadece çalışan tarayıcıları göster, Alt ile kuralları atla, tam ekran pencereleri atla (aşağıya bakın), kuralları ve ayarları .json dosyasına Dışa aktar... / dosyadan İçe aktar...
+- Seçenekler: sadece çalışan tarayıcıları göster, Alt ile kuralları atla, "Tam ekran pencereleri atla" (aşağıya bakın), kuralları ve ayarları .json dosyasına Dışa aktar... / dosyadan İçe aktar...
 - Güncelleme denetimi: GitHub'daki snipeTR/BrowserSelect sürümlerini denetler. Yeni sürüm çıktığında bu yardım düğmesi güncelleme düğmesine dönüşür; güncelleme mesajından sonra BrowserSelect yeni kurulum dosyasını indirip çalıştırmayı önerir (BrowserSelect hâlâ açıksa kurulum, programı kapatmak için izin ister).
-- Dil (sol altta): arayüz dili; BrowserSelect bir sonraki açılışta bu dili kullanır.
+- Dil (sol altta): arayüz dili (English, Türkçe, Русский, Deutsch, Français, Español, Português (Brasil), Italiano, Polski, Українська, 简体中文, 日本語); BrowserSelect bir sonraki açılışta bu dili kullanır.
 - Tema (sol altta, Dil'in altında): Açık, Koyu veya Windows'a uy (Windows uygulama modu Koyu ise Koyu kullanılır). Yeni tema hemen uygulanır. Mica: sadece Windows 11 (22H2 veya daha yeni), başlık çubuğuna Mica efekti ekler. Windows 11'de pencerelerin köşeleri de yuvarlatılır.
 - Ekran ölçeği (%100-%200): pencereler Windows'a giriş yaptığınız ölçekte net çizilir. Bir pencere (ör. 1920x1080 ekranda %175'te Ayarlar) ekrandan büyükse, kontroller görev çubuğunun altında kalmak yerine pencereye kaydırma çubukları eklenir.
 
 TAM EKRAN PENCERELER VE BİRDEN FAZLA MONİTÖR
 Tarayıcı yeni bir linki en son kullandığınız pencerede açar. O pencere (ör. ikinci monitörde) tam ekran video oynatıyorsa link videoyu böler. Ayarlar &gt; Seçenekler &gt; "Tam ekran pencereleri atla" açıkken (varsayılan) BrowserSelect, linki açmadan hemen önce tarayıcının tam ekran OLMAYAN en son kullanılan penceresini öne getirir; link o pencerede açılır (simge durumundaki bir pencere sadece başka pencere yoksa kullanılır ve geri açılır).
 Tarayıcının bütün pencereleri tam ekransa "Tüm pencereler tam ekransa" seçimi geçerlidir: "Ana monitördeki pencere" (varsayılan) ana monitördeki tarayıcı penceresini kullanır (Windows Ayarlar &gt; Ekran &gt; "Bunu ana ekranım yap"); "Son kullanılan pencere" kararı tarayıcıya bırakır.
-Tarayıcı çalışmıyorsa, link gizli pencerede açılıyorsa veya tarayıcı/kural parametreleri yeni pencere açıyorsa (--new-window, --incognito, -private-window, --app=..., --kiosk, ...) hiçbir şey yapılmaz. Tek monitörde de aynı mantık çalışır. Kararı her zaman tarayıcıya bırakmak için seçeneği kapatın.
+Tarayıcı açık değilse, link gizli pencerede açılıyorsa veya tarayıcı/kural argümanları yeni pencere açıyorsa (--new-window, --incognito, -private-window, --app=..., --kiosk, ...) hiçbir şey yapılmaz. Tek monitörde de aynı mantık çalışır. Kararı her zaman tarayıcıya bırakmak için seçeneği kapatın.
 Notlar: ekranı kaplayan (maximize) pencere tam ekran sayılmaz (görev çubuğu otomatik gizlense de); sadece gerçek tam ekran (F11, tam ekran video) sayılır. Aynı tarayıcının farklı profillerinin pencereleri (aynı .exe) tek tarayıcı olarak ele alınır. Windows nadiren pencerenin öne getirilmesine izin vermez; o zaman pencere sadece görev çubuğunda yanıp söner.
 
 Çoğunlukla tek bir tarayıcı kullanıp bazı siteleri başka bir tarayıcıda açmak istiyorsanız (ör. her şey Firefox'ta, şirket sitesi IE'de), ana tarayıcınız için "*" kuralı, diğer siteler için de ayrı kurallar ekleyin.
@@ -630,7 +630,7 @@ Desen: linkin karşılaştırıldığı metin (bkz. Eşleşme). Karşılaştırm
 Tarayıcı: desen eşleşince ne olacağı: linkin açılacağı tarayıcı, her zaman tarayıcı listesini göstermek için "display BrowserSelect" veya linki hiç açmamak için "ignore URL (do nothing)".
 
 Gizli: linki gizli/incognito pencerede açar.
-Argümanlar: tarayıcıya verilecek ek komut satırı parametreleri (ör. --incognito --disable-web-security). Gizli kurallar ve yeni pencere açan parametreler (--new-window, --incognito, ...) "Tam ekran pencereleri atla" (Ayarlar &gt; Seçenekler) adımını atlar, çünkü link zaten yeni pencerede açılır.
+Argümanlar: tarayıcıya verilecek ek komut satırı argümanları (ör. --incognito --disable-web-security). Gizli kurallar ve yeni pencere açan argümanlar (--new-window, --incognito, ...) için "Tam ekran pencereleri atla" (Ayarlar &gt; Seçenekler) seçeneği uygulanmaz, çünkü link zaten yeni pencerede açılır.
 
 Önce tam desenler, sonra joker karakterli desenler, en son * denetlenir; aynı öncelikteki kurallar yukarıdan aşağıya denetlenir (Yukarı / Aşağı). İlk eşleşen kural uygulanır; hiçbiri eşleşmezse tarayıcı listesi gösterilir.
 

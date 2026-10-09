@@ -260,7 +260,7 @@ El instalador se descargará de GitHub y se iniciará. Si BrowserSelect sigue ab
     <value>BrowserSelect debe ser el navegador predeterminado para funcionar. También abre archivos .html y .url.</value>
   </data>
   <data name="Settings_SetDefault" xml:space="preserve">
-    <value>Predeterminar</value>
+    <value>Hacer predeterminado</value>
   </data>
   <data name="Settings_FileTypes" xml:space="preserve">
     <value>Archivos...</value>
@@ -377,7 +377,7 @@ Asegúrese de estar conectado a Internet.</value>
     <value>Aplicar</value>
   </data>
   <data name="Settings_Refresh" xml:space="preserve">
-    <value>Actualizar</value>
+    <value>Recargar</value>
   </data>
   <data name="Settings_LinkOpenedFrom" xml:space="preserve">
     <value>Enlace abierto desde: {0}</value>
@@ -402,7 +402,7 @@ Asegúrese de estar conectado a Internet.</value>
   </data>
   <data name="Settings_ExportUnsaved" xml:space="preserve">
     <value>Hay cambios en las reglas sin aplicar. ¿Aplicarlos antes de exportar?
-(No exporta las últimas reglas aplicadas)</value>
+(Si elige No, se exportan las últimas reglas aplicadas)</value>
   </data>
   <data name="Settings_ExportDone" xml:space="preserve">
     <value>Reglas y ajustes exportados a
@@ -577,7 +577,7 @@ Es una aplicación de código abierto con licencia GPL v2. No dude en informar d
     <value>BrowserSelect - Ayuda de las reglas de selección automática</value>
   </data>
   <data name="HelpMain_Text" xml:space="preserve">
-    <value>BrowserSelect le permite elegir un navegador cada vez que hace clic en un enlace fuera de un navegador (cliente de correo, mensajería, archivo PDF, ...) en lugar de abrir siempre el mismo navegador predeterminado. Para ello, BrowserSelect debe ser el navegador predeterminado: Ajustes &gt; Navegador predeterminado &gt; Predeterminar.
+    <value>BrowserSelect le permite elegir un navegador cada vez que hace clic en un enlace fuera de un navegador (cliente de correo, mensajería, archivo PDF, ...) en lugar de abrir siempre el mismo navegador predeterminado. Para ello, BrowserSelect debe ser el navegador predeterminado: Ajustes &gt; Navegador predeterminado &gt; Hacer predeterminado.
 
 LA LISTA DE NAVEGADORES
 El enlace que se va a abrir aparece en el título de la ventana. Puede:
@@ -595,11 +595,11 @@ Mantenga pulsada Alt al hacer clic en un enlace (en otra aplicación) para omiti
 
 AJUSTES
 - Navegadores: Añadir... un navegador portable o cualquier programa; Editar... el nombre, el icono, las teclas de acceso directo y los argumentos de un navegador; Quitar un navegador añadido manualmente; desmarcar un navegador para ocultarlo; cambiar el orden con Orden (Manual usa los botones de flecha).
-- Actualizar: BrowserSelect guarda en caché la lista de navegadores y perfiles instalados la primera vez que se ejecuta. Tras instalar o quitar un navegador o perfil, haga clic en Actualizar junto a la lista de navegadores.
-- Navegador predeterminado: Predeterminar; Archivos... registra BrowserSelect para archivos .html y .url.
+- Recargar: BrowserSelect guarda en caché la lista de navegadores y perfiles instalados la primera vez que se ejecuta. Tras instalar o quitar un navegador o perfil, haga clic en Recargar junto a la lista de navegadores.
+- Navegador predeterminado: Hacer predeterminado; Archivos... registra BrowserSelect para archivos .html y .url.
 - Opciones: mostrar solo los navegadores abiertos, omitir las reglas con Alt, evitar ventanas a pantalla completa (ver más abajo), Exportar... / Importar... reglas y ajustes a/desde un archivo .json.
 - Actualizaciones: comprueba las versiones de snipeTR/BrowserSelect en GitHub. Cuando hay una nueva versión, este botón de ayuda se convierte en un botón de actualización; tras el mensaje de actualización, BrowserSelect ofrece descargar y ejecutar el nuevo instalador (el instalador pide cerrar BrowserSelect si sigue abierto).
-- Idioma (abajo a la izquierda): idioma de la interfaz; se usa la próxima vez que se inicie BrowserSelect.
+- Idioma (abajo a la izquierda): idioma de la interfaz (English, Türkçe, Русский, Deutsch, Français, Español, Português (Brasil), Italiano, Polski, Українська, 简体中文, 日本語); se usa la próxima vez que se inicie BrowserSelect.
 - Tema (abajo a la izquierda, bajo Idioma): Claro, Oscuro o Como Windows (usa Oscuro cuando el modo de aplicación de Windows es Oscuro). El nuevo tema se aplica de inmediato. Mica: solo Windows 11 (22H2 o posterior), añade el efecto Mica a la barra de título. En Windows 11 las ventanas también tienen esquinas redondeadas.
 - Escala de pantalla (100-200 %): las ventanas se dibujan nítidas con la escala con la que inició sesión en Windows. Si una ventana (p. ej. Ajustes al 175 % en una pantalla de 1920x1080) es más grande que la pantalla, recibe barras de desplazamiento en lugar de ocultar controles bajo la barra de tareas.
 

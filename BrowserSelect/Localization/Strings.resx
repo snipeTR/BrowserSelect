@@ -743,7 +743,7 @@ SETTINGS
 - Default Browser: Set as Default Browser; File types... registers BrowserSelect for .html and .url files.
 - Options: show only running browsers, skip the rules with Alt, avoid full-screen windows (see below), Export... / Import... rules and settings to/from a .json file.
 - Update checker: checks the releases of snipeTR/BrowserSelect on GitHub. When a new version is available, this help button turns into an update button; after the update message BrowserSelect offers to download and run the new installer (the setup asks to close BrowserSelect if it is still running).
-- Language (bottom left): user interface language; it is used the next time BrowserSelect starts.
+- Language (bottom left): user interface language (English, Türkçe, Русский, Deutsch, Français, Español, Português (Brasil), Italiano, Polski, Українська, 简体中文, 日本語); it is used the next time BrowserSelect starts.
 - Theme (bottom left, below Language): Light, Dark or Follow Windows (uses Dark when the Windows app mode is Dark). The new theme is applied at once. Mica: Windows 11 (22H2 or newer) only, adds the Mica effect to the title bar. On Windows 11 the windows also get rounded corners.
 - Display scale (100-200 %): the windows are drawn sharp at the scale you signed in to Windows with. If a window (e.g. Settings at 175 % on a 1920x1080 screen) is bigger than the screen, it gets scroll bars instead of hiding controls below the taskbar.
 

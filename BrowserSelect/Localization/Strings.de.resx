@@ -211,7 +211,7 @@ Möchten Sie die Release-Seite öffnen und die neue Version manuell herunterlade
     <value>Info</value>
   </data>
   <data name="Main_Settings" xml:space="preserve">
-    <value>Optionen</value>
+    <value>Einstellungen</value>
   </data>
   <data name="Main_PatternError" xml:space="preserve">
     <value>Fehler beim Erzeugen des Musters aus der URL. Bitte fügen Sie die folgende URL Ihrem Fehlerbericht bei:
@@ -242,7 +242,7 @@ Möchten Sie die Release-Seite öffnen und die neue Version manuell herunterlade
     <value>Einen manuell hinzugefügten Browser entfernen (Häkchen entfernen, um einen Browser auszublenden)</value>
   </data>
   <data name="Settings_SortLabel" xml:space="preserve">
-    <value>Sort.:</value>
+    <value>Sortieren:</value>
   </data>
   <data name="Settings_SortTooltip" xml:space="preserve">
     <value>Reihenfolge der Browser im Auswahlfenster</value>
@@ -401,8 +401,8 @@ Bitte prüfen Sie Ihre Internetverbindung.</value>
     <value>BrowserSelect-Einstellungen exportieren</value>
   </data>
   <data name="Settings_ExportUnsaved" xml:space="preserve">
-    <value>Es gibt nicht übernommene Regeländerungen. Vor dem Export übernehmen?
-(Nein exportiert die zuletzt übernommenen Regeln)</value>
+    <value>Es gibt nicht angewendete Regeländerungen. Vor dem Export anwenden?
+(Bei „Nein“ werden die zuletzt angewendeten Regeln exportiert)</value>
   </data>
   <data name="Settings_ExportDone" xml:space="preserve">
     <value>Regeln und Einstellungen exportiert nach
@@ -594,12 +594,12 @@ Unter Einstellungen &gt; Regeln für automatische Auswahl kann BrowserSelect den
 Halten Sie beim Klicken auf einen Link (in einer anderen Anwendung) Alt gedrückt, um alle Regeln zu überspringen und den Browser manuell zu wählen (abschaltbar unter Einstellungen &gt; Optionen).
 
 EINSTELLUNGEN
-- Browser: Neu... fügt einen portablen Browser oder ein beliebiges Programm hinzu; Ändern... ändert Name, Symbol, Tastenkürzel und Argumente eines Browsers; Entfernen löscht einen manuell hinzugefügten Browser; Häkchen entfernen blendet einen Browser aus; die Reihenfolge ändern Sie mit Sort. (Manual verwendet die Pfeiltasten).
+- Browser: Neu... fügt einen portablen Browser oder ein beliebiges Programm hinzu; Ändern... ändert Name, Symbol, Tastenkürzel und Argumente eines Browsers; Entfernen löscht einen manuell hinzugefügten Browser; Häkchen entfernen blendet einen Browser aus; die Reihenfolge ändern Sie mit Sortieren (Manual verwendet die Pfeilschaltflächen).
 - Neu laden: BrowserSelect speichert die Liste der installierten Browser und Profile beim ersten Start zwischen. Klicken Sie nach dem Installieren oder Entfernen eines Browsers oder Profils neben der Browserliste auf Neu laden.
 - Standardbrowser: Als Standard festlegen; Dateitypen registriert BrowserSelect für .html- und .url-Dateien.
 - Optionen: nur laufende Browser anzeigen, Regeln mit Alt überspringen, Vollbildfenster meiden (siehe unten), Regeln und Einstellungen in eine .json-Datei Exportieren... / aus ihr Importieren...
 - Update-Prüfung: prüft die Releases von snipeTR/BrowserSelect auf GitHub. Ist eine neue Version verfügbar, wird diese Hilfe-Schaltfläche zur Update-Schaltfläche; nach der Update-Meldung bietet BrowserSelect an, das neue Installationsprogramm herunterzuladen und auszuführen (das Setup bittet darum, BrowserSelect zu schließen, falls es noch läuft).
-- Sprache (unten links): Sprache der Oberfläche; sie wird beim nächsten Start von BrowserSelect verwendet.
+- Sprache (unten links): Sprache der Oberfläche (English, Türkçe, Русский, Deutsch, Français, Español, Português (Brasil), Italiano, Polski, Українська, 简体中文, 日本語); sie wird beim nächsten Start von BrowserSelect verwendet.
 - Design (unten links, unter Sprache): Hell, Dunkel oder Wie Windows (Dunkel, wenn der Windows-App-Modus Dunkel ist). Das neue Design wird sofort übernommen. Mica: nur Windows 11 (22H2 oder neuer), fügt der Titelleiste den Mica-Effekt hinzu. Unter Windows 11 erhalten die Fenster außerdem abgerundete Ecken.
 - Anzeigeskalierung (100-200 %): Die Fenster werden in der Skalierung scharf gezeichnet, mit der Sie sich bei Windows angemeldet haben. Ist ein Fenster (z. B. Einstellungen bei 175 % auf einem 1920x1080-Bildschirm) größer als der Bildschirm, erhält es Bildlaufleisten, statt Steuerelemente unter der Taskleiste zu verbergen.
 

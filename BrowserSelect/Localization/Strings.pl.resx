@@ -301,7 +301,7 @@ Błąd interfejsu skojarzeń: {1}</value>
     <value>Pokazuj tylko uruchomione przeglądarki (jeśli żadna nie działa, pokazywane są wszystkie)</value>
   </data>
   <data name="Settings_AltIgnore" xml:space="preserve">
-    <value>Alt na linku pomija reguły</value>
+    <value>Klawisz Alt pomija reguły</value>
   </data>
   <data name="Settings_AltIgnoreTooltip" xml:space="preserve">
     <value>Jeśli podczas klikania linku przytrzymany jest klawisz Alt, reguły automatycznego wyboru są pomijane i wyświetlana jest lista przeglądarek.</value>
@@ -380,7 +380,7 @@ Upewnij się, że masz połączenie z internetem.</value>
     <value>Odśwież</value>
   </data>
   <data name="Settings_LinkOpenedFrom" xml:space="preserve">
-    <value>Link otwarty z: {0}</value>
+    <value>Źródło linku: {0}</value>
   </data>
   <data name="Settings_InvalidRule" xml:space="preserve">
     <value>Nieprawidłowa reguła: {0}</value>
@@ -402,7 +402,7 @@ Upewnij się, że masz połączenie z internetem.</value>
   </data>
   <data name="Settings_ExportUnsaved" xml:space="preserve">
     <value>Masz niezastosowane zmiany reguł. Zastosować je przed eksportem?
-(Nie eksportuje ostatnio zastosowane reguły)</value>
+(Jeśli wybierzesz Nie, zostaną wyeksportowane ostatnio zastosowane reguły)</value>
   </data>
   <data name="Settings_ExportDone" xml:space="preserve">
     <value>Reguły i ustawienia wyeksportowano do
@@ -450,7 +450,7 @@ Upewnij się, że masz połączenie z internetem.</value>
     <value>Argumenty wiersza poleceń zawsze przekazywane do tej przeglądarki (np. --profile-directory="Profile 1" lub -P work)</value>
   </data>
   <data name="BrowserEdit_ExtraArgumentsTooltip" xml:space="preserve">
-    <value>Dodatkowe argumenty wiersza poleceń zawsze przekazywane do tej przeglądarki</value>
+    <value>Dodatkowe argumenty wiersza poleceń, które są zawsze przekazywane do tej przeglądarki</value>
   </data>
   <data name="BrowserEdit_Shortcut" xml:space="preserve">
     <value>Skróty:</value>
@@ -518,7 +518,7 @@ Upewnij się, że masz połączenie z internetem.</value>
     <value>GitHub:</value>
   </data>
   <data name="About_ForkBy" xml:space="preserve">
-    <value>Ten fork rozwija: snipeTR</value>
+    <value>Opiekun tego forka: snipeTR</value>
   </data>
   <data name="About_Description" xml:space="preserve">
     <value>Browser Select to narzędzie do wybierania na bieżąco przeglądarki, której chcesz użyć, zamiast jednej domyślnej dla wszystkich linków – podobnie jak okno w Androidzie, które pyta o przeglądarkę po kliknięciu/dotknięciu linku w aplikacji, która nie jest przeglądarką. Nie każdemu się przyda, ale bardzo pomaga, gdy używasz kilku przeglądarek do różnych celów (np. jednej z proxy, a drugiej bez) i otwierasz wiele linków z innych aplikacji (np. komunikatorów).
@@ -596,15 +596,15 @@ Przytrzymaj Alt podczas klikania linku (w innej aplikacji), aby pominąć wszyst
 USTAWIENIA
 - Przeglądarki: Dodaj... przeglądarkę przenośną lub dowolny program; Edytuj... nazwę, ikonę, skróty klawiszowe i argumenty przeglądarki; Usuń ręcznie dodaną przeglądarkę; odznacz przeglądarkę, aby ją ukryć; zmień kolejność przez Sortuj (Manual używa przycisków ze strzałkami).
 - Odśwież: przy pierwszym uruchomieniu BrowserSelect zapamiętuje listę zainstalowanych przeglądarek i profili. Po zainstalowaniu lub usunięciu przeglądarki albo profilu kliknij Odśwież obok listy przeglądarek.
-- Domyślna przeglądarka: Ustaw jako domyślną; Typy plików rejestruje BrowserSelect dla plików .html i .url.
-- Opcje: pokaż tylko otwarte przeglądarki, pomijaj reguły klawiszem Alt, omijaj okna pełnoekranowe (patrz niżej), Eksportuj... / Importuj... reguły i ustawienia do/z pliku .json.
+- Domyślna przeglądarka: przycisk „Ustaw jako domyślną”; przycisk „Typy plików” dodaje BrowserSelect do programów obsługujących pliki .html i .url.
+- Opcje: pokaż tylko otwarte przeglądarki, pomijaj reguły klawiszem Alt, unikaj okien pełnoekranowych (patrz niżej), Eksportuj... / Importuj... reguły i ustawienia do/z pliku .json.
 - Aktualizacje: sprawdza wydania snipeTR/BrowserSelect w GitHub. Gdy dostępna jest nowa wersja, ten przycisk pomocy zmienia się w przycisk aktualizacji; po komunikacie o aktualizacji BrowserSelect proponuje pobranie i uruchomienie nowego instalatora (instalator prosi o zamknięcie BrowserSelect, jeśli nadal działa).
-- Język (lewy dolny róg): język interfejsu; zostanie użyty przy następnym uruchomieniu BrowserSelect.
+- Język (lewy dolny róg): język interfejsu (English, Türkçe, Русский, Deutsch, Français, Español, Português (Brasil), Italiano, Polski, Українська, 简体中文, 日本語); zostanie użyty przy następnym uruchomieniu BrowserSelect.
 - Motyw (lewy dolny róg, pod Językiem): Jasny, Ciemny lub Jak Windows (Ciemny, gdy tryb aplikacji Windows jest ciemny). Nowy motyw jest stosowany od razu. Mica: tylko Windows 11 (22H2 lub nowszy), dodaje efekt Mica do paska tytułu. W Windows 11 okna mają też zaokrąglone rogi.
 - Skalowanie ekranu (100-200 %): okna są rysowane ostro w skali, z jaką zalogowano się do Windows. Jeśli okno (np. Ustawienia przy 175 % na ekranie 1920x1080) jest większe niż ekran, dostaje paski przewijania zamiast chować kontrolki pod paskiem zadań.
 
 OKNA PEŁNOEKRANOWE I KILKA MONITORÓW
-Przeglądarka otwiera nowy link w ostatnio używanym oknie. Jeśli w tym oknie odtwarzany jest film na pełnym ekranie (np. na drugim monitorze), link by go przerwał. Gdy włączona jest opcja Ustawienia &gt; Opcje &gt; „Omijaj okna pełnoekranowe” (domyślnie włączona), BrowserSelect tuż przed otwarciem linku przenosi na wierzch ostatnio używane okno przeglądarki, które NIE jest pełnoekranowe, i link otwiera się w nim (zminimalizowane okno jest używane i przywracane tylko wtedy, gdy nie ma innego).
+Przeglądarka otwiera nowy link w ostatnio używanym oknie. Jeśli w tym oknie odtwarzany jest film na pełnym ekranie (np. na drugim monitorze), link by go przerwał. Gdy włączona jest opcja Ustawienia &gt; Opcje &gt; „Unikaj okien pełnoekranowych” (domyślnie włączona), BrowserSelect tuż przed otwarciem linku przenosi na wierzch ostatnio używane okno przeglądarki, które NIE jest pełnoekranowe, i link otwiera się w nim (zminimalizowane okno jest używane i przywracane tylko wtedy, gdy nie ma innego).
 Jeśli wszystkie okna przeglądarki są pełnoekranowe, decyduje „Gdy wszystkie są pełnoekranowe”: „Okno na monitorze głównym” (domyślnie) używa okna przeglądarki na monitorze głównym (Ustawienia systemu Windows &gt; Ekran &gt; „Ustaw jako ekran główny”); „Ostatnio używane okno” zostawia wybór przeglądarce.
 Nic nie jest zmieniane, gdy przeglądarka nie działa, gdy link jest otwierany w oknie prywatnym lub gdy argumenty przeglądarki/reguły otwierają nowe okno (--new-window, --incognito, -private-window, --app=..., --kiosk, ...). Przy jednym monitorze działa ta sama logika. Wyłącz opcję, aby zawsze zostawiać wybór przeglądarce.
 Uwagi: zmaksymalizowane okno nie jest pełnoekranowe (również przy automatycznie ukrywanym pasku zadań); liczy się tylko prawdziwy pełny ekran (F11, film na pełnym ekranie). Okna różnych profili tej samej przeglądarki (ten sam .exe) są traktowane jak jedna przeglądarka. Rzadko Windows nie pozwala przenieść okna na wierzch; wtedy tylko miga ono na pasku zadań.
@@ -630,18 +630,18 @@ Wzorzec: tekst, z którym porównywany jest link (patrz Typ). Wielkość liter n
 Przeglądarka: co się dzieje, gdy wzorzec pasuje: przeglądarka, w której otworzyć link, „display BrowserSelect”, aby zawsze pokazywać listę przeglądarek, lub „ignore URL (do nothing)”, aby w ogóle nie otwierać linku.
 
 Prywatne: otwiera link w oknie prywatnym/incognito.
-Argumenty: dodatkowe opcje wiersza poleceń dla przeglądarki (np. --incognito --disable-web-security). Reguły prywatne i argumenty otwierające nowe okno (--new-window, --incognito, ...) pomijają „Omijaj okna pełnoekranowe” (Ustawienia &gt; Opcje), bo link i tak dostaje nowe okno.
+Argumenty: dodatkowe opcje wiersza poleceń dla przeglądarki (np. --incognito --disable-web-security). Reguły prywatne i argumenty otwierające nowe okno (--new-window, --incognito, ...) pomijają opcję „Unikaj okien pełnoekranowych” (Ustawienia &gt; Opcje), bo link i tak dostaje nowe okno.
 
 Najpierw sprawdzane są dokładne wzorce, potem wzorce z symbolami wieloznacznymi, a na końcu *; reguły o tym samym priorytecie są sprawdzane od góry do dołu (W górę / W dół). Wygrywa pierwsza pasująca reguła; jeśli żadna nie pasuje, wyświetlana jest lista przeglądarek.
 
 Aby usunąć regułę, zaznacz ją i kliknij Usuń (lub naciśnij klawisz Del). Zmiany zapisuje się przyciskiem Zastosuj.
-„Link otwarty z” (na dole okna) pokazuje aplikację do użycia w regułach Source App.
+„Źródło linku” (na dole okna) pokazuje aplikację do użycia w regułach Source App.
 
 Uwaga: BrowserSelect można otworzyć ręcznie z menu Start, aby zmienić reguły. Przytrzymaj Alt podczas klikania linku, aby pominąć reguły i wybrać ręcznie.
 Więcej przykładów: link nad listą reguł.</value>
   </data>
   <data name="Settings_AvoidFullscreen" xml:space="preserve">
-    <value>Omijaj okna pełnoekranowe</value>
+    <value>Unikaj okien pełnoekranowych</value>
   </data>
   <data name="Settings_AvoidFullscreenTooltip" xml:space="preserve">
     <value>Gdy przeglądarka ma kilka okien, otwieraj link w jej ostatnio używanym oknie, które nie jest pełnoekranowe (np. nie w tym, które odtwarza film na pełnym ekranie na innym monitorze). Wyłączone: decyduje przeglądarka (jej ostatnio używane okno).</value>

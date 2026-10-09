@@ -214,7 +214,7 @@ Voulez-vous ouvrir la page des versions et télécharger la nouvelle version man
     <value>Paramètres</value>
   </data>
   <data name="Main_PatternError" xml:space="preserve">
-    <value>Erreur lors de la création du modèle à partir de l'URL. Veuillez inclure l'URL suivante dans votre rapport de bogue :
+    <value>Erreur lors de la création du motif à partir de l'URL. Veuillez inclure l'URL suivante dans votre rapport de bogue :
 {0}</value>
   </data>
   <data name="Settings_Title" xml:space="preserve">
@@ -350,7 +350,7 @@ Vérifiez que vous êtes connecté à Internet.</value>
     <value>Type</value>
   </data>
   <data name="Settings_ColPattern" xml:space="preserve">
-    <value>Modèle</value>
+    <value>Motif</value>
   </data>
   <data name="Settings_ColBrowser" xml:space="preserve">
     <value>Navigateur</value>
@@ -402,7 +402,7 @@ Vérifiez que vous êtes connecté à Internet.</value>
   </data>
   <data name="Settings_ExportUnsaved" xml:space="preserve">
     <value>Certaines modifications de règles ne sont pas appliquées. Les appliquer avant l'exportation ?
-(Non exporte les dernières règles appliquées)</value>
+(Si vous choisissez Non, les dernières règles appliquées sont exportées)</value>
   </data>
   <data name="Settings_ExportDone" xml:space="preserve">
     <value>Règles et paramètres exportés vers
@@ -509,7 +509,7 @@ Vérifiez que vous êtes connecté à Internet.</value>
     <value>Browser Select : À propos</value>
   </data>
   <data name="About_CodedBy" xml:space="preserve">
-    <value>Développé par : Bor691</value>
+    <value>Codé par : Bor691</value>
   </data>
   <data name="About_Contact" xml:space="preserve">
     <value>Contact :</value>
@@ -550,7 +550,7 @@ C'est une application open source sous licence GPL v2. N'hésitez pas à signale
     <value>Vous avez oublié de choisir un navigateur pour la règle « {0} ».</value>
   </data>
   <data name="Rule_EmptyPattern" xml:space="preserve">
-    <value>L'une de vos règles a un modèle vide. Consultez l'aide pour plus d'informations.</value>
+    <value>L'une de vos règles a un motif vide. Consultez l'aide pour plus d'informations.</value>
   </data>
   <data name="Rule_InvalidRegex" xml:space="preserve">
     <value>« {0} » n'est pas une expression régulière valide.</value>
@@ -599,7 +599,7 @@ PARAMÈTRES
 - Navigateur par défaut : Définir par défaut ; Fichiers... associe BrowserSelect aux fichiers .html et .url.
 - Options : afficher uniquement les navigateurs ouverts, ignorer les règles avec Alt, éviter les fenêtres plein écran (voir ci-dessous), Exporter... / Importer... les règles et paramètres vers/depuis un fichier .json.
 - Mises à jour : vérifie les versions de snipeTR/BrowserSelect sur GitHub. Quand une nouvelle version est disponible, ce bouton d'aide devient un bouton de mise à jour ; après le message de mise à jour, BrowserSelect propose de télécharger et de lancer le nouveau programme d'installation (l'installation demande de fermer BrowserSelect s'il est encore ouvert).
-- Langue (en bas à gauche) : langue de l'interface ; elle est utilisée au prochain démarrage de BrowserSelect.
+- Langue (en bas à gauche) : langue de l'interface (English, Türkçe, Русский, Deutsch, Français, Español, Português (Brasil), Italiano, Polski, Українська, 简体中文, 日本語) ; elle est utilisée au prochain démarrage de BrowserSelect.
 - Thème (en bas à gauche, sous Langue) : Clair, Sombre ou Comme Windows (Sombre si le mode d'application de Windows est Sombre). Le nouveau thème s'applique immédiatement. Mica : Windows 11 (22H2 ou plus récent) uniquement, ajoute l'effet Mica à la barre de titre. Sous Windows 11, les fenêtres ont aussi des coins arrondis.
 - Mise à l'échelle (100-200 %) : les fenêtres sont dessinées nettement à l'échelle avec laquelle vous vous êtes connecté à Windows. Si une fenêtre (par ex. Paramètres à 175 % sur un écran 1920x1080) est plus grande que l'écran, elle reçoit des barres de défilement au lieu de cacher des contrôles sous la barre des tâches.
 
@@ -616,7 +616,7 @@ Vous pouvez toujours ouvrir BrowserSelect depuis le menu Démarrer pour modifier
   <data name="HelpRules_Text" xml:space="preserve">
     <value>Chaque règle comporte cinq colonnes :
 
-Type : la partie du lien à laquelle le modèle est comparé :
+Type : la partie du lien à laquelle le motif est comparé :
     - Domain : le nom d'hôte, par ex. google.com, *.google.com, website.* ou * (correspond à tout)
     - URL : le lien complet avec les jokers * et ?, par ex. github.com/myorg/* ou https://*/login*
     - Path : le chemin du lien, par ex. /watch* ou /docs/*
@@ -625,14 +625,14 @@ Type : la partie du lien à laquelle le modèle est comparé :
     - Source App : l'application dans laquelle le lien a été cliqué, par ex. outlook.exe, slack, teams*
     - Regex : une expression régulière .NET comparée au lien complet
 
-Modèle : le texte auquel le lien est comparé (voir Type). Les comparaisons ne tiennent pas compte de la casse.
+Motif : le texte auquel le lien est comparé (voir Type). Les comparaisons ne tiennent pas compte de la casse.
 
-Navigateur : ce qui se passe quand le modèle correspond : un navigateur dans lequel ouvrir le lien, « display BrowserSelect » pour toujours afficher la liste des navigateurs, ou « ignore URL (do nothing) » pour ne pas ouvrir le lien du tout.
+Navigateur : ce qui se passe quand le motif correspond : un navigateur dans lequel ouvrir le lien, « display BrowserSelect » pour toujours afficher la liste des navigateurs, ou « ignore URL (do nothing) » pour ne pas ouvrir le lien du tout.
 
 Privé : ouvre le lien dans une fenêtre privée/de navigation privée.
 Arguments : options de ligne de commande supplémentaires pour le navigateur (par ex. --incognito --disable-web-security). Les règles privées et les arguments qui ouvrent une nouvelle fenêtre (--new-window, --incognito, ...) ignorent « Éviter les fenêtres plein écran » (Paramètres &gt; Options), car le lien obtient de toute façon une nouvelle fenêtre.
 
-Les modèles exacts sont vérifiés en premier, puis les modèles avec jokers, et * en dernier ; les règles de même priorité sont vérifiées de haut en bas (Monter / Descendre). La première règle qui correspond l'emporte ; si aucune ne correspond, la liste des navigateurs s'affiche.
+Les motifs exacts sont vérifiés en premier, puis les motifs avec jokers, et * en dernier ; les règles de même priorité sont vérifiées de haut en bas (Monter / Descendre). La première règle qui correspond l'emporte ; si aucune ne correspond, la liste des navigateurs s'affiche.
 
 Pour supprimer une règle, sélectionnez-la et cliquez sur Supprimer (ou appuyez sur Suppr). Les modifications sont enregistrées avec Appliquer.
 « Lien ouvert depuis » (en bas de la fenêtre) indique l'application à utiliser dans les règles Source App.

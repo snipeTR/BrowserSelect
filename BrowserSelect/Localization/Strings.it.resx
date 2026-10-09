@@ -133,7 +133,7 @@
     <value>Tema:</value>
   </data>
   <data name="Theme_Tooltip" xml:space="preserve">
-    <value>Aspetto delle finestre di BrowserSelect: Chiaro, Scuro o Come Windows (la modalità app scelta in Impostazioni di Windows &gt; Personalizzazione &gt; Colori). Applicato subito.</value>
+    <value>Aspetto delle finestre di BrowserSelect: Chiaro, Scuro o Segui Windows (la modalità app scelta in Impostazioni di Windows &gt; Personalizzazione &gt; Colori). Applicato subito.</value>
   </data>
   <data name="Theme_Light" xml:space="preserve">
     <value>Chiaro</value>
@@ -142,7 +142,7 @@
     <value>Scuro</value>
   </data>
   <data name="Theme_System" xml:space="preserve">
-    <value>Come Windows</value>
+    <value>Segui Windows</value>
   </data>
   <data name="Theme_Mica" xml:space="preserve">
     <value>Mica</value>
@@ -214,7 +214,7 @@ Vuoi aprire la pagina delle versioni e scaricare la nuova versione manualmente?
     <value>Impostazioni</value>
   </data>
   <data name="Main_PatternError" xml:space="preserve">
-    <value>Errore durante la creazione del modello dall'URL. Includi il seguente URL nella segnalazione del bug:
+    <value>Errore durante la creazione del pattern dall'URL. Includi il seguente URL nella segnalazione del bug:
 {0}</value>
   </data>
   <data name="Settings_Title" xml:space="preserve">
@@ -233,7 +233,7 @@ Vuoi aprire la pagina delle versioni e scaricare la nuova versione manualmente?
     <value>Modifica</value>
   </data>
   <data name="Settings_BrowserEditTooltip" xml:space="preserve">
-    <value>Cambia l'icona, i tasti di scelta rapida e gli argomenti del browser selezionato</value>
+    <value>Cambia l'icona, i tasti di scelta rapida e i parametri del browser selezionato</value>
   </data>
   <data name="Settings_BrowserRemove" xml:space="preserve">
     <value>Rimuovi</value>
@@ -301,7 +301,7 @@ Errore dell'interfaccia di associazione: {1}</value>
     <value>Elenca solo i browser in esecuzione (se nessuno è in esecuzione vengono mostrati tutti)</value>
   </data>
   <data name="Settings_AltIgnore" xml:space="preserve">
-    <value>Alt su un link salta le regole</value>
+    <value>Con Alt premuto salta le regole</value>
   </data>
   <data name="Settings_AltIgnoreTooltip" xml:space="preserve">
     <value>Se si tiene premuto Alt mentre si fa clic su un link, le regole di selezione automatica vengono ignorate e viene mostrato l'elenco dei browser.</value>
@@ -322,10 +322,10 @@ Errore dell'interfaccia di associazione: {1}</value>
     <value>Aggiornamenti</value>
   </data>
   <data name="Settings_UpdateEnable" xml:space="preserve">
-    <value>attiva</value>
+    <value>Attiva</value>
   </data>
   <data name="Settings_UpdateCheckNow" xml:space="preserve">
-    <value>controlla</value>
+    <value>Controlla</value>
   </data>
   <data name="Settings_UpToDate" xml:space="preserve">
     <value>Stai usando l'ultima versione.</value>
@@ -350,7 +350,7 @@ Assicurati di essere connesso a Internet.</value>
     <value>Tipo</value>
   </data>
   <data name="Settings_ColPattern" xml:space="preserve">
-    <value>Modello</value>
+    <value>Pattern</value>
   </data>
   <data name="Settings_ColBrowser" xml:space="preserve">
     <value>Browser</value>
@@ -359,10 +359,10 @@ Assicurati di essere connesso a Internet.</value>
     <value>Privato</value>
   </data>
   <data name="Settings_ColArguments" xml:space="preserve">
-    <value>Argomenti</value>
+    <value>Parametri</value>
   </data>
   <data name="Settings_Help" xml:space="preserve">
-    <value>Guida</value>
+    <value>Aiuto</value>
   </data>
   <data name="Settings_MoveUp" xml:space="preserve">
     <value>Sposta su</value>
@@ -377,7 +377,7 @@ Assicurati di essere connesso a Internet.</value>
     <value>Applica</value>
   </data>
   <data name="Settings_Refresh" xml:space="preserve">
-    <value>Aggiorna</value>
+    <value>Ricarica</value>
   </data>
   <data name="Settings_LinkOpenedFrom" xml:space="preserve">
     <value>Link aperto da: {0}</value>
@@ -402,7 +402,7 @@ Assicurati di essere connesso a Internet.</value>
   </data>
   <data name="Settings_ExportUnsaved" xml:space="preserve">
     <value>Ci sono modifiche alle regole non applicate. Applicarle prima di esportare?
-(No esporta le ultime regole applicate)</value>
+(Se scegli No, vengono esportate le ultime regole applicate)</value>
   </data>
   <data name="Settings_ExportDone" xml:space="preserve">
     <value>Regole e impostazioni esportate in
@@ -444,13 +444,13 @@ Assicurati di essere connesso a Internet.</value>
     <value>Sfoglia...</value>
   </data>
   <data name="BrowserEdit_Arguments" xml:space="preserve">
-    <value>Argomenti:</value>
+    <value>Parametri:</value>
   </data>
   <data name="BrowserEdit_ArgumentsTooltip" xml:space="preserve">
-    <value>Argomenti della riga di comando passati sempre a questo browser (ad es. --profile-directory="Profile 1" o -P work)</value>
+    <value>Parametri della riga di comando passati sempre a questo browser (ad es. --profile-directory="Profile 1" o -P work)</value>
   </data>
   <data name="BrowserEdit_ExtraArgumentsTooltip" xml:space="preserve">
-    <value>Argomenti aggiuntivi della riga di comando passati sempre a questo browser</value>
+    <value>Parametri aggiuntivi della riga di comando passati sempre a questo browser</value>
   </data>
   <data name="BrowserEdit_Shortcut" xml:space="preserve">
     <value>Tasti rapidi:</value>
@@ -503,13 +503,13 @@ Assicurati di essere connesso a Internet.</value>
     <value>Seleziona un eseguibile esistente (usa Sfoglia...).</value>
   </data>
   <data name="BrowserEdit_AlreadyListed" xml:space="preserve">
-    <value>Questo browser (stesso eseguibile e stessi argomenti) è già nell'elenco.</value>
+    <value>Questo browser (stesso eseguibile e stessi parametri) è già nell'elenco.</value>
   </data>
   <data name="About_Title" xml:space="preserve">
     <value>Browser Select: Info</value>
   </data>
   <data name="About_CodedBy" xml:space="preserve">
-    <value>Sviluppato da: Bor691</value>
+    <value>Programmato da: Bor691</value>
   </data>
   <data name="About_Contact" xml:space="preserve">
     <value>Contatto:</value>
@@ -550,7 +550,7 @@ Assicurati di essere connesso a Internet.</value>
     <value>Hai dimenticato di selezionare un browser per la regola "{0}".</value>
   </data>
   <data name="Rule_EmptyPattern" xml:space="preserve">
-    <value>Una delle tue regole ha un modello vuoto. Consulta la Guida per maggiori informazioni.</value>
+    <value>Una delle tue regole ha un pattern vuoto. Consulta l'Aiuto per maggiori informazioni.</value>
   </data>
   <data name="Rule_InvalidRegex" xml:space="preserve">
     <value>"{0}" non è un'espressione regolare valida.</value>
@@ -571,10 +571,10 @@ Assicurati di essere connesso a Internet.</value>
     <value>Questa versione di BrowserSelect è un fork del progetto BrowserSelect originale creato da Bor691 (zumoshi su GitHub). Il progetto originale è software open source rilasciato con licenza GPL v2. Un grande grazie al suo autore per il lavoro su cui si basa questo fork.</value>
   </data>
   <data name="HelpMain_Title" xml:space="preserve">
-    <value>BrowserSelect - Guida</value>
+    <value>BrowserSelect - Aiuto</value>
   </data>
   <data name="HelpRules_Title" xml:space="preserve">
-    <value>BrowserSelect - Guida alle regole di selezione automatica</value>
+    <value>BrowserSelect - Aiuto sulle regole di selezione automatica</value>
   </data>
   <data name="HelpMain_Text" xml:space="preserve">
     <value>BrowserSelect ti permette di scegliere un browser ogni volta che fai clic su un link fuori da un browser (client di posta, app di messaggistica, file PDF, ...) invece di aprire sempre lo stesso browser predefinito. Per questo BrowserSelect deve essere il browser predefinito: Impostazioni &gt; Browser predefinito &gt; Rendi predefinito.
@@ -590,23 +590,23 @@ Il link da aprire è mostrato nel titolo della finestra. Puoi:
 3. Fare clic su "Sempre" sotto un browser per aprire sempre i link di questo sito in quel browser. Viene creata una regola in Impostazioni &gt; Regole di selezione automatica; per annullarla, seleziona lì la regola, fai clic su Elimina e poi su Applica.
 
 REGOLE DI SELEZIONE AUTOMATICA
-In Impostazioni &gt; Regole di selezione automatica BrowserSelect può scegliere il browser automaticamente in base a dominio, URL completo, percorso, parola chiave, estensione del file, applicazione in cui è stato fatto clic sul link o espressione regolare. Una regola può anche aprire il link in una finestra privata, passare argomenti aggiuntivi al browser, mostrare comunque l'elenco dei browser o ignorare il link. Fai clic su "Guida" in quella sezione per i dettagli, o sul link sopra l'elenco delle regole per gli esempi.
+In Impostazioni &gt; Regole di selezione automatica BrowserSelect può scegliere il browser automaticamente in base a dominio, URL completo, percorso, parola chiave, estensione del file, applicazione in cui è stato fatto clic sul link o espressione regolare. Una regola può anche aprire il link in una finestra privata, passare parametri aggiuntivi al browser, mostrare comunque l'elenco dei browser o ignorare il link. Fai clic su "Aiuto" in quella sezione per i dettagli, o sul link sopra l'elenco delle regole per gli esempi.
 Tieni premuto Alt mentre fai clic su un link (in un'altra applicazione) per saltare tutte le regole e scegliere il browser manualmente (disattivabile in Impostazioni &gt; Opzioni).
 
 IMPOSTAZIONI
-- Browser: Aggiungi un browser portatile o qualsiasi programma; Modifica nome, icona, tasti rapidi e argomenti di un browser; Rimuovi un browser aggiunto manualmente; togli la spunta a un browser per nasconderlo; cambia l'ordine con Ordine (Manual usa i pulsanti freccia).
-- Aggiorna: al primo avvio BrowserSelect memorizza l'elenco dei browser e dei profili installati. Dopo aver installato o rimosso un browser o un profilo, fai clic su Aggiorna accanto all'elenco dei browser.
+- Browser: Aggiungi un browser portatile o qualsiasi programma; Modifica nome, icona, tasti rapidi e parametri di un browser; Rimuovi un browser aggiunto manualmente; togli la spunta a un browser per nasconderlo; cambia l'ordine con Ordine (Manual usa i pulsanti freccia).
+- Ricarica: al primo avvio BrowserSelect memorizza l'elenco dei browser e dei profili installati. Dopo aver installato o rimosso un browser o un profilo, fai clic su Ricarica accanto all'elenco dei browser.
 - Browser predefinito: Rendi predefinito; Tipi file... registra BrowserSelect per i file .html e .url.
 - Opzioni: mostra solo i browser aperti, salta le regole con Alt, evita le finestre a schermo intero (vedi sotto), Esporta... / Importa... regole e impostazioni in/da un file .json.
-- Aggiornamenti: controlla le versioni di snipeTR/BrowserSelect su GitHub. Quando è disponibile una nuova versione, questo pulsante della guida diventa un pulsante di aggiornamento; dopo il messaggio di aggiornamento BrowserSelect propone di scaricare ed eseguire il nuovo programma di installazione (l'installazione chiede di chiudere BrowserSelect se è ancora in esecuzione).
-- Lingua (in basso a sinistra): lingua dell'interfaccia; viene usata al prossimo avvio di BrowserSelect.
-- Tema (in basso a sinistra, sotto Lingua): Chiaro, Scuro o Come Windows (usa Scuro quando la modalità app di Windows è Scura). Il nuovo tema viene applicato subito. Mica: solo Windows 11 (22H2 o successivo), aggiunge l'effetto Mica alla barra del titolo. Su Windows 11 le finestre hanno anche gli angoli arrotondati.
+- Aggiornamenti: controlla le versioni di snipeTR/BrowserSelect su GitHub. Quando è disponibile una nuova versione, questo pulsante Aiuto diventa un pulsante di aggiornamento; dopo il messaggio di aggiornamento BrowserSelect propone di scaricare ed eseguire il nuovo programma di installazione (l'installazione chiede di chiudere BrowserSelect se è ancora in esecuzione).
+- Lingua (in basso a sinistra): lingua dell'interfaccia (English, Türkçe, Русский, Deutsch, Français, Español, Português (Brasil), Italiano, Polski, Українська, 简体中文, 日本語); viene usata al prossimo avvio di BrowserSelect.
+- Tema (in basso a sinistra, sotto Lingua): Chiaro, Scuro o Segui Windows (usa Scuro quando la modalità app di Windows è Scura). Il nuovo tema viene applicato subito. Mica: solo Windows 11 (22H2 o successivo), aggiunge l'effetto Mica alla barra del titolo. Su Windows 11 le finestre hanno anche gli angoli arrotondati.
 - Scala dello schermo (100-200 %): le finestre vengono disegnate nitide alla scala con cui hai effettuato l'accesso a Windows. Se una finestra (ad es. Impostazioni al 175 % su uno schermo 1920x1080) è più grande dello schermo, riceve barre di scorrimento invece di nascondere controlli sotto la barra delle applicazioni.
 
 FINESTRE A SCHERMO INTERO E PIÙ MONITOR
 Un browser apre un nuovo link nell'ultima finestra che hai usato. Se quella finestra sta riproducendo un video a schermo intero (ad es. su un secondo monitor), il link lo interromperebbe. Con Impostazioni &gt; Opzioni &gt; "Evita finestre a schermo intero" (attiva per impostazione predefinita) BrowserSelect porta in primo piano, subito prima di aprire il link, la finestra del browser usata più di recente che NON è a schermo intero, così il link si apre lì (una finestra ridotta a icona viene usata, e ripristinata, solo se non ce ne sono altre).
-Se tutte le finestre del browser sono a schermo intero, decide "Se tutte sono a schermo intero": "Finestra sul monitor principale" (predefinito) usa la finestra del browser sul monitor principale (Impostazioni di Windows &gt; Schermo &gt; "Rendi questo schermo principale"); "Ultima finestra usata" lascia la scelta al browser.
-Non viene cambiato nulla se il browser non è in esecuzione, se il link viene aperto in una finestra privata o se gli argomenti del browser/della regola aprono una nuova finestra (--new-window, --incognito, -private-window, --app=..., --kiosk, ...). Con un solo monitor vale la stessa logica. Disattiva l'opzione per lasciare sempre decidere il browser.
+Se tutte le finestre del browser sono a schermo intero, la scelta dipende dall'opzione "Se tutte sono a schermo intero": "Finestra sul monitor principale" (predefinita) usa la finestra del browser sul monitor principale (Impostazioni di Windows &gt; Schermo &gt; "Rendi questo schermo principale"); "Ultima finestra usata" lascia la scelta al browser.
+Non viene cambiato nulla se il browser non è in esecuzione, se il link viene aperto in una finestra privata o se i parametri del browser/della regola aprono una nuova finestra (--new-window, --incognito, -private-window, --app=..., --kiosk, ...). Con un solo monitor vale la stessa logica. Disattiva l'opzione per lasciare sempre decidere il browser.
 Note: una finestra ingrandita non è a schermo intero (anche con la barra delle applicazioni nascosta automaticamente); conta solo il vero schermo intero (F11, video a schermo intero). Le finestre di profili diversi dello stesso browser (stesso .exe) sono trattate come un unico browser. Raramente Windows non permette di portare una finestra in primo piano; in quel caso lampeggia solo nella barra delle applicazioni.
 
 Se usi soprattutto un browser ma vuoi aprire alcuni siti in un altro (ad es. Firefox per tutto, ma IE per il sito aziendale), aggiungi una regola "*" per il browser principale e regole separate per gli altri siti.
@@ -616,7 +616,7 @@ Puoi sempre aprire BrowserSelect dal menu Start per modificarne le impostazioni.
   <data name="HelpRules_Text" xml:space="preserve">
     <value>Ogni regola ha cinque colonne:
 
-Tipo: con quale parte del link viene confrontato il modello:
+Tipo: con quale parte del link viene confrontato il pattern:
     - Domain: il nome host, ad es. google.com, *.google.com, website.* o * (corrisponde a tutto)
     - URL: l'intero link con i caratteri jolly * e ?, ad es. github.com/myorg/* o https://*/login*
     - Path: il percorso del link, ad es. /watch* o /docs/*
@@ -625,14 +625,14 @@ Tipo: con quale parte del link viene confrontato il modello:
     - Source App: l'applicazione in cui è stato fatto clic sul link, ad es. outlook.exe, slack, teams*
     - Regex: un'espressione regolare .NET confrontata con l'intero link
 
-Modello: il testo con cui viene confrontato il link (vedi Tipo). I confronti non distinguono tra maiuscole e minuscole.
+Pattern: il testo con cui viene confrontato il link (vedi Tipo). I confronti non distinguono tra maiuscole e minuscole.
 
-Browser: cosa succede quando il modello corrisponde: un browser con cui aprire il link, "display BrowserSelect" per mostrare sempre l'elenco dei browser, o "ignore URL (do nothing)" per non aprire affatto il link.
+Browser: cosa succede quando il pattern corrisponde: un browser con cui aprire il link, "display BrowserSelect" per mostrare sempre l'elenco dei browser, o "ignore URL (do nothing)" per non aprire affatto il link.
 
 Privato: apre il link in una finestra privata/in incognito.
-Argomenti: opzioni aggiuntive della riga di comando per il browser (ad es. --incognito --disable-web-security). Le regole private e gli argomenti che aprono una nuova finestra (--new-window, --incognito, ...) saltano "Evita finestre a schermo intero" (Impostazioni &gt; Opzioni), perché il link riceve comunque una nuova finestra.
+Parametri: opzioni aggiuntive della riga di comando per il browser (ad es. --incognito --disable-web-security). Le regole private e i parametri che aprono una nuova finestra (--new-window, --incognito, ...) saltano "Evita finestre a schermo intero" (Impostazioni &gt; Opzioni), perché il link riceve comunque una nuova finestra.
 
-Prima vengono controllati i modelli esatti, poi quelli con caratteri jolly e per ultimo *; le regole con la stessa priorità vengono controllate dall'alto in basso (Sposta su / Sposta giù). Vince la prima regola corrispondente; se nessuna corrisponde, viene mostrato l'elenco dei browser.
+Prima vengono controllati i pattern esatti, poi quelli con caratteri jolly e per ultimo *; le regole con la stessa priorità vengono controllate dall'alto in basso (Sposta su / Sposta giù). Vince la prima regola corrispondente; se nessuna corrisponde, viene mostrato l'elenco dei browser.
 
 Per eliminare una regola selezionala e fai clic su Elimina (o premi il tasto Canc). Le modifiche vengono salvate con Applica.
 "Link aperto da" (in fondo alla finestra) mostra l'applicazione da usare nelle regole Source App.

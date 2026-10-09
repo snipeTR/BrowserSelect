@@ -402,7 +402,7 @@ Verifique se você está conectado à internet.</value>
   </data>
   <data name="Settings_ExportUnsaved" xml:space="preserve">
     <value>Há alterações nas regras não aplicadas. Aplicá-las antes de exportar?
-(Não exporta as últimas regras aplicadas)</value>
+(Se escolher Não, as últimas regras aplicadas serão exportadas)</value>
   </data>
   <data name="Settings_ExportDone" xml:space="preserve">
     <value>Regras e configurações exportadas para
@@ -509,7 +509,7 @@ Verifique se você está conectado à internet.</value>
     <value>Browser Select: Sobre</value>
   </data>
   <data name="About_CodedBy" xml:space="preserve">
-    <value>Desenvolvido por: Bor691</value>
+    <value>Programado por: Bor691</value>
   </data>
   <data name="About_Contact" xml:space="preserve">
     <value>Contato:</value>
@@ -599,7 +599,7 @@ CONFIGURAÇÕES
 - Navegador padrão: Tornar padrão; Arquivos... registra o BrowserSelect para arquivos .html e .url.
 - Opções: mostrar só navegadores abertos, ignorar as regras com Alt, evitar janelas em tela cheia (veja abaixo), Exportar... / Importar... regras e configurações para/de um arquivo .json.
 - Atualizações: verifica as versões de snipeTR/BrowserSelect no GitHub. Quando há uma nova versão, este botão de ajuda vira um botão de atualização; após a mensagem de atualização, o BrowserSelect oferece baixar e executar o novo instalador (o instalador pede para fechar o BrowserSelect se ele ainda estiver em execução).
-- Idioma (canto inferior esquerdo): idioma da interface; é usado na próxima vez que o BrowserSelect for iniciado.
+- Idioma (canto inferior esquerdo): idioma da interface (English, Türkçe, Русский, Deutsch, Français, Español, Português (Brasil), Italiano, Polski, Українська, 简体中文, 日本語); é usado na próxima vez que o BrowserSelect for iniciado.
 - Tema (canto inferior esquerdo, abaixo de Idioma): Claro, Escuro ou Como o Windows (usa Escuro quando o modo de aplicativo do Windows é Escuro). O novo tema é aplicado imediatamente. Mica: somente Windows 11 (22H2 ou mais recente), adiciona o efeito Mica à barra de título. No Windows 11 as janelas também ganham cantos arredondados.
 - Escala da tela (100-200 %): as janelas são desenhadas nítidas na escala com que você entrou no Windows. Se uma janela (por ex. Configurações a 175 % em uma tela de 1920x1080) for maior que a tela, ela ganha barras de rolagem em vez de esconder controles atrás da barra de tarefas.
 

@@ -2,7 +2,7 @@
 
 Browser Select is a utility to dynamically select the browser you want instead of just having one default for all links. Similar to the prompt in android to choose a browser when a link in a non-browser app is clicked/touched. It may not be useful for everyone but it helps when you use multiple browsers for different things (e.g. one with proxy and one without) and open many links from other applications (e.g. Messengers).
 
-This is an actively maintained fork of [zumoshi/BrowserSelect](https://github.com/zumoshi/BrowserSelect) with Windows **64-bit** installer builds via GitHub Actions, maintained by [snipeTR](https://github.com/snipeTR). Available in English and Turkish (Settings → Language).
+This is an actively maintained fork of [zumoshi/BrowserSelect](https://github.com/zumoshi/BrowserSelect) with Windows **64-bit** installer builds via GitHub Actions, maintained by [snipeTR](https://github.com/snipeTR). User interface in 12 languages (Settings → Language): English, Turkish, Russian, Ukrainian, German, French, Spanish, Portuguese (Brazil), Italian, Polish, Simplified Chinese and Japanese.
 
 ![Browser picker (light theme)](screenshots/picker-light.png)
 
@@ -76,12 +76,21 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 - [x] themes ? or at least an optional transparent Aero glass mode (Windows 10/11 look: Light / Dark / Follow Windows, Windows 11 rounded corners and optional Mica)
 - [x] Ability to choose custom icons for browsers
 - [ ] display the unshortened version of adf.ly or goo.gl links when selecting the browser
-- [x] Localization (English and Turkish; texts in `BrowserSelect/Localization/Strings*.resx`, language selection in Settings)
+- [x] Localization (12 languages: English, Turkish, Russian, Ukrainian, German, French, Spanish, Portuguese (Brazil), Italian, Polish, Simplified Chinese, Japanese; texts in `BrowserSelect/Localization/Strings*.resx`, language selection in Settings)
 - [ ] handling of other link types (e.g. `mail:` in case you have both outlook and thunderbird installed [or maybe as a sister app])
 - [x] update checker (not as a popup or messagebox, a tiny icon somewhere on the main form that appears when you don't have the last version)
 - [x] add file associations (e.g. .url files, or .html files)
 
 # Changelog
+
+v1.5.5.0
+- **12 user interface languages** (Settings → Language, takes effect after a restart): English, Turkish, Russian, Ukrainian, German, French, Spanish, Portuguese (Brazil), Italian, Polish, Simplified Chinese and Japanese. Every window, message box and both help windows are translated; the drop-down shows each language's native name. Right-to-left languages are not supported by the app UI (the installer offers Arabic and Persian)
+- **Automatic font per UI language:** Japanese uses Yu Gothic UI (fallback Meiryo UI), Simplified Chinese Microsoft YaHei UI (fallback Microsoft YaHei), every other language Segoe UI. Fonts that ship with Windows are used, no font files are bundled. Japanese/Chinese text is never shrunk below 9pt to fit and is never italic
+- Translations were checked by **back-translation with Google Translate and Bing Translator** (every text translated back to English in both services and compared with the original); unclear or wrong lines were fixed and checked again
+- Rule match types, sort modes and the special rule targets (`display BrowserSelect`, `ignore URL (do nothing)`) stay in English on purpose, because they are stored values. Long translated labels in Settings move their drop-downs to the right instead of overlapping
+- Help: the Language line lists the available languages (all languages)
+- Human test recipe: [Tests/human_test/18-arayuz-dilleri.md](Tests/human_test/18-arayuz-dilleri.md) (switch each language, restart, check CJK fonts, clipping in narrow buttons/labels and the help windows)
+- Installer (since v1.5.4.0): checks for .NET Framework 4.8 at start and has its own language selection (12 languages above plus Arabic and Persian)
 
 v1.5.3.0
 - **Avoid full-screen windows** (Settings → Options, on by default; based on the original "focus the window on the first monitor" idea by Cihan Uygun): before a link is handed to a running browser, BrowserSelect brings the browser's most recently used (top of the Z-order) visible window that is not full screen to the front, so the browser opens the link there instead of in a full-screen video on another monitor. A minimized window is only used (and restored) if there is no other. Replaces the old always-on behaviour that focused the window on the leftmost/topmost monitor
