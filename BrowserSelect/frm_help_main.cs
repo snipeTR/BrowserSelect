@@ -63,8 +63,8 @@ namespace BrowserSelect
 
         /// <summary>
         /// puts the Close button in the free strip below the text (bottom padding of the window). This
-        /// window is designed at 150% and scaled down; with per-monitor DPI awareness (app.config) the
-        /// anchored button could otherwise end up over the text.
+        /// window is designed at 150% and scaled down; the anchored button could otherwise end up over
+        /// the text.
         /// </summary>
         public static void PlaceCloseButton(Form form, Button button)
         {

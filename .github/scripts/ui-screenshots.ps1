@@ -7,8 +7,8 @@
 #                  Display > Scale does (DisplayConfigSetDeviceInfo, see Display.cs). Windows keeps the
 #                  sign-in DPI (96) as "system DPI", so this is the same situation as a second monitor
 #                  with a different scale than the main one.
-#  -Mode session : runs inside a Remote Desktop session that was signed in at the scale (see
-#                  ui-signin-scales.ps1): system DPI = monitor DPI, the normal single monitor case.
+#  -Mode session : just uses the scale the current session was signed in with (manual use on a PC;
+#                  a loopback Remote Desktop sign-in on the Actions runner never logged in).
 # The DPI of every window, its pixel size and the app's own layout report are recorded and checked.
 param(
     [string]$BuildDir = "BrowserSelect\bin\x64\Release",
@@ -63,12 +63,14 @@ function Shot([IntPtr]$h, [string]$name, [string]$formName) {
     $dpi = [Disp]::WindowDpi($h)
     Write-Host "saved $script:scale/$name.png ($w x $hgt, window dpi $dpi)"
     $script:summary.Add("| $script:scale | $name | $w x $hgt | $dpi | $script:systemDpi |")
-    if ($dpi -ne $script:expectedDpi) { $script:problems.Add("$script:scale/${name}: window DPI $dpi, expected $script:expectedDpi") }
+    # monitor DPI (drawn at the scale) or the sign-in DPI (Windows stretches a system DPI aware window)
+    if ($dpi -ne $script:expectedDpi -and $dpi -ne $script:systemDpi) { $script:problems.Add("$script:scale/${name}: window DPI $dpi, expected $script:expectedDpi") }
     # the app's own layout report (BROWSERSELECT_LAYOUT_LOG), written ~0.7 s after the window is shown
     $report = Join-Path $layoutDir "$formName.txt"
     for ($i = 0; $i -lt 20 -and -not (Test-Path $report); $i++) { Start-Sleep -Milliseconds 250 }
     if (Test-Path $report) {
         Move-Item -Force $report (Join-Path $script:dir "$name.layout.txt")
+        $script:layouts[[string]$h] = @{ File = (Join-Path $script:dir "$name.layout.txt"); L = $r.L; T = $r.T; W = $w }
         $first = Get-Content (Join-Path $script:dir "$name.layout.txt") -TotalCount 1
         if ($first -ne "issues: 0") {
             foreach ($l in (Get-Content (Join-Path $script:dir "$name.layout.txt") | Select-Object -Skip 1)) {
@@ -94,6 +96,34 @@ function ClientPoint([IntPtr]$h, [int]$x, [int]$y) {
     $p.X = $x; $p.Y = $y
     [W]::ClientToScreen($h, [ref]$p) | Out-Null
     return $p
+}
+
+$script:layouts = @{}
+
+# clicks a control of a BrowserSelect window by its (WinForms) name, using the positions from the
+# app's layout report (window relative, scaled to physical pixels if Windows stretches the window)
+function ClickCtl([IntPtr]$h, [string]$name, [int]$index = 0, [double]$fx = 0.5, [double]$fy = 0.5) {
+    $info = $script:layouts[[string]$h]
+    if ($info -eq $null) { throw "no layout report for window $h" }
+    $lines = Get-Content $info.File
+    $win = ($lines | Where-Object { $_ -like "#win *" } | Select-Object -First 1) -split ' '
+    $ratio = $info.W / [double]$win[1]
+    $found = New-Object System.Collections.Generic.List[object]
+    foreach ($l in $lines) { if ($l -like "#ctl $name *") { $found.Add([string[]]($l -split ' ')) } }
+    if ($found.Count -le $index) { throw "control $name not found" }
+    $sorted = [object[]]($found.ToArray())
+    [Array]::Sort($sorted, [Comparison[object]] { param($a, $b) ([int]$a[3]).CompareTo([int]$b[3]) })
+    $c = $sorted[$index]
+    if ($c[6] -ne "1") { throw "control $name is disabled" }
+    $x = $info.L + ([int]$c[2] + [int]$c[4] * $fx) * $ratio
+    $y = $info.T + ([int]$c[3] + [int]$c[5] * $fy) * $ratio
+    [W]::Click([int]$x, [int]$y)
+}
+
+function CtlEnabled([IntPtr]$h, [string]$name) {
+    $info = $script:layouts[[string]$h]
+    $line = Get-Content $info.File | Where-Object { $_ -like "#ctl $name *" } | Select-Object -First 1
+    return ($line -ne $null -and ($line -split ' ')[6] -eq "1")
 }
 
 function FindId([IntPtr]$h, [string]$id) {
@@ -154,23 +184,16 @@ function RunAll {
         [W]::SetForegroundWindow($main) | Out-Null
         Start-Sleep -Milliseconds 500
         Shot $main "$tag-1-browser-list" "Form1"
-        $side = SideButtons $main
-        if ($side.Count -lt 2) { $script:problems.Add("$script:scale/${tag}: About/Settings buttons not found"); $p.Kill(); continue }
-
-        # Settings, then Edit browser from it
-        ClickElement $side[1]
+        # Settings (2nd vertical button), then Edit browser from it
+        try { ClickCtl $main "VButton" 1 } catch { $script:problems.Add("$script:scale/${tag}: $_"); $p.Kill(); continue }
         $settings = NewWindow $main
         if ($settings -ne [IntPtr]::Zero) {
             Shot $settings "$tag-2-settings" "frm_settings"
             try {
-                $list = FindId $settings "browser_filter"
-                $item = $list.FindFirst([System.Windows.Automation.TreeScope]::Children, (New-Object System.Windows.Automation.PropertyCondition([System.Windows.Automation.AutomationElement]::ControlTypeProperty, [System.Windows.Automation.ControlType]::ListItem)))
-                $sel = $item.GetCurrentPattern([System.Windows.Automation.SelectionItemPattern]::Pattern)
-                $sel.Select()
-                Start-Sleep -Milliseconds 500
-                $btn = FindId $settings "btn_browser_edit"
-                if (-not $btn.Current.IsEnabled) { $btn = FindId $settings "btn_browser_add" }
-                ClickElement $btn
+                # select the first browser of the list (click its text, top of the list), then Edit...
+                ClickCtl $settings "browser_filter" 0 0.6 0.03
+                Start-Sleep -Milliseconds 800
+                ClickCtl $settings "btn_browser_edit"
                 $edit = NewWindow $settings
                 if ($edit -ne [IntPtr]::Zero) { Shot $edit "$tag-5-edit-browser" "frm_browser_edit"; CloseWindow $edit }
                 else { $script:problems.Add("$script:scale/${tag}: Edit browser window did not open") }
@@ -182,12 +205,12 @@ function RunAll {
         # About, then Original project info from it
         [W]::SetForegroundWindow($main) | Out-Null
         Start-Sleep -Milliseconds 500
-        ClickElement $side[0]
+        ClickCtl $main "VButton" 0
         $about = NewWindow $main
         if ($about -ne [IntPtr]::Zero) {
             Shot $about "$tag-3-about" "frm_About"
             try {
-                ClickElement (FindId $about "btn_original")
+                ClickCtl $about "btn_original"
                 $orig = NewWindow $about
                 if ($orig -ne [IntPtr]::Zero) { Shot $orig "$tag-6-original-info" "frm_about_original"; CloseWindow $orig }
                 else { $script:problems.Add("$script:scale/${tag}: Original project info window did not open") }
@@ -199,13 +222,10 @@ function RunAll {
         # ? (help) button at the bottom right
         [W]::SetForegroundWindow($main) | Out-Null
         Start-Sleep -Milliseconds 500
-        $helpButton = FindId $main "btn_help"
-        if ($helpButton -ne $null) {
-            ClickElement $helpButton
-            $help = NewWindow $main
-            if ($help -ne [IntPtr]::Zero) { Shot $help "$tag-4-help" "frm_help_main"; CloseWindow $help }
-            else { $script:problems.Add("$script:scale/${tag}: Help window did not open") }
-        } else { $script:problems.Add("$script:scale/${tag}: ? button not found") }
+        ClickCtl $main "btn_help"
+        $help = NewWindow $main
+        if ($help -ne [IntPtr]::Zero) { Shot $help "$tag-4-help" "frm_help_main"; CloseWindow $help }
+        else { $script:problems.Add("$script:scale/${tag}: Help window did not open") }
 
         if (-not $p.HasExited) { $p.Kill() }
         Start-Sleep -Seconds 1

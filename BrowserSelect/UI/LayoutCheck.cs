@@ -58,6 +58,10 @@ namespace BrowserSelect.UI
                 if (!area.Contains(form.Bounds))
                     issues.Add(string.Format("OFFSCREEN window {0} is not inside the screen working area {1}", form.Bounds, area));
                 Walk(form, Dpi(form) / 96f, lines, issues, 1);
+                // machine readable positions for the test script: name, rectangle relative to the window
+                lines.AppendLine();
+                lines.AppendFormat("#win {0} {1}", form.Width, form.Height).AppendLine();
+                AppendPositions(form, form, lines);
                 var text = new StringBuilder();
                 text.AppendLine("issues: " + issues.Count);
                 foreach (var issue in issues)
@@ -118,6 +122,20 @@ namespace BrowserSelect.UI
                     issues.Add(string.Format("CLIP {0} \"{1}\": {2}", Id(c), Short(c.Text), clip));
                 if (c.HasChildren && !(c is DataGridView) && !(c is ComboBox) && !(c is NumericUpDown))
                     Walk(c, scale, lines, issues, depth + 1);
+            }
+        }
+
+        private static void AppendPositions(Form form, Control parent, StringBuilder lines)
+        {
+            foreach (Control c in parent.Controls)
+            {
+                if (!c.Visible)
+                    continue;
+                var r = parent.RectangleToScreen(c.Bounds);
+                lines.AppendFormat("#ctl {0} {1} {2} {3} {4} {5}", Id(c), r.X - form.Left, r.Y - form.Top, r.Width, r.Height,
+                    c.Enabled ? 1 : 0).AppendLine();
+                if (c.HasChildren && !(c is DataGridView) && !(c is ComboBox) && !(c is NumericUpDown))
+                    AppendPositions(form, c, lines);
             }
         }
 
