@@ -278,7 +278,8 @@ namespace BrowserSelect.UI
 
         /// <summary>
         /// makes a fixed-size label taller if its text needs more lines than it has room for and the
-        /// space below it (up to the next control or the bottom of its parent) is free
+        /// space below it (up to the next control or the bottom of its parent) is free; if that is not
+        /// enough, it also moves up into the free space above it
         /// </summary>
         private static bool GrowLabel(Label label, Font font)
         {
@@ -289,17 +290,24 @@ namespace BrowserSelect.UI
             if (needed <= label.Height)
                 return true;
             var limit = parent.ClientSize.Height - (parent is GroupBox ? Px(3) : 0);
+            var top = parent is GroupBox ? Px(14) : 0;
             foreach (Control other in parent.Controls)
             {
                 if (other == label || !other.Visible)
                     continue;
                 var b = other.Bounds;
-                if (b.Top >= label.Top + 1 && b.Right > label.Left && b.Left < label.Right)
+                if (b.Right <= label.Left || b.Left >= label.Right)
+                    continue;
+                if (b.Top >= label.Top + 1)
                     limit = Math.Min(limit, b.Top - 1);
+                else if (b.Bottom <= label.Top)
+                    top = Math.Max(top, b.Bottom + 1);
             }
-            if (label.Top + needed > limit)
+            if (limit - top < needed)
                 return false;
-            label.Height = needed;
+            // grow downwards, and move up a little if the space below is not enough
+            var newTop = Math.Min(label.Top, limit - needed);
+            label.SetBounds(label.Left, newTop, label.Width, needed);
             return true;
         }
 
@@ -317,18 +325,12 @@ namespace BrowserSelect.UI
         }
 
         /// <summary>
-        /// the window got its final size (WinForms scales it to the display scale before Load): fit the
-        /// fonts again for the real control sizes, then keep the window on the screen
+        /// the window got its final size (WinForms scales it to the display scale before Load): keep it on
+        /// the screen
         /// </summary>
         private static void Form_Load(object sender, EventArgs e)
         {
-            var form = (Form)sender;
-            try
-            {
-                Refit(form);
-            }
-            catch (Exception) { }
-            FitToScreen(form);
+            FitToScreen((Form)sender);
         }
 
         private static void Refit(Control parent)
@@ -383,9 +385,19 @@ namespace BrowserSelect.UI
             catch (Exception) { }
         }
 
+        /// <summary>
+        /// the window is shown with its final (DPI scaled) layout: fit the fixed-size texts again for the
+        /// real control sizes (labels may use free space around them, which needs the controls visible)
+        /// </summary>
         private static void Form_Shown(object sender, EventArgs e)
         {
-            KeepOnScreen((Form)sender);
+            var form = (Form)sender;
+            try
+            {
+                Refit(form);
+            }
+            catch (Exception) { }
+            KeepOnScreen(form);
         }
 
         private static bool Fits(Control c, Font font)

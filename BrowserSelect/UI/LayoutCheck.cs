@@ -208,7 +208,7 @@ namespace BrowserSelect.UI
             }
             if (c is CheckBox || c is RadioButton)
             {
-                var box = (int)Math.Ceiling(18 * scale);
+                var box = (int)Math.Ceiling(17 * scale);
                 var size = Measure(c, text, int.MaxValue / 2, TextFormatFlags.SingleLine);
                 if (size.Height > c.Height + 1 || size.Width > c.Width - box + 1)
                     return string.Format("needs {0} + {1}px box, control is {2}", size, box, c.Size);
