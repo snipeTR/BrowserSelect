@@ -2,7 +2,7 @@
 
 Browser Select is a utility to dynamically select the browser you want instead of just having one default for all links. Similar to the prompt in android to choose a browser when a link in a non-browser app is clicked/touched. It may not be useful for everyone but it helps when you use multiple browsers for different things (e.g. one with proxy and one without) and open many links from other applications (e.g. Messengers).
 
-This is an actively maintained fork of [zumoshi/BrowserSelect](https://github.com/zumoshi/BrowserSelect) with Windows **64-bit** installer builds via GitHub Actions, maintained by [snipeTR](https://github.com/snipeTR). User interface in 12 languages (Settings → Language): English, Turkish, Russian, Ukrainian, German, French, Spanish, Portuguese (Brazil), Italian, Polish, Simplified Chinese and Japanese.
+This is an actively maintained fork of [zumoshi/BrowserSelect](https://github.com/zumoshi/BrowserSelect) and [cihanuygun/BrowserSelect](https://github.com/cihanuygun/BrowserSelect) with Windows **64-bit** installer builds via GitHub Actions, maintained by [snipeTR](https://github.com/snipeTR). User interface in 12 languages (Settings → Language): English, Turkish, Russian, Ukrainian, German, French, Spanish, Portuguese (Brazil), Italian, Polish, Simplified Chinese and Japanese.
 
 ![Browser picker (light theme)](screenshots/picker-light.png)
 
