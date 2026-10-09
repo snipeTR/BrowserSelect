@@ -7,6 +7,23 @@ English is the default and the fallback language. Shipped translations:
 |----------|------|
 | English (default) | `Strings.resx` |
 | Türkçe (TR) | `Strings.tr.resx` |
+| Русский (RU) | `Strings.ru.resx` |
+| Deutsch (DE) | `Strings.de.resx` |
+| Français (FR) | `Strings.fr.resx` |
+| Español (ES) | `Strings.es.resx` |
+| Português (Brasil) (PT-BR) | `Strings.pt-BR.resx` |
+| Italiano (IT) | `Strings.it.resx` |
+| Polski (PL) | `Strings.pl.resx` |
+| Українська (UK) | `Strings.uk.resx` |
+| 简体中文 (ZH-HANS) | `Strings.zh-Hans.resx` |
+| 日本語 (JA) | `Strings.ja.resx` |
+
+Right-to-left languages (Arabic, Persian, ...) are not supported by the application UI (the installer has them).
+Japanese and Chinese use their own Windows UI font, chosen in one place, `UI/Theme.cs` (`Theme.FontName`):
+ja: Yu Gothic UI → Meiryo UI; zh-Hans/zh-CN/zh-SG: Microsoft YaHei UI → Microsoft YaHei; zh-Hant/zh-TW/zh-HK/zh-MO:
+Microsoft JhengHei UI → Microsoft JhengHei (ready, no translation yet); Segoe UI if none is installed and for all other
+languages. No font files are shipped. Japanese/Chinese text is never smaller than 9pt and never italic.
+Names shown in the language drop-down are fixed in `LanguageOption.NativeNames` (`L10n.cs`).
 
 The Settings, browser Add/Edit and About windows set their texts in an `ApplyTexts()` method called right
 after `InitializeComponent()`; the English texts in the `*.Designer.cs` files are only design-time defaults.

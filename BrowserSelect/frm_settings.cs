@@ -26,6 +26,31 @@ namespace BrowserSelect
             // Windows 10/11 look (fonts, colors, title bar); before the texts so labels are measured with the final font
             Theme.Apply(this);
             ApplyTexts();
+            // translated labels in front of a drop-down can be wider than the English ones
+            KeepRightOf(lbl_sort, cmb_sort);
+            KeepRightOf(lbl_language, cmb_language);
+            KeepRightOf(lbl_theme, cmb_theme);
+        }
+
+        /// <summary>
+        /// an auto-sized label in front of a field: if the (translated) label grows into the field, the field
+        /// starts right after the label and gets narrower (its right edge stays where it is)
+        /// </summary>
+        private static void KeepRightOf(Label label, Control field)
+        {
+            EventHandler fit = (s, e) =>
+            {
+                try
+                {
+                    var left = label.Right + 3;
+                    if (label.Visible && left > field.Left && field.Right - left >= 40)
+                        field.SetBounds(left, field.Top, field.Right - left, field.Height);
+                }
+                catch (Exception) { }
+            };
+            label.SizeChanged += fit;
+            label.LocationChanged += fit;
+            fit(label, EventArgs.Empty);
         }
 
         /// <summary>

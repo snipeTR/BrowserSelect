@@ -1,0 +1,661 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Language_Label" xml:space="preserve">
+    <value>语言：</value>
+  </data>
+  <data name="Language_Tooltip" xml:space="preserve">
+    <value>界面语言。添加到 BrowserSelect 的所有语言都会在此列出。</value>
+  </data>
+  <data name="Language_RestartRequired" xml:space="preserve">
+    <value>新语言将在下次启动 BrowserSelect 时生效。</value>
+  </data>
+  <data name="Language_RestartTitle" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Theme_Label" xml:space="preserve">
+    <value>主题：</value>
+  </data>
+  <data name="Theme_Tooltip" xml:space="preserve">
+    <value>BrowserSelect 窗口的外观：浅色、深色或跟随 Windows（即在 Windows 设置 &gt; 个性化 &gt; 颜色中选择的应用模式）。立即生效。</value>
+  </data>
+  <data name="Theme_Light" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="Theme_Dark" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="Theme_System" xml:space="preserve">
+    <value>跟随 Windows</value>
+  </data>
+  <data name="Theme_Mica" xml:space="preserve">
+    <value>Mica</value>
+  </data>
+  <data name="Theme_MicaTooltip" xml:space="preserve">
+    <value>仅限 Windows 11（22H2 或更高版本）：在 BrowserSelect 窗口的标题栏上使用 Mica 效果。在 Windows 10 上无效。</value>
+  </data>
+  <data name="Settings_UnsavedChanges" xml:space="preserve">
+    <value>有未保存的更改，确定不保存就关闭吗？</value>
+  </data>
+  <data name="Settings_UnsavedChangesTitle" xml:space="preserve">
+    <value>未保存的更改</value>
+  </data>
+  <data name="Common_OK" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Common_UpdateAvailable" xml:space="preserve">
+    <value>有新的更新可用！
+当前版本：{1}
+最新版本：{0}
+要更新，请从以下地址下载并安装新版本：
+{2}</value>
+  </data>
+  <data name="Update_AskDownload" xml:space="preserve">
+    <value>是否立即下载并运行新版本（{0}）？
+
+安装程序将从 GitHub 下载并启动。如果 BrowserSelect 仍在运行，安装程序会请求允许关闭它。</value>
+  </data>
+  <data name="Update_DownloadTitle" xml:space="preserve">
+    <value>BrowserSelect - 正在下载更新</value>
+  </data>
+  <data name="Update_Finding" xml:space="preserve">
+    <value>正在查找最新版本的安装程序...</value>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>正在下载 {0}...</value>
+  </data>
+  <data name="Update_Starting" xml:space="preserve">
+    <value>正在启动安装程序...</value>
+  </data>
+  <data name="Update_ErrorNetwork" xml:space="preserve">
+    <value>无法下载更新（网络错误：{0}）。</value>
+  </data>
+  <data name="Update_ErrorNoAsset" xml:space="preserve">
+    <value>最新版本中没有安装程序（.exe 文件）。</value>
+  </data>
+  <data name="Update_ErrorIncomplete" xml:space="preserve">
+    <value>下载的安装程序不完整或为空。</value>
+  </data>
+  <data name="Update_ErrorStart" xml:space="preserve">
+    <value>无法启动下载的安装程序（{0}）。</value>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>{0}
+
+是否打开发布页面并手动下载新版本？
+{1}</value>
+  </data>
+  <data name="Main_About" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="Main_Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Main_PatternError" xml:space="preserve">
+    <value>根据网址生成模式时出错。请在错误报告中附上以下网址：
+{0}</value>
+  </data>
+  <data name="Settings_Title" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Settings_BrowsersGroup" xml:space="preserve">
+    <value>浏览器</value>
+  </data>
+  <data name="Settings_BrowserAdd" xml:space="preserve">
+    <value>添加...</value>
+  </data>
+  <data name="Settings_BrowserAddTooltip" xml:space="preserve">
+    <value>通过选择可执行文件来添加便携版浏览器（或任意程序）</value>
+  </data>
+  <data name="Settings_BrowserEdit" xml:space="preserve">
+    <value>编辑...</value>
+  </data>
+  <data name="Settings_BrowserEditTooltip" xml:space="preserve">
+    <value>更改所选浏览器的图标、快捷键和参数</value>
+  </data>
+  <data name="Settings_BrowserRemove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="Settings_BrowserRemoveTooltip" xml:space="preserve">
+    <value>移除手动添加的浏览器（取消勾选可隐藏浏览器）</value>
+  </data>
+  <data name="Settings_SortLabel" xml:space="preserve">
+    <value>排序：</value>
+  </data>
+  <data name="Settings_SortTooltip" xml:space="preserve">
+    <value>浏览器在选择窗口中的顺序</value>
+  </data>
+  <data name="Settings_BrowserUpTooltip" xml:space="preserve">
+    <value>上移所选浏览器（Manual 排序）</value>
+  </data>
+  <data name="Settings_BrowserDownTooltip" xml:space="preserve">
+    <value>下移所选浏览器（Manual 排序）</value>
+  </data>
+  <data name="Settings_DefaultGroup" xml:space="preserve">
+    <value>默认浏览器</value>
+  </data>
+  <data name="Settings_DefaultInfo" xml:space="preserve">
+    <value>必须将 BrowserSelect 设为默认浏览器才能正常工作。它也可以打开 .html 和 .url 文件。</value>
+  </data>
+  <data name="Settings_SetDefault" xml:space="preserve">
+    <value>设为默认浏览器</value>
+  </data>
+  <data name="Settings_FileTypes" xml:space="preserve">
+    <value>文件类型</value>
+  </data>
+  <data name="Settings_FileTypesTooltip" xml:space="preserve">
+    <value>将 BrowserSelect 注册为 .htm/.html/.shtml/.xhtml/.url 文件的打开程序（添加到“打开方式”和“默认应用”中）</value>
+  </data>
+  <data name="Settings_FileTypesTitle" xml:space="preserve">
+    <value>文件类型</value>
+  </data>
+  <data name="Settings_FileTypesError" xml:space="preserve">
+    <value>无法注册文件类型。
+
+{0}</value>
+  </data>
+  <data name="Settings_FileTypesDone" xml:space="preserve">
+    <value>BrowserSelect 现已注册为 {0} 文件的打开程序，并出现在其“打开方式”菜单中。
+
+若要默认用 BrowserSelect 打开这些文件，请在接下来打开的 Windows“默认应用”窗口中为它们选择 BrowserSelect。</value>
+  </data>
+  <data name="Settings_DefaultAppsError" xml:space="preserve">
+    <value>Windows 无法打开“默认应用”。
+
+{0}
+
+关联界面错误：{1}</value>
+  </data>
+  <data name="Settings_DefaultAppsErrorTitle" xml:space="preserve">
+    <value>无法更改默认浏览器</value>
+  </data>
+  <data name="Settings_OptionsGroup" xml:space="preserve">
+    <value>选项</value>
+  </data>
+  <data name="Settings_RunningOnly" xml:space="preserve">
+    <value>仅显示正在运行的浏览器</value>
+  </data>
+  <data name="Settings_RunningOnlyTooltip" xml:space="preserve">
+    <value>只列出当前正在运行的浏览器（如果都未运行，则显示所有浏览器）</value>
+  </data>
+  <data name="Settings_AltIgnore" xml:space="preserve">
+    <value>按住 Alt 点击链接可跳过规则</value>
+  </data>
+  <data name="Settings_AltIgnoreTooltip" xml:space="preserve">
+    <value>点击链接时如果按住 Alt 键，将忽略自动选择规则并显示浏览器列表。</value>
+  </data>
+  <data name="Settings_Export" xml:space="preserve">
+    <value>导出...</value>
+  </data>
+  <data name="Settings_ExportTooltip" xml:space="preserve">
+    <value>将规则和设置保存到文件</value>
+  </data>
+  <data name="Settings_Import" xml:space="preserve">
+    <value>导入...</value>
+  </data>
+  <data name="Settings_ImportTooltip" xml:space="preserve">
+    <value>从文件加载规则和设置（替换当前的规则和设置）</value>
+  </data>
+  <data name="Settings_UpdateGroup" xml:space="preserve">
+    <value>更新检查</value>
+  </data>
+  <data name="Settings_UpdateEnable" xml:space="preserve">
+    <value>启用</value>
+  </data>
+  <data name="Settings_UpdateCheckNow" xml:space="preserve">
+    <value>立即检查</value>
+  </data>
+  <data name="Settings_UpToDate" xml:space="preserve">
+    <value>您使用的是最新版本。</value>
+  </data>
+  <data name="Settings_UpdateFailed" xml:space="preserve">
+    <value>无法检查更新。
+请确认已连接到互联网。</value>
+  </data>
+  <data name="Settings_FeedbackInfo" xml:space="preserve">
+    <value>有想法或发现错误？请在项目的 GitHub 页面上提交 issue。</value>
+  </data>
+  <data name="Settings_RulesGroup" xml:space="preserve">
+    <value>自动选择规则</value>
+  </data>
+  <data name="Settings_RulesInfo" xml:space="preserve">
+    <value>在此部分可以添加规则，BrowserSelect 会根据这些规则自动选择浏览器，而不是显示列表让您手动选择。更多信息和示例请参阅项目的 GitHub 页面。</value>
+  </data>
+  <data name="Settings_RulesInfoLink" xml:space="preserve">
+    <value>项目的 GitHub 页面</value>
+  </data>
+  <data name="Settings_ColMatch" xml:space="preserve">
+    <value>匹配</value>
+  </data>
+  <data name="Settings_ColPattern" xml:space="preserve">
+    <value>模式</value>
+  </data>
+  <data name="Settings_ColBrowser" xml:space="preserve">
+    <value>浏览器</value>
+  </data>
+  <data name="Settings_ColPrivate" xml:space="preserve">
+    <value>隐私</value>
+  </data>
+  <data name="Settings_ColArguments" xml:space="preserve">
+    <value>参数</value>
+  </data>
+  <data name="Settings_Help" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="Settings_MoveUp" xml:space="preserve">
+    <value>上移</value>
+  </data>
+  <data name="Settings_MoveDown" xml:space="preserve">
+    <value>下移</value>
+  </data>
+  <data name="Settings_Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Settings_Apply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="Settings_Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Settings_LinkOpenedFrom" xml:space="preserve">
+    <value>链接来源：{0}</value>
+  </data>
+  <data name="Settings_InvalidRule" xml:space="preserve">
+    <value>无效规则：{0}</value>
+  </data>
+  <data name="Settings_RemoveBrowserConfirm" xml:space="preserve">
+    <value>要从列表中移除“{0}”吗？</value>
+  </data>
+  <data name="Settings_RemoveBrowserTitle" xml:space="preserve">
+    <value>移除浏览器</value>
+  </data>
+  <data name="Settings_SettingsFileFilter" xml:space="preserve">
+    <value>BrowserSelect 设置 (*.json)|*.json|所有文件 (*.*)|*.*</value>
+  </data>
+  <data name="Settings_ExportTitle" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="Settings_ExportDialogTitle" xml:space="preserve">
+    <value>导出 BrowserSelect 设置</value>
+  </data>
+  <data name="Settings_ExportUnsaved" xml:space="preserve">
+    <value>有未应用的规则更改。导出前先应用吗？
+（选“否”将导出上次应用的规则）</value>
+  </data>
+  <data name="Settings_ExportDone" xml:space="preserve">
+    <value>规则和设置已导出到
+{0}</value>
+  </data>
+  <data name="Settings_ExportFailed" xml:space="preserve">
+    <value>导出失败：
+{0}</value>
+  </data>
+  <data name="Settings_ImportTitle" xml:space="preserve">
+    <value>导入</value>
+  </data>
+  <data name="Settings_ImportDialogTitle" xml:space="preserve">
+    <value>导入 BrowserSelect 设置</value>
+  </data>
+  <data name="Settings_ImportConfirm" xml:space="preserve">
+    <value>导入会用文件中的内容替换您当前的规则、浏览器列表自定义和选项。是否继续？</value>
+  </data>
+  <data name="Settings_ImportDone" xml:space="preserve">
+    <value>设置已导入（{0} 条规则）。</value>
+  </data>
+  <data name="Settings_ImportFailed" xml:space="preserve">
+    <value>导入失败：
+{0}</value>
+  </data>
+  <data name="BrowserEdit_AddTitle" xml:space="preserve">
+    <value>添加浏览器</value>
+  </data>
+  <data name="BrowserEdit_EditTitle" xml:space="preserve">
+    <value>编辑浏览器 - {0}</value>
+  </data>
+  <data name="BrowserEdit_Name" xml:space="preserve">
+    <value>名称：</value>
+  </data>
+  <data name="BrowserEdit_Executable" xml:space="preserve">
+    <value>可执行文件：</value>
+  </data>
+  <data name="BrowserEdit_Browse" xml:space="preserve">
+    <value>浏览...</value>
+  </data>
+  <data name="BrowserEdit_Arguments" xml:space="preserve">
+    <value>参数：</value>
+  </data>
+  <data name="BrowserEdit_ArgumentsTooltip" xml:space="preserve">
+    <value>始终传递给此浏览器的命令行参数（例如 --profile-directory="Profile 1" 或 -P work）</value>
+  </data>
+  <data name="BrowserEdit_ExtraArgumentsTooltip" xml:space="preserve">
+    <value>始终传递给此浏览器的额外命令行参数</value>
+  </data>
+  <data name="BrowserEdit_Shortcut" xml:space="preserve">
+    <value>快捷键：</value>
+  </data>
+  <data name="BrowserEdit_ShortcutTooltip" xml:space="preserve">
+    <value>在选择窗口中打开此浏览器的按键（每个字符都是一个快捷键）</value>
+  </data>
+  <data name="BrowserEdit_ShortcutHint" xml:space="preserve">
+    <value>例如 w（留空则自动分配）</value>
+  </data>
+  <data name="BrowserEdit_Icon" xml:space="preserve">
+    <value>图标：</value>
+  </data>
+  <data name="BrowserEdit_ChangeIcon" xml:space="preserve">
+    <value>更改...</value>
+  </data>
+  <data name="BrowserEdit_DefaultIcon" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="BrowserEdit_SelectExecutable" xml:space="preserve">
+    <value>选择浏览器的可执行文件</value>
+  </data>
+  <data name="BrowserEdit_ProgramsFilter" xml:space="preserve">
+    <value>程序 (*.exe)|*.exe|所有文件 (*.*)|*.*</value>
+  </data>
+  <data name="BrowserEdit_SelectIcon" xml:space="preserve">
+    <value>选择图标</value>
+  </data>
+  <data name="BrowserEdit_IconFilter" xml:space="preserve">
+    <value>图标和图像|*.ico;*.exe;*.dll;*.png;*.jpg;*.jpeg;*.bmp;*.gif|所有文件 (*.*)|*.*</value>
+  </data>
+  <data name="BrowserEdit_IconError" xml:space="preserve">
+    <value>无法从此文件加载图标。
+
+{0}</value>
+  </data>
+  <data name="BrowserEdit_IconErrorTitle" xml:space="preserve">
+    <value>自定义图标</value>
+  </data>
+  <data name="BrowserEdit_NameRequired" xml:space="preserve">
+    <value>请输入浏览器的名称。</value>
+  </data>
+  <data name="BrowserEdit_NameReserved" xml:space="preserve">
+    <value>此名称已被保留，请另选一个。</value>
+  </data>
+  <data name="BrowserEdit_NameExists" xml:space="preserve">
+    <value>已存在名为“{0}”的浏览器，请另选一个名称。</value>
+  </data>
+  <data name="BrowserEdit_ExecutableRequired" xml:space="preserve">
+    <value>请选择一个存在的可执行文件（使用“浏览...”）。</value>
+  </data>
+  <data name="BrowserEdit_AlreadyListed" xml:space="preserve">
+    <value>此浏览器（相同的可执行文件和参数）已在列表中。</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>Browser Select：关于</value>
+  </data>
+  <data name="About_CodedBy" xml:space="preserve">
+    <value>开发者：Bor691</value>
+  </data>
+  <data name="About_Contact" xml:space="preserve">
+    <value>联系方式：</value>
+  </data>
+  <data name="About_GitHub" xml:space="preserve">
+    <value>GitHub：</value>
+  </data>
+  <data name="About_ForkBy" xml:space="preserve">
+    <value>此分支的维护者：snipeTR</value>
+  </data>
+  <data name="About_Description" xml:space="preserve">
+    <value>Browser Select 是一个实用工具，让您可以随时选择想用的浏览器，而不是所有链接都只用一个默认浏览器打开。它类似于 Android 中在非浏览器应用里点击或轻触链接时弹出的浏览器选择提示。它未必对每个人都有用，但如果您为不同用途使用多个浏览器（例如一个使用代理，一个不使用），并且经常从其他应用（例如聊天软件）打开链接，它会非常有帮助。
+
+这是一个采用 GPL v2 许可证的开源应用。欢迎在 GitHub 上报告错误或建议新功能。</value>
+  </data>
+  <data name="About_DonateText" xml:space="preserve">
+    <value>如果您觉得这个程序有用并想感谢开发者，可以通过比特币进行捐赠。</value>
+  </data>
+  <data name="About_DonateFork" xml:space="preserve">
+    <value>snipeTR（此分支）- Bitcoin：</value>
+  </data>
+  <data name="About_DonateOriginal" xml:space="preserve">
+    <value>Bor691（原作者）- Bitcoin：</value>
+  </data>
+  <data name="About_CopyAddress" xml:space="preserve">
+    <value>复制地址</value>
+  </data>
+  <data name="About_Copied" xml:space="preserve">
+    <value>已复制！</value>
+  </data>
+  <data name="Main_Always" xml:space="preserve">
+    <value>始终</value>
+  </data>
+  <data name="Main_OpenPrivate" xml:space="preserve">
+    <value>在隐私窗口中打开</value>
+  </data>
+  <data name="Rule_NoBrowser" xml:space="preserve">
+    <value>您忘了为规则“{0}”选择浏览器。</value>
+  </data>
+  <data name="Rule_EmptyPattern" xml:space="preserve">
+    <value>您的某条规则的模式为空。详情请参阅帮助。</value>
+  </data>
+  <data name="Rule_InvalidRegex" xml:space="preserve">
+    <value>“{0}”不是有效的正则表达式。</value>
+  </data>
+  <data name="Settings_RulesHelpFile" xml:space="preserve">
+    <value>filters.md</value>
+  </data>
+  <data name="About_OriginalButton" xml:space="preserve">
+    <value>原始项目信息...</value>
+  </data>
+  <data name="AboutOriginal_Title" xml:space="preserve">
+    <value>BrowserSelect：原始项目</value>
+  </data>
+  <data name="AboutOriginal_Header" xml:space="preserve">
+    <value>原始项目</value>
+  </data>
+  <data name="AboutOriginal_Intro" xml:space="preserve">
+    <value>此版本的 BrowserSelect 是 Bor691（GitHub 上的 zumoshi）创建的原始 BrowserSelect 项目的一个分支。原始项目是以 GPL v2 许可证发布的开源软件。衷心感谢原作者，此分支正是基于其工作构建的。</value>
+  </data>
+  <data name="HelpMain_Title" xml:space="preserve">
+    <value>BrowserSelect - 帮助</value>
+  </data>
+  <data name="HelpRules_Title" xml:space="preserve">
+    <value>BrowserSelect - 自动选择规则帮助</value>
+  </data>
+  <data name="HelpMain_Text" xml:space="preserve">
+    <value>每次在浏览器以外的地方（电子邮件客户端、聊天软件、PDF 文件等）点击链接时，BrowserSelect 都能让您选择浏览器，而不是总用同一个默认浏览器打开。为此，必须将 BrowserSelect 设为默认浏览器：设置 &gt; 默认浏览器 &gt; 设为默认浏览器。
+
+浏览器列表
+要打开的链接显示在窗口标题中。您可以：
+1. 按 Esc 或点击“x”，完全不打开该链接
+   （例如误点了链接，或某个程序在安装后打开网页时）。
+2. 在某个浏览器中打开链接：
+   - 点击浏览器的图标，或
+   - 按图标下方括号中显示的按键之一：按位置的 1-9、浏览器名称中的字母，或在 设置 &gt; 浏览器 &gt; 编辑... 中设置的自定义快捷键。
+   - 点击（或按键）时按住 Shift，可在隐私/无痕窗口中打开链接；右键点击图标并选择“在隐私窗口中打开”效果相同。
+3. 点击浏览器下方的“始终”，以后此网站的链接都会在该浏览器中打开。这会在 设置 &gt; 自动选择规则 中创建一条规则；要撤销，请在那里选中该规则，点击“删除”，然后点击“应用”。
+
+自动选择规则
+在 设置 &gt; 自动选择规则 中，BrowserSelect 可以根据域名、完整网址、路径、关键字、文件扩展名、点击链接的应用程序或正则表达式自动选择浏览器。规则还可以在隐私窗口中打开链接、向浏览器传递额外参数、照常显示浏览器列表，或忽略该链接。详情请点击该部分中的“帮助”，示例请点击规则列表上方的链接。
+在其他应用程序中点击链接时按住 Alt，可跳过所有规则并手动选择浏览器（可在 设置 &gt; 选项 中关闭）。
+
+设置
+- 浏览器：“添加...”可添加便携版浏览器或任意程序；“编辑...”可更改浏览器的名称、图标、快捷键和参数；“移除”可删除手动添加的浏览器；取消勾选可隐藏浏览器；用“排序”更改顺序（Manual 使用箭头按钮）。
+- 刷新：BrowserSelect 首次运行时会缓存已安装的浏览器和配置文件列表。安装或删除浏览器或配置文件后，请点击浏览器列表旁边的“刷新”。
+- 默认浏览器：设为默认浏览器；“文件类型”将 BrowserSelect 注册为 .html 和 .url 文件的打开程序。
+- 选项：仅显示正在运行的浏览器、按住 Alt 跳过规则、避开全屏窗口（见下文），以及将规则和设置“导出...”到 .json 文件或从中“导入...”。
+- 更新检查：在 GitHub 上检查 snipeTR/BrowserSelect 的发布版本。有新版本时，此帮助按钮会变成更新按钮；显示更新消息后，BrowserSelect 会提议下载并运行新的安装程序（如果 BrowserSelect 仍在运行，安装程序会要求关闭它）。
+- 语言（左下角）：界面语言；在下次启动 BrowserSelect 时生效。
+- 主题（左下角，语言下方）：浅色、深色或跟随 Windows（Windows 应用模式为深色时使用深色）。新主题立即生效。Mica：仅限 Windows 11（22H2 或更高版本），为标题栏添加 Mica 效果。在 Windows 11 上，窗口还会显示圆角。
+- 显示缩放（100-200 %）：窗口会按您登录 Windows 时的缩放比例清晰绘制。如果某个窗口（例如在 1920x1080 屏幕上以 175 % 缩放显示的“设置”）比屏幕大，窗口会显示滚动条，而不会让控件藏到任务栏下面。
+
+全屏窗口和多台显示器
+浏览器会在您上次使用的窗口中打开新链接。如果该窗口正在全屏播放视频（例如在第二台显示器上），链接会打断视频。启用 设置 &gt; 选项 &gt;“避开全屏窗口”（默认开启）后，BrowserSelect 会在打开链接前，把该浏览器最近使用的非全屏窗口切换到前台，链接就会在那里打开（只有在没有其他窗口时，才会使用并还原最小化的窗口）。
+如果浏览器的所有窗口都是全屏，则由“如果所有窗口都是全屏”决定：“主显示器上的窗口”（默认）使用主显示器上的浏览器窗口（Windows 设置 &gt; 显示 &gt;“设为主显示器”）；“上次使用的窗口”则交由浏览器决定。
+如果浏览器未运行、链接在隐私窗口中打开，或者浏览器/规则参数会打开新窗口（--new-window、--incognito、-private-window、--app=...、--kiosk 等），则不做任何更改。只有一台显示器时，逻辑相同。关闭此选项即可始终交由浏览器决定。
+注意：最大化的窗口不算全屏（即使任务栏自动隐藏也是如此）；只有真正的全屏（F11、全屏视频）才算。同一浏览器（相同 .exe）不同配置文件的窗口被视为同一个浏览器。极少数情况下，Windows 不允许将窗口切换到前台，此时窗口只会在任务栏中闪烁。
+
+如果您主要使用一个浏览器，但希望某些网站在另一个浏览器中打开（例如所有网站都用 Firefox，但公司网站用 IE），请为主浏览器添加一条“*”规则，并为其他网站添加单独的规则。
+
+您随时可以从“开始”菜单打开 BrowserSelect 来更改设置。</value>
+  </data>
+  <data name="HelpRules_Text" xml:space="preserve">
+    <value>每条规则有五列：
+
+匹配：模式与链接的哪一部分进行比较：
+    - Domain：主机名，例如 google.com、*.google.com、website.* 或 *（匹配所有）
+    - URL：带 * 和 ? 通配符的完整链接，例如 github.com/myorg/* 或 https://*/login*
+    - Path：链接的路径，例如 /watch* 或 /docs/*
+    - Keyword：以逗号分隔的词语，链接必须包含其中之一，例如 zoom, meet
+    - Extension：链接或所打开文件的扩展名，例如 pdf, html
+    - Source App：点击链接的应用程序，例如 outlook.exe, slack, teams*
+    - Regex：与完整链接进行匹配的 .NET 正则表达式
+
+模式：与链接进行比较的文本（参见“匹配”）。比较时不区分大小写。
+
+浏览器：模式匹配时的操作：用于打开链接的浏览器，“display BrowserSelect”表示始终显示浏览器列表，“ignore URL (do nothing)”表示完全不打开链接。
+
+隐私：在隐私/无痕窗口中打开链接。
+参数：传递给浏览器的额外命令行参数（例如 --incognito --disable-web-security）。隐私规则和会打开新窗口的参数（--new-window、--incognito 等）会跳过“避开全屏窗口”（设置 &gt; 选项），因为链接无论如何都会在新窗口中打开。
+
+先检查精确模式，再检查通配符模式，最后检查 *；优先级相同的规则按从上到下的顺序检查（上移 / 下移）。第一条匹配的规则生效；如果没有规则匹配，则显示浏览器列表。
+
+要删除规则，请选中它并点击“删除”（或按 Del 键）。点击“应用”保存更改。
+窗口底部的“链接来源”显示在 Source App 规则中应使用的应用程序。
+
+注意：您可以从“开始”菜单手动打开 BrowserSelect 来更改规则。点击链接时按住 Alt 可跳过规则并手动选择。
+更多示例：规则列表上方的链接。</value>
+  </data>
+  <data name="Settings_AvoidFullscreen" xml:space="preserve">
+    <value>避开全屏窗口</value>
+  </data>
+  <data name="Settings_AvoidFullscreenTooltip" xml:space="preserve">
+    <value>当浏览器有多个窗口时，在其最近使用的非全屏窗口中打开链接（例如，不在另一台显示器上正在全屏播放视频的窗口中打开）。关闭：由浏览器决定（其上次使用的窗口）。</value>
+  </data>
+  <data name="Settings_FullscreenFallback" xml:space="preserve">
+    <value>如果所有窗口都是全屏：</value>
+  </data>
+  <data name="Settings_FullscreenFallbackTooltip" xml:space="preserve">
+    <value>浏览器的所有窗口都是全屏时的处理方式：使用主显示器上的窗口，或交由浏览器决定（其上次使用的窗口）。</value>
+  </data>
+  <data name="Settings_FallbackPrimary" xml:space="preserve">
+    <value>主显示器上的窗口</value>
+  </data>
+  <data name="Settings_FallbackLastUsed" xml:space="preserve">
+    <value>上次使用的窗口</value>
+  </data>
+</root>

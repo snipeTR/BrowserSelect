@@ -1,0 +1,661 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Language_Label" xml:space="preserve">
+    <value>Lingua:</value>
+  </data>
+  <data name="Language_Tooltip" xml:space="preserve">
+    <value>Lingua dell'interfaccia. Qui sono elencate tutte le lingue aggiunte a BrowserSelect.</value>
+  </data>
+  <data name="Language_RestartRequired" xml:space="preserve">
+    <value>La nuova lingua verrà usata al prossimo avvio di BrowserSelect.</value>
+  </data>
+  <data name="Language_RestartTitle" xml:space="preserve">
+    <value>Lingua</value>
+  </data>
+  <data name="Theme_Label" xml:space="preserve">
+    <value>Tema:</value>
+  </data>
+  <data name="Theme_Tooltip" xml:space="preserve">
+    <value>Aspetto delle finestre di BrowserSelect: Chiaro, Scuro o Come Windows (la modalità app scelta in Impostazioni di Windows &gt; Personalizzazione &gt; Colori). Applicato subito.</value>
+  </data>
+  <data name="Theme_Light" xml:space="preserve">
+    <value>Chiaro</value>
+  </data>
+  <data name="Theme_Dark" xml:space="preserve">
+    <value>Scuro</value>
+  </data>
+  <data name="Theme_System" xml:space="preserve">
+    <value>Come Windows</value>
+  </data>
+  <data name="Theme_Mica" xml:space="preserve">
+    <value>Mica</value>
+  </data>
+  <data name="Theme_MicaTooltip" xml:space="preserve">
+    <value>Solo Windows 11 (22H2 o successivo): effetto Mica sulla barra del titolo delle finestre di BrowserSelect. Nessun effetto su Windows 10.</value>
+  </data>
+  <data name="Settings_UnsavedChanges" xml:space="preserve">
+    <value>Ci sono modifiche non salvate. Chiudere davvero senza salvare?</value>
+  </data>
+  <data name="Settings_UnsavedChangesTitle" xml:space="preserve">
+    <value>Modifiche non salvate</value>
+  </data>
+  <data name="Common_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Chiudi</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="Common_UpdateAvailable" xml:space="preserve">
+    <value>Nuovo aggiornamento disponibile!
+Versione attuale: {1}
+Ultima versione: {0}
+Per aggiornare, scarica e installa la nuova versione da:
+{2}</value>
+  </data>
+  <data name="Update_AskDownload" xml:space="preserve">
+    <value>Vuoi scaricare ed eseguire ora la nuova versione ({0})?
+
+Il programma di installazione verrà scaricato da GitHub e avviato. Se BrowserSelect è ancora in esecuzione, l'installazione chiederà il permesso di chiuderlo.</value>
+  </data>
+  <data name="Update_DownloadTitle" xml:space="preserve">
+    <value>BrowserSelect - Download dell'aggiornamento</value>
+  </data>
+  <data name="Update_Finding" xml:space="preserve">
+    <value>Ricerca del programma di installazione dell'ultima versione...</value>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>Download di {0}...</value>
+  </data>
+  <data name="Update_Starting" xml:space="preserve">
+    <value>Avvio dell'installazione...</value>
+  </data>
+  <data name="Update_ErrorNetwork" xml:space="preserve">
+    <value>Impossibile scaricare l'aggiornamento (errore di rete: {0}).</value>
+  </data>
+  <data name="Update_ErrorNoAsset" xml:space="preserve">
+    <value>L'ultima versione non contiene un programma di installazione (file .exe).</value>
+  </data>
+  <data name="Update_ErrorIncomplete" xml:space="preserve">
+    <value>Il programma di installazione scaricato è incompleto o vuoto.</value>
+  </data>
+  <data name="Update_ErrorStart" xml:space="preserve">
+    <value>Impossibile avviare il programma di installazione scaricato ({0}).</value>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>{0}
+
+Vuoi aprire la pagina delle versioni e scaricare la nuova versione manualmente?
+{1}</value>
+  </data>
+  <data name="Main_About" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Main_Settings" xml:space="preserve">
+    <value>Impostazioni</value>
+  </data>
+  <data name="Main_PatternError" xml:space="preserve">
+    <value>Errore durante la creazione del modello dall'URL. Includi il seguente URL nella segnalazione del bug:
+{0}</value>
+  </data>
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Impostazioni</value>
+  </data>
+  <data name="Settings_BrowsersGroup" xml:space="preserve">
+    <value>Browser</value>
+  </data>
+  <data name="Settings_BrowserAdd" xml:space="preserve">
+    <value>Aggiungi</value>
+  </data>
+  <data name="Settings_BrowserAddTooltip" xml:space="preserve">
+    <value>Aggiungi un browser portatile (o qualsiasi programma) selezionandone l'eseguibile</value>
+  </data>
+  <data name="Settings_BrowserEdit" xml:space="preserve">
+    <value>Modifica</value>
+  </data>
+  <data name="Settings_BrowserEditTooltip" xml:space="preserve">
+    <value>Cambia l'icona, i tasti di scelta rapida e gli argomenti del browser selezionato</value>
+  </data>
+  <data name="Settings_BrowserRemove" xml:space="preserve">
+    <value>Rimuovi</value>
+  </data>
+  <data name="Settings_BrowserRemoveTooltip" xml:space="preserve">
+    <value>Rimuovi un browser aggiunto manualmente (togli la spunta a un browser per nasconderlo)</value>
+  </data>
+  <data name="Settings_SortLabel" xml:space="preserve">
+    <value>Ordine:</value>
+  </data>
+  <data name="Settings_SortTooltip" xml:space="preserve">
+    <value>Ordine dei browser nella finestra di selezione</value>
+  </data>
+  <data name="Settings_BrowserUpTooltip" xml:space="preserve">
+    <value>Sposta su il browser selezionato (ordine Manual)</value>
+  </data>
+  <data name="Settings_BrowserDownTooltip" xml:space="preserve">
+    <value>Sposta giù il browser selezionato (ordine Manual)</value>
+  </data>
+  <data name="Settings_DefaultGroup" xml:space="preserve">
+    <value>Browser predefinito</value>
+  </data>
+  <data name="Settings_DefaultInfo" xml:space="preserve">
+    <value>BrowserSelect deve essere il browser predefinito per funzionare. Può aprire anche i file .html e .url.</value>
+  </data>
+  <data name="Settings_SetDefault" xml:space="preserve">
+    <value>Rendi predefinito</value>
+  </data>
+  <data name="Settings_FileTypes" xml:space="preserve">
+    <value>Tipi file...</value>
+  </data>
+  <data name="Settings_FileTypesTooltip" xml:space="preserve">
+    <value>Registra BrowserSelect per i file .htm/.html/.shtml/.xhtml/.url (lo aggiunge ad "Apri con" e alle App predefinite)</value>
+  </data>
+  <data name="Settings_FileTypesTitle" xml:space="preserve">
+    <value>Tipi di file</value>
+  </data>
+  <data name="Settings_FileTypesError" xml:space="preserve">
+    <value>Impossibile registrare i tipi di file.
+
+{0}</value>
+  </data>
+  <data name="Settings_FileTypesDone" xml:space="preserve">
+    <value>BrowserSelect ora è registrato per i file {0} e compare nel loro menu "Apri con".
+
+Per aprire questi file con BrowserSelect per impostazione predefinita, scegli BrowserSelect nella finestra App predefinite di Windows che si aprirà ora.</value>
+  </data>
+  <data name="Settings_DefaultAppsError" xml:space="preserve">
+    <value>Windows non è riuscito ad aprire App predefinite.
+
+{0}
+
+Errore dell'interfaccia di associazione: {1}</value>
+  </data>
+  <data name="Settings_DefaultAppsErrorTitle" xml:space="preserve">
+    <value>Impossibile cambiare il browser predefinito</value>
+  </data>
+  <data name="Settings_OptionsGroup" xml:space="preserve">
+    <value>Opzioni</value>
+  </data>
+  <data name="Settings_RunningOnly" xml:space="preserve">
+    <value>Mostra solo i browser aperti</value>
+  </data>
+  <data name="Settings_RunningOnlyTooltip" xml:space="preserve">
+    <value>Elenca solo i browser in esecuzione (se nessuno è in esecuzione vengono mostrati tutti)</value>
+  </data>
+  <data name="Settings_AltIgnore" xml:space="preserve">
+    <value>Alt su un link salta le regole</value>
+  </data>
+  <data name="Settings_AltIgnoreTooltip" xml:space="preserve">
+    <value>Se si tiene premuto Alt mentre si fa clic su un link, le regole di selezione automatica vengono ignorate e viene mostrato l'elenco dei browser.</value>
+  </data>
+  <data name="Settings_Export" xml:space="preserve">
+    <value>Esporta...</value>
+  </data>
+  <data name="Settings_ExportTooltip" xml:space="preserve">
+    <value>Salva regole e impostazioni in un file</value>
+  </data>
+  <data name="Settings_Import" xml:space="preserve">
+    <value>Importa...</value>
+  </data>
+  <data name="Settings_ImportTooltip" xml:space="preserve">
+    <value>Carica regole e impostazioni da un file (sostituisce quelle attuali)</value>
+  </data>
+  <data name="Settings_UpdateGroup" xml:space="preserve">
+    <value>Aggiornamenti</value>
+  </data>
+  <data name="Settings_UpdateEnable" xml:space="preserve">
+    <value>attiva</value>
+  </data>
+  <data name="Settings_UpdateCheckNow" xml:space="preserve">
+    <value>controlla</value>
+  </data>
+  <data name="Settings_UpToDate" xml:space="preserve">
+    <value>Stai usando l'ultima versione.</value>
+  </data>
+  <data name="Settings_UpdateFailed" xml:space="preserve">
+    <value>Impossibile verificare gli aggiornamenti.
+Assicurati di essere connesso a Internet.</value>
+  </data>
+  <data name="Settings_FeedbackInfo" xml:space="preserve">
+    <value>Idee o bug? Apri una segnalazione sulla pagina GitHub del progetto.</value>
+  </data>
+  <data name="Settings_RulesGroup" xml:space="preserve">
+    <value>Regole di selezione automatica</value>
+  </data>
+  <data name="Settings_RulesInfo" xml:space="preserve">
+    <value>In questa sezione puoi aggiungere regole in base alle quali BrowserSelect sceglie automaticamente un browser invece di mostrare l'elenco per la scelta manuale. Altre informazioni ed esempi si trovano sulla pagina GitHub del progetto.</value>
+  </data>
+  <data name="Settings_RulesInfoLink" xml:space="preserve">
+    <value>pagina GitHub del progetto</value>
+  </data>
+  <data name="Settings_ColMatch" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="Settings_ColPattern" xml:space="preserve">
+    <value>Modello</value>
+  </data>
+  <data name="Settings_ColBrowser" xml:space="preserve">
+    <value>Browser</value>
+  </data>
+  <data name="Settings_ColPrivate" xml:space="preserve">
+    <value>Privato</value>
+  </data>
+  <data name="Settings_ColArguments" xml:space="preserve">
+    <value>Argomenti</value>
+  </data>
+  <data name="Settings_Help" xml:space="preserve">
+    <value>Guida</value>
+  </data>
+  <data name="Settings_MoveUp" xml:space="preserve">
+    <value>Sposta su</value>
+  </data>
+  <data name="Settings_MoveDown" xml:space="preserve">
+    <value>Sposta giù</value>
+  </data>
+  <data name="Settings_Delete" xml:space="preserve">
+    <value>Elimina</value>
+  </data>
+  <data name="Settings_Apply" xml:space="preserve">
+    <value>Applica</value>
+  </data>
+  <data name="Settings_Refresh" xml:space="preserve">
+    <value>Aggiorna</value>
+  </data>
+  <data name="Settings_LinkOpenedFrom" xml:space="preserve">
+    <value>Link aperto da: {0}</value>
+  </data>
+  <data name="Settings_InvalidRule" xml:space="preserve">
+    <value>Regola non valida: {0}</value>
+  </data>
+  <data name="Settings_RemoveBrowserConfirm" xml:space="preserve">
+    <value>Rimuovere "{0}" dall'elenco?</value>
+  </data>
+  <data name="Settings_RemoveBrowserTitle" xml:space="preserve">
+    <value>Rimuovi browser</value>
+  </data>
+  <data name="Settings_SettingsFileFilter" xml:space="preserve">
+    <value>Impostazioni di BrowserSelect (*.json)|*.json|Tutti i file (*.*)|*.*</value>
+  </data>
+  <data name="Settings_ExportTitle" xml:space="preserve">
+    <value>Esporta</value>
+  </data>
+  <data name="Settings_ExportDialogTitle" xml:space="preserve">
+    <value>Esporta impostazioni di BrowserSelect</value>
+  </data>
+  <data name="Settings_ExportUnsaved" xml:space="preserve">
+    <value>Ci sono modifiche alle regole non applicate. Applicarle prima di esportare?
+(No esporta le ultime regole applicate)</value>
+  </data>
+  <data name="Settings_ExportDone" xml:space="preserve">
+    <value>Regole e impostazioni esportate in
+{0}</value>
+  </data>
+  <data name="Settings_ExportFailed" xml:space="preserve">
+    <value>Esportazione non riuscita:
+{0}</value>
+  </data>
+  <data name="Settings_ImportTitle" xml:space="preserve">
+    <value>Importa</value>
+  </data>
+  <data name="Settings_ImportDialogTitle" xml:space="preserve">
+    <value>Importa impostazioni di BrowserSelect</value>
+  </data>
+  <data name="Settings_ImportConfirm" xml:space="preserve">
+    <value>L'importazione sostituisce le regole, le personalizzazioni dell'elenco dei browser e le opzioni attuali con quelle del file. Continuare?</value>
+  </data>
+  <data name="Settings_ImportDone" xml:space="preserve">
+    <value>Impostazioni importate ({0} regole).</value>
+  </data>
+  <data name="Settings_ImportFailed" xml:space="preserve">
+    <value>Importazione non riuscita:
+{0}</value>
+  </data>
+  <data name="BrowserEdit_AddTitle" xml:space="preserve">
+    <value>Aggiungi browser</value>
+  </data>
+  <data name="BrowserEdit_EditTitle" xml:space="preserve">
+    <value>Modifica browser - {0}</value>
+  </data>
+  <data name="BrowserEdit_Name" xml:space="preserve">
+    <value>Nome:</value>
+  </data>
+  <data name="BrowserEdit_Executable" xml:space="preserve">
+    <value>Eseguibile:</value>
+  </data>
+  <data name="BrowserEdit_Browse" xml:space="preserve">
+    <value>Sfoglia...</value>
+  </data>
+  <data name="BrowserEdit_Arguments" xml:space="preserve">
+    <value>Argomenti:</value>
+  </data>
+  <data name="BrowserEdit_ArgumentsTooltip" xml:space="preserve">
+    <value>Argomenti della riga di comando passati sempre a questo browser (ad es. --profile-directory="Profile 1" o -P work)</value>
+  </data>
+  <data name="BrowserEdit_ExtraArgumentsTooltip" xml:space="preserve">
+    <value>Argomenti aggiuntivi della riga di comando passati sempre a questo browser</value>
+  </data>
+  <data name="BrowserEdit_Shortcut" xml:space="preserve">
+    <value>Tasti rapidi:</value>
+  </data>
+  <data name="BrowserEdit_ShortcutTooltip" xml:space="preserve">
+    <value>Tasti che aprono questo browser nella finestra di selezione (ogni carattere è un tasto di scelta rapida)</value>
+  </data>
+  <data name="BrowserEdit_ShortcutHint" xml:space="preserve">
+    <value>es. w (vuoto = automatico)</value>
+  </data>
+  <data name="BrowserEdit_Icon" xml:space="preserve">
+    <value>Icona:</value>
+  </data>
+  <data name="BrowserEdit_ChangeIcon" xml:space="preserve">
+    <value>Cambia...</value>
+  </data>
+  <data name="BrowserEdit_DefaultIcon" xml:space="preserve">
+    <value>Predefinita</value>
+  </data>
+  <data name="BrowserEdit_SelectExecutable" xml:space="preserve">
+    <value>Seleziona l'eseguibile del browser</value>
+  </data>
+  <data name="BrowserEdit_ProgramsFilter" xml:space="preserve">
+    <value>Programmi (*.exe)|*.exe|Tutti i file (*.*)|*.*</value>
+  </data>
+  <data name="BrowserEdit_SelectIcon" xml:space="preserve">
+    <value>Seleziona un'icona</value>
+  </data>
+  <data name="BrowserEdit_IconFilter" xml:space="preserve">
+    <value>Icone e immagini|*.ico;*.exe;*.dll;*.png;*.jpg;*.jpeg;*.bmp;*.gif|Tutti i file (*.*)|*.*</value>
+  </data>
+  <data name="BrowserEdit_IconError" xml:space="preserve">
+    <value>Impossibile caricare un'icona da questo file.
+
+{0}</value>
+  </data>
+  <data name="BrowserEdit_IconErrorTitle" xml:space="preserve">
+    <value>Icona personalizzata</value>
+  </data>
+  <data name="BrowserEdit_NameRequired" xml:space="preserve">
+    <value>Inserisci un nome per il browser.</value>
+  </data>
+  <data name="BrowserEdit_NameReserved" xml:space="preserve">
+    <value>Questo nome è riservato, scegline un altro.</value>
+  </data>
+  <data name="BrowserEdit_NameExists" xml:space="preserve">
+    <value>Esiste già un browser chiamato "{0}", scegli un altro nome.</value>
+  </data>
+  <data name="BrowserEdit_ExecutableRequired" xml:space="preserve">
+    <value>Seleziona un eseguibile esistente (usa Sfoglia...).</value>
+  </data>
+  <data name="BrowserEdit_AlreadyListed" xml:space="preserve">
+    <value>Questo browser (stesso eseguibile e stessi argomenti) è già nell'elenco.</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>Browser Select: Info</value>
+  </data>
+  <data name="About_CodedBy" xml:space="preserve">
+    <value>Sviluppato da: Bor691</value>
+  </data>
+  <data name="About_Contact" xml:space="preserve">
+    <value>Contatto:</value>
+  </data>
+  <data name="About_GitHub" xml:space="preserve">
+    <value>GitHub:</value>
+  </data>
+  <data name="About_ForkBy" xml:space="preserve">
+    <value>Questo fork è mantenuto da: snipeTR</value>
+  </data>
+  <data name="About_Description" xml:space="preserve">
+    <value>Browser Select è un'utilità per scegliere di volta in volta il browser desiderato invece di averne uno solo predefinito per tutti i link, simile alla richiesta di Android di scegliere un browser quando si fa clic o si tocca un link in un'app che non è un browser. Potrebbe non essere utile a tutti, ma aiuta molto se usi più browser per scopi diversi (ad es. uno con proxy e uno senza) e apri molti link da altre applicazioni (ad es. app di messaggistica).
+
+È un'applicazione open source con licenza GPL v2. Sentiti libero di segnalare bug o suggerire funzionalità su GitHub.</value>
+  </data>
+  <data name="About_DonateText" xml:space="preserve">
+    <value>Se trovi utile questo programma e vuoi ringraziare gli sviluppatori, puoi fare una donazione in bitcoin.</value>
+  </data>
+  <data name="About_DonateFork" xml:space="preserve">
+    <value>snipeTR (questo fork) - Bitcoin:</value>
+  </data>
+  <data name="About_DonateOriginal" xml:space="preserve">
+    <value>Bor691 (autore originale) - Bitcoin:</value>
+  </data>
+  <data name="About_CopyAddress" xml:space="preserve">
+    <value>Copia indirizzo</value>
+  </data>
+  <data name="About_Copied" xml:space="preserve">
+    <value>Copiato!</value>
+  </data>
+  <data name="Main_Always" xml:space="preserve">
+    <value>Sempre</value>
+  </data>
+  <data name="Main_OpenPrivate" xml:space="preserve">
+    <value>Apri in finestra privata</value>
+  </data>
+  <data name="Rule_NoBrowser" xml:space="preserve">
+    <value>Hai dimenticato di selezionare un browser per la regola "{0}".</value>
+  </data>
+  <data name="Rule_EmptyPattern" xml:space="preserve">
+    <value>Una delle tue regole ha un modello vuoto. Consulta la Guida per maggiori informazioni.</value>
+  </data>
+  <data name="Rule_InvalidRegex" xml:space="preserve">
+    <value>"{0}" non è un'espressione regolare valida.</value>
+  </data>
+  <data name="Settings_RulesHelpFile" xml:space="preserve">
+    <value>filters.md</value>
+  </data>
+  <data name="About_OriginalButton" xml:space="preserve">
+    <value>Progetto originale...</value>
+  </data>
+  <data name="AboutOriginal_Title" xml:space="preserve">
+    <value>BrowserSelect: Progetto originale</value>
+  </data>
+  <data name="AboutOriginal_Header" xml:space="preserve">
+    <value>Progetto originale</value>
+  </data>
+  <data name="AboutOriginal_Intro" xml:space="preserve">
+    <value>Questa versione di BrowserSelect è un fork del progetto BrowserSelect originale creato da Bor691 (zumoshi su GitHub). Il progetto originale è software open source rilasciato con licenza GPL v2. Un grande grazie al suo autore per il lavoro su cui si basa questo fork.</value>
+  </data>
+  <data name="HelpMain_Title" xml:space="preserve">
+    <value>BrowserSelect - Guida</value>
+  </data>
+  <data name="HelpRules_Title" xml:space="preserve">
+    <value>BrowserSelect - Guida alle regole di selezione automatica</value>
+  </data>
+  <data name="HelpMain_Text" xml:space="preserve">
+    <value>BrowserSelect ti permette di scegliere un browser ogni volta che fai clic su un link fuori da un browser (client di posta, app di messaggistica, file PDF, ...) invece di aprire sempre lo stesso browser predefinito. Per questo BrowserSelect deve essere il browser predefinito: Impostazioni &gt; Browser predefinito &gt; Rendi predefinito.
+
+L'ELENCO DEI BROWSER
+Il link da aprire è mostrato nel titolo della finestra. Puoi:
+1. Premere Esc o fare clic su "x" per non aprire affatto il link
+   (ad es. se hai fatto clic per errore o un programma apre una pagina web dopo l'installazione).
+2. Aprire il link in un browser:
+   - fai clic sull'icona del browser, oppure
+   - premi uno dei tasti indicati tra parentesi sotto l'icona: 1-9 in base alla posizione, lettere del nome del browser o i tasti rapidi personalizzati impostati in Impostazioni &gt; Browser &gt; Modifica
+   - tieni premuto Maiusc mentre fai clic (o premi il tasto) per aprire il link in una finestra privata/in incognito; lo stesso si ottiene facendo clic destro su un'icona e scegliendo "Apri in finestra privata".
+3. Fare clic su "Sempre" sotto un browser per aprire sempre i link di questo sito in quel browser. Viene creata una regola in Impostazioni &gt; Regole di selezione automatica; per annullarla, seleziona lì la regola, fai clic su Elimina e poi su Applica.
+
+REGOLE DI SELEZIONE AUTOMATICA
+In Impostazioni &gt; Regole di selezione automatica BrowserSelect può scegliere il browser automaticamente in base a dominio, URL completo, percorso, parola chiave, estensione del file, applicazione in cui è stato fatto clic sul link o espressione regolare. Una regola può anche aprire il link in una finestra privata, passare argomenti aggiuntivi al browser, mostrare comunque l'elenco dei browser o ignorare il link. Fai clic su "Guida" in quella sezione per i dettagli, o sul link sopra l'elenco delle regole per gli esempi.
+Tieni premuto Alt mentre fai clic su un link (in un'altra applicazione) per saltare tutte le regole e scegliere il browser manualmente (disattivabile in Impostazioni &gt; Opzioni).
+
+IMPOSTAZIONI
+- Browser: Aggiungi un browser portatile o qualsiasi programma; Modifica nome, icona, tasti rapidi e argomenti di un browser; Rimuovi un browser aggiunto manualmente; togli la spunta a un browser per nasconderlo; cambia l'ordine con Ordine (Manual usa i pulsanti freccia).
+- Aggiorna: al primo avvio BrowserSelect memorizza l'elenco dei browser e dei profili installati. Dopo aver installato o rimosso un browser o un profilo, fai clic su Aggiorna accanto all'elenco dei browser.
+- Browser predefinito: Rendi predefinito; Tipi file... registra BrowserSelect per i file .html e .url.
+- Opzioni: mostra solo i browser aperti, salta le regole con Alt, evita le finestre a schermo intero (vedi sotto), Esporta... / Importa... regole e impostazioni in/da un file .json.
+- Aggiornamenti: controlla le versioni di snipeTR/BrowserSelect su GitHub. Quando è disponibile una nuova versione, questo pulsante della guida diventa un pulsante di aggiornamento; dopo il messaggio di aggiornamento BrowserSelect propone di scaricare ed eseguire il nuovo programma di installazione (l'installazione chiede di chiudere BrowserSelect se è ancora in esecuzione).
+- Lingua (in basso a sinistra): lingua dell'interfaccia; viene usata al prossimo avvio di BrowserSelect.
+- Tema (in basso a sinistra, sotto Lingua): Chiaro, Scuro o Come Windows (usa Scuro quando la modalità app di Windows è Scura). Il nuovo tema viene applicato subito. Mica: solo Windows 11 (22H2 o successivo), aggiunge l'effetto Mica alla barra del titolo. Su Windows 11 le finestre hanno anche gli angoli arrotondati.
+- Scala dello schermo (100-200 %): le finestre vengono disegnate nitide alla scala con cui hai effettuato l'accesso a Windows. Se una finestra (ad es. Impostazioni al 175 % su uno schermo 1920x1080) è più grande dello schermo, riceve barre di scorrimento invece di nascondere controlli sotto la barra delle applicazioni.
+
+FINESTRE A SCHERMO INTERO E PIÙ MONITOR
+Un browser apre un nuovo link nell'ultima finestra che hai usato. Se quella finestra sta riproducendo un video a schermo intero (ad es. su un secondo monitor), il link lo interromperebbe. Con Impostazioni &gt; Opzioni &gt; "Evita finestre a schermo intero" (attiva per impostazione predefinita) BrowserSelect porta in primo piano, subito prima di aprire il link, la finestra del browser usata più di recente che NON è a schermo intero, così il link si apre lì (una finestra ridotta a icona viene usata, e ripristinata, solo se non ce ne sono altre).
+Se tutte le finestre del browser sono a schermo intero, decide "Se tutte sono a schermo intero": "Finestra sul monitor principale" (predefinito) usa la finestra del browser sul monitor principale (Impostazioni di Windows &gt; Schermo &gt; "Rendi questo schermo principale"); "Ultima finestra usata" lascia la scelta al browser.
+Non viene cambiato nulla se il browser non è in esecuzione, se il link viene aperto in una finestra privata o se gli argomenti del browser/della regola aprono una nuova finestra (--new-window, --incognito, -private-window, --app=..., --kiosk, ...). Con un solo monitor vale la stessa logica. Disattiva l'opzione per lasciare sempre decidere il browser.
+Note: una finestra ingrandita non è a schermo intero (anche con la barra delle applicazioni nascosta automaticamente); conta solo il vero schermo intero (F11, video a schermo intero). Le finestre di profili diversi dello stesso browser (stesso .exe) sono trattate come un unico browser. Raramente Windows non permette di portare una finestra in primo piano; in quel caso lampeggia solo nella barra delle applicazioni.
+
+Se usi soprattutto un browser ma vuoi aprire alcuni siti in un altro (ad es. Firefox per tutto, ma IE per il sito aziendale), aggiungi una regola "*" per il browser principale e regole separate per gli altri siti.
+
+Puoi sempre aprire BrowserSelect dal menu Start per modificarne le impostazioni.</value>
+  </data>
+  <data name="HelpRules_Text" xml:space="preserve">
+    <value>Ogni regola ha cinque colonne:
+
+Tipo: con quale parte del link viene confrontato il modello:
+    - Domain: il nome host, ad es. google.com, *.google.com, website.* o * (corrisponde a tutto)
+    - URL: l'intero link con i caratteri jolly * e ?, ad es. github.com/myorg/* o https://*/login*
+    - Path: il percorso del link, ad es. /watch* o /docs/*
+    - Keyword: parole separate da virgole; il link deve contenerne una, ad es. zoom, meet
+    - Extension: l'estensione del file del link o del file aperto, ad es. pdf, html
+    - Source App: l'applicazione in cui è stato fatto clic sul link, ad es. outlook.exe, slack, teams*
+    - Regex: un'espressione regolare .NET confrontata con l'intero link
+
+Modello: il testo con cui viene confrontato il link (vedi Tipo). I confronti non distinguono tra maiuscole e minuscole.
+
+Browser: cosa succede quando il modello corrisponde: un browser con cui aprire il link, "display BrowserSelect" per mostrare sempre l'elenco dei browser, o "ignore URL (do nothing)" per non aprire affatto il link.
+
+Privato: apre il link in una finestra privata/in incognito.
+Argomenti: opzioni aggiuntive della riga di comando per il browser (ad es. --incognito --disable-web-security). Le regole private e gli argomenti che aprono una nuova finestra (--new-window, --incognito, ...) saltano "Evita finestre a schermo intero" (Impostazioni &gt; Opzioni), perché il link riceve comunque una nuova finestra.
+
+Prima vengono controllati i modelli esatti, poi quelli con caratteri jolly e per ultimo *; le regole con la stessa priorità vengono controllate dall'alto in basso (Sposta su / Sposta giù). Vince la prima regola corrispondente; se nessuna corrisponde, viene mostrato l'elenco dei browser.
+
+Per eliminare una regola selezionala e fai clic su Elimina (o premi il tasto Canc). Le modifiche vengono salvate con Applica.
+"Link aperto da" (in fondo alla finestra) mostra l'applicazione da usare nelle regole Source App.
+
+Nota: puoi aprire BrowserSelect manualmente dal menu Start per modificare le regole. Tieni premuto Alt mentre fai clic su un link per saltare le regole e scegliere manualmente.
+Altri esempi: il link sopra l'elenco delle regole.</value>
+  </data>
+  <data name="Settings_AvoidFullscreen" xml:space="preserve">
+    <value>Evita finestre a schermo intero</value>
+  </data>
+  <data name="Settings_AvoidFullscreenTooltip" xml:space="preserve">
+    <value>Quando un browser ha più finestre, apri il link nell'ultima finestra usata che non è a schermo intero (ad es. non quella che riproduce un video a schermo intero su un altro monitor). Disattivata: decide il browser (la sua ultima finestra usata).</value>
+  </data>
+  <data name="Settings_FullscreenFallback" xml:space="preserve">
+    <value>Se tutte sono a schermo intero:</value>
+  </data>
+  <data name="Settings_FullscreenFallbackTooltip" xml:space="preserve">
+    <value>Cosa fare quando tutte le finestre del browser sono a schermo intero: usare la finestra sul monitor principale o lasciare la scelta al browser (la sua ultima finestra usata).</value>
+  </data>
+  <data name="Settings_FallbackPrimary" xml:space="preserve">
+    <value>Finestra sul monitor principale</value>
+  </data>
+  <data name="Settings_FallbackLastUsed" xml:space="preserve">
+    <value>Ultima finestra usata</value>
+  </data>
+</root>

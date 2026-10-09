@@ -147,9 +147,32 @@ namespace BrowserSelect.Localization
             get { return Culture.Name; }
         }
 
+        /// <summary>
+        /// names shown instead of CultureInfo.NativeName, which differs between Windows versions or is not the
+        /// usual name (e.g. "中文(简体)" or "português (Brasil)")
+        /// </summary>
+        private static readonly Dictionary<string, string> NativeNames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "en", "English" },
+            { "tr", "Türkçe" },
+            { "ru", "Русский" },
+            { "de", "Deutsch" },
+            { "fr", "Français" },
+            { "es", "Español" },
+            { "pt-BR", "Português (Brasil)" },
+            { "it", "Italiano" },
+            { "pl", "Polski" },
+            { "uk", "Українська" },
+            { "zh-Hans", "简体中文" },
+            { "ja", "日本語" },
+        };
+
         public override string ToString()
         {
-            // e.g. "English (EN)", "Türkçe (TR)"
+            // e.g. "English (EN)", "Türkçe (TR)", "简体中文 (ZH-HANS)"
+            string known;
+            if (NativeNames.TryGetValue(Code, out known))
+                return known + " (" + Code.ToUpperInvariant() + ")";
             var name = Culture.NativeName;
             if (name.Length > 0)
                 name = char.ToUpper(name[0], Culture) + name.Substring(1);

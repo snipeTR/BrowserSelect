@@ -1,0 +1,661 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Language_Label" xml:space="preserve">
+    <value>Язык:</value>
+  </data>
+  <data name="Language_Tooltip" xml:space="preserve">
+    <value>Язык интерфейса. Здесь перечислены все языки, добавленные в BrowserSelect.</value>
+  </data>
+  <data name="Language_RestartRequired" xml:space="preserve">
+    <value>Новый язык будет использоваться при следующем запуске BrowserSelect.</value>
+  </data>
+  <data name="Language_RestartTitle" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="Theme_Label" xml:space="preserve">
+    <value>Тема:</value>
+  </data>
+  <data name="Theme_Tooltip" xml:space="preserve">
+    <value>Внешний вид окон BrowserSelect: Светлая, Тёмная или Как в Windows (режим приложений, выбранный в Параметры Windows &gt; Персонализация &gt; Цвета). Применяется сразу.</value>
+  </data>
+  <data name="Theme_Light" xml:space="preserve">
+    <value>Светлая</value>
+  </data>
+  <data name="Theme_Dark" xml:space="preserve">
+    <value>Тёмная</value>
+  </data>
+  <data name="Theme_System" xml:space="preserve">
+    <value>Как в Windows</value>
+  </data>
+  <data name="Theme_Mica" xml:space="preserve">
+    <value>Mica</value>
+  </data>
+  <data name="Theme_MicaTooltip" xml:space="preserve">
+    <value>Только Windows 11 (22H2 или новее): эффект Mica в заголовке окон BrowserSelect. В Windows 10 не действует.</value>
+  </data>
+  <data name="Settings_UnsavedChanges" xml:space="preserve">
+    <value>Есть несохранённые изменения. Закрыть без сохранения?</value>
+  </data>
+  <data name="Settings_UnsavedChangesTitle" xml:space="preserve">
+    <value>Несохранённые изменения</value>
+  </data>
+  <data name="Common_OK" xml:space="preserve">
+    <value>ОК</value>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="Common_UpdateAvailable" xml:space="preserve">
+    <value>Доступно новое обновление!
+Текущая версия: {1}
+Последняя версия: {0}
+Чтобы обновиться, скачайте и установите новую версию отсюда:
+{2}</value>
+  </data>
+  <data name="Update_AskDownload" xml:space="preserve">
+    <value>Скачать и запустить новую версию ({0}) сейчас?
+
+Установщик будет скачан с GitHub и запущен. Если BrowserSelect ещё работает, установщик попросит разрешения закрыть его.</value>
+  </data>
+  <data name="Update_DownloadTitle" xml:space="preserve">
+    <value>BrowserSelect - Загрузка обновления</value>
+  </data>
+  <data name="Update_Finding" xml:space="preserve">
+    <value>Поиск установщика последней версии...</value>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>Загрузка {0}...</value>
+  </data>
+  <data name="Update_Starting" xml:space="preserve">
+    <value>Запуск установщика...</value>
+  </data>
+  <data name="Update_ErrorNetwork" xml:space="preserve">
+    <value>Не удалось скачать обновление (ошибка сети: {0}).</value>
+  </data>
+  <data name="Update_ErrorNoAsset" xml:space="preserve">
+    <value>Последний выпуск не содержит установщика (файла .exe).</value>
+  </data>
+  <data name="Update_ErrorIncomplete" xml:space="preserve">
+    <value>Скачанный установщик неполный или пустой.</value>
+  </data>
+  <data name="Update_ErrorStart" xml:space="preserve">
+    <value>Не удалось запустить скачанный установщик ({0}).</value>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>{0}
+
+Открыть страницу выпусков и скачать новую версию вручную?
+{1}</value>
+  </data>
+  <data name="Main_About" xml:space="preserve">
+    <value>Сведения</value>
+  </data>
+  <data name="Main_Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="Main_PatternError" xml:space="preserve">
+    <value>Ошибка при создании шаблона из URL. Пожалуйста, укажите следующий URL в отчёте об ошибке:
+{0}</value>
+  </data>
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="Settings_BrowsersGroup" xml:space="preserve">
+    <value>Браузеры</value>
+  </data>
+  <data name="Settings_BrowserAdd" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="Settings_BrowserAddTooltip" xml:space="preserve">
+    <value>Добавить портативный браузер (или любую программу), выбрав его исполняемый файл</value>
+  </data>
+  <data name="Settings_BrowserEdit" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="Settings_BrowserEditTooltip" xml:space="preserve">
+    <value>Изменить значок, клавиши быстрого выбора и аргументы выбранного браузера</value>
+  </data>
+  <data name="Settings_BrowserRemove" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Settings_BrowserRemoveTooltip" xml:space="preserve">
+    <value>Удалить браузер, добавленный вручную (снимите флажок, чтобы скрыть браузер)</value>
+  </data>
+  <data name="Settings_SortLabel" xml:space="preserve">
+    <value>Порядок:</value>
+  </data>
+  <data name="Settings_SortTooltip" xml:space="preserve">
+    <value>Порядок браузеров в окне выбора</value>
+  </data>
+  <data name="Settings_BrowserUpTooltip" xml:space="preserve">
+    <value>Переместить выбранный браузер вверх (порядок Manual)</value>
+  </data>
+  <data name="Settings_BrowserDownTooltip" xml:space="preserve">
+    <value>Переместить выбранный браузер вниз (порядок Manual)</value>
+  </data>
+  <data name="Settings_DefaultGroup" xml:space="preserve">
+    <value>Браузер по умолчанию</value>
+  </data>
+  <data name="Settings_DefaultInfo" xml:space="preserve">
+    <value>BrowserSelect должен быть браузером по умолчанию. Он также открывает файлы .html и .url.</value>
+  </data>
+  <data name="Settings_SetDefault" xml:space="preserve">
+    <value>Сделать основным</value>
+  </data>
+  <data name="Settings_FileTypes" xml:space="preserve">
+    <value>Файлы...</value>
+  </data>
+  <data name="Settings_FileTypesTooltip" xml:space="preserve">
+    <value>Зарегистрировать BrowserSelect для файлов .htm/.html/.shtml/.xhtml/.url (добавляет его в «Открыть с помощью» и в Приложения по умолчанию)</value>
+  </data>
+  <data name="Settings_FileTypesTitle" xml:space="preserve">
+    <value>Типы файлов</value>
+  </data>
+  <data name="Settings_FileTypesError" xml:space="preserve">
+    <value>Не удалось зарегистрировать типы файлов.
+
+{0}</value>
+  </data>
+  <data name="Settings_FileTypesDone" xml:space="preserve">
+    <value>BrowserSelect теперь зарегистрирован для файлов {0} и отображается в их меню «Открыть с помощью».
+
+Чтобы по умолчанию открывать эти файлы в BrowserSelect, выберите для них BrowserSelect в окне Windows «Приложения по умолчанию», которое сейчас откроется.</value>
+  </data>
+  <data name="Settings_DefaultAppsError" xml:space="preserve">
+    <value>Windows не удалось открыть Приложения по умолчанию.
+
+{0}
+
+Ошибка интерфейса сопоставления: {1}</value>
+  </data>
+  <data name="Settings_DefaultAppsErrorTitle" xml:space="preserve">
+    <value>Не удалось изменить браузер по умолчанию</value>
+  </data>
+  <data name="Settings_OptionsGroup" xml:space="preserve">
+    <value>Параметры</value>
+  </data>
+  <data name="Settings_RunningOnly" xml:space="preserve">
+    <value>Только запущенные браузеры</value>
+  </data>
+  <data name="Settings_RunningOnlyTooltip" xml:space="preserve">
+    <value>Показывать только запущенные браузеры (если ни один не запущен, показываются все)</value>
+  </data>
+  <data name="Settings_AltIgnore" xml:space="preserve">
+    <value>Alt+щелчок пропускает правила</value>
+  </data>
+  <data name="Settings_AltIgnoreTooltip" xml:space="preserve">
+    <value>Если при щелчке по ссылке удерживать Alt, правила автовыбора игнорируются и показывается список браузеров.</value>
+  </data>
+  <data name="Settings_Export" xml:space="preserve">
+    <value>Экспорт...</value>
+  </data>
+  <data name="Settings_ExportTooltip" xml:space="preserve">
+    <value>Сохранить правила и настройки в файл</value>
+  </data>
+  <data name="Settings_Import" xml:space="preserve">
+    <value>Импорт...</value>
+  </data>
+  <data name="Settings_ImportTooltip" xml:space="preserve">
+    <value>Загрузить правила и настройки из файла (заменяет текущие)</value>
+  </data>
+  <data name="Settings_UpdateGroup" xml:space="preserve">
+    <value>Обновления</value>
+  </data>
+  <data name="Settings_UpdateEnable" xml:space="preserve">
+    <value>включить</value>
+  </data>
+  <data name="Settings_UpdateCheckNow" xml:space="preserve">
+    <value>проверить</value>
+  </data>
+  <data name="Settings_UpToDate" xml:space="preserve">
+    <value>У вас последняя версия.</value>
+  </data>
+  <data name="Settings_UpdateFailed" xml:space="preserve">
+    <value>Не удалось проверить обновления.
+Убедитесь, что есть подключение к Интернету.</value>
+  </data>
+  <data name="Settings_FeedbackInfo" xml:space="preserve">
+    <value>Идеи или ошибки? Создайте issue на странице проекта на GitHub.</value>
+  </data>
+  <data name="Settings_RulesGroup" xml:space="preserve">
+    <value>Правила автовыбора</value>
+  </data>
+  <data name="Settings_RulesInfo" xml:space="preserve">
+    <value>Здесь можно добавить правила, по которым BrowserSelect будет сам выбирать браузер, а не показывать список для ручного выбора. Подробности и примеры — на странице проекта на GitHub.</value>
+  </data>
+  <data name="Settings_RulesInfoLink" xml:space="preserve">
+    <value>странице проекта на GitHub</value>
+  </data>
+  <data name="Settings_ColMatch" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="Settings_ColPattern" xml:space="preserve">
+    <value>Шаблон</value>
+  </data>
+  <data name="Settings_ColBrowser" xml:space="preserve">
+    <value>Браузер</value>
+  </data>
+  <data name="Settings_ColPrivate" xml:space="preserve">
+    <value>Приватно</value>
+  </data>
+  <data name="Settings_ColArguments" xml:space="preserve">
+    <value>Аргументы</value>
+  </data>
+  <data name="Settings_Help" xml:space="preserve">
+    <value>Справка</value>
+  </data>
+  <data name="Settings_MoveUp" xml:space="preserve">
+    <value>Вверх</value>
+  </data>
+  <data name="Settings_MoveDown" xml:space="preserve">
+    <value>Вниз</value>
+  </data>
+  <data name="Settings_Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Settings_Apply" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="Settings_Refresh" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="Settings_LinkOpenedFrom" xml:space="preserve">
+    <value>Ссылка открыта из: {0}</value>
+  </data>
+  <data name="Settings_InvalidRule" xml:space="preserve">
+    <value>Неверное правило: {0}</value>
+  </data>
+  <data name="Settings_RemoveBrowserConfirm" xml:space="preserve">
+    <value>Удалить «{0}» из списка?</value>
+  </data>
+  <data name="Settings_RemoveBrowserTitle" xml:space="preserve">
+    <value>Удаление браузера</value>
+  </data>
+  <data name="Settings_SettingsFileFilter" xml:space="preserve">
+    <value>Настройки BrowserSelect (*.json)|*.json|Все файлы (*.*)|*.*</value>
+  </data>
+  <data name="Settings_ExportTitle" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <data name="Settings_ExportDialogTitle" xml:space="preserve">
+    <value>Экспорт настроек BrowserSelect</value>
+  </data>
+  <data name="Settings_ExportUnsaved" xml:space="preserve">
+    <value>Есть непримененные изменения правил. Применить их перед экспортом?
+(«Нет» экспортирует последние применённые правила)</value>
+  </data>
+  <data name="Settings_ExportDone" xml:space="preserve">
+    <value>Правила и настройки экспортированы в
+{0}</value>
+  </data>
+  <data name="Settings_ExportFailed" xml:space="preserve">
+    <value>Ошибка экспорта:
+{0}</value>
+  </data>
+  <data name="Settings_ImportTitle" xml:space="preserve">
+    <value>Импорт</value>
+  </data>
+  <data name="Settings_ImportDialogTitle" xml:space="preserve">
+    <value>Импорт настроек BrowserSelect</value>
+  </data>
+  <data name="Settings_ImportConfirm" xml:space="preserve">
+    <value>Импорт заменит ваши текущие правила, настройки списка браузеров и параметры данными из файла. Продолжить?</value>
+  </data>
+  <data name="Settings_ImportDone" xml:space="preserve">
+    <value>Настройки импортированы (правил: {0}).</value>
+  </data>
+  <data name="Settings_ImportFailed" xml:space="preserve">
+    <value>Ошибка импорта:
+{0}</value>
+  </data>
+  <data name="BrowserEdit_AddTitle" xml:space="preserve">
+    <value>Добавление браузера</value>
+  </data>
+  <data name="BrowserEdit_EditTitle" xml:space="preserve">
+    <value>Изменение браузера - {0}</value>
+  </data>
+  <data name="BrowserEdit_Name" xml:space="preserve">
+    <value>Имя:</value>
+  </data>
+  <data name="BrowserEdit_Executable" xml:space="preserve">
+    <value>Программа:</value>
+  </data>
+  <data name="BrowserEdit_Browse" xml:space="preserve">
+    <value>Обзор...</value>
+  </data>
+  <data name="BrowserEdit_Arguments" xml:space="preserve">
+    <value>Аргументы:</value>
+  </data>
+  <data name="BrowserEdit_ArgumentsTooltip" xml:space="preserve">
+    <value>Аргументы командной строки, всегда передаваемые этому браузеру (например, --profile-directory="Profile 1" или -P work)</value>
+  </data>
+  <data name="BrowserEdit_ExtraArgumentsTooltip" xml:space="preserve">
+    <value>Дополнительные аргументы командной строки, всегда передаваемые этому браузеру</value>
+  </data>
+  <data name="BrowserEdit_Shortcut" xml:space="preserve">
+    <value>Клавиши:</value>
+  </data>
+  <data name="BrowserEdit_ShortcutTooltip" xml:space="preserve">
+    <value>Клавиши, открывающие этот браузер в окне выбора (каждый символ — отдельная клавиша)</value>
+  </data>
+  <data name="BrowserEdit_ShortcutHint" xml:space="preserve">
+    <value>напр. w (пусто = автоматически)</value>
+  </data>
+  <data name="BrowserEdit_Icon" xml:space="preserve">
+    <value>Значок:</value>
+  </data>
+  <data name="BrowserEdit_ChangeIcon" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="BrowserEdit_DefaultIcon" xml:space="preserve">
+    <value>Стандарт</value>
+  </data>
+  <data name="BrowserEdit_SelectExecutable" xml:space="preserve">
+    <value>Выберите исполняемый файл браузера</value>
+  </data>
+  <data name="BrowserEdit_ProgramsFilter" xml:space="preserve">
+    <value>Программы (*.exe)|*.exe|Все файлы (*.*)|*.*</value>
+  </data>
+  <data name="BrowserEdit_SelectIcon" xml:space="preserve">
+    <value>Выберите значок</value>
+  </data>
+  <data name="BrowserEdit_IconFilter" xml:space="preserve">
+    <value>Значки и изображения|*.ico;*.exe;*.dll;*.png;*.jpg;*.jpeg;*.bmp;*.gif|Все файлы (*.*)|*.*</value>
+  </data>
+  <data name="BrowserEdit_IconError" xml:space="preserve">
+    <value>Не удалось загрузить значок из этого файла.
+
+{0}</value>
+  </data>
+  <data name="BrowserEdit_IconErrorTitle" xml:space="preserve">
+    <value>Свой значок</value>
+  </data>
+  <data name="BrowserEdit_NameRequired" xml:space="preserve">
+    <value>Введите имя браузера.</value>
+  </data>
+  <data name="BrowserEdit_NameReserved" xml:space="preserve">
+    <value>Это имя зарезервировано, выберите другое.</value>
+  </data>
+  <data name="BrowserEdit_NameExists" xml:space="preserve">
+    <value>Браузер с именем «{0}» уже существует, выберите другое имя.</value>
+  </data>
+  <data name="BrowserEdit_ExecutableRequired" xml:space="preserve">
+    <value>Выберите существующий исполняемый файл (кнопка «Обзор...»).</value>
+  </data>
+  <data name="BrowserEdit_AlreadyListed" xml:space="preserve">
+    <value>Этот браузер (тот же исполняемый файл и аргументы) уже есть в списке.</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>Browser Select: О программе</value>
+  </data>
+  <data name="About_CodedBy" xml:space="preserve">
+    <value>Автор кода: Bor691</value>
+  </data>
+  <data name="About_Contact" xml:space="preserve">
+    <value>Контакт:</value>
+  </data>
+  <data name="About_GitHub" xml:space="preserve">
+    <value>GitHub:</value>
+  </data>
+  <data name="About_ForkBy" xml:space="preserve">
+    <value>Этот форк поддерживает: snipeTR</value>
+  </data>
+  <data name="About_Description" xml:space="preserve">
+    <value>Browser Select — утилита, позволяющая каждый раз выбирать нужный браузер, а не открывать все ссылки в одном браузере по умолчанию. Это похоже на запрос Android о выборе браузера при нажатии на ссылку в приложении, которое не является браузером. Она пригодится не всем, но очень помогает, если вы пользуетесь несколькими браузерами для разных задач (например, одним с прокси, другим без) и открываете много ссылок из других приложений (например, мессенджеров).
+
+Это приложение с открытым исходным кодом под лицензией GPL v2. Сообщайте об ошибках и предлагайте новые функции на GitHub.</value>
+  </data>
+  <data name="About_DonateText" xml:space="preserve">
+    <value>Если программа оказалась полезной и вы хотите поблагодарить разработчиков, можно сделать пожертвование в биткоинах.</value>
+  </data>
+  <data name="About_DonateFork" xml:space="preserve">
+    <value>snipeTR (этот форк) - Bitcoin:</value>
+  </data>
+  <data name="About_DonateOriginal" xml:space="preserve">
+    <value>Bor691 (автор оригинала) - Bitcoin:</value>
+  </data>
+  <data name="About_CopyAddress" xml:space="preserve">
+    <value>Копировать адрес</value>
+  </data>
+  <data name="About_Copied" xml:space="preserve">
+    <value>Скопировано!</value>
+  </data>
+  <data name="Main_Always" xml:space="preserve">
+    <value>Всегда</value>
+  </data>
+  <data name="Main_OpenPrivate" xml:space="preserve">
+    <value>Открыть в приватном окне</value>
+  </data>
+  <data name="Rule_NoBrowser" xml:space="preserve">
+    <value>Вы забыли выбрать браузер для правила «{0}».</value>
+  </data>
+  <data name="Rule_EmptyPattern" xml:space="preserve">
+    <value>В одном из правил пустой шаблон. Подробности см. в справке.</value>
+  </data>
+  <data name="Rule_InvalidRegex" xml:space="preserve">
+    <value>«{0}» — недопустимое регулярное выражение.</value>
+  </data>
+  <data name="Settings_RulesHelpFile" xml:space="preserve">
+    <value>filters.md</value>
+  </data>
+  <data name="About_OriginalButton" xml:space="preserve">
+    <value>Исходный проект...</value>
+  </data>
+  <data name="AboutOriginal_Title" xml:space="preserve">
+    <value>BrowserSelect: Исходный проект</value>
+  </data>
+  <data name="AboutOriginal_Header" xml:space="preserve">
+    <value>Исходный проект</value>
+  </data>
+  <data name="AboutOriginal_Intro" xml:space="preserve">
+    <value>Эта версия BrowserSelect — форк исходного проекта BrowserSelect, созданного Bor691 (zumoshi на GitHub). Исходный проект — программа с открытым исходным кодом, выпущенная под лицензией GPL v2. Большое спасибо автору за работу, на которой основан этот форк.</value>
+  </data>
+  <data name="HelpMain_Title" xml:space="preserve">
+    <value>BrowserSelect - Справка</value>
+  </data>
+  <data name="HelpRules_Title" xml:space="preserve">
+    <value>BrowserSelect - Справка по правилам автовыбора</value>
+  </data>
+  <data name="HelpMain_Text" xml:space="preserve">
+    <value>BrowserSelect позволяет выбирать браузер каждый раз, когда вы щёлкаете ссылку вне браузера (почтовый клиент, мессенджер, PDF-файл, ...), вместо того чтобы всегда открывать один и тот же браузер по умолчанию. Для этого BrowserSelect должен быть браузером по умолчанию: Настройки &gt; Браузер по умолчанию &gt; Сделать основным.
+
+СПИСОК БРАУЗЕРОВ
+Открываемая ссылка показана в заголовке окна. Вы можете:
+1. Нажать Esc или щёлкнуть «x», чтобы вообще не открывать ссылку
+   (например, если щёлкнули по ошибке или программа открывает веб-страницу после установки).
+2. Открыть ссылку в браузере:
+   - щёлкните значок браузера или
+   - нажмите одну из клавиш, указанных в скобках под значком: 1-9 по позиции, буквы из названия браузера или свои клавиши, заданные в Настройки &gt; Браузеры &gt; Изменить
+   - удерживайте Shift при щелчке (или нажатии клавиши), чтобы открыть ссылку в приватном окне/режиме инкогнито; то же самое — щелчок правой кнопкой по значку и «Открыть в приватном окне».
+3. Нажать «Всегда» под браузером, чтобы всегда открывать ссылки этого сайта в нём. Будет создано правило в Настройки &gt; Правила автовыбора; чтобы отменить его, выберите там правило, нажмите Удалить, а затем Применить.
+
+ПРАВИЛА АВТОВЫБОРА
+В Настройки &gt; Правила автовыбора BrowserSelect может выбирать браузер автоматически: по домену, полному URL, пути, ключевому слову, расширению файла, приложению, в котором щёлкнули ссылку, или регулярному выражению. Правило может также открыть ссылку в приватном окне, передать браузеру дополнительные аргументы, всё равно показать список браузеров или проигнорировать ссылку. Подробности — кнопка «Справка» в этом разделе, примеры — ссылка над списком правил.
+Удерживайте Alt при щелчке по ссылке (в другом приложении), чтобы пропустить все правила и выбрать браузер вручную (отключается в Настройки &gt; Параметры).
+
+НАСТРОЙКИ
+- Браузеры: Добавить — портативный браузер или любую программу; Изменить — имя, значок, клавиши и аргументы браузера; Удалить — браузер, добавленный вручную; снимите флажок, чтобы скрыть браузер; порядок меняется через Порядок (Manual использует кнопки со стрелками).
+- Обновить: при первом запуске BrowserSelect запоминает список установленных браузеров и профилей. После установки или удаления браузера или профиля нажмите Обновить рядом со списком браузеров.
+- Браузер по умолчанию: Сделать основным; Файлы... регистрирует BrowserSelect для файлов .html и .url.
+- Параметры: только запущенные браузеры, пропуск правил с Alt, обход полноэкранных окон (см. ниже), Экспорт... / Импорт... правил и настроек в файл .json или из него.
+- Обновления: проверяет выпуски snipeTR/BrowserSelect на GitHub. Когда доступна новая версия, эта кнопка справки превращается в кнопку обновления; после сообщения об обновлении BrowserSelect предлагает скачать и запустить новый установщик (установщик попросит закрыть BrowserSelect, если он ещё работает).
+- Язык (внизу слева): язык интерфейса; применяется при следующем запуске BrowserSelect.
+- Тема (внизу слева, под «Язык»): Светлая, Тёмная или Как в Windows (Тёмная, если в Windows выбран тёмный режим приложений). Новая тема применяется сразу. Mica: только Windows 11 (22H2 или новее), добавляет эффект Mica в заголовок окна. В Windows 11 у окон также скруглённые углы.
+- Масштаб экрана (100-200 %): окна отрисовываются чётко в том масштабе, с которым вы вошли в Windows. Если окно (например, Настройки при 175 % на экране 1920x1080) больше экрана, у него появляются полосы прокрутки, а элементы не прячутся под панелью задач.
+
+ПОЛНОЭКРАННЫЕ ОКНА И НЕСКОЛЬКО МОНИТОРОВ
+Браузер открывает новую ссылку в последнем использованном окне. Если в этом окне идёт полноэкранное видео (например, на втором мониторе), ссылка прервёт его. С параметром Настройки &gt; Параметры &gt; «Обходить полноэкранные окна» (включён по умолчанию) BrowserSelect перед открытием ссылки выводит на передний план последнее использованное окно браузера, которое НЕ в полноэкранном режиме, и ссылка открывается в нём (свёрнутое окно используется и разворачивается, только если других нет).
+Если все окна браузера полноэкранные, решает параметр «Если все окна полноэкранные»: «Окно на основном мониторе» (по умолчанию) использует окно браузера на основном мониторе (Параметры Windows &gt; Дисплей &gt; «Сделать основным дисплеем»); «Последнее активное окно» оставляет выбор браузеру.
+Ничего не меняется, если браузер не запущен, если ссылка открывается в приватном окне или если аргументы браузера/правила открывают новое окно (--new-window, --incognito, -private-window, --app=..., --kiosk, ...). С одним монитором действует та же логика. Отключите параметр, чтобы всегда оставлять выбор браузеру.
+Примечания: развёрнутое окно не считается полноэкранным (даже при автоматически скрываемой панели задач); учитывается только настоящий полноэкранный режим (F11, полноэкранное видео). Окна разных профилей одного браузера (тот же .exe) считаются одним браузером. Изредка Windows не разрешает вывести окно на передний план; тогда оно только мигает на панели задач.
+
+Если вы в основном пользуетесь одним браузером, но некоторые сайты хотите открывать в другом (например, всё в Firefox, а сайт компании в IE), добавьте правило «*» для основного браузера и отдельные правила для остальных сайтов.
+
+BrowserSelect всегда можно открыть из меню «Пуск», чтобы изменить настройки.</value>
+  </data>
+  <data name="HelpRules_Text" xml:space="preserve">
+    <value>У каждого правила пять столбцов:
+
+Тип: с какой частью ссылки сравнивается шаблон:
+    - Domain: имя хоста, например google.com, *.google.com, website.* или * (подходит всё)
+    - URL: вся ссылка с подстановочными знаками * и ?, например github.com/myorg/* или https://*/login*
+    - Path: путь ссылки, например /watch* или /docs/*
+    - Keyword: слова через запятую; ссылка должна содержать одно из них, например zoom, meet
+    - Extension: расширение файла ссылки или открываемого файла, например pdf, html
+    - Source App: приложение, в котором щёлкнули ссылку, например outlook.exe, slack, teams*
+    - Regex: регулярное выражение .NET, сравниваемое со всей ссылкой
+
+Шаблон: текст, с которым сравнивается ссылка (см. Тип). Регистр букв не учитывается.
+
+Браузер: что происходит при совпадении шаблона: браузер, в котором открыть ссылку, «display BrowserSelect», чтобы всегда показывать список браузеров, или «ignore URL (do nothing)», чтобы вообще не открывать ссылку.
+
+Приватно: открывает ссылку в приватном окне/режиме инкогнито.
+Аргументы: дополнительные параметры командной строки для браузера (например, --incognito --disable-web-security). Приватные правила и аргументы, открывающие новое окно (--new-window, --incognito, ...), пропускают «Обходить полноэкранные окна» (Настройки &gt; Параметры), так как ссылка всё равно получает новое окно.
+
+Сначала проверяются точные шаблоны, затем шаблоны с подстановочными знаками и в конце *; правила с одинаковым приоритетом проверяются сверху вниз (Вверх / Вниз). Срабатывает первое подходящее правило; если ни одно не подходит, показывается список браузеров.
+
+Чтобы удалить правило, выберите его и нажмите Удалить (или клавишу Del). Изменения сохраняются кнопкой Применить.
+«Ссылка открыта из» (внизу окна) показывает приложение для правил Source App.
+
+Примечание: BrowserSelect можно открыть вручную из меню «Пуск», чтобы изменить правила. Удерживайте Alt при щелчке по ссылке, чтобы пропустить правила и выбрать вручную.
+Больше примеров: ссылка над списком правил.</value>
+  </data>
+  <data name="Settings_AvoidFullscreen" xml:space="preserve">
+    <value>Обходить полноэкранные окна</value>
+  </data>
+  <data name="Settings_AvoidFullscreenTooltip" xml:space="preserve">
+    <value>Если у браузера несколько окон, ссылка открывается в последнем использованном окне, которое не в полноэкранном режиме (например, не в том, где на другом мониторе идёт полноэкранное видео). Выкл.: решает браузер (его последнее окно).</value>
+  </data>
+  <data name="Settings_FullscreenFallback" xml:space="preserve">
+    <value>Если все окна полноэкранные:</value>
+  </data>
+  <data name="Settings_FullscreenFallbackTooltip" xml:space="preserve">
+    <value>Что делать, если все окна браузера полноэкранные: использовать окно на основном мониторе или оставить выбор браузеру (его последнее использованное окно).</value>
+  </data>
+  <data name="Settings_FallbackPrimary" xml:space="preserve">
+    <value>Окно на основном мониторе</value>
+  </data>
+  <data name="Settings_FallbackLastUsed" xml:space="preserve">
+    <value>Последнее активное окно</value>
+  </data>
+</root>
