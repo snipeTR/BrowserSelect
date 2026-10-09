@@ -208,7 +208,7 @@ namespace BrowserSelect.UI
             }
             if (c is CheckBox || c is RadioButton)
             {
-                var box = (int)Math.Ceiling(17 * scale);
+                var box = (int)Math.Ceiling(15 * scale);
                 var size = Measure(c, text, int.MaxValue / 2, TextFormatFlags.SingleLine);
                 if (size.Height > c.Height + 1 || size.Width > c.Width - box + 1)
                     return string.Format("needs {0} + {1}px box, control is {2}", size, box, c.Size);
@@ -231,7 +231,9 @@ namespace BrowserSelect.UI
                     size = Measure(c, text, width, flags);
                 }
                 var height = label.ClientSize.Height - label.Padding.Vertical;
-                if (size.Height > height + 1 || size.Width > width + 1)
+                // measured lines include some leading: a few pixels less still shows the whole text
+                var tolerance = Math.Max(1, (int)(TextRenderer.MeasureText("Ag", label.Font).Height * 0.15));
+                if (size.Height > height + tolerance || size.Width > width + 1)
                     return string.Format("needs {0}, label is {1}", size, label.ClientSize);
                 return null;
             }

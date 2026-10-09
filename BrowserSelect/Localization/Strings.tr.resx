@@ -601,6 +601,7 @@ AYARLAR
 - Güncelleme denetimi: GitHub'daki snipeTR/BrowserSelect sürümlerini denetler. Yeni sürüm çıktığında bu yardım düğmesi güncelleme düğmesine dönüşür; güncelleme mesajından sonra BrowserSelect yeni kurulum dosyasını indirip çalıştırmayı önerir (BrowserSelect hâlâ açıksa kurulum, programı kapatmak için izin ister).
 - Dil (sol altta): arayüz dili; BrowserSelect bir sonraki açılışta bu dili kullanır.
 - Tema (sol altta, Dil'in altında): Açık, Koyu veya Windows'a uy (Windows uygulama modu Koyu ise Koyu kullanılır). Yeni tema hemen uygulanır. Mica: sadece Windows 11 (22H2 veya daha yeni), başlık çubuğuna Mica efekti ekler. Windows 11'de pencerelerin köşeleri de yuvarlatılır.
+- Ekran ölçeği (%100-%200): pencereler Windows'a giriş yaptığınız ölçekte net çizilir. Bir pencere (ör. 1920x1080 ekranda %175'te Ayarlar) ekrandan büyükse, kontroller görev çubuğunun altında kalmak yerine pencereye kaydırma çubukları eklenir.
 
 Çoğunlukla tek bir tarayıcı kullanıp bazı siteleri başka bir tarayıcıda açmak istiyorsanız (ör. her şey Firefox'ta, şirket sitesi IE'de), ana tarayıcınız için "*" kuralı, diğer siteler için de ayrı kurallar ekleyin.
 

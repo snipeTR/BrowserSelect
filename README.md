@@ -77,6 +77,14 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 
 # Changelog
 
+v1.5.2.0 (UI test copy)
+- Tested at 100 %, 125 %, 150 %, 175 % and 200 % display scale (GitHub Actions runner, every window in Light/Dark and English/Turkish, with a layout report per window)
+- Fixed: with per-monitor DPI awareness (v1.5.0–1.5.1) windows that opened on a screen whose scale differs from the sign-in scale were not scaled by .NET Framework WinForms (tiny windows, oversized **?** button, clipped shortcut texts). BrowserSelect is now *system DPI aware* (manifest): sharp at the scale you signed in with, correctly sized (stretched by Windows) on a second monitor with another scale
+- Fixed: windows bigger than the screen (Settings and About at 175 %/200 % on 1920x1080/1600x1200) get scroll bars and stay on the screen instead of hiding the bottom controls below the taskbar
+- Fixed: fixed-size texts are fitted again once the window has its final scaled size; a label may use free space around it (the feedback text at the bottom left of Settings was cut off); short buttons follow the scale
+- Shorter feedback text in Settings ("Ideas or bugs? Please open an issue on the project's GitHub page."); help (**?**) explains the display scale behaviour (English and Turkish)
+- UI screenshots workflow: all six windows (browser list, Settings, Edit browser, About, Original project info, help) at every scale, window size/DPI table and problem list in the run summary; test recipe [16E](Tests/human_test/16-gorunum-tema.md) updated
+
 v1.5.1.0 (UI test copy)
 - Checked on Windows (GitHub Actions runner, screenshots in Light/Dark, English/Turkish): the first try (v1.5.0.0) made the windows about 16% bigger because of the new font; now every window keeps its original size and control positions (verified control by control with UI Automation)
 - Short buttons (Refresh, Always) no longer clip their text; the help window's Close button stays below the text with per-monitor DPI; thin group box frames in the dark theme

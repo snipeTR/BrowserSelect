@@ -401,7 +401,7 @@ Please make sure you are connected to internet.</value>
     <comment>Update check result</comment>
   </data>
   <data name="Settings_FeedbackInfo" xml:space="preserve">
-    <value>if you have feature requests,bug reports or suggestions please submit an issue on the project's Github.</value>
+    <value>Ideas or bugs? Please open an issue on the project's GitHub page.</value>
     <comment>Label bottom left (220 x 32 px, 2 lines)</comment>
   </data>
   <data name="Settings_RulesGroup" xml:space="preserve">
@@ -745,6 +745,7 @@ SETTINGS
 - Update checker: checks the releases of snipeTR/BrowserSelect on GitHub. When a new version is available, this help button turns into an update button; after the update message BrowserSelect offers to download and run the new installer (the setup asks to close BrowserSelect if it is still running).
 - Language (bottom left): user interface language; it is used the next time BrowserSelect starts.
 - Theme (bottom left, below Language): Light, Dark or Follow Windows (uses Dark when the Windows app mode is Dark). The new theme is applied at once. Mica: Windows 11 (22H2 or newer) only, adds the Mica effect to the title bar. On Windows 11 the windows also get rounded corners.
+- Display scale (100-200 %): the windows are drawn sharp at the scale you signed in to Windows with. If a window (e.g. Settings at 175 % on a 1920x1080 screen) is bigger than the screen, it gets scroll bars instead of hiding controls below the taskbar.
 
 If you mostly use one browser but want some websites to open in another one (e.g. Firefox for everything but IE for the company website), add a rule "*" for your main browser and separate rules for the other websites.
 

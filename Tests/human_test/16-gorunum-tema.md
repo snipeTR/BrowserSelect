@@ -75,9 +75,18 @@
 
 ## 16E – Yüksek DPI
 
-1. Windows Ayarlar → Ekran → Ölçek: `%150` (veya iki farklı ölçekli monitör).
-2. Seçim penceresini ve Ayarlar'ı aç; birden fazla monitör varsa pencereyi diğer monitöre sürükle.
-   - [ ] Yazılar net (bulanık değil), kontroller üst üste binmiyor, butonlar kesilmiyor.
+1. Windows Ayarlar → Ekran → Ölçek: `%125`, `%150`, `%175` (ve mümkünse `%200`). Her ölçekten sonra
+   BrowserSelect'i kapatıp yeniden aç (Windows'tan çıkış yapıp girmek en gerçekçi durumdur).
+2. Seçim penceresi, Ayarlar, Ayarlar → Düzenle..., Hakkında, Orijinal proje bilgileri ve **?** yardımını aç.
+   - [ ] Yazılar net (bulanık değil), kontroller üst üste binmiyor, yazılar kesilmiyor.
+   - [ ] Pencereler ölçekle birlikte büyüyor (örn. %150'de Ayarlar ≈ 1372 x 971 px).
+   - [ ] 1920x1080 ekranda %175'te Ayarlar ve Hakkında ekrandan taşmıyor: pencere ekrana sığdırılıyor ve
+         kaydırma çubukları çıkıyor; alttaki Dil / Tema / Kapat / Uygula kaydırınca görünüyor.
+3. İki farklı ölçekli monitör varsa pencereyi diğer monitöre sürükle.
+   - [ ] Pencere doğru boyutta kalıyor (diğer monitörde Windows biraz bulanık büyütebilir; bu beklenen
+         davranış, v1.5.0–1.5.1'deki gibi minik pencere / büyük ? butonu olmamalı).
+4. Otomatik kontrol: GitHub → Actions → **UI screenshots (manual)** her pencereyi %100–%200'de çeker;
+   *Summary* tablosunda boyut/DPI ve sorun listesi, artifact'te `<ölçek>/*.png` ve `*.layout.txt` var.
 
 ## 16F – Türkçe
 
