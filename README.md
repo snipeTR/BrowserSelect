@@ -10,18 +10,24 @@ Browser Select is a utility to dynamically select the browser you want instead o
 
 This is an actively maintained fork of [zumoshi/BrowserSelect](https://github.com/zumoshi/BrowserSelect) with Windows **64-bit** installer builds via GitHub Actions, maintained by [snipeTR](https://github.com/snipeTR). Available in English and Turkish (Settings → Language).
 
-![screenshot1](https://raw.githubusercontent.com/zumoshi/BrowserSelect/master/screenshots/photo_2016-07-11_13-44-19.png)
+![Browser picker (light theme)](screenshots/picker-light.png)
 
 Instead of having to copy the link, open the desired (non-default) browser then pasting the link, all you need to do is to click on the link and this prompt will open allowing you to choose the browser you want. It automatically detects installed browsers. It does not require administrative rights and can be installed as a restricted user.
 
-![screenshot 2](https://raw.githubusercontent.com/zumoshi/BrowserSelect/master/screenshots/photo_2015-10-12_16-46-14.jpg)
+![Browser picker (dark theme)](screenshots/picker-dark.png)
 
 You may click on the desired browser or press one of the shortcuts (its index or the first letter of its name), for example for chrome you can press 2, g or c.
 you may also press Esc (or click the X) to not open the URL.
 
 To install, download the installer below then set BrowserSelect as the default browser.
 
-![select default browser](https://raw.githubusercontent.com/zumoshi/BrowserSelect/master/screenshots/photo_2015-10-12_16-43-08.jpg)
+Settings (Set as Default Browser, browser list, auto select rules, language and theme):
+
+| Light | Dark |
+|---|---|
+| ![Settings (light theme)](screenshots/settings-light.png) | ![Settings (dark theme)](screenshots/settings-dark.png) |
+
+<sub>Screenshots: Windows Server 2025 GitHub Actions runner at 100 % scale (Actions → UI screenshots (manual) takes every window at 100–200 %).</sub>
 
 BrowserSelect has been tested on windows 7, windows 8.1 and windows 10/11. Requires **.NET Framework 4.8**.
 
@@ -83,6 +89,7 @@ v1.5.2.0 (UI test copy)
 - Fixed: windows bigger than the screen (Settings and About at 175 %/200 % on 1920x1080/1600x1200) get scroll bars and stay on the screen instead of hiding the bottom controls below the taskbar
 - Fixed: fixed-size texts are fitted again once the window has its final scaled size; a label may use free space around it (the feedback text at the bottom left of Settings was cut off); short buttons follow the scale
 - Shorter feedback text in Settings ("Ideas or bugs? Please open an issue on the project's GitHub page."); help (**?**) explains the display scale behaviour (English and Turkish)
+- README screenshots replaced with the new look (`screenshots/picker-*.png`, `screenshots/settings-*.png`)
 - UI screenshots workflow: all six windows (browser list, Settings, Edit browser, About, Original project info, help) at every scale, window size/DPI table and problem list in the run summary; test recipe [16E](Tests/human_test/16-gorunum-tema.md) updated
 
 v1.5.1.0 (UI test copy)
