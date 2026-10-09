@@ -2,6 +2,7 @@
 
 > Bu reçete v1.5.3.0 ve sonrası içindir. Çoklu monitör bölümleri (17D–17G) **gerçek iki (veya üç) monitörlü**
 > bir bilgisayarda yapılmalıdır; GitHub'ın test makinesinde ikinci monitör yoktur, bu kısımlar otomatik test edilmedi.
+> v1.5.3.0 gerçek çoklu monitörlü bir bilgisayarda bu reçeteyle elle test edildi ve doğru çalıştı.
 
 ## Amaç
 
@@ -26,7 +27,8 @@ Gizli pencerede açarken (Shift+tık, Private kural), yeni pencere açan paramet
 
 ## Ön koşullar
 
-- [00 – Hazırlık](00-hazirlik.md) tamam; `BrowserSelect-1.5.3.0-x64-Setup.exe` (veya daha yeni) kurulu.
+- [00 – Hazırlık](00-hazirlik.md) tamam; `BrowserSelect-1.5.3.0-x64-Setup.exe` (veya daha yeni) kurulu
+  ([Releases](https://github.com/snipeTR/BrowserSelect/releases) sayfasından).
 - En az bir tarayıcı: **Google Chrome** (veya Edge). Mümkünse **Firefox** ile de tekrarla (17H).
 - Tam ekran için uzun bir video: ör. https://www.youtube.com/watch?v=aqz-KE-bpKQ (herhangi bir video olur)
   veya herhangi bir sayfada **F11**.

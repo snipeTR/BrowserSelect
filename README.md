@@ -87,7 +87,7 @@ v1.5.3.0
 - Both settings are saved like the others and included in settings Export/Import (`avoidFullscreen`, `fullscreenFallback`)
 - Settings → Options group is taller (new check box, label and drop-down); the window is 64 px (at 100 %) taller, the rest of the layout is unchanged
 - Help (**?**, Settings → Help) and `help/filters*.md` updated in English and Turkish
-- Human test recipe incl. multi-monitor scenarios: [Tests/human_test/17-tam-ekran-pencere.md](Tests/human_test/17-tam-ekran-pencere.md)
+- Human test recipe incl. multi-monitor scenarios: [Tests/human_test/17-tam-ekran-pencere.md](Tests/human_test/17-tam-ekran-pencere.md); verified manually on real multi-monitor hardware
 
 v1.5.2.0
 Windows 10/11 look (appearance only: window sizes, control positions, features and behaviour are unchanged). Earlier 1.5.0.0/1.5.1.0 builds were internal test builds and were not released.
