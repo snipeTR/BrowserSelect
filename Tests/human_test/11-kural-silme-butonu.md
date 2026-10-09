@@ -54,11 +54,11 @@ Seçili kuralı listeden siler ve değişikliği kaydetmek için `Apply`’ı ak
 
 1. Listedeki **son** kuralı seç → `Delete` → seçim bir üstteki kurala geçmeli.
 2. Kalan tüm kuralları tek tek `Delete` ile sil → `Apply`.
-3. Liste boşken (sadece en alttaki boş “yeni satır” varken) `Delete`’e bas.
+3. Liste boşken (sadece en alttaki `+` satırı varken) `Delete`’e bas.
 
 - [ ] Son kural silinince seçim bir öncekine geçti.
 - [ ] Tüm kurallar silinip `Apply` sonrası liste boş kaydedildi.
-- [ ] Boş listede veya boş “yeni satır” seçiliyken `Delete` hata vermedi, hiçbir şey olmadı.
+- [ ] Boş listede veya `+` satırı seçiliyken `Delete` hata vermedi, hiçbir şey olmadı (ayrıntı: [19](19-kural-ekleme-arti-satiri.md)).
 
 ### Test 11E – Move Up / Move Down ile birlikte
 
@@ -69,6 +69,7 @@ Seçili kuralı listeden siler ve değişikliği kaydetmek için `Apply`’ı ak
 
 ## Notlar
 
-- Klavyedeki `Delete` tuşu (satır başlığına tıklayıp tüm satırı seçince) da eskisi gibi satırı siler; buton bunun
-  daha görünür hâlidir.
+- Klavyedeki `Del` tuşu da butonla aynı şeyi yapar: yalnızca seçili kural(lar)ı siler (hücre düzenlenirken basılırsa
+  sadece hücredeki yazıyı siler).
+- Kurallar v1.5.6.0’dan beri son kuralın altındaki `+` ile eklenir; bkz. [19 – Kural ekleme (+ satırı)](19-kural-ekleme-arti-satiri.md).
 - Silme işlemi onay sormaz; yanlışlıkla silersen `Apply`’a basmadan `Cancel` ile geri alabilirsin.

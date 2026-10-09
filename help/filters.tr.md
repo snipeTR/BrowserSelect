@@ -3,7 +3,14 @@
 🇬🇧 [English](filters.md)
 
 **Ayarlar → Otomatik Seçim Kuralları** bölümünden kurallar ekleyerek BrowserSelect'in tarayıcı listesini
-göstermek yerine linki otomatik olarak bir tarayıcıda açmasını sağlayabilirsiniz. Her kuralın beş sütunu vardır:
+göstermek yerine linki otomatik olarak bir tarayıcıda açmasını sağlayabilirsiniz.
+
+**Kural ekleme ve silme:** kural eklemek için son kuralın altındaki satırda, sol sütundaki **+** işaretine tıklayın
+(Eşleşme = `Domain` olan yeni bir satır eklenir ve Desen hücresine hemen yazabilirsiniz). Kural silmek için kuralları
+seçip **Sil**'e tıklayın (veya **Del** tuşuna basın); yalnızca seçili kurallar silinir, **+** satırı bir kural değildir ve
+silinemez. **Uygula**'ya basana kadar hiçbir şey kaydedilmez.
+
+Her kuralın beş sütunu vardır:
 
 **Eşleşme (Match)**: desenin linkin hangi kısmıyla karşılaştırılacağı:
 

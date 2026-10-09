@@ -35,13 +35,14 @@ testlerde kullanılan `tools\bs-open.ps1` yardımcı betiği orada anlatılıyor
 | 16 | Windows 10/11 görünümü: Segoe UI, düz butonlar, Tema (Açık/Koyu/Windows'a uy), Mica, yüksek DPI | [16-gorunum-tema.md](16-gorunum-tema.md) | 20 dk |
 | 17 | Tam ekran pencereleri atla (tek ve **çoklu monitör**), "Tüm pencereler tam ekransa" yedek ayarı | [17-tam-ekran-pencere.md](17-tam-ekran-pencere.md) | 30 dk |
 | 18 | 12 arayüz dili, Japonca/Çince yazı tipi, dar butonlarda taşma, yardım pencereleri | [18-arayuz-dilleri.md](18-arayuz-dilleri.md) | 40 dk |
+| 19 | Kural ekleme `+` satırı (otomatik boş satır yok), `Delete` yalnızca seçili kuralı siler | [19-kural-ekleme-arti-satiri.md](19-kural-ekleme-arti-satiri.md) | 20 dk |
 
 ## Klasör içeriği
 
 ```
 Tests/human_test/
 ├─ README.md                  ← bu dosya (indeks + sonuç tablosu)
-├─ 00-hazirlik.md … 18-*.md   ← reçeteler
+├─ 00-hazirlik.md … 19-*.md   ← reçeteler
 ├─ tools/
 │  └─ bs-open.ps1             ← bir linki BrowserSelect ile açan yardımcı betik
 └─ files/
@@ -116,6 +117,7 @@ Testleri bitirdikçe bu tabloyu kopyalayıp doldurabilirsin (issue açarken ekle
 | 16 | Windows 10/11 görünümü / Tema / Mica | | |
 | 17 | Tam ekran pencereleri atla / çoklu monitör | | |
 | 18 | 12 arayüz dili / CJK yazı tipi | | |
+| 19 | Kural ekleme + satırı / Delete düzeltmesi | | |
 
 Test ortamı: Windows sürümü: ______  BrowserSelect sürümü: ______  Yüklü tarayıcılar: ______
 

@@ -25,7 +25,8 @@ Bu reçete her eşleşme tipini, Private / Arguments / ignore URL seçeneklerini
 ## Kural nasıl eklenir (tüm alt testler için)
 
 1. Başlat menüsünden **BrowserSelect**’i aç → sağdaki dikey **`Settings`** butonu.
-2. `Auto Select Filters` tablosunun **en alttaki boş satırına** tıkla.
+2. `Auto Select Filters` tablosunda son kuralın altındaki satırın **sol sütunundaki `+`** işaretine tıkla
+   (v1.5.6.0’dan beri otomatik boş satır yok; `+` yeni bir kural satırı ekler ve `Pattern` hücresi yazmaya hazır olur).
 3. `Match` hücresinden tipi seç, `Pattern` hücresine kalıbı yaz, `Browser` hücresinden hedefi seç;
    gerekiyorsa `Private` kutusunu işaretle ve `Arguments` yaz.
 4. **`Apply`**’a bas (Apply pasifleşmeli, `Cancel` butonu `Close`’a dönmeli).

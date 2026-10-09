@@ -373,6 +373,9 @@ Vérifiez que vous êtes connecté à Internet.</value>
   <data name="Settings_Delete" xml:space="preserve">
     <value>Supprimer</value>
   </data>
+  <data name="RuleAddRow" xml:space="preserve">
+    <value>Ajouter une nouvelle règle</value>
+  </data>
   <data name="Settings_Apply" xml:space="preserve">
     <value>Appliquer</value>
   </data>
@@ -634,7 +637,7 @@ Arguments : options de ligne de commande supplémentaires pour le navigateur (pa
 
 Les motifs exacts sont vérifiés en premier, puis les motifs avec jokers, et * en dernier ; les règles de même priorité sont vérifiées de haut en bas (Monter / Descendre). La première règle qui correspond l'emporte ; si aucune ne correspond, la liste des navigateurs s'affiche.
 
-Pour supprimer une règle, sélectionnez-la et cliquez sur Supprimer (ou appuyez sur Suppr). Les modifications sont enregistrées avec Appliquer.
+Pour ajouter une règle, cliquez sur le + dans la colonne de gauche, sous la dernière règle. Pour supprimer une règle, sélectionnez-la et cliquez sur Supprimer (ou appuyez sur Suppr) ; la ligne + n'est pas une règle et ne peut pas être supprimée. Les modifications sont enregistrées avec Appliquer.
 « Lien ouvert depuis » (en bas de la fenêtre) indique l'application à utiliser dans les règles Source App.
 
 Remarque : vous pouvez ouvrir BrowserSelect manuellement depuis le menu Démarrer pour modifier les règles. Maintenez Alt en cliquant sur un lien pour ignorer les règles et choisir manuellement.

@@ -83,6 +83,12 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 
 # Changelog
 
+v1.5.6.0
+- **Rule list: "+" row instead of the automatic empty row.** Settings → Auto Select Filters no longer adds an empty "new row" at the bottom. Below the last rule there is a row with a **+** in the left (row header) column (tooltip *Add a new rule*, translated in all 12 languages); clicking it inserts a new rule above it (Match = `Domain`) and starts editing its Pattern. The + row is not a rule: it is never saved, validated, exported, moved with Move Up/Down or deleted, and its cells cannot be edited. The + is drawn in the current theme colors (light/dark) and scales with the display (DPI)
+- **Fix:** clicking the empty last row and pressing **Delete** (button or Del key) deleted the rule above it. Delete now removes exactly the selected rule(s), looked up by rule rather than by row number; with only the + row (or nothing) selected nothing happens
+- Help (Settings → Help, all 12 languages) and `help/filters*.md` (EN/TR): how to add a rule with + and delete it with Delete
+- Human test recipe: [Tests/human_test/19-kural-ekleme-arti-satiri.md](Tests/human_test/19-kural-ekleme-arti-satiri.md); recipes 02 and 11 now add rules with +
+
 v1.5.5.0
 - **12 user interface languages** (Settings → Language, takes effect after a restart): English, Turkish, Russian, Ukrainian, German, French, Spanish, Portuguese (Brazil), Italian, Polish, Simplified Chinese and Japanese. Every window, message box and both help windows are translated; the drop-down shows each language's native name. Right-to-left languages are not supported by the app UI (the installer offers Arabic and Persian)
 - **Automatic font per UI language:** Japanese uses Yu Gothic UI (fallback Meiryo UI), Simplified Chinese Microsoft YaHei UI (fallback Microsoft YaHei), every other language Segoe UI. Fonts that ship with Windows are used, no font files are bundled. Japanese/Chinese text is never shrunk below 9pt to fit and is never italic

@@ -373,6 +373,9 @@ Upewnij się, że masz połączenie z internetem.</value>
   <data name="Settings_Delete" xml:space="preserve">
     <value>Usuń</value>
   </data>
+  <data name="RuleAddRow" xml:space="preserve">
+    <value>Dodaj nową regułę</value>
+  </data>
   <data name="Settings_Apply" xml:space="preserve">
     <value>Zastosuj</value>
   </data>
@@ -634,7 +637,7 @@ Argumenty: dodatkowe opcje wiersza poleceń dla przeglądarki (np. --incognito -
 
 Najpierw sprawdzane są dokładne wzorce, potem wzorce z symbolami wieloznacznymi, a na końcu *; reguły o tym samym priorytecie są sprawdzane od góry do dołu (W górę / W dół). Wygrywa pierwsza pasująca reguła; jeśli żadna nie pasuje, wyświetlana jest lista przeglądarek.
 
-Aby usunąć regułę, zaznacz ją i kliknij Usuń (lub naciśnij klawisz Del). Zmiany zapisuje się przyciskiem Zastosuj.
+Aby dodać regułę, kliknij + w lewej kolumnie pod ostatnią regułą. Aby usunąć regułę, zaznacz ją i kliknij Usuń (lub naciśnij klawisz Del); wiersz + nie jest regułą i nie można go usunąć. Zmiany zapisuje się przyciskiem Zastosuj.
 „Źródło linku” (na dole okna) pokazuje aplikację do użycia w regułach Source App.
 
 Uwaga: BrowserSelect można otworzyć ręcznie z menu Start, aby zmienić reguły. Przytrzymaj Alt podczas klikania linku, aby pominąć reguły i wybrać ręcznie.

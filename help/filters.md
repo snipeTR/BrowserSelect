@@ -3,7 +3,14 @@
 🇹🇷 [Türkçe](filters.tr.md)
 
 With **Settings → Auto Select Filters** you can add rules so that BrowserSelect opens a link in a browser
-automatically instead of showing the browser list. Every rule has five columns:
+automatically instead of showing the browser list.
+
+**Adding and deleting rules:** click the **+** in the left column below the last rule to add a rule (a new row
+with Match = `Domain` is inserted and the Pattern cell is ready for typing). To delete rules select them and click
+**Delete** (or press the **Del** key); only the selected rules are deleted, the **+** row is not a rule and cannot be
+deleted. Nothing is saved until you click **Apply**.
+
+Every rule has five columns:
 
 **Match**: what part of the link the pattern is compared to:
 

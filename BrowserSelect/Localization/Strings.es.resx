@@ -373,6 +373,9 @@ Asegúrese de estar conectado a Internet.</value>
   <data name="Settings_Delete" xml:space="preserve">
     <value>Eliminar</value>
   </data>
+  <data name="RuleAddRow" xml:space="preserve">
+    <value>Añadir una nueva regla</value>
+  </data>
   <data name="Settings_Apply" xml:space="preserve">
     <value>Aplicar</value>
   </data>
@@ -634,7 +637,7 @@ Argumentos: opciones de línea de comandos adicionales para el navegador (p. ej.
 
 Primero se comprueban los patrones exactos, después los patrones con comodines y por último *; las reglas con la misma prioridad se comprueban de arriba abajo (Subir / Bajar). Gana la primera regla que coincide; si no coincide ninguna, se muestra la lista de navegadores.
 
-Para eliminar una regla, selecciónela y haga clic en Eliminar (o pulse la tecla Supr). Los cambios se guardan con Aplicar.
+Para añadir una regla, haga clic en el + de la columna izquierda, debajo de la última regla. Para eliminar una regla, selecciónela y haga clic en Eliminar (o pulse la tecla Supr); la fila + no es una regla y no se puede eliminar. Los cambios se guardan con Aplicar.
 "Enlace abierto desde" (abajo en la ventana) muestra la aplicación que debe usarse en las reglas Source App.
 
 Nota: puede abrir BrowserSelect manualmente desde el menú Inicio para cambiar las reglas. Mantenga pulsada Alt al hacer clic en un enlace para omitir las reglas y elegir manualmente.

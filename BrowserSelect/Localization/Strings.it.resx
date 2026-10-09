@@ -373,6 +373,9 @@ Assicurati di essere connesso a Internet.</value>
   <data name="Settings_Delete" xml:space="preserve">
     <value>Elimina</value>
   </data>
+  <data name="RuleAddRow" xml:space="preserve">
+    <value>Aggiungi una nuova regola</value>
+  </data>
   <data name="Settings_Apply" xml:space="preserve">
     <value>Applica</value>
   </data>
@@ -634,7 +637,7 @@ Parametri: opzioni aggiuntive della riga di comando per il browser (ad es. --inc
 
 Prima vengono controllati i pattern esatti, poi quelli con caratteri jolly e per ultimo *; le regole con la stessa priorità vengono controllate dall'alto in basso (Sposta su / Sposta giù). Vince la prima regola corrispondente; se nessuna corrisponde, viene mostrato l'elenco dei browser.
 
-Per eliminare una regola selezionala e fai clic su Elimina (o premi il tasto Canc). Le modifiche vengono salvate con Applica.
+Per aggiungere una regola fai clic sul + nella colonna di sinistra, sotto l'ultima regola. Per eliminare una regola selezionala e fai clic su Elimina (o premi il tasto Canc); la riga + non è una regola e non può essere eliminata. Le modifiche vengono salvate con Applica.
 "Link aperto da" (in fondo alla finestra) mostra l'applicazione da usare nelle regole Source App.
 
 Nota: puoi aprire BrowserSelect manualmente dal menu Start per modificare le regole. Tieni premuto Alt mentre fai clic su un link per saltare le regole e scegliere manualmente.

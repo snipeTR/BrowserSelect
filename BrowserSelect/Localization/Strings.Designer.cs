@@ -677,6 +677,15 @@ namespace BrowserSelect.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a new rule.
+        /// </summary>
+        internal static string RuleAddRow {
+            get {
+                return ResourceManager.GetString("RuleAddRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply.
         /// </summary>
         internal static string Settings_Apply {

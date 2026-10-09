@@ -373,6 +373,9 @@ Bitte prüfen Sie Ihre Internetverbindung.</value>
   <data name="Settings_Delete" xml:space="preserve">
     <value>Löschen</value>
   </data>
+  <data name="RuleAddRow" xml:space="preserve">
+    <value>Neue Regel hinzufügen</value>
+  </data>
   <data name="Settings_Apply" xml:space="preserve">
     <value>Anwenden</value>
   </data>
@@ -634,7 +637,7 @@ Argumente: zusätzliche Befehlszeilenoptionen für den Browser (z. B. --incognit
 
 Zuerst werden exakte Muster geprüft, dann Muster mit Platzhaltern und zuletzt *; Regeln mit gleicher Priorität werden von oben nach unten geprüft (Nach oben / Nach unten). Die erste passende Regel gewinnt; passt keine, wird die Browserliste angezeigt.
 
-Um eine Regel zu löschen, wählen Sie sie aus und klicken Sie auf Löschen (oder drücken Sie Entf). Änderungen werden mit Anwenden gespeichert.
+Um eine Regel hinzuzufügen, klicken Sie in der linken Spalte unter der letzten Regel auf +. Um eine Regel zu löschen, wählen Sie sie aus und klicken Sie auf Löschen (oder drücken Sie Entf); die Zeile mit dem + ist keine Regel und kann nicht gelöscht werden. Änderungen werden mit Anwenden gespeichert.
 „Link geöffnet aus“ (unten im Fenster) zeigt die Anwendung, die in Source-App-Regeln zu verwenden ist.
 
 Hinweis: Sie können BrowserSelect manuell über das Startmenü öffnen, um die Regeln zu ändern. Halten Sie beim Klicken auf einen Link Alt gedrückt, um die Regeln zu überspringen und manuell zu wählen.

@@ -121,8 +121,12 @@ namespace BrowserSelect
             btn_cancel.Text = Strings.Common_Close;
         }
 
+        // the rule grid shows the rules followed by one "add" row (AddRuleRow, painted as a "+" in the row header).
+        // The add row is a placeholder object at the end of the list, never a rule: it is not saved, validated,
+        // exported, deleted or moved, and its cells cannot be edited (see the "Rule grid: add row" region).
         private BindingList<AutoMatchRule> rules = new BindingList<AutoMatchRule>();
         private BindingSource rulesBindingSource;
+        private readonly AutoMatchRule AddRuleRow = new AutoMatchRule { Pattern = "", Browser = "" };
         private void frm_settings_Load(object sender, EventArgs e)
         {
             //check if browser select is the default browser or not
@@ -141,9 +145,10 @@ namespace BrowserSelect
             gv_filters.AutoGenerateColumns = false;
             matchType.Items.AddRange(AutoMatchRule.MatchTypes);
 
-            //populate Rules in the gridview
+            //populate Rules in the gridview (+ the "add" row at the end)
             foreach (var rule in Settings.Default.AutoBrowser)
                 rules.Add(rule);
+            rules.Add(AddRuleRow);
 
             //populate list of browsers (browser filter + Rule List ComboBox)
             PopulateBrowsers(BrowserFinder.find());
@@ -158,7 +163,13 @@ namespace BrowserSelect
             UpdateBrowserButtons();
             rulesBindingSource = new BindingSource();
             rulesBindingSource.DataSource = rules;
+            // new rules are only added with the "+" row; no automatic empty "new row" (it shifted the row
+            // indexes against the rule list, so Delete on it removed the rule above)
+            rulesBindingSource.AllowNew = false;
+            gv_filters.AllowUserToAddRows = false;
+            gv_filters.AllowUserToDeleteRows = false;
             gv_filters.DataSource = rulesBindingSource;
+            SetupAddRow();
 
             _populating = true;
             chk_check_update.Checked = Settings.Default.check_update != "nope";
@@ -209,7 +220,7 @@ namespace BrowserSelect
             c.Items.Add(AutoMatchRule.DisplayBrowserSelect);
             c.Items.Add(AutoMatchRule.IgnoreUrl);
             // keep rules pointing at a browser that is no longer installed displayable/editable
-            foreach (var rule in rules)
+            foreach (var rule in RealRules)
                 if (!string.IsNullOrEmpty(rule.Browser) && !c.Items.Contains(rule.Browser))
                     c.Items.Add(rule.Browser);
         }
@@ -407,7 +418,7 @@ namespace BrowserSelect
         /// <summary>rules refer to browsers by name; keep them working when a browser is renamed</summary>
         private void RenameBrowserInRules(string oldName, string newName)
         {
-            foreach (var rule in rules)
+            foreach (var rule in RealRules)
                 if (rule.Browser == oldName)
                     rule.Browser = newName;
             rulesBindingSource?.ResetBindings(false);
@@ -676,7 +687,7 @@ namespace BrowserSelect
 
             //clear rules (instead of checking for changes we just overwrite the whole ruleset)
             Settings.Default.AutoBrowser.Clear();
-            foreach (var rule in rules)
+            foreach (var rule in RealRules)
             {
                 //check if rule has both pattern and browser defined
                 if (rule.valid())
@@ -722,9 +733,20 @@ namespace BrowserSelect
             Close();
         }
 
-        private void gv_filters_CellBeginEdit(object sender, EventArgs e)
+        private void gv_filters_CellBeginEditRule(object sender, DataGridViewCellCancelEventArgs e)
         {
-            //set the unsaved changes flag to true
+            // the "+" row is not a rule: its cells are never edited
+            if (IsAddRow(e.RowIndex))
+            {
+                e.Cancel = true;
+                return;
+            }
+            MarkUnsaved();
+        }
+
+        /// <summary>sets the unsaved changes flag (Apply enabled, Close becomes Cancel)</summary>
+        private void MarkUnsaved()
+        {
             btn_apply.Enabled = true;
             btn_cancel.Text = Strings.Common_Cancel;
         }
@@ -752,31 +774,51 @@ namespace BrowserSelect
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            gv_filters.EndEdit();
-            if (rulesBindingSource != null)
-                rulesBindingSource.EndEdit();
+            DeleteSelectedRules();
+        }
 
-            int rowIndex = gv_filters.CurrentCell == null
-                ? -1
-                : gv_filters.CurrentCell.RowIndex;
-            if (rowIndex < 0 || rowIndex >= rules.Count)
+        /// <summary>
+        /// deletes exactly the selected rules (selected rows, or the rows of the selected cells). The rules are
+        /// looked up by object, not by row index; the "+" row is never deleted, with nothing else selected
+        /// nothing happens
+        /// </summary>
+        private void DeleteSelectedRules()
+        {
+            if (rulesBindingSource == null)
+                return;
+            gv_filters.EndEdit();
+            rulesBindingSource.EndEdit();
+
+            var rows = new HashSet<int>();
+            foreach (DataGridViewRow row in gv_filters.SelectedRows)
+                rows.Add(row.Index);
+            foreach (DataGridViewCell cell in gv_filters.SelectedCells)
+                rows.Add(cell.RowIndex);
+            var selected = rows.Where(i => i >= 0 && i < RuleCount)
+                .OrderBy(i => i)
+                .Select(i => rules[i])
+                .ToList();
+            if (selected.Count == 0)
                 return;
 
-            int columnIndex = gv_filters.CurrentCell.ColumnIndex;
-            rules.RemoveAt(rowIndex);
+            int firstIndex = rules.IndexOf(selected[0]);
+            int columnIndex = gv_filters.CurrentCell != null && gv_filters.CurrentCell.ColumnIndex >= 0
+                ? gv_filters.CurrentCell.ColumnIndex
+                : 0;
+            foreach (var rule in selected)
+                rules.Remove(rule);
 
-            if (rules.Count > 0)
+            // select the rule now at the same position (or the last rule; the "+" row if there is none left)
+            int newIndex = Math.Max(0, Math.Min(firstIndex, RuleCount - 1));
+            if (newIndex < gv_filters.Rows.Count && columnIndex < gv_filters.Columns.Count)
             {
-                int newIndex = Math.Min(rowIndex, rules.Count - 1);
-                if (columnIndex >= gv_filters.Columns.Count)
-                    columnIndex = 0;
                 gv_filters.ClearSelection();
                 gv_filters.CurrentCell = gv_filters.Rows[newIndex].Cells[columnIndex];
-                gv_filters.Rows[newIndex].Selected = true;
+                if (!IsAddRow(newIndex))
+                    gv_filters.Rows[newIndex].Selected = true;
             }
 
-            btn_apply.Enabled = true;
-            btn_cancel.Text = Strings.Common_Cancel;
+            MarkUnsaved();
         }
 
         private void MoveSelectedRule(int offset)
@@ -788,11 +830,12 @@ namespace BrowserSelect
             int rowIndex = gv_filters.CurrentCell == null
                 ? -1
                 : gv_filters.CurrentCell.RowIndex;
-            if (rowIndex < 0 || rowIndex >= rules.Count)
+            // the "+" row is never moved and nothing is moved below it
+            if (rowIndex < 0 || rowIndex >= RuleCount)
                 return;
 
             int targetIndex = rowIndex + offset;
-            if (targetIndex < 0 || targetIndex >= rules.Count)
+            if (targetIndex < 0 || targetIndex >= RuleCount)
                 return;
 
             int columnIndex = gv_filters.CurrentCell.ColumnIndex;
@@ -810,8 +853,7 @@ namespace BrowserSelect
             gv_filters.CurrentCell = gv_filters.Rows[targetIndex].Cells[columnIndex];
             gv_filters.Rows[targetIndex].Selected = true;
 
-            btn_apply.Enabled = true;
-            btn_cancel.Text = Strings.Common_Cancel;
+            MarkUnsaved();
         }
 
         private void frm_settings_FormClosed(object sender, FormClosedEventArgs e)
@@ -936,6 +978,7 @@ namespace BrowserSelect
             rules.Clear();
             foreach (var rule in Settings.Default.AutoBrowser)
                 rules.Add(rule);
+            rules.Add(AddRuleRow);
             rulesBindingSource.ResetBindings(false);
             btn_apply.Enabled = false;
             btn_cancel.Text = Strings.Common_Close;
@@ -958,6 +1001,178 @@ namespace BrowserSelect
             PopulateBrowsers(BrowserFinder.find(true), SelectedBrowser?.Identifier);
             this.mainForm.updateBrowsers();
         }
+
+        #region Rule grid: add row ("+")
+
+        /// <summary>number of real rules (the list ends with the "+" row)</summary>
+        private int RuleCount
+        {
+            get { return rules.Count > 0 && ReferenceEquals(rules[rules.Count - 1], AddRuleRow) ? rules.Count - 1 : rules.Count; }
+        }
+
+        /// <summary>every rule of the grid, without the "+" row</summary>
+        private IEnumerable<AutoMatchRule> RealRules
+        {
+            get { return rules.Where(r => !ReferenceEquals(r, AddRuleRow)); }
+        }
+
+        private bool IsAddRow(int rowIndex)
+        {
+            if (rowIndex < 0 || rowIndex >= gv_filters.Rows.Count)
+                return false;
+            return ReferenceEquals(gv_filters.Rows[rowIndex].DataBoundItem, AddRuleRow);
+        }
+
+        private bool _addRowHover;
+
+        private void SetupAddRow()
+        {
+            gv_filters.ShowCellToolTips = true;
+            gv_filters.CellPainting += gv_filters_CellPainting;
+            gv_filters.CellMouseClick += gv_filters_CellMouseClick;
+            gv_filters.CellMouseEnter += gv_filters_CellMouseEnter;
+            gv_filters.CellMouseLeave += gv_filters_CellMouseLeave;
+            gv_filters.CellToolTipTextNeeded += gv_filters_CellToolTipTextNeeded;
+            gv_filters.KeyDown += gv_filters_KeyDown;
+            gv_filters.DataBindingComplete += (s, e) => ProtectAddRow();
+            gv_filters.RowsAdded += (s, e) => ProtectAddRow();
+            ProtectAddRow();
+        }
+
+        /// <summary>the "+" row is read-only (also after a re-binding, e.g. Move Up/Down or Import)</summary>
+        private void ProtectAddRow()
+        {
+            try
+            {
+                for (int i = 0; i < gv_filters.Rows.Count; i++)
+                {
+                    bool add = IsAddRow(i);
+                    if (gv_filters.Rows[i].ReadOnly != add)
+                        gv_filters.Rows[i].ReadOnly = add;
+                }
+            }
+            catch (Exception) { }
+        }
+
+        /// <summary>inserts an empty rule (Match = Domain) above the "+" row and starts editing its Pattern</summary>
+        private void AddRule()
+        {
+            if (rulesBindingSource == null)
+                return;
+            gv_filters.EndEdit();
+            rulesBindingSource.EndEdit();
+            int index = RuleCount;
+            rules.Insert(index, new AutoMatchRule());
+            ProtectAddRow();
+            MarkUnsaved();
+            // after the click has been processed by the grid
+            BeginInvoke((Action)(() =>
+            {
+                try
+                {
+                    if (index >= gv_filters.Rows.Count || IsAddRow(index))
+                        return;
+                    gv_filters.ClearSelection();
+                    gv_filters.CurrentCell = gv_filters.Rows[index].Cells[pattern.Index];
+                    gv_filters.Rows[index].Selected = true;
+                    gv_filters.Focus();
+                    gv_filters.BeginEdit(true);
+                }
+                catch (Exception) { }
+            }));
+        }
+
+        private void gv_filters_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && IsAddRow(e.RowIndex))
+                AddRule();
+        }
+
+        private void gv_filters_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (gv_filters.IsCurrentCellInEditMode)
+                return;
+            if (e.KeyCode == Keys.Delete && e.Modifiers == Keys.None)
+            {
+                // same as the Delete button: exactly the selected rules, never the "+" row
+                DeleteSelectedRules();
+                e.Handled = true;
+            }
+            else if ((e.KeyCode == Keys.Space || e.KeyCode == Keys.Insert) && e.Modifiers == Keys.None &&
+                     gv_filters.CurrentCell != null && IsAddRow(gv_filters.CurrentCell.RowIndex))
+            {
+                AddRule();
+                e.Handled = true;
+            }
+        }
+
+        private void gv_filters_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        {
+            if (IsAddRow(e.RowIndex))
+                e.ToolTipText = Strings.RuleAddRow;
+        }
+
+        private void gv_filters_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!IsAddRow(e.RowIndex))
+                return;
+            gv_filters.Cursor = Cursors.Hand;
+            _addRowHover = true;
+            gv_filters.InvalidateCell(-1, e.RowIndex);
+        }
+
+        private void gv_filters_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!IsAddRow(e.RowIndex))
+                return;
+            gv_filters.Cursor = Cursors.Default;
+            _addRowHover = false;
+            gv_filters.InvalidateCell(-1, e.RowIndex);
+        }
+
+        /// <summary>
+        /// the "+" row: blank cells (background and grid lines only) and a "+" in the row header, drawn with the
+        /// grid's current (light/dark theme) colors and scaled with the cell size
+        /// </summary>
+        private void gv_filters_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0 || !IsAddRow(e.RowIndex))
+                return;
+            var style = e.CellStyle;
+            var back = style.BackColor;
+            var fore = style.ForeColor;
+            if (e.ColumnIndex < 0 && _addRowHover)
+            {
+                back = style.SelectionBackColor;
+                fore = style.SelectionForeColor;
+            }
+            using (var brush = new SolidBrush(back))
+                e.Graphics.FillRectangle(brush, e.CellBounds);
+            e.Paint(e.ClipBounds, DataGridViewPaintParts.Border);
+
+            if (e.ColumnIndex < 0)
+            {
+                var r = e.CellBounds;
+                float scale = Math.Max(1f, e.Graphics.DpiX / 96f);
+                int size = (int)Math.Round(Math.Min(Math.Min(r.Width, r.Height) * 0.55f, 11f * scale));
+                if (size < 5)
+                    size = 5;
+                float thickness = Math.Max(1f, (float)Math.Round(1.5f * scale));
+                int cx = r.Left + r.Width / 2;
+                int cy = r.Top + r.Height / 2;
+                using (var pen = new Pen(fore, thickness))
+                {
+                    var old = e.Graphics.SmoothingMode;
+                    e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                    e.Graphics.DrawLine(pen, cx - size / 2, cy, cx - size / 2 + size, cy);
+                    e.Graphics.DrawLine(pen, cx, cy - size / 2, cx, cy - size / 2 + size);
+                    e.Graphics.SmoothingMode = old;
+                }
+            }
+            e.Handled = true;
+        }
+
+        #endregion
 
         private void gv_filters_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {

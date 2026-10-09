@@ -373,6 +373,9 @@ Lütfen internete bağlı olduğunuzdan emin olun.</value>
   <data name="Settings_Delete" xml:space="preserve">
     <value>Sil</value>
   </data>
+  <data name="RuleAddRow" xml:space="preserve">
+    <value>Yeni kural ekle</value>
+  </data>
   <data name="Settings_Apply" xml:space="preserve">
     <value>Uygula</value>
   </data>
@@ -634,7 +637,7 @@ Argümanlar: tarayıcıya verilecek ek komut satırı argümanları (ör. --inco
 
 Önce tam desenler, sonra joker karakterli desenler, en son * denetlenir; aynı öncelikteki kurallar yukarıdan aşağıya denetlenir (Yukarı / Aşağı). İlk eşleşen kural uygulanır; hiçbiri eşleşmezse tarayıcı listesi gösterilir.
 
-Bir kuralı silmek için seçip Sil'e tıklayın (veya Del tuşuna basın). Değişiklikler Uygula ile kaydedilir.
+Kural eklemek için son kuralın altındaki satırda, sol sütundaki + işaretine tıklayın. Bir kuralı silmek için seçip Sil'e tıklayın (veya Del tuşuna basın); + satırı bir kural değildir ve silinemez. Değişiklikler Uygula ile kaydedilir.
 Pencerenin altındaki "Linki açan" bilgisi, Source App kurallarında kullanılacak uygulamayı gösterir.
 
 Not: Kuralları değiştirmek için BrowserSelect'i Başlat menüsünden elle açabilirsiniz. Kuralları atlayıp elle seçmek için linke tıklarken Alt tuşunu basılı tutun.

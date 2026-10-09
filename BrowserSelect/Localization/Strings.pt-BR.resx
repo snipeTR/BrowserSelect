@@ -373,6 +373,9 @@ Verifique se você está conectado à internet.</value>
   <data name="Settings_Delete" xml:space="preserve">
     <value>Excluir</value>
   </data>
+  <data name="RuleAddRow" xml:space="preserve">
+    <value>Adicionar uma nova regra</value>
+  </data>
   <data name="Settings_Apply" xml:space="preserve">
     <value>Aplicar</value>
   </data>
@@ -634,7 +637,7 @@ Argumentos: opções de linha de comando extras para o navegador (por ex. --inco
 
 Primeiro são verificados os modelos exatos, depois os modelos com curingas e por último *; regras com a mesma prioridade são verificadas de cima para baixo (Subir / Descer). Vale a primeira regra que corresponder; se nenhuma corresponder, a lista de navegadores é mostrada.
 
-Para excluir uma regra, selecione-a e clique em Excluir (ou pressione a tecla Del). As alterações são salvas com Aplicar.
+Para adicionar uma regra, clique no + da coluna da esquerda, abaixo da última regra. Para excluir uma regra, selecione-a e clique em Excluir (ou pressione a tecla Del); a linha + não é uma regra e não pode ser excluída. As alterações são salvas com Aplicar.
 "Link aberto por" (na parte inferior da janela) mostra o aplicativo a usar nas regras Source App.
 
 Observação: você pode abrir o BrowserSelect manualmente pelo menu Iniciar para alterar as regras. Mantenha Alt pressionado ao clicar em um link para ignorar as regras e escolher manualmente.

@@ -352,6 +352,8 @@ namespace BrowserSelect {
             this.gv_filters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gv_filters.AllowUserToAddRows = false;
+            this.gv_filters.AllowUserToDeleteRows = false;
             this.gv_filters.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_filters.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.matchType,
@@ -363,11 +365,9 @@ namespace BrowserSelect {
             this.gv_filters.Name = "gv_filters";
             this.gv_filters.Size = new System.Drawing.Size(638, 486);
             this.gv_filters.TabIndex = 1;
-            this.gv_filters.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gv_filters_CellBeginEdit);
+            this.gv_filters.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gv_filters_CellBeginEditRule);
             this.gv_filters.CurrentCellDirtyStateChanged += new System.EventHandler(this.gv_filters_CurrentCellDirtyStateChanged);
             this.gv_filters.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.gv_filters_DataError);
-            this.gv_filters.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gv_filters_CellBeginEdit);
-            this.gv_filters.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gv_filters_CellBeginEdit);
             //
             // matchType
             //

@@ -452,6 +452,10 @@ Please make sure you are connected to internet.</value>
     <value>Delete</value>
     <comment>Button (75 px wide)</comment>
   </data>
+  <data name="RuleAddRow" xml:space="preserve">
+    <value>Add a new rule</value>
+    <comment>Tooltip of the "+" row below the last rule (Settings, rule list)</comment>
+  </data>
   <data name="Settings_Apply" xml:space="preserve">
     <value>Apply</value>
     <comment>Button (75 px wide)</comment>
@@ -779,7 +783,7 @@ Arguments: extra command line flags for the browser (e.g. --incognito --disable-
 
 Exact patterns are checked first, then wildcard patterns, and * last; rules with the same priority are checked from top to bottom (Move Up / Move Down). The first matching rule wins; if none matches, the browser list is shown.
 
-To delete a rule select it and click Delete (or press the Del key). Changes are saved with Apply.
+To add a rule click the + in the left column below the last rule. To delete a rule select it and click Delete (or press the Del key); the + row is not a rule and cannot be deleted. Changes are saved with Apply.
 "Link opened from" (bottom of the window) shows the application to use in Source App rules.
 
 Note: you can open BrowserSelect manually from the Start menu to change the rules. Hold Alt while clicking a link to skip the rules and choose manually.

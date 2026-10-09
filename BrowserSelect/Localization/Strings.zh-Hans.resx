@@ -373,6 +373,9 @@
   <data name="Settings_Delete" xml:space="preserve">
     <value>删除</value>
   </data>
+  <data name="RuleAddRow" xml:space="preserve">
+    <value>添加新规则</value>
+  </data>
   <data name="Settings_Apply" xml:space="preserve">
     <value>应用</value>
   </data>
@@ -634,7 +637,7 @@
 
 先检查精确的匹配内容，再检查含通配符的匹配内容，最后检查 *；优先级相同的规则按从上到下的顺序检查（上移 / 下移）。第一条匹配的规则生效；如果没有规则匹配，则显示浏览器列表。
 
-要删除规则，请选中它并点击“删除”（或按 Del 键）。点击“应用”保存更改。
+要添加规则，请点击最后一条规则下方左侧列中的 +。要删除规则，请选中它并点击“删除”（或按 Del 键）；+ 行不是规则，不能删除。点击“应用”保存更改。
 窗口底部的“链接来源”显示在 Source App 规则中应使用的应用程序。
 
 注意：您可以从“开始”菜单手动打开 BrowserSelect 来更改规则。点击链接时按住 Alt 可跳过规则并手动选择。
