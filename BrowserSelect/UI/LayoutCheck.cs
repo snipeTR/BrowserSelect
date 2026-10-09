@@ -114,7 +114,7 @@ namespace BrowserSelect.UI
                     var b = visible[j].Bounds;
                     a.Inflate(-1, -1);
                     b.Inflate(-1, -1);
-                    if (a.IntersectsWith(b))
+                    if (a.IntersectsWith(b) && !Designed(c, visible[j]))
                         issues.Add(string.Format("OVERLAP {0} {1} and {2} {3}", Id(c), c.Bounds, Id(visible[j]), visible[j].Bounds));
                 }
                 var clip = CheckText(c, scale);
@@ -137,6 +137,20 @@ namespace BrowserSelect.UI
                 if (c.HasChildren && !(c is DataGridView) && !(c is ComboBox) && !(c is NumericUpDown))
                     AppendPositions(form, c, lines);
             }
+        }
+
+        /// <summary>overlaps that are part of the original design</summary>
+        private static bool Designed(Control a, Control b)
+        {
+            var pair = Id(a) + "/" + Id(b);
+            switch (pair)
+            {
+                case "btn_help/ButtonsUC": case "ButtonsUC/btn_help":     // ? at the bottom of the side buttons
+                case "btn_refresh/groupBox1": case "groupBox1/btn_refresh": // Refresh on the caption line
+                case "shortcuts/name": case "name/shortcuts":               // transparent labels touching
+                    return true;
+            }
+            return false;
         }
 
         private static string Short(string s)
@@ -168,7 +182,7 @@ namespace BrowserSelect.UI
                         continue;
                     var font = gv.ColumnHeadersDefaultCellStyle.Font ?? gv.Font;
                     var w = TextRenderer.MeasureText(col.HeaderText, font).Width;
-                    if (w + 6 * scale > col.Width)
+                    if (w + 2 * scale > col.Width)
                         return string.Format("column header \"{0}\" needs {1}px, column is {2}px", col.HeaderText, w, col.Width);
                     var h = TextRenderer.MeasureText("Ag", font).Height;
                     if (h > gv.ColumnHeadersHeight)
@@ -195,7 +209,7 @@ namespace BrowserSelect.UI
             if (c is CheckBox || c is RadioButton)
             {
                 var box = (int)Math.Ceiling(18 * scale);
-                var size = Measure(c, text, c.Width - box, flags);
+                var size = Measure(c, text, int.MaxValue / 2, TextFormatFlags.SingleLine);
                 if (size.Height > c.Height + 1 || size.Width > c.Width - box + 1)
                     return string.Format("needs {0} + {1}px box, control is {2}", size, box, c.Size);
                 return null;

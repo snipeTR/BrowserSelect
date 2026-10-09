@@ -40,6 +40,8 @@ public static class W {
   [DllImport("user32.dll")] public static extern bool IsWindow(IntPtr h);
   [DllImport("user32.dll")] public static extern void mouse_event(uint f, uint x, uint y, uint d, IntPtr e);
   public static void Click(int x, int y) { SetCursorPos(x, y); System.Threading.Thread.Sleep(200); mouse_event(2,0,0,0,IntPtr.Zero); mouse_event(4,0,0,0,IntPtr.Zero); }
+  [DllImport("user32.dll")] public static extern void keybd_event(byte k, byte s, uint f, IntPtr e);
+  public static void Key(byte k) { keybd_event(k,0,0,IntPtr.Zero); keybd_event(k,0,2,IntPtr.Zero); }
   public static void Close(IntPtr h) { PostMessage(h, 0x0010, IntPtr.Zero, IntPtr.Zero); }
 }
 "@
@@ -114,7 +116,8 @@ function ClickCtl([IntPtr]$h, [string]$name, [int]$index = 0, [double]$fx = 0.5,
     $sorted = [object[]]($found.ToArray())
     [Array]::Sort($sorted, [Comparison[object]] { param($a, $b) ([int]$a[3]).CompareTo([int]$b[3]) })
     $c = $sorted[$index]
-    if ($c[6] -ne "1") { throw "control $name is disabled" }
+    if ($c[6] -ne "1" -and -not $script:forceEnabled) { throw "control $name is disabled" }
+    $script:forceEnabled = $false
     $x = $info.L + ([int]$c[2] + [int]$c[4] * $fx) * $ratio
     $y = $info.T + ([int]$c[3] + [int]$c[5] * $fy) * $ratio
     [W]::Click([int]$x, [int]$y)
@@ -192,7 +195,11 @@ function RunAll {
             try {
                 # select the first browser of the list (click its text, top of the list), then Edit...
                 ClickCtl $settings "browser_filter" 0 0.6 0.03
+                Start-Sleep -Milliseconds 400
+                [W]::Key(0x24)  # Home: first browser selected (enables Edit...)
                 Start-Sleep -Milliseconds 800
+                # the report was written before the selection; Edit... is enabled now
+                $script:forceEnabled = $true
                 ClickCtl $settings "btn_browser_edit"
                 $edit = NewWindow $settings
                 if ($edit -ne [IntPtr]::Zero) { Shot $edit "$tag-5-edit-browser" "frm_browser_edit"; CloseWindow $edit }

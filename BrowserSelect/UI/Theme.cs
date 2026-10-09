@@ -259,9 +259,133 @@ namespace BrowserSelect.UI
                         return;
                     }
                 }
+                // once the window has its final (DPI scaled) size: a label may use free space below it
+                if (info.Laidout && c is Label)
+                {
+                    foreach (var font in new[] { info.Preferred, info.Smaller, info.Original })
+                    {
+                        if (font != null && GrowLabel((Label)c, font))
+                        {
+                            c.Font = font;
+                            return;
+                        }
+                    }
+                }
                 c.Font = info.Original;
             }
             catch (Exception) { }
+        }
+
+        /// <summary>
+        /// makes a fixed-size label taller if its text needs more lines than it has room for and the
+        /// space below it (up to the next control or the bottom of its parent) is free
+        /// </summary>
+        private static bool GrowLabel(Label label, Font font)
+        {
+            var parent = label.Parent;
+            if (parent == null || label.AutoEllipsis || label.Dock != DockStyle.None)
+                return false;
+            var needed = LabelTextHeight(label, font) + label.Padding.Vertical + (label.Height - label.ClientSize.Height);
+            if (needed <= label.Height)
+                return true;
+            var limit = parent.ClientSize.Height - (parent is GroupBox ? Px(3) : 0);
+            foreach (Control other in parent.Controls)
+            {
+                if (other == label || !other.Visible)
+                    continue;
+                var b = other.Bounds;
+                if (b.Top >= label.Top + 1 && b.Right > label.Left && b.Left < label.Right)
+                    limit = Math.Min(limit, b.Top - 1);
+            }
+            if (label.Top + needed > limit)
+                return false;
+            label.Height = needed;
+            return true;
+        }
+
+        private static int LabelTextHeight(Label label, Font font)
+        {
+            var text = label.Text ?? "";
+            var width = Math.Max(1, label.ClientSize.Width - label.Padding.Horizontal - 6);
+            if (label.UseCompatibleTextRendering)
+            {
+                using (var g = label.CreateGraphics())
+                    return (int)Math.Ceiling(g.MeasureString(text, font, width).Height);
+            }
+            return TextRenderer.MeasureText(text, font, new Size(width, int.MaxValue),
+                TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl).Height;
+        }
+
+        /// <summary>
+        /// the window got its final size (WinForms scales it to the display scale before Load): fit the
+        /// fonts again for the real control sizes, then keep the window on the screen
+        /// </summary>
+        private static void Form_Load(object sender, EventArgs e)
+        {
+            var form = (Form)sender;
+            try
+            {
+                Refit(form);
+            }
+            catch (Exception) { }
+            FitToScreen(form);
+        }
+
+        private static void Refit(Control parent)
+        {
+            foreach (Control c in parent.Controls)
+            {
+                if (c.HasChildren && !(c is DataGridView))
+                    Refit(c);
+                ControlInfo info;
+                if (Infos.TryGetValue(c, out info) && info.Preferred != null && NeedsFitting(c))
+                {
+                    info.Laidout = true;
+                    FitFont(c);
+                }
+            }
+        }
+
+        /// <summary>
+        /// a window bigger than the screen (e.g. Settings at 175 % on a 1920x1080 screen) gets scroll bars
+        /// instead of controls hidden below the taskbar; the layout inside stays the same
+        /// </summary>
+        private static void FitToScreen(Form form)
+        {
+            try
+            {
+                var area = Screen.FromPoint(Cursor.Position).WorkingArea;
+                var size = form.Size;
+                if (size.Width > area.Width || size.Height > area.Height)
+                {
+                    var client = form.ClientSize;
+                    form.MinimumSize = Size.Empty;
+                    form.AutoScrollMinSize = client;
+                    form.AutoScroll = true;
+                    form.Size = new Size(Math.Min(size.Width, area.Width), Math.Min(size.Height, area.Height));
+                }
+                KeepOnScreen(form);
+            }
+            catch (Exception) { }
+        }
+
+        private static void KeepOnScreen(Form form)
+        {
+            try
+            {
+                var area = Screen.FromControl(form).WorkingArea;
+                var b = form.Bounds;
+                var x = Math.Max(area.Left, Math.Min(b.Left, area.Right - b.Width));
+                var y = Math.Max(area.Top, Math.Min(b.Top, area.Bottom - b.Height));
+                if (x != b.Left || y != b.Top)
+                    form.Location = new Point(x, y);
+            }
+            catch (Exception) { }
+        }
+
+        private static void Form_Shown(object sender, EventArgs e)
+        {
+            KeepOnScreen((Form)sender);
         }
 
         private static bool Fits(Control c, Font font)
@@ -271,7 +395,7 @@ namespace BrowserSelect.UI
             {
                 // flat buttons lay out their text inside the border with some padding; keep a safe margin
                 var size = TextRenderer.MeasureText(text.Length > 0 ? text : "Ag", font);
-                if (c.Height < SmallButtonHeight)
+                if (c.Height < Px(SmallButtonHeight))
                     return size.Width + 6 <= c.Width && size.Height + 2 <= c.Height;
                 return size.Width + 16 <= c.Width && size.Height + 6 <= c.Height;
             }
@@ -308,6 +432,7 @@ namespace BrowserSelect.UI
             public Role Role;
             public Font Original, Preferred, Smaller;
             public bool PaintHooked;
+            public bool Laidout;
         }
 
         private static readonly ConditionalWeakTable<Control, ControlInfo> Infos = new ConditionalWeakTable<Control, ControlInfo>();
@@ -470,7 +595,7 @@ namespace BrowserSelect.UI
             }
             b.FlatStyle = FlatStyle.Flat;
             b.UseVisualStyleBackColor = false;
-            if (b.Height < SmallButtonHeight && !(b is VButton))
+            if (b.Height < Px(SmallButtonHeight) && !(b is VButton))
             {
                 // flat buttons keep a few pixels of padding around the text, which clips it in short
                 // buttons (Refresh, Always); those draw their text themselves (see PaintSmallButton)
@@ -491,6 +616,32 @@ namespace BrowserSelect.UI
 
         /// <summary>buttons lower than this get their text painted without the flat button's inner padding</summary>
         private const int SmallButtonHeight = 23;
+
+        private static float _dpiScale;
+
+        /// <summary>display scale the windows are drawn at (system DPI / 96; 1.5 at 150 %)</summary>
+        private static float DpiScale
+        {
+            get
+            {
+                if (_dpiScale <= 0)
+                {
+                    try
+                    {
+                        using (var g = Graphics.FromHwnd(IntPtr.Zero))
+                            _dpiScale = g.DpiY / 96f;
+                    }
+                    catch (Exception) { _dpiScale = 1f; }
+                }
+                return _dpiScale;
+            }
+        }
+
+        /// <summary>a size designed at 100 % in pixels at the current scale</summary>
+        private static int Px(int value)
+        {
+            return (int)Math.Round(value * DpiScale);
+        }
 
         private static void PaintSmallButton(object sender, PaintEventArgs e)
         {
@@ -640,6 +791,10 @@ namespace BrowserSelect.UI
 
             form.HandleCreated -= Form_HandleCreated;
             form.HandleCreated += Form_HandleCreated;
+            form.Load -= Form_Load;
+            form.Load += Form_Load;
+            form.Shown -= Form_Shown;
+            form.Shown += Form_Shown;
             if (form.IsHandleCreated)
                 ApplyWindowAttributes(form, dark, true);
             form.Invalidate(true);
