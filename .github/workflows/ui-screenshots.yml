@@ -19,6 +19,12 @@ permissions:
 
 jobs:
   screenshots:
+    # signin: inside Remote Desktop sessions signed in at each scale (the usual single screen case)
+    # runtime: scale of the runner's screen changed at run time (like a second monitor with another scale)
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [signin, runtime]
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v5
@@ -30,17 +36,21 @@ jobs:
         run: |
           git show "${{ github.sha }}:.github/scripts/ui-screenshots.ps1" | Out-File -Encoding utf8 "$env:RUNNER_TEMP\ui-screenshots.ps1"
           git show "${{ github.sha }}:.github/scripts/Display.cs" | Out-File -Encoding utf8 "$env:RUNNER_TEMP\Display.cs"
+          git show "${{ github.sha }}:.github/scripts/ui-signin-scales.ps1" | Out-File -Encoding utf8 "$env:RUNNER_TEMP\ui-signin-scales.ps1"
       - uses: microsoft/setup-msbuild@v2
       - uses: NuGet/setup-nuget@v2
       - run: nuget restore BrowserSelect.sln
       - run: msbuild BrowserSelect\BrowserSelect.csproj /p:Configuration=Release /p:Platform=x64 /m /v:minimal
       - name: Screenshots
         shell: pwsh
-        timeout-minutes: 40
-        run: '& "$env:RUNNER_TEMP\ui-screenshots.ps1" -Scales "${{ inputs.scales || ''100,125,150,175,200'' }}"'
+        timeout-minutes: 60
+        run: |
+          $scales = "${{ inputs.scales || '100,125,150,175,200' }}"
+          if ("${{ matrix.mode }}" -eq "signin") { & "$env:RUNNER_TEMP\ui-signin-scales.ps1" -Scales $scales -ScriptDir $env:RUNNER_TEMP }
+          else { & "$env:RUNNER_TEMP\ui-screenshots.ps1" -Mode runtime -Scales $scales }
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: ui-screenshots
+          name: ui-screenshots-${{ matrix.mode }}
           path: screenshots-ci/
           if-no-files-found: warn

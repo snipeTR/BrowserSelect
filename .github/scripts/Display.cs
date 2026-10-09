@@ -28,6 +28,19 @@ public static class Disp
     [DllImport("user32.dll")] static extern IntPtr MonitorFromPoint(POINT pt, uint flags);
     [DllImport("shcore.dll")] static extern int GetDpiForMonitor(IntPtr mon, int type, out uint x, out uint y);
     [DllImport("user32.dll")] static extern uint GetDpiForWindow(IntPtr hwnd);
+    [DllImport("user32.dll")] static extern uint GetDpiForSystem();
+    [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr hwnd, out uint pid);
+    [DllImport("user32.dll")] static extern bool IsWindowVisible(IntPtr hwnd);
+
+    /// <summary>DPI fixed at sign-in (what DPI unaware/system aware apps and WinForms auto scaling use)</summary>
+    public static uint SystemDpi() { return GetDpiForSystem(); }
+
+    public static bool OwnedVisible(IntPtr hwnd, int pid)
+    {
+        uint p;
+        GetWindowThreadProcessId(hwnd, out p);
+        return p == (uint)pid && IsWindowVisible(hwnd);
+    }
     [StructLayout(LayoutKind.Sequential)] public struct POINT { public int X, Y; }
 
     [StructLayout(LayoutKind.Sequential)] public struct HDR { public int type; public uint size; public uint low; public int high; public uint id; }
