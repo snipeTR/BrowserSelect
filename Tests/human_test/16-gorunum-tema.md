@@ -1,6 +1,6 @@
 # 16 – Windows 10/11 görünümü, Tema (Açık / Koyu / Windows'a uy) ve Mica
 
-> Bu reçete **UI test kopyası** (`snipeTR/BrowserSelect-ui-test`, v1.5.1.0) içindir. Değişiklikler sadece
+> Bu reçete v1.5.2.0 ve sonrası içindir. Değişiklikler sadece
 > **görünümle** ilgilidir: pencerelerdeki kontrollerin yerleri, özellikler ve davranış aynı kalmalıdır.
 
 ## Amaç
@@ -15,10 +15,8 @@
 
 ## Ön koşullar
 
-- [00 – Hazırlık](00-hazirlik.md) tamam; UI test kopyasının draft release'indeki
-  `BrowserSelect-1.5.1.0-x64-Setup.exe` kurulu.
-  > Dikkat: test kurulumu ana BrowserSelect kurulumunun **üzerine** kurulur (aynı klasör, aynı ayarlar).
-  > Test bitince ana repodaki son sürümü tekrar kurarak geri dönebilirsin.
+- [00 – Hazırlık](00-hazirlik.md) tamam; `BrowserSelect-1.5.2.0-x64-Setup.exe` (veya daha yeni) kurulu
+  ([Releases](https://github.com/snipeTR/BrowserSelect/releases)).
 - Karşılaştırma için mümkünse eski sürümün (v1.4.6.0) ekran görüntülerini al. Otomatik karşılaştırma için:
   GitHub → Actions → **UI screenshots (manual)** → *Run workflow* (boş bırak = yeni görünüm; `ref` alanına
   `b894d9abc18ac61f8e2a15cb96d1f6a33a4b682c` yaz = eski görünüm). Sonuçlar *Artifacts → ui-screenshots* içinde
@@ -84,7 +82,7 @@
          kaydırma çubukları çıkıyor; alttaki Dil / Tema / Kapat / Uygula kaydırınca görünüyor.
 3. İki farklı ölçekli monitör varsa pencereyi diğer monitöre sürükle.
    - [ ] Pencere doğru boyutta kalıyor (diğer monitörde Windows biraz bulanık büyütebilir; bu beklenen
-         davranış, v1.5.0–1.5.1'deki gibi minik pencere / büyük ? butonu olmamalı).
+         davranış, eski test sürümlerindeki gibi minik pencere / büyük ? butonu olmamalı).
 4. Otomatik kontrol: GitHub → Actions → **UI screenshots (manual)** her pencereyi %100–%200'de çeker;
    *Summary* tablosunda boyut/DPI ve sorun listesi, artifact'te `<ölçek>/*.png` ve `*.layout.txt` var.
 

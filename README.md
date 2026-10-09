@@ -1,11 +1,5 @@
 # Browser Select
 
-> **UI test copy (private).** This repository (`snipeTR/BrowserSelect-ui-test`) is a private, independent copy of
-> [snipeTR/BrowserSelect](https://github.com/snipeTR/BrowserSelect) (full history) used to try the Windows 10/11
-> visual refresh (v1.5.x, see the [Changelog](#changelog)) without touching the main project. Draft releases
-> here are test builds; if the new look is accepted, the same changes are applied to the main repository.
-> Note: the update checker of this build still looks at the main repository's releases.
-
 Browser Select is a utility to dynamically select the browser you want instead of just having one default for all links. Similar to the prompt in android to choose a browser when a link in a non-browser app is clicked/touched. It may not be useful for everyone but it helps when you use multiple browsers for different things (e.g. one with proxy and one without) and open many links from other applications (e.g. Messengers).
 
 This is an actively maintained fork of [zumoshi/BrowserSelect](https://github.com/zumoshi/BrowserSelect) with Windows **64-bit** installer builds via GitHub Actions, maintained by [snipeTR](https://github.com/snipeTR). Available in English and Turkish (Settings → Language).
@@ -33,7 +27,7 @@ BrowserSelect has been tested on windows 7, windows 8.1 and windows 10/11. Requi
 
 # Download
 
-Windows 64-bit installer: [BrowserSelect 1.4.1.0 (x64) Setup](https://github.com/snipeTR/BrowserSelect/releases/download/v1.4.1.0-build.4/BrowserSelect-1.4.1.0-x64-Setup.exe)
+Windows 64-bit installer: download `BrowserSelect-<version>-x64-Setup.exe` from the [latest release](https://github.com/snipeTR/BrowserSelect/releases/latest) (requires Windows 10/11 x64 with .NET Framework 4.8).
 
 Latest release: [github.com/snipeTR/BrowserSelect/releases/latest](https://github.com/snipeTR/BrowserSelect/releases/latest)
 
@@ -73,7 +67,7 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 - [ ] A browser extension to launch the correct browser based on the rules even if a link is clicked inside a browser
 - [x] support for portable browsers (adding browsers using a browse button rather than registry)
 - [ ] support for non-browser apps as an option (e.g. download managers)
-- [x] themes ? or at least an optional transparent Aero glass mode (Windows 10/11 look: Light / Dark / Follow Windows, Windows 11 rounded corners and optional Mica; UI test copy)
+- [x] themes ? or at least an optional transparent Aero glass mode (Windows 10/11 look: Light / Dark / Follow Windows, Windows 11 rounded corners and optional Mica)
 - [x] Ability to choose custom icons for browsers
 - [ ] display the unshortened version of adf.ly or goo.gl links when selecting the browser
 - [x] Localization (English and Turkish; texts in `BrowserSelect/Localization/Strings*.resx`, language selection in Settings)
@@ -83,31 +77,20 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 
 # Changelog
 
-v1.5.2.0 (UI test copy)
-- Tested at 100 %, 125 %, 150 %, 175 % and 200 % display scale (GitHub Actions runner, every window in Light/Dark and English/Turkish, with a layout report per window)
-- Fixed: with per-monitor DPI awareness (v1.5.0–1.5.1) windows that opened on a screen whose scale differs from the sign-in scale were not scaled by .NET Framework WinForms (tiny windows, oversized **?** button, clipped shortcut texts). BrowserSelect is now *system DPI aware* (manifest): sharp at the scale you signed in with, correctly sized (stretched by Windows) on a second monitor with another scale
-- Fixed: windows bigger than the screen (Settings and About at 175 %/200 % on 1920x1080/1600x1200) get scroll bars and stay on the screen instead of hiding the bottom controls below the taskbar
-- Fixed: fixed-size texts are fitted again once the window has its final scaled size; a label may use free space around it (the feedback text at the bottom left of Settings was cut off); short buttons follow the scale
-- Shorter feedback text in Settings ("Ideas or bugs? Please open an issue on the project's GitHub page."); help (**?**) explains the display scale behaviour (English and Turkish)
+v1.5.2.0
+Windows 10/11 look (appearance only: window sizes, control positions, features and behaviour are unchanged). Earlier 1.5.0.0/1.5.1.0 builds were internal test builds and were not released.
+- New application manifest: Common Controls 6 (themed controls and message boxes), Windows 7–11 compatibility and *system DPI awareness*: text is sharp at the display scale you signed in with; on a second monitor with another scale Windows stretches the window to the correct size
+- Segoe UI 9pt everywhere; every window keeps its size and control positions. Fixed-size buttons/labels whose (translated) text would not fit fall back to a smaller or the original font, and are fitted again once the window has its final scaled size
+- Flat buttons with a thin border and a subtle hover/pressed color (short buttons such as Refresh and Always draw their text themselves so it is not clipped); Windows 11 light colors; rule grid with flat headers, light grid lines and soft selection color; thin separators and group box frames
+- **Theme** drop-down at the bottom left of Settings (below Language): Light (default), Dark (dark title bar, windows, lists, grid, menus and scroll bars) or Follow Windows (uses the Windows app mode). Applied immediately, included in settings export/import
+- Windows 11: rounded window corners; optional **Mica** effect on the title bar (Settings → Mica, Windows 11 22H2+, no effect on Windows 10). On older Windows every step fails silently and keeps the classic look
+- High display scales: tested at 100 %, 125 %, 150 %, 175 % and 200 % (every window in Light/Dark and English/Turkish). Windows bigger than the screen (Settings and About at 175 %/200 %) get scroll bars instead of hiding the bottom buttons below the taskbar; the help window's Close button stays below the text
+- Shorter feedback text in Settings ("Ideas or bugs? Please open an issue on the project's GitHub page.")
+- Help (**?**) updated in English and Turkish (Theme, Mica, display scale behaviour); new texts in `Strings.resx` / `Strings.tr.resx`
+- All appearance code in one place: `BrowserSelect/UI/Theme.cs` (plus `UI/LayoutCheck.cs` for the clipping/fit checks)
 - README screenshots replaced with the new look (`screenshots/picker-*.png`, `screenshots/settings-*.png`)
-- UI screenshots workflow: all six windows (browser list, Settings, Edit browser, About, Original project info, help) at every scale, window size/DPI table and problem list in the run summary; test recipe [16E](Tests/human_test/16-gorunum-tema.md) updated
-
-v1.5.1.0 (UI test copy)
-- Checked on Windows (GitHub Actions runner, screenshots in Light/Dark, English/Turkish): the first try (v1.5.0.0) made the windows about 16% bigger because of the new font; now every window keeps its original size and control positions (verified control by control with UI Automation)
-- Short buttons (Refresh, Always) no longer clip their text; the help window's Close button stays below the text with per-monitor DPI; thin group box frames in the dark theme
-
-v1.5.0.0 (UI test copy)
-- Windows 10/11 look, appearance only: positions, features and behaviour are unchanged
-- New application manifest: Common Controls 6 (themed controls and message boxes) and Windows 7–11 compatibility; per-monitor (PerMonitorV2) DPI awareness via `app.config`, so text stays sharp on high DPI screens and when moving between monitors (replaced by system DPI awareness in v1.5.2.0, see above)
-- Segoe UI 9pt everywhere; every window keeps its exact size and control positions. Fixed-size buttons/labels whose (translated) text would not fit fall back to Segoe UI 8.25pt or the original font, so the new font clips nothing
-- Flat buttons with a thin border and a subtle hover/pressed color (short buttons such as Refresh and Always draw their text themselves so it is not clipped); cleaner Windows 11 light colors; rule grid with flat headers, light grid lines and soft selection color; separators drawn as thin lines
-- Windows 11: rounded window corners; optional **Mica** effect on the title bar (Settings → Mica, Windows 11 22H2+, no effect on Windows 10)
-- **Theme** drop-down at the bottom left of Settings (below Language): Light (default), Dark (dark title bar, dark windows, lists, grid, menus and scroll bars) or Follow Windows (uses the Windows app mode). Applied immediately, included in settings export/import
-- Help (**?**) window: the Close button is placed in the strip below the text (with per-monitor DPI it could otherwise cover the text)
-- All appearance code in one place: `BrowserSelect/UI/Theme.cs` (called once per window); every step fails silently and keeps the classic look on older Windows
-- Help (**?** window) updated in English and Turkish; new texts in `Strings.resx` / `Strings.tr.resx`
-- Human test recipe: [Tests/human_test/16-gorunum-tema.md](Tests/human_test/16-gorunum-tema.md)
-- Manual GitHub Actions workflow **UI screenshots** (`.github/workflows/ui-screenshots.yml`, Actions → Run workflow): builds the app and uploads screenshots of the browser list, Settings and About in Light and Dark as an artifact (no release)
+- Manual GitHub Actions workflow **UI screenshots (manual)** (`.github/workflows/ui-screenshots.yml`, Actions → Run workflow): builds the app and uploads screenshots of all windows at 100–200 % scale with a layout report as an artifact (never creates a release)
+- Human test recipe: [Tests/human_test/16-gorunum-tema.md](Tests/human_test/16-gorunum-tema.md) (16A–16E)
 
 v1.4.6.0
 - Updater: after the "update available" message BrowserSelect asks whether to download and run the new version. On *Yes* it finds the `BrowserSelect-<version>-x64-Setup.exe` asset of the latest published release via the GitHub API, downloads it to `%TEMP%` (progress window, can be cancelled) and starts the setup. Errors (no network, no installer in the release, incomplete file) show a message and offer to open the releases page instead
