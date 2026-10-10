@@ -547,18 +547,24 @@ namespace BrowserSelect.UI
                 if (size.Width > area.Width || size.Height > area.Height)
                 {
                     var client = form.ClientSize;
+                    var fitted = new Size(Math.Min(size.Width, area.Width), Math.Min(size.Height, area.Height));
                     form.MinimumSize = Size.Empty;
-                    // a window with a resizable layout first shrinks down to its layout minimum; scroll bars only
-                    // below that (e.g. Settings at 200 % on a 1600 px wide screen)
+                    // a window with a resizable (anchored) layout just becomes smaller as long as it stays above its
+                    // layout minimum (e.g. Settings at 200 % on a 1600 px wide screen); scroll bars only below that
+                    var scroll = true;
                     object minimum;
                     if (LayoutMinimums.TryGetValue(form, out minimum))
                     {
                         var m = (Size)minimum;
-                        client = new Size(Math.Min(client.Width, m.Width), Math.Min(client.Height, m.Height));
+                        var fittedClient = new Size(fitted.Width - (size.Width - client.Width), fitted.Height - (size.Height - client.Height));
+                        scroll = fittedClient.Width < m.Width || fittedClient.Height < m.Height;
                     }
-                    form.AutoScrollMinSize = client;
-                    form.AutoScroll = true;
-                    form.Size = new Size(Math.Min(size.Width, area.Width), Math.Min(size.Height, area.Height));
+                    if (scroll)
+                    {
+                        form.AutoScrollMinSize = client;
+                        form.AutoScroll = true;
+                    }
+                    form.Size = fitted;
                 }
                 KeepOnScreen(form);
             }
