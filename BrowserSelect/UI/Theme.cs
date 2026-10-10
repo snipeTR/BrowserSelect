@@ -728,7 +728,13 @@ namespace BrowserSelect.UI
             {
                 var tb = (TextBoxBase)c;
                 var flush = tb is TextBox && ((TextBox)tb).BorderStyle == BorderStyle.None;
-                tb.BackColor = flush || tb.ReadOnly ? p.Back : p.Field;
+                var host = tb.Parent as FluentTextBoxHost;
+                if (host != null)
+                    tb.BackColor = host.FieldColor; // inside a rounded Fluent text field
+                else if (flush && tb.Parent is FluentCard)
+                    tb.BackColor = Fluent.CardBack; // read-only text in a card (help windows)
+                else
+                    tb.BackColor = flush || tb.ReadOnly ? p.Back : p.Field;
                 tb.ForeColor = p.FieldText;
                 SetDarkScrollbars(tb, dark);
             }

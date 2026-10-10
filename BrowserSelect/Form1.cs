@@ -73,6 +73,10 @@ namespace BrowserSelect
             }
             int i = 0;
             int width = 0;
+            int height = 0;
+            // Windows 11 look (v1.5.8.0): a few pixels of space around the browser cards
+            var scale = Fluent.Scale(this);
+            var pad = (int)Math.Round(5 * scale);
             for (int k = Controls.Count - 1; k >= 0; k--)
             {
                 Control c = Controls[k];
@@ -84,15 +88,33 @@ namespace BrowserSelect
             {
                 var buc = new BrowserUC(browser, i);
                 AddPrivateContextMenu(buc);
-                width = buc.Width;  // buc.Width = 128*dpi Scale
-                buc.Left = width * i++;
+                width = buc.Width;  // buc.Width = 132*dpi Scale
+                height = buc.Height;
+                buc.Left = pad + width * i++;
+                buc.Top = pad;
                 buc.Click += browser_click;
                 this.Controls.Add(buc);
             }
             ResumeLayout();
-            buc.Left = i * width;
-            btn_help.Left = i * width;
-            btn_help.Top = buc.Height - btn_help.Height;
+            buc.Left = pad + i * width;
+            buc.Top = pad;
+            if (buc.IconButtons)
+            {
+                // About / Settings at the top, ? (or update) at the bottom of the column, lined up with the
+                // rounded cards (drawn 3 px inside their controls)
+                if (height <= 0)
+                    height = (int)Math.Round(176 * scale);
+                var inset = (int)Math.Round(3 * scale);
+                buc.LayoutColumn(height, inset, scale);
+                var size = ButtonsUC.ButtonSize(scale);
+                btn_help.SetBounds(buc.Left + inset, buc.Top + height - inset - size, size, size);
+            }
+            else
+            {
+                btn_help.Left = buc.Left;
+                btn_help.Top = buc.Top + buc.Height - btn_help.Height;
+            }
+            Padding = new Padding(0, 0, pad, pad);
             Theme.Apply(this);
             // this.Width = i * 128 + 20 + 20;
         }
@@ -142,9 +164,17 @@ namespace BrowserSelect
             // create a wildcard rule for this domain (always button)
             _alwaysRule = generate_rule(Program.url);
             // check for new version
+            toolTip1.SetToolTip(btn_help, Strings.Settings_Help);
+            btn_help.AccessibleName = Strings.Settings_Help;
             if (Settings.Default.last_version != "nope")
             {
                 btn_help.BackgroundImage = Resources.update_available;
+                // update button: download glyph on the accent color
+                btn_help.Glyph = Fluent.GlyphDownload;
+                btn_help.Accent = true;
+                var updateText = (Strings.Common_UpdateAvailable ?? "").Split('\n')[0].Trim();
+                toolTip1.SetToolTip(btn_help, updateText);
+                btn_help.AccessibleName = updateText;
                 btn_help.Click -= btn_help_Click;
                 btn_help.Click += btn_update_click;
             }

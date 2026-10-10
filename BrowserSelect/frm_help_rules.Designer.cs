@@ -30,8 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_help_rules));
             this.txt_help = new System.Windows.Forms.TextBox();
-            this.btn_close = new System.Windows.Forms.Button();
+            this.btn_close = new BrowserSelect.UI.FluentButton();
+            this.card_help = new BrowserSelect.UI.FluentCard();
+            this.card_help.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // card_help: the help text in a rounded card (Windows 11 look, v1.5.8.0)
+            // 
+            this.card_help.Controls.Add(this.txt_help);
+            this.card_help.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.card_help.Name = "card_help";
+            this.card_help.TabIndex = 0;
             // 
             // txt_help
             // 
@@ -57,7 +66,6 @@
             this.btn_close.Size = new System.Drawing.Size(75, 23);
             this.btn_close.TabIndex = 1;
             this.btn_close.Text = "Close";
-            this.btn_close.UseVisualStyleBackColor = true;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
             // frm_help_rules
@@ -67,11 +75,13 @@
             this.CancelButton = this.btn_close;
             this.ClientSize = new System.Drawing.Size(680, 480);
             this.Controls.Add(this.btn_close);
-            this.Controls.Add(this.txt_help);
+            this.Controls.Add(this.card_help);
             this.Padding = new System.Windows.Forms.Padding(8, 8, 8, 38);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "frm_help_rules";
             this.Text = "BrowserSelect - Help";
+            this.card_help.ResumeLayout(false);
+            this.card_help.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -80,6 +90,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox txt_help;
-        private System.Windows.Forms.Button btn_close;
+        private BrowserSelect.UI.FluentButton btn_close;
+        private BrowserSelect.UI.FluentCard card_help;
     }
 }

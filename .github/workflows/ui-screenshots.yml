@@ -1,7 +1,8 @@
 name: UI screenshots (manual)
 
-# Manual check of the Windows 10/11 look: builds BrowserSelect and uploads screenshots of the browser list,
-# Settings and About windows in the Light and Dark themes as an artifact. Never creates a release.
+# Manual check of the Windows 10/11 look: builds BrowserSelect and uploads screenshots of every window
+# (browser list, Settings, Add/Edit browser, About, Original project, help, rules help, update download) in the
+# Light and Dark themes as an artifact. Never creates a release.
 on:
   workflow_dispatch:
     inputs:

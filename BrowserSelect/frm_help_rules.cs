@@ -19,6 +19,7 @@ namespace BrowserSelect
             // Windows 10/11 look (fonts, colors, title bar); before the texts so labels are measured with the final font
             Theme.Apply(this);
             ApplyTexts();
+            HelpText.Modernize(this, card_help, btn_close);
         }
 
         /// <summary>sets every visible text from Localization\Strings.resx (current UI language)</summary>
@@ -33,7 +34,17 @@ namespace BrowserSelect
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
+            // after the window got its final (DPI scaled) size
+            HelpText.PlaceCloseButton(this, btn_close);
             HelpText.ScrollToTop(txt_help);
+        }
+
+        protected override void OnLayout(LayoutEventArgs e)
+        {
+            base.OnLayout(e);
+            // the Close button stays in the strip below the text (bottom right corner)
+            if (IsHandleCreated && Visible)
+                HelpText.PlaceCloseButton(this, btn_close);
         }
 
         private void btn_close_Click(object sender, EventArgs e)

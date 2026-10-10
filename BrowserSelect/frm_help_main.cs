@@ -19,6 +19,7 @@ namespace BrowserSelect
             // Windows 10/11 look (fonts, colors, title bar); before the texts so labels are measured with the final font
             Theme.Apply(this);
             ApplyTexts();
+            HelpText.Modernize(this, card_help, btn_close);
         }
 
         /// <summary>sets every visible text from Localization\Strings.resx (current UI language)</summary>
@@ -55,6 +56,26 @@ namespace BrowserSelect
     /// <summary>helpers shared by the two help windows</summary>
     internal static class HelpText
     {
+        /// <summary>
+        /// Windows 11 look (v1.5.8.0): the text sits in a rounded card with some space around it, the rounded
+        /// Close button in the strip below the card (set after the texts, the button fits its translation)
+        /// </summary>
+        public static void Modernize(Form form, Panel card, Button close)
+        {
+            try
+            {
+                var s = Fluent.Scale(form);
+                Func<float, int> px = v => FluentLayout.Px(v, s);
+                var buttonHeight = px(30);
+                close.Size = new Size(FluentLayout.ButtonWidth(close, px(92), s), buttonHeight);
+                // the strip below the card: 16 px above and below the button
+                form.Padding = new Padding(px(16), px(16), px(16), buttonHeight + px(32));
+                // little space on the right: the vertical scroll bar sits there
+                card.Padding = new Padding(px(14), px(12), px(4), px(12));
+            }
+            catch (Exception) { }
+        }
+
         /// <summary>resx values use \n line breaks; a multiline TextBox needs \r\n</summary>
         public static string ForTextBox(string text)
         {

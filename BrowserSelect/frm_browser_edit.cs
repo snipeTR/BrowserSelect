@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -39,6 +40,11 @@ namespace BrowserSelect
         public frm_browser_edit(Browser browser, IEnumerable<Browser> allBrowsers)
         {
             InitializeComponent();
+            // rounded Windows 11 text fields around the (borderless) text boxes
+            host_name.Box = txt_name;
+            host_exec.Box = txt_exec;
+            host_args.Box = txt_args;
+            host_shortcut.Box = txt_shortcut;
             // Windows 10/11 look (fonts, colors, title bar); before the texts so labels are measured with the final font
             Theme.Apply(this);
             ApplyTexts();
@@ -87,6 +93,82 @@ namespace BrowserSelect
             btn_icon_reset.Text = Strings.BrowserEdit_DefaultIcon;
             btn_ok.Text = Strings.Common_OK;
             btn_cancel.Text = Strings.Common_Cancel;
+        }
+
+        private void frm_browser_edit_Load(object sender, EventArgs e)
+        {
+            LayoutWindow();
+        }
+
+        /// <summary>
+        /// Windows 11 layout (v1.5.8.0), done in code for the final (DPI scaled) fonts and the translated labels:
+        /// one card with a row per field (label column as wide as the longest label), OK (accent) and Cancel
+        /// at the bottom right
+        /// </summary>
+        private void LayoutWindow()
+        {
+            try
+            {
+                SuspendLayout();
+                var s = Fluent.Scale(this);
+                Func<float, int> px = v => FluentLayout.Px(v, s);
+                int margin = px(16), pad = px(16), rowGap = px(8), fieldWidth = px(340);
+                var buttonHeight = px(30);
+                var labels = new Label[] { lbl_name, lbl_exec, lbl_args, lbl_shortcut, lbl_icon };
+                var labelWidth = 0;
+                foreach (var l in labels)
+                    labelWidth = Math.Max(labelWidth, l.PreferredWidth);
+                var fieldX = pad + labelWidth + px(12);
+                var rowHeight = FluentTextBoxHost.PreferredHeightFor(txt_name, s);
+                Action<Label, int, int> placeLabel = (l, top, height) => l.Location = new Point(pad, top + (height - l.Height) / 2);
+
+                var y = pad;
+                host_name.SetBounds(fieldX, y, fieldWidth, rowHeight);
+                placeLabel(lbl_name, y, rowHeight);
+                y += rowHeight + rowGap;
+
+                btn_browse.Size = new Size(FluentLayout.ButtonWidth(btn_browse, px(88), s), rowHeight);
+                host_exec.SetBounds(fieldX, y, fieldWidth - btn_browse.Width - px(8), rowHeight);
+                btn_browse.Location = new Point(fieldX + fieldWidth - btn_browse.Width, y);
+                placeLabel(lbl_exec, y, rowHeight);
+                y += rowHeight + rowGap;
+
+                host_args.SetBounds(fieldX, y, fieldWidth, rowHeight);
+                placeLabel(lbl_args, y, rowHeight);
+                y += rowHeight + rowGap;
+
+                host_shortcut.SetBounds(fieldX, y, px(72), rowHeight);
+                var hintX = host_shortcut.Right + px(12);
+                FluentLayout.Wrap(lbl_shortcut_hint, hintX, y, fieldX + fieldWidth - hintX);
+                var shortcutRow = Math.Max(rowHeight, lbl_shortcut_hint.Height);
+                host_shortcut.Top = y + (shortcutRow - rowHeight) / 2;
+                lbl_shortcut_hint.Top = y + (shortcutRow - lbl_shortcut_hint.Height) / 2;
+                placeLabel(lbl_shortcut, y, shortcutRow);
+                y += shortcutRow + rowGap;
+
+                // icon preview in a rounded frame, Change... and Default next to it
+                var iconButtons = FluentLayout.ButtonWidth(btn_icon, px(96), s, btn_icon.Text, btn_icon_reset.Text);
+                var iconSize = 2 * buttonHeight + px(6);
+                host_icon.SetBounds(fieldX, y, iconSize, iconSize);
+                btn_icon.SetBounds(host_icon.Right + px(12), y, iconButtons, buttonHeight);
+                btn_icon_reset.SetBounds(btn_icon.Left, y + buttonHeight + px(6), iconButtons, buttonHeight);
+                placeLabel(lbl_icon, y, buttonHeight);
+                y = host_icon.Bottom + pad;
+
+                var cardWidth = fieldX + fieldWidth + pad;
+                card_fields.SetBounds(margin, margin, cardWidth, y);
+
+                var buttonWidth = FluentLayout.ButtonWidth(btn_ok, px(92), s, btn_ok.Text, btn_cancel.Text);
+                var by = card_fields.Bottom + px(16);
+                btn_cancel.SetBounds(card_fields.Right - buttonWidth, by, buttonWidth, buttonHeight);
+                btn_ok.SetBounds(btn_cancel.Left - px(8) - buttonWidth, by, buttonWidth, buttonHeight);
+                ClientSize = new Size(card_fields.Right + margin, btn_ok.Bottom + margin);
+                ResumeLayout(true);
+            }
+            catch (Exception)
+            {
+                ResumeLayout(true);
+            }
         }
 
         private void UpdatePreview()

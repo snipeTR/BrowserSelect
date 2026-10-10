@@ -25,17 +25,20 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btn_help = new System.Windows.Forms.Button();
+            this.btn_help = new BrowserSelect.UI.FluentButton();
             this.SuspendLayout();
             // 
             // btn_help
             // 
-            this.btn_help.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_help.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_help.BackgroundImage = global::BrowserSelect.Properties.Resources.Button_help_icon;
             this.btn_help.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_help.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_help.FlatAppearance.BorderSize = 0;
             this.btn_help.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_help.Glyph = BrowserSelect.UI.Fluent.GlyphHelp;
+            this.btn_help.GlyphSize = 11F;
+            this.btn_help.Margin = new System.Windows.Forms.Padding(0);
             this.btn_help.Location = new System.Drawing.Point(97, 155);
             this.btn_help.Name = "btn_help";
             this.btn_help.Size = new System.Drawing.Size(25, 25);
@@ -62,7 +65,7 @@
 
         #endregion
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button btn_help;
+        private BrowserSelect.UI.FluentButton btn_help;
     }
 }
 

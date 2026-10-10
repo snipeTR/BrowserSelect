@@ -1,5 +1,6 @@
-# Takes screenshots of every BrowserSelect window (browser list, Settings, Edit browser, About,
-# Original project info, ? help) in the Light and Dark themes, English and Turkish, at several
+# Takes screenshots of every BrowserSelect window (browser list incl. a browser card under the mouse,
+# Settings with all pages, Edit browser, Add browser, About, Original project info, ? help, rules help,
+# update download window) in the Light and Dark themes and the selected languages, at several
 # display scales (used by .github/workflows/ui-screenshots.yml; run manually, never creates releases).
 #
 # Two ways to get a display scale on the runner:
@@ -54,7 +55,7 @@ $env:BROWSERSELECT_LAYOUT_LOG = $layoutDir
 $summary = New-Object System.Collections.Generic.List[string]
 $problems = New-Object System.Collections.Generic.List[string]
 
-function Shot([IntPtr]$h, [string]$name, [string]$formName) {
+function Shot([IntPtr]$h, [string]$name, [string]$formName, [switch]$NoReport) {
     $r = New-Object W+RECT
     [W]::GetWindowRect($h, [ref]$r) | Out-Null
     $w = $r.R - $r.L; $hgt = $r.B - $r.T
@@ -67,6 +68,8 @@ function Shot([IntPtr]$h, [string]$name, [string]$formName) {
     $dpi = [Disp]::WindowDpi($h)
     Write-Host "saved $script:scale/$name.png ($w x $hgt, window dpi $dpi)"
     $script:summary.Add("| $script:scale | $name | $w x $hgt | $dpi | $script:systemDpi |")
+    # a second picture of a window already checked (e.g. the mouse over a browser card): no new report
+    if ($NoReport) { return }
     # monitor DPI (drawn at the scale) or the sign-in DPI (Windows stretches a system DPI aware window)
     if ($dpi -ne $script:expectedDpi -and $dpi -ne $script:systemDpi) { $script:problems.Add("$script:scale/${name}: window DPI $dpi, expected $script:expectedDpi") }
     # the app's own layout report (BROWSERSELECT_LAYOUT_LOG), written ~0.7 s after the window is shown
@@ -123,6 +126,19 @@ function ClickCtl([IntPtr]$h, [string]$name, [int]$index = 0, [double]$fx = 0.5,
     $x = $info.L + ([int]$c[2] + [int]$c[4] * $fx) * $ratio
     $y = $info.T + ([int]$c[3] + [int]$c[5] * $fy) * $ratio
     [W]::Click([int]$x, [int]$y)
+}
+
+# moves the mouse over a control (hover state), same positions as ClickCtl
+function HoverCtl([IntPtr]$h, [string]$name, [int]$index = 0) {
+    $info = $script:layouts[[string]$h]
+    if ($info -eq $null) { throw "no layout report for window $h" }
+    $lines = Get-Content $info.File
+    $win = ($lines | Where-Object { $_ -like "#win *" } | Select-Object -First 1) -split ' '
+    $ratio = $info.W / [double]$win[1]
+    $found = @(foreach ($l in $lines) { if ($l -like "#ctl $name *") { ,([string[]]($l -split ' ')) } })
+    if ($found.Count -le $index) { throw "control $name not found" }
+    $c = $found[$index]
+    [W]::SetCursorPos([int]($info.L + ([int]$c[2] + [int]$c[4] * 0.5) * $ratio), [int]($info.T + ([int]$c[3] + [int]$c[5] * 0.35) * $ratio)) | Out-Null
 }
 
 function CtlEnabled([IntPtr]$h, [string]$name) {
@@ -192,6 +208,14 @@ function RunAll {
         [W]::SetForegroundWindow($main) | Out-Null
         Start-Sleep -Milliseconds 500
         Shot $main "$tag-1-browser-list" "Form1"
+        # the first browser card under the mouse (hover state: accent border, tinted card)
+        try {
+            HoverCtl $main "BrowserUC" 0
+            Start-Sleep -Milliseconds 700
+            Shot $main "$tag-1b-browser-list-hover" "Form1" -NoReport
+            [W]::SetCursorPos(0, 0) | Out-Null
+            Start-Sleep -Milliseconds 300
+        } catch { $script:problems.Add("$script:scale/${tag}: hover: $_") }
         # Settings (2nd vertical button), then Edit browser from it
         try { ClickCtl $main "VButton" 1 } catch { $script:problems.Add("$script:scale/${tag}: $_"); $p.Kill(); continue }
         $settings = NewWindow $main
@@ -210,6 +234,15 @@ function RunAll {
                 if ($edit -ne [IntPtr]::Zero) { Shot $edit "$tag-5-edit-browser" "frm_browser_edit"; CloseWindow $edit }
                 else { $script:problems.Add("$script:scale/${tag}: Edit browser window did not open") }
             } catch { $script:problems.Add("$script:scale/${tag}: Edit browser: $_") }
+            # Add... (same dialog, empty fields)
+            try {
+                [W]::SetForegroundWindow($settings) | Out-Null
+                Start-Sleep -Milliseconds 500
+                ClickCtl $settings "btn_browser_add"
+                $add = NewWindow $settings
+                if ($add -ne [IntPtr]::Zero) { Shot $add "$tag-7-add-browser" "frm_browser_edit"; CloseWindow $add }
+                else { $script:problems.Add("$script:scale/${tag}: Add browser window did not open") }
+            } catch { $script:problems.Add("$script:scale/${tag}: Add browser: $_") }
             [W]::SetForegroundWindow($settings) | Out-Null
             Start-Sleep -Milliseconds 500
             # the other pages of the navigation pane (v1.5.7.0+; the app writes a new layout report per page)
@@ -219,6 +252,17 @@ function RunAll {
                         ClickCtl $settings $pg[0]
                         Start-Sleep -Milliseconds 900
                         Shot $settings "$tag-2-settings-$($pg[1])" "frm_settings"
+                        if ($pg[1] -eq "rules") {
+                            # Help of the rules page (separate, non-modal window)
+                            try {
+                                ClickCtl $settings "button1"
+                                $rh = NewWindow $settings
+                                if ($rh -ne [IntPtr]::Zero) { Shot $rh "$tag-8-help-rules" "frm_help_rules"; CloseWindow $rh }
+                                else { $script:problems.Add("$script:scale/${tag}: rules help window did not open") }
+                            } catch { $script:problems.Add("$script:scale/${tag}: rules help: $_") }
+                            [W]::SetForegroundWindow($settings) | Out-Null
+                            Start-Sleep -Milliseconds 500
+                        }
                     } catch { $script:problems.Add("$script:scale/${tag}: Settings page $($pg[1]): $_") }
                 }
             }
@@ -251,6 +295,23 @@ function RunAll {
         else { $script:problems.Add("$script:scale/${tag}: Help window did not open") }
 
         if (-not $p.HasExited) { $p.Kill() }
+        Start-Sleep -Seconds 1
+
+        # update download window (v1.5.8.0+: BROWSERSELECT_UI_PREVIEW=update shows it with a sample state and no
+        # network access; older builds ignore the variable and show the browser list, which is skipped here)
+        $env:BROWSERSELECT_UI_PREVIEW = "update"
+        try {
+            $u = Start-Process -FilePath $exe -PassThru
+            $report = Join-Path $layoutDir "frm_update_download.txt"
+            for ($i = 0; $i -lt 24 -and -not (Test-Path $report); $i++) { Start-Sleep -Milliseconds 250 }
+            $u.Refresh()
+            if ((Test-Path $report) -and -not $u.HasExited -and $u.MainWindowHandle -ne [IntPtr]::Zero) {
+                [W]::SetForegroundWindow($u.MainWindowHandle) | Out-Null
+                Start-Sleep -Milliseconds 500
+                Shot $u.MainWindowHandle "$tag-9-update-download" "frm_update_download"
+            } else { Write-Host "no update download preview in this build ($tag)" }
+            if (-not $u.HasExited) { $u.Kill() }
+        } finally { Remove-Item Env:BROWSERSELECT_UI_PREVIEW -ErrorAction SilentlyContinue }
         Start-Sleep -Seconds 1
     }
 }

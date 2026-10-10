@@ -44,6 +44,13 @@ namespace BrowserSelect
             }
             // user interface language (Localization\Strings.resx); English unless another installed language is selected
             L10n.Apply(Settings.Default.Language);
+            // test aid for the UI screenshot workflow only: shows the update download window with a sample state
+            // (no network access); normal starts never have this variable
+            if (string.Equals(Environment.GetEnvironmentVariable("BROWSERSELECT_UI_PREVIEW"), "update", StringComparison.OrdinalIgnoreCase))
+            {
+                Application.Run(new frm_update_download(true));
+                return;
+            }
             // check for update
             if (Settings.Default.check_update != "nope" &&
                 DateTime.Now.Subtract(time(Settings.Default.check_update)).TotalDays > 7)

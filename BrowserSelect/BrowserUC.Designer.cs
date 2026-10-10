@@ -23,47 +23,50 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            // Windows 11 look (v1.5.8.0): the tile is a rounded card (painted by BrowserUC itself), with the icon,
+            // the name, the shortcut keys and a rounded "Always" button inside it
             this.icon = new System.Windows.Forms.PictureBox();
             this.name = new System.Windows.Forms.Label();
             this.shortcuts = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button1 = new BrowserSelect.UI.FluentButton();
             ((System.ComponentModel.ISupportInitialize)(this.icon)).BeginInit();
             this.SuspendLayout();
             // 
             // icon
             // 
-            this.icon.Location = new System.Drawing.Point(0, 0);
+            this.icon.Location = new System.Drawing.Point(26, 12);
             this.icon.Name = "icon";
-            this.icon.Size = new System.Drawing.Size(128, 128);
+            this.icon.Size = new System.Drawing.Size(80, 80);
             this.icon.TabIndex = 0;
             this.icon.TabStop = false;
             // 
             // name
             // 
-            this.name.Location = new System.Drawing.Point(3, 131);
+            this.name.Location = new System.Drawing.Point(6, 97);
             this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(122, 18);
+            this.name.Size = new System.Drawing.Size(120, 19);
             this.name.TabIndex = 1;
             this.name.Text = "label1";
             this.name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.name.UseMnemonic = false;
             // 
             // shortcuts
             // 
-            this.shortcuts.Location = new System.Drawing.Point(3, 147);
+            this.shortcuts.Location = new System.Drawing.Point(6, 116);
             this.shortcuts.Name = "shortcuts";
-            this.shortcuts.Size = new System.Drawing.Size(122, 13);
+            this.shortcuts.Size = new System.Drawing.Size(120, 16);
             this.shortcuts.TabIndex = 2;
             this.shortcuts.Text = "label1";
-            this.shortcuts.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.shortcuts.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.shortcuts.UseMnemonic = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(0, 161);
+            this.button1.Location = new System.Drawing.Point(12, 138);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 20);
+            this.button1.Size = new System.Drawing.Size(108, 24);
             this.button1.TabIndex = 3;
             this.button1.Text = "Always";
-            this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // BrowserUC
@@ -75,8 +78,9 @@
             this.Controls.Add(this.shortcuts);
             this.Controls.Add(this.name);
             this.Controls.Add(this.icon);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "BrowserUC";
-            this.Size = new System.Drawing.Size(131, 184);
+            this.Size = new System.Drawing.Size(132, 176);
             ((System.ComponentModel.ISupportInitialize)(this.icon)).EndInit();
             this.ResumeLayout(false);
 
@@ -87,6 +91,6 @@
         private System.Windows.Forms.PictureBox icon;
         private System.Windows.Forms.Label name;
         private System.Windows.Forms.Label shortcuts;
-        private System.Windows.Forms.Button button1;
+        private BrowserSelect.UI.FluentButton button1;
     }
 }

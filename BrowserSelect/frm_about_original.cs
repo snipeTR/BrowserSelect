@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using BrowserSelect.Localization;
 using BrowserSelect.UI;
@@ -68,6 +69,62 @@ namespace BrowserSelect
         private void btn_close_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void frm_about_original_Load(object sender, EventArgs e)
+        {
+            LayoutWindow();
+        }
+
+        /// <summary>
+        /// Windows 11 layout (v1.5.8.0), done in code for the final (DPI scaled) fonts and the translated texts:
+        /// title, a card with the credits and links, a card with the donation, Close at the bottom right
+        /// </summary>
+        private void LayoutWindow()
+        {
+            try
+            {
+                SuspendLayout();
+                var s = Fluent.Scale(this);
+                Func<float, int> px = v => FluentLayout.Px(v, s);
+                int margin = px(20), pad = px(16), gap = px(12), width = px(480), line = px(6);
+                var inner = width - 2 * pad;
+
+                lbl_header.Location = new Point(margin, px(14));
+                var y = lbl_header.Bottom + px(14);
+
+                var cy = FluentLayout.Wrap(lbl_intro, pad, pad, inner) + gap;
+                cy = FluentLayout.Wrap(lbl_coded, pad, cy, inner) + line;
+                lbl_contact.Location = new Point(pad, cy);
+                frm_About.PlaceAfter(lbl_contact, lnk_mail);
+                lnk_mail.Top = cy;
+                cy = Math.Max(lbl_contact.Bottom, lnk_mail.Bottom) + line;
+                lbl_github.Location = new Point(pad, cy);
+                frm_About.PlaceAfter(lbl_github, lnk_github);
+                lnk_github.Top = cy;
+                cy = Math.Max(lbl_github.Bottom, lnk_github.Bottom);
+                card_info.SetBounds(margin, y, width, cy + pad);
+                y = card_info.Bottom + gap;
+
+                pic_btc.SetBounds(pad, pad, px(100), px(100));
+                var column = pic_btc.Right + pad;
+                cy = FluentLayout.Wrap(lbl_btc, column, pad + px(2), width - pad - column) + line;
+                lnk_btc.Location = new Point(column, cy);
+                cy = lnk_btc.Bottom + gap;
+                btn_copy.SetBounds(column, cy,
+                    FluentLayout.ButtonWidth(btn_copy, px(140), s, Strings.About_CopyAddress, Strings.About_Copied), px(30));
+                card_donate.SetBounds(margin, y, width, Math.Max(pic_btc.Bottom, btn_copy.Bottom) + pad);
+                y = card_donate.Bottom + px(20);
+
+                btn_close.Size = new Size(FluentLayout.ButtonWidth(btn_close, px(92), s), px(30));
+                btn_close.Location = new Point(margin + width - btn_close.Width, y);
+                ClientSize = new Size(width + 2 * margin, btn_close.Bottom + margin);
+                ResumeLayout(true);
+            }
+            catch (Exception)
+            {
+                ResumeLayout(true);
+            }
         }
     }
 }

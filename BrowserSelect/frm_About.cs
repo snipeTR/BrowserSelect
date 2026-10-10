@@ -19,6 +19,10 @@ namespace BrowserSelect
         public frm_About()
         {
             InitializeComponent();
+            // big title (Segoe UI Semibold; bold for Japanese/Chinese), set before the theme measures the texts
+            var title = Theme.CreateTitleFont(20f);
+            if (title != null)
+                label1.Font = title;
             // Windows 10/11 look (fonts, colors, title bar); before the texts so labels are measured with the final font
             Theme.Apply(this);
             ApplyTexts();
@@ -59,7 +63,81 @@ namespace BrowserSelect
             pictureBox1.Image = IconExtractor.fromFile(Application.ExecutablePath).ToBitmap();
             var v = Application.ProductVersion;
             lab_ver.Text = "v" + v.Remove(v.Length - 2);
-            lab_ver.Left = label1.Left + label1.PreferredWidth;
+            LayoutWindow();
+        }
+
+        /// <summary>
+        /// Windows 11 layout (v1.5.8.0), done in code for the final (DPI scaled) fonts and the translated texts:
+        /// header with icon, name, version and maintainer; cards for the description, the links and the donation;
+        /// Close at the bottom right. The window height follows the content.
+        /// </summary>
+        private void LayoutWindow()
+        {
+            try
+            {
+                SuspendLayout();
+                var s = Fluent.Scale(this);
+                Func<float, int> px = v => FluentLayout.Px(v, s);
+                int margin = px(20), pad = px(16), gap = px(12), width = px(560);
+                var buttonHeight = px(30);
+
+                // header
+                pictureBox1.SetBounds(margin, margin, px(64), px(64));
+                var textLeft = pictureBox1.Right + px(16);
+                label1.Location = new Point(textLeft, margin - px(2));
+                lab_ver.Location = new Point(label1.Right + px(4), label1.Bottom - lab_ver.Height - px(3));
+                FluentLayout.Wrap(lbl_fork, textLeft, label1.Bottom + px(2), margin + width - textLeft);
+                var y = Math.Max(pictureBox1.Bottom, lbl_fork.Bottom) + px(20);
+
+                // description
+                var inner = width - 2 * pad;
+                FluentLayout.Wrap(label3, pad, pad, inner);
+                card_info.SetBounds(margin, y, width, label3.Bottom + pad);
+                y = card_info.Bottom + gap;
+
+                // links: GitHub of this fork, "Original project info..." on the same row if it fits
+                lbl_fork_github.Location = new Point(pad, pad);
+                PlaceAfter(lbl_fork_github, lnk_fork);
+                lnk_fork.Top = pad;
+                btn_original.Size = new Size(FluentLayout.ButtonWidth(btn_original, px(160), s), buttonHeight);
+                int linksBottom;
+                if (lnk_fork.Right + gap + btn_original.Width <= width - pad)
+                {
+                    btn_original.Location = new Point(width - pad - btn_original.Width, pad);
+                    var row = Math.Max(btn_original.Height, lnk_fork.Height);
+                    lbl_fork_github.Top = lnk_fork.Top = pad + (row - lnk_fork.Height) / 2;
+                    linksBottom = pad + row;
+                }
+                else
+                {
+                    btn_original.Location = new Point(pad, Math.Max(lnk_fork.Bottom, lbl_fork_github.Bottom) + gap);
+                    linksBottom = btn_original.Bottom;
+                }
+                card_links.SetBounds(margin, y, width, linksBottom + pad);
+                y = card_links.Bottom + gap;
+
+                // donation: text, QR code on the left, name / address / Copy on the right
+                var top = FluentLayout.Wrap(label5, pad, pad, inner) + gap;
+                pic_btc_fork.SetBounds(pad, top, px(100), px(100));
+                var column = pic_btc_fork.Right + pad;
+                var columnWidth = width - pad - column;
+                var cy = FluentLayout.Wrap(lbl_btc_fork, column, top, columnWidth) + px(6);
+                lnk_btc_fork.Location = new Point(column, cy);
+                cy = lnk_btc_fork.Bottom + gap;
+                btn_btc_fork_copy.SetBounds(column, cy,
+                    FluentLayout.ButtonWidth(btn_btc_fork_copy, px(140), s, Strings.About_CopyAddress, Strings.About_Copied), buttonHeight);
+                card_donate.SetBounds(margin, y, width, Math.Max(pic_btc_fork.Bottom, btn_btc_fork_copy.Bottom) + pad);
+                y = card_donate.Bottom + px(20);
+
+                btn_close.Size = new Size(FluentLayout.ButtonWidth(btn_close, px(92), s), buttonHeight);
+                btn_close.Location = new Point(margin + width - btn_close.Width, y);
+                ClientSize = new Size(width + 2 * margin, btn_close.Bottom + margin);
+                ResumeLayout(true);
+            }
+            catch (Exception)
+            {
+                ResumeLayout(true);
+            }
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

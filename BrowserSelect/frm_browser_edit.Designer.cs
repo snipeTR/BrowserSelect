@@ -29,11 +29,17 @@ namespace BrowserSelect
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.card_fields = new BrowserSelect.UI.FluentCard();
+            this.host_name = new BrowserSelect.UI.FluentTextBoxHost();
+            this.host_exec = new BrowserSelect.UI.FluentTextBoxHost();
+            this.host_args = new BrowserSelect.UI.FluentTextBoxHost();
+            this.host_shortcut = new BrowserSelect.UI.FluentTextBoxHost();
+            this.host_icon = new BrowserSelect.UI.FluentFieldHost();
             this.lbl_name = new System.Windows.Forms.Label();
             this.txt_name = new System.Windows.Forms.TextBox();
             this.lbl_exec = new System.Windows.Forms.Label();
             this.txt_exec = new System.Windows.Forms.TextBox();
-            this.btn_browse = new System.Windows.Forms.Button();
+            this.btn_browse = new BrowserSelect.UI.FluentButton();
             this.lbl_args = new System.Windows.Forms.Label();
             this.txt_args = new System.Windows.Forms.TextBox();
             this.lbl_shortcut = new System.Windows.Forms.Label();
@@ -41,13 +47,52 @@ namespace BrowserSelect
             this.lbl_shortcut_hint = new System.Windows.Forms.Label();
             this.lbl_icon = new System.Windows.Forms.Label();
             this.pic_icon = new System.Windows.Forms.PictureBox();
-            this.btn_icon = new System.Windows.Forms.Button();
-            this.btn_icon_reset = new System.Windows.Forms.Button();
-            this.btn_ok = new System.Windows.Forms.Button();
-            this.btn_cancel = new System.Windows.Forms.Button();
+            this.btn_icon = new BrowserSelect.UI.FluentButton();
+            this.btn_icon_reset = new BrowserSelect.UI.FluentButton();
+            this.btn_ok = new BrowserSelect.UI.FluentButton();
+            this.btn_cancel = new BrowserSelect.UI.FluentButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pic_icon)).BeginInit();
+            this.card_fields.SuspendLayout();
             this.SuspendLayout();
+            //
+            // card_fields: every field of the dialog (Windows 11 look, v1.5.8.0); the rounded text fields
+            // (host_*) contain the borderless text boxes; positions are set in code (LayoutWindow)
+            //
+            this.card_fields.Controls.Add(this.lbl_name);
+            this.card_fields.Controls.Add(this.host_name);
+            this.card_fields.Controls.Add(this.lbl_exec);
+            this.card_fields.Controls.Add(this.host_exec);
+            this.card_fields.Controls.Add(this.btn_browse);
+            this.card_fields.Controls.Add(this.lbl_args);
+            this.card_fields.Controls.Add(this.host_args);
+            this.card_fields.Controls.Add(this.lbl_shortcut);
+            this.card_fields.Controls.Add(this.host_shortcut);
+            this.card_fields.Controls.Add(this.lbl_shortcut_hint);
+            this.card_fields.Controls.Add(this.lbl_icon);
+            this.card_fields.Controls.Add(this.host_icon);
+            this.card_fields.Controls.Add(this.btn_icon);
+            this.card_fields.Controls.Add(this.btn_icon_reset);
+            this.card_fields.Location = new System.Drawing.Point(12, 12);
+            this.card_fields.Name = "card_fields";
+            this.card_fields.Size = new System.Drawing.Size(373, 175);
+            this.card_fields.TabIndex = 0;
+            this.host_name.Controls.Add(this.txt_name);
+            this.host_name.Name = "host_name";
+            this.host_name.TabIndex = 1;
+            this.host_exec.Controls.Add(this.txt_exec);
+            this.host_exec.Name = "host_exec";
+            this.host_exec.TabIndex = 3;
+            this.host_args.Controls.Add(this.txt_args);
+            this.host_args.Name = "host_args";
+            this.host_args.TabIndex = 6;
+            this.host_shortcut.Controls.Add(this.txt_shortcut);
+            this.host_shortcut.Name = "host_shortcut";
+            this.host_shortcut.TabIndex = 8;
+            this.host_icon.Controls.Add(this.pic_icon);
+            this.host_icon.Inset = 6;
+            this.host_icon.Name = "host_icon";
+            this.host_icon.TabIndex = 11;
             //
             // lbl_name
             //
@@ -88,7 +133,6 @@ namespace BrowserSelect
             this.btn_browse.Size = new System.Drawing.Size(75, 23);
             this.btn_browse.TabIndex = 4;
             this.btn_browse.Text = "Browse...";
-            this.btn_browse.UseVisualStyleBackColor = true;
             this.btn_browse.Click += new System.EventHandler(this.btn_browse_Click);
             //
             // lbl_args
@@ -147,7 +191,7 @@ namespace BrowserSelect
             //
             // pic_icon
             //
-            this.pic_icon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pic_icon.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pic_icon.Location = new System.Drawing.Point(95, 128);
             this.pic_icon.Name = "pic_icon";
             this.pic_icon.Size = new System.Drawing.Size(52, 52);
@@ -162,7 +206,6 @@ namespace BrowserSelect
             this.btn_icon.Size = new System.Drawing.Size(75, 23);
             this.btn_icon.TabIndex = 12;
             this.btn_icon.Text = "Change...";
-            this.btn_icon.UseVisualStyleBackColor = true;
             this.btn_icon.Click += new System.EventHandler(this.btn_icon_Click);
             //
             // btn_icon_reset
@@ -172,7 +215,6 @@ namespace BrowserSelect
             this.btn_icon_reset.Size = new System.Drawing.Size(75, 23);
             this.btn_icon_reset.TabIndex = 13;
             this.btn_icon_reset.Text = "Default";
-            this.btn_icon_reset.UseVisualStyleBackColor = true;
             this.btn_icon_reset.Click += new System.EventHandler(this.btn_icon_reset_Click);
             //
             // btn_ok
@@ -182,7 +224,7 @@ namespace BrowserSelect
             this.btn_ok.Size = new System.Drawing.Size(75, 23);
             this.btn_ok.TabIndex = 14;
             this.btn_ok.Text = "OK";
-            this.btn_ok.UseVisualStyleBackColor = true;
+            this.btn_ok.Accent = true;
             this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
             //
             // btn_cancel
@@ -193,8 +235,7 @@ namespace BrowserSelect
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 15;
             this.btn_cancel.Text = "Cancel";
-            this.btn_cancel.UseVisualStyleBackColor = true;
-            //
+                        //
             // frm_browser_edit
             //
             this.AcceptButton = this.btn_ok;
@@ -204,20 +245,7 @@ namespace BrowserSelect
             this.ClientSize = new System.Drawing.Size(397, 230);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_ok);
-            this.Controls.Add(this.btn_icon_reset);
-            this.Controls.Add(this.btn_icon);
-            this.Controls.Add(this.pic_icon);
-            this.Controls.Add(this.lbl_icon);
-            this.Controls.Add(this.lbl_shortcut_hint);
-            this.Controls.Add(this.txt_shortcut);
-            this.Controls.Add(this.lbl_shortcut);
-            this.Controls.Add(this.txt_args);
-            this.Controls.Add(this.lbl_args);
-            this.Controls.Add(this.btn_browse);
-            this.Controls.Add(this.txt_exec);
-            this.Controls.Add(this.lbl_exec);
-            this.Controls.Add(this.txt_name);
-            this.Controls.Add(this.lbl_name);
+            this.Controls.Add(this.card_fields);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -225,7 +253,10 @@ namespace BrowserSelect
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Browser";
+            this.Load += new System.EventHandler(this.frm_browser_edit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pic_icon)).EndInit();
+            this.card_fields.ResumeLayout(false);
+            this.card_fields.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,7 +268,7 @@ namespace BrowserSelect
         private System.Windows.Forms.TextBox txt_name;
         private System.Windows.Forms.Label lbl_exec;
         private System.Windows.Forms.TextBox txt_exec;
-        private System.Windows.Forms.Button btn_browse;
+        private BrowserSelect.UI.FluentButton btn_browse;
         private System.Windows.Forms.Label lbl_args;
         private System.Windows.Forms.TextBox txt_args;
         private System.Windows.Forms.Label lbl_shortcut;
@@ -245,10 +276,16 @@ namespace BrowserSelect
         private System.Windows.Forms.Label lbl_shortcut_hint;
         private System.Windows.Forms.Label lbl_icon;
         private System.Windows.Forms.PictureBox pic_icon;
-        private System.Windows.Forms.Button btn_icon;
-        private System.Windows.Forms.Button btn_icon_reset;
-        private System.Windows.Forms.Button btn_ok;
-        private System.Windows.Forms.Button btn_cancel;
+        private BrowserSelect.UI.FluentButton btn_icon;
+        private BrowserSelect.UI.FluentButton btn_icon_reset;
+        private BrowserSelect.UI.FluentButton btn_ok;
+        private BrowserSelect.UI.FluentButton btn_cancel;
         private System.Windows.Forms.ToolTip toolTip1;
+        private BrowserSelect.UI.FluentCard card_fields;
+        private BrowserSelect.UI.FluentTextBoxHost host_name;
+        private BrowserSelect.UI.FluentTextBoxHost host_exec;
+        private BrowserSelect.UI.FluentTextBoxHost host_args;
+        private BrowserSelect.UI.FluentTextBoxHost host_shortcut;
+        private BrowserSelect.UI.FluentFieldHost host_icon;
     }
 }

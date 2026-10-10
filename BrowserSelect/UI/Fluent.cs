@@ -178,13 +178,22 @@ namespace BrowserSelect.UI
                 if (!_iconChecked)
                 {
                     _iconChecked = true;
+                    // fast check (the selection window shows these icons on every link click): GDI+ substitutes a
+                    // missing font, so the font is installed if the created font keeps the requested name
                     foreach (var name in new[] { "Segoe Fluent Icons", "Segoe MDL2 Assets" })
                     {
-                        if (Theme.IsFontInstalled(name))
+                        try
                         {
-                            _iconFont = name;
-                            break;
+                            using (var font = new Font(name, 10f, FontStyle.Regular, GraphicsUnit.Point))
+                            {
+                                if (string.Equals(font.Name, name, StringComparison.OrdinalIgnoreCase))
+                                {
+                                    _iconFont = name;
+                                    break;
+                                }
+                            }
                         }
+                        catch (Exception) { }
                     }
                 }
                 return _iconFont;
@@ -214,6 +223,9 @@ namespace BrowserSelect.UI
         public const string GlyphSync = "\uE895";
         public const string GlyphChevronUp = "\uE70E";
         public const string GlyphChevronDown = "\uE70D";
+        public const string GlyphInfo = "\uE946";
+        public const string GlyphHelp = "\uE897";
+        public const string GlyphDownload = "\uE896";
 
         // ---- drawing helpers ---------------------------------------------------------------------
 
@@ -328,6 +340,7 @@ namespace BrowserSelect.UI
         private bool _hover, _pressed, _accent, _busy;
         private string _glyph;
         private Font _glyphFont;
+        private float _glyphSize = 10f;
 
         public FluentButton()
         {
@@ -360,6 +373,25 @@ namespace BrowserSelect.UI
         {
             get { return _glyph; }
             set { _glyph = value; Invalidate(); }
+        }
+
+        /// <summary>size of the icon glyph in points (10 = normal button icon)</summary>
+        [DefaultValue(10f)]
+        public float GlyphSize
+        {
+            get { return _glyphSize; }
+            set
+            {
+                if (Math.Abs(_glyphSize - value) < 0.01f)
+                    return;
+                _glyphSize = value;
+                if (_glyphFont != null)
+                {
+                    _glyphFont.Dispose();
+                    _glyphFont = null;
+                }
+                Invalidate();
+            }
         }
 
         public void ApplyTheme(Theme.Palette p, bool dark)
@@ -433,6 +465,18 @@ namespace BrowserSelect.UI
                         TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine |
                         TextFormatFlags.NoPrefix | TextFormatFlags.NoPadding);
                 }
+                else if (!string.IsNullOrEmpty(_glyph) && BackgroundImage != null)
+                {
+                    // no icon font (very old Windows): the picture of the button instead of the glyph
+                    var m = (int)Math.Round(4 * s);
+                    var box = Rectangle.Inflate(ClientRectangle, -m, -m);
+                    var img = BackgroundImage;
+                    var f = Math.Min(box.Width / (float)img.Width, box.Height / (float)img.Height);
+                    var w = (int)(img.Width * f);
+                    var h = (int)(img.Height * f);
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.DrawImage(img, new Rectangle(box.X + (box.Width - w) / 2, box.Y + (box.Height - h) / 2, w, h));
+                }
                 else
                 {
                     var flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine |
@@ -455,7 +499,7 @@ namespace BrowserSelect.UI
             if (string.IsNullOrEmpty(_glyph))
                 return null;
             if (_glyphFont == null)
-                _glyphFont = Fluent.CreateIconFont(10f);
+                _glyphFont = Fluent.CreateIconFont(_glyphSize);
             return _glyphFont;
         }
 
@@ -920,6 +964,347 @@ namespace BrowserSelect.UI
         public void ApplyTheme(Theme.Palette p, bool dark)
         {
             ForeColor = p.Text;
+        }
+    }
+
+    /// <summary>
+    /// rounded Windows 11 text field around a single-line TextBox (borderless TextBox centered inside, a few px
+    /// padding left/right; accent colored bottom line while it has the keyboard focus, like WinUI). The TextBox
+    /// keeps all its events, tooltips and properties; Theme gives it the field color of this host.
+    /// </summary>
+    public class FluentTextBoxHost : Panel, IFluentControl
+    {
+        private TextBox _box;
+        private bool _hover;
+
+        public FluentTextBoxHost()
+        {
+            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.ResizeRedraw | ControlStyles.SupportsTransparentBackColor, true);
+        }
+
+        /// <summary>the hosted text box (made borderless and moved into this host)</summary>
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public TextBox Box
+        {
+            get { return _box; }
+            set
+            {
+                if (_box != null)
+                {
+                    _box.GotFocus -= Box_FocusChanged;
+                    _box.LostFocus -= Box_FocusChanged;
+                    _box.MouseEnter -= Box_MouseEnter;
+                    _box.MouseLeave -= Box_MouseLeave;
+                    _box.ReadOnlyChanged -= Box_ReadOnlyChanged;
+                }
+                _box = value;
+                if (_box == null)
+                    return;
+                _box.BorderStyle = BorderStyle.None;
+                _box.Dock = DockStyle.None;
+                _box.Anchor = AnchorStyles.None;
+                if (_box.Parent != this)
+                    Controls.Add(_box);
+                _box.GotFocus += Box_FocusChanged;
+                _box.LostFocus += Box_FocusChanged;
+                _box.MouseEnter += Box_MouseEnter;
+                _box.MouseLeave += Box_MouseLeave;
+                _box.ReadOnlyChanged += Box_ReadOnlyChanged;
+                PlaceBox();
+            }
+        }
+
+        /// <summary>background of the field (also used for the hosted TextBox by Theme)</summary>
+        public Color FieldColor
+        {
+            get
+            {
+                if (_box != null && (_box.ReadOnly || !_box.Enabled))
+                    return Fluent.ButtonDisabledBack;
+                return Theme.Current.Field;
+            }
+        }
+
+        public void ApplyTheme(Theme.Palette p, bool dark)
+        {
+            BackColor = FieldColor;
+            Invalidate();
+        }
+
+        private void Box_FocusChanged(object sender, EventArgs e) { Invalidate(); }
+        private void Box_MouseEnter(object sender, EventArgs e) { _hover = true; Invalidate(); }
+
+        private void Box_MouseLeave(object sender, EventArgs e)
+        {
+            _hover = ClientRectangle.Contains(PointToClient(Cursor.Position));
+            Invalidate();
+        }
+
+        private void Box_ReadOnlyChanged(object sender, EventArgs e)
+        {
+            BackColor = FieldColor;
+            if (_box != null)
+                _box.BackColor = FieldColor;
+            Invalidate();
+        }
+
+        protected override void OnMouseEnter(EventArgs e) { _hover = true; Invalidate(); base.OnMouseEnter(e); }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            _hover = false;
+            Invalidate();
+            base.OnMouseLeave(e);
+        }
+
+        /// <summary>a click on the padding around the text box focuses it</summary>
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            if (_box != null && _box.CanFocus)
+                _box.Focus();
+            base.OnMouseDown(e);
+        }
+
+        protected override void OnLayout(LayoutEventArgs levent)
+        {
+            base.OnLayout(levent);
+            PlaceBox();
+        }
+
+        protected override void OnResize(EventArgs eventargs)
+        {
+            base.OnResize(eventargs);
+            PlaceBox();
+        }
+
+        /// <summary>height a host needs for its text box (text height + padding)</summary>
+        public static int PreferredHeightFor(TextBox box, float scale)
+        {
+            var text = TextRenderer.MeasureText("Ag", box.Font).Height;
+            return Math.Max((int)Math.Round(30 * scale), text + (int)Math.Round(12 * scale));
+        }
+
+        private void PlaceBox()
+        {
+            if (_box == null)
+                return;
+            var s = Fluent.Scale(this);
+            var padX = (int)Math.Round(10 * s);
+            var w = Math.Max(1, ClientSize.Width - 2 * padX);
+            var h = _box.PreferredHeight;
+            var y = Math.Max(0, (ClientSize.Height - h) / 2);
+            var bounds = new Rectangle(padX, y, w, h);
+            if (_box.Bounds != bounds)
+                _box.Bounds = bounds;
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            try
+            {
+                var g = e.Graphics;
+                var s = Fluent.Scale(this);
+                g.Clear(Fluent.ParentBack(this));
+                var focused = _box != null && _box.Focused && !_box.ReadOnly;
+                var fill = FieldColor;
+                var border = _hover && !focused ? Fluent.StrongStroke : Fluent.FieldBorder;
+                Fluent.FillRounded(g, ClientRectangle, 4f * s, fill, border);
+                if (focused)
+                {
+                    // WinUI: 2 px accent line at the bottom of the focused field, inside the rounded corners
+                    var line = Math.Max(2, (int)Math.Round(2 * s));
+                    var inset = (int)Math.Round(3 * s);
+                    using (var brush = new SolidBrush(Fluent.Accent))
+                        g.FillRectangle(brush, new Rectangle(inset, ClientSize.Height - line, Math.Max(1, ClientSize.Width - 2 * inset), line));
+                }
+            }
+            catch (Exception)
+            {
+                base.OnPaintBackground(e);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Windows 11 progress bar: thin rounded track with a rounded accent colored bar; Marquee style animates a
+    /// short bar from left to right. Same members as the ProgressBar it replaces (Style, Value, Minimum, Maximum,
+    /// MarqueeAnimationSpeed).
+    /// </summary>
+    public class FluentProgressBar : Control, IFluentControl
+    {
+        private int _value, _minimum, _maximum = 100, _speed = 30;
+        private ProgressBarStyle _style = ProgressBarStyle.Continuous;
+        private readonly Timer _timer = new Timer();
+        private float _marquee;
+
+        public FluentProgressBar()
+        {
+            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.ResizeRedraw | ControlStyles.SupportsTransparentBackColor, true);
+            SetStyle(ControlStyles.Selectable, false);
+            TabStop = false;
+            AccessibleRole = AccessibleRole.ProgressBar;
+            _timer.Interval = 30;
+            _timer.Tick += (s, e) =>
+            {
+                _marquee += 0.02f;
+                if (_marquee > 1.4f)
+                    _marquee = -0.4f;
+                Invalidate();
+            };
+        }
+
+        [DefaultValue(ProgressBarStyle.Continuous)]
+        public ProgressBarStyle Style
+        {
+            get { return _style; }
+            set { _style = value; UpdateTimer(); Invalidate(); }
+        }
+
+        [DefaultValue(0)]
+        public int Value
+        {
+            get { return _value; }
+            set
+            {
+                if (value < _minimum || value > _maximum)
+                    throw new ArgumentOutOfRangeException("value");
+                _value = value;
+                AccessibleDescription = _value + " %";
+                Invalidate();
+            }
+        }
+
+        [DefaultValue(0)]
+        public int Minimum
+        {
+            get { return _minimum; }
+            set { _minimum = value; if (_value < value) _value = value; Invalidate(); }
+        }
+
+        [DefaultValue(100)]
+        public int Maximum
+        {
+            get { return _maximum; }
+            set { _maximum = value; if (_value > value) _value = value; Invalidate(); }
+        }
+
+        /// <summary>milliseconds per animation step of the Marquee style (0 stops the animation)</summary>
+        [DefaultValue(30)]
+        public int MarqueeAnimationSpeed
+        {
+            get { return _speed; }
+            set { _speed = value; UpdateTimer(); }
+        }
+
+        private void UpdateTimer()
+        {
+            if (_style == ProgressBarStyle.Marquee && _speed > 0 && Visible && !IsDisposed)
+            {
+                _timer.Interval = Math.Max(15, _speed);
+                _timer.Start();
+            }
+            else
+            {
+                _timer.Stop();
+            }
+        }
+
+        protected override void OnVisibleChanged(EventArgs e)
+        {
+            base.OnVisibleChanged(e);
+            UpdateTimer();
+        }
+
+        public void ApplyTheme(Theme.Palette p, bool dark)
+        {
+            Invalidate();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            try
+            {
+                var g = e.Graphics;
+                var s = Fluent.Scale(this);
+                g.Clear(Fluent.ParentBack(this));
+                var h = Math.Max(3, (int)Math.Round(4 * s));
+                var y = (Height - h) / 2;
+                var track = new Rectangle(0, y, Width, h);
+                // the track is a thin line, the bar is thicker (like Windows 11)
+                var line = Math.Max(1, (int)Math.Round(1 * s));
+                var trackLine = new Rectangle(0, y + (h - line) / 2, Width, line);
+                using (var brush = new SolidBrush(Fluent.StrongStroke))
+                    g.FillRectangle(brush, trackLine);
+                RectangleF bar;
+                if (_style == ProgressBarStyle.Marquee)
+                {
+                    var w = Width * 0.4f;
+                    var x = _marquee * Width - w / 2;
+                    bar = RectangleF.Intersect(new RectangleF(x, y, w, h), track);
+                }
+                else
+                {
+                    var range = Math.Max(1, _maximum - _minimum);
+                    bar = new RectangleF(0, y, Width * (float)(_value - _minimum) / range, h);
+                }
+                if (bar.Width >= 1)
+                {
+                    var old = g.SmoothingMode;
+                    g.SmoothingMode = SmoothingMode.AntiAlias;
+                    using (var path = Fluent.RoundRect(bar, h / 2f))
+                    using (var brush = new SolidBrush(Enabled ? Fluent.Accent : Fluent.DisabledText))
+                        g.FillPath(brush, path);
+                    g.SmoothingMode = old;
+                }
+            }
+            catch (Exception)
+            {
+                base.OnPaint(e);
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _timer.Stop();
+                _timer.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+
+    /// <summary>layout helpers for the windows that are laid out in code (About, Edit browser, ...)</summary>
+    internal static class FluentLayout
+    {
+        /// <summary>
+        /// makes a label wrap its text at <paramref name="width"/> (AutoSize with a maximum width), places it and
+        /// returns its bottom
+        /// </summary>
+        public static int Wrap(Label label, int x, int y, int width)
+        {
+            label.AutoSize = false;
+            label.MaximumSize = new Size(Math.Max(1, width), 0);
+            label.AutoSize = true;
+            label.Location = new Point(x, y);
+            return label.Bottom;
+        }
+
+        /// <summary>width of a button that shows its (longest) text with padding, at least <paramref name="minimum"/></summary>
+        public static int ButtonWidth(Button button, int minimum, float scale, params string[] texts)
+        {
+            var width = minimum;
+            var all = texts == null || texts.Length == 0 ? new[] { button.Text } : texts;
+            foreach (var t in all)
+                width = Math.Max(width, TextRenderer.MeasureText(t ?? "", button.Font).Width + (int)Math.Round(32 * scale));
+            return width;
+        }
+
+        public static int Px(float value, float scale)
+        {
+            return (int)Math.Round(value * scale);
         }
     }
 }

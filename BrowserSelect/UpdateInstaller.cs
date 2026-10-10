@@ -138,8 +138,9 @@ namespace BrowserSelect
     class frm_update_download : Form
     {
         private readonly Label lbl_status;
-        private readonly ProgressBar progress;
-        private readonly Button btn_cancel;
+        private readonly FluentProgressBar progress;
+        private readonly FluentButton btn_cancel;
+        private readonly bool _preview;
         private WebClient _client;
         private string _file;
         private bool _cancelled;
@@ -147,8 +148,18 @@ namespace BrowserSelect
         /// <summary>set when the update could not be downloaded/started; shown by the caller after the window closed</summary>
         public string FailureReason { get; private set; }
 
-        public frm_update_download()
+        public frm_update_download() : this(false)
         {
+        }
+
+        /// <param name="preview">
+        /// test aid for the UI screenshot workflow (BROWSERSELECT_UI_PREVIEW=update): shows the window with a
+        /// sample download state and never connects to the network
+        /// </param>
+        public frm_update_download(bool preview)
+        {
+            _preview = preview;
+            Name = "frm_update_download";
             Text = L10n.T("Update_DownloadTitle");
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
@@ -156,7 +167,7 @@ namespace BrowserSelect
             ShowInTaskbar = true;
             StartPosition = FormStartPosition.CenterParent;
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(420, 120);
+            ClientSize = new Size(440, 132);
             try
             {
                 Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
@@ -166,24 +177,25 @@ namespace BrowserSelect
                 ShowIcon = false;
             }
 
+            // Windows 11 look (v1.5.8.0): thin rounded progress bar in the accent color, rounded Cancel button
             lbl_status = new Label
             {
-                Location = new Point(12, 12),
-                Size = new Size(396, 36),
+                Location = new Point(20, 16),
+                Size = new Size(400, 36),
                 AutoEllipsis = true,
                 Text = L10n.T("Update_Finding")
             };
-            progress = new ProgressBar
+            progress = new FluentProgressBar
             {
-                Location = new Point(12, 52),
-                Size = new Size(396, 20),
+                Location = new Point(20, 58),
+                Size = new Size(400, 12),
                 Style = ProgressBarStyle.Marquee,
                 MarqueeAnimationSpeed = 30
             };
-            btn_cancel = new Button
+            btn_cancel = new FluentButton
             {
-                Location = new Point(308, 84),
-                Size = new Size(100, 26),
+                Location = new Point(320, 86),
+                Size = new Size(100, 30),
                 Text = L10n.T("Common_Cancel"),
                 DialogResult = DialogResult.None
             };
@@ -194,7 +206,24 @@ namespace BrowserSelect
             Controls.Add(progress);
             Controls.Add(btn_cancel);
             Theme.Apply(this);
+            Load += (s, e) =>
+            {
+                // the Cancel button fits its translation (after the window got its final fonts and scale)
+                var width = FluentLayout.ButtonWidth(btn_cancel, btn_cancel.Width, Fluent.Scale(this));
+                btn_cancel.Left = btn_cancel.Right - width;
+                btn_cancel.Width = width;
+            };
 
+            if (_preview)
+            {
+                Shown += (s, e) =>
+                {
+                    lbl_status.Text = L10n.T("Update_Downloading", "BrowserSelect-1.5.8.0-x64-Setup.exe") + "\n412 / 980 KB";
+                    progress.Style = ProgressBarStyle.Continuous;
+                    progress.Value = 42;
+                };
+                return;
+            }
             Shown += async (s, e) => await Run();
             FormClosing += (s, e) =>
             {
