@@ -132,7 +132,7 @@ namespace BrowserSelect {
             this.pnl_nav.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left));
             this.pnl_nav.Location = new System.Drawing.Point(0, 0);
             this.pnl_nav.Name = "pnl_nav";
-            this.pnl_nav.Size = new System.Drawing.Size(240, 516);
+            this.pnl_nav.Size = new System.Drawing.Size(240, 496);
             this.pnl_nav.TabIndex = 0;
             //
             // nav_browsers
@@ -185,7 +185,7 @@ namespace BrowserSelect {
             //
             this.lbl_language.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left));
             this.lbl_language.AutoSize = true;
-            this.lbl_language.Location = new System.Drawing.Point(12, 380);
+            this.lbl_language.Location = new System.Drawing.Point(12, 360);
             this.lbl_language.Name = "lbl_language";
             this.lbl_language.Size = new System.Drawing.Size(58, 13);
             this.lbl_language.TabIndex = 5;
@@ -194,7 +194,7 @@ namespace BrowserSelect {
             // cmb_language
             //
             this.cmb_language.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left));
-            this.cmb_language.Location = new System.Drawing.Point(12, 398);
+            this.cmb_language.Location = new System.Drawing.Point(12, 378);
             this.cmb_language.Name = "cmb_language";
             this.cmb_language.Size = new System.Drawing.Size(216, 21);
             this.cmb_language.TabIndex = 6;
@@ -205,7 +205,7 @@ namespace BrowserSelect {
             //
             this.lbl_theme.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left));
             this.lbl_theme.AutoSize = true;
-            this.lbl_theme.Location = new System.Drawing.Point(12, 430);
+            this.lbl_theme.Location = new System.Drawing.Point(12, 410);
             this.lbl_theme.Name = "lbl_theme";
             this.lbl_theme.Size = new System.Drawing.Size(43, 13);
             this.lbl_theme.TabIndex = 7;
@@ -214,7 +214,7 @@ namespace BrowserSelect {
             // cmb_theme
             //
             this.cmb_theme.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left));
-            this.cmb_theme.Location = new System.Drawing.Point(12, 448);
+            this.cmb_theme.Location = new System.Drawing.Point(12, 428);
             this.cmb_theme.Name = "cmb_theme";
             this.cmb_theme.Size = new System.Drawing.Size(216, 21);
             this.cmb_theme.TabIndex = 8;
@@ -223,7 +223,7 @@ namespace BrowserSelect {
             // chk_mica
             //
             this.chk_mica.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left));
-            this.chk_mica.Location = new System.Drawing.Point(12, 476);
+            this.chk_mica.Location = new System.Drawing.Point(12, 456);
             this.chk_mica.Name = "chk_mica";
             this.chk_mica.Size = new System.Drawing.Size(216, 32);
             this.chk_mica.TabIndex = 9;
@@ -237,7 +237,7 @@ namespace BrowserSelect {
             this.pg_browsers.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right));
             this.pg_browsers.Location = new System.Drawing.Point(248, 0);
             this.pg_browsers.Name = "pg_browsers";
-            this.pg_browsers.Size = new System.Drawing.Size(644, 466);
+            this.pg_browsers.Size = new System.Drawing.Size(644, 446);
             this.pg_browsers.TabIndex = 1;
             //
             // lbl_page_browsers
@@ -261,7 +261,7 @@ namespace BrowserSelect {
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right));
             this.groupBox1.Location = new System.Drawing.Point(4, 60);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(636, 398);
+            this.groupBox1.Size = new System.Drawing.Size(636, 378);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.Text = "Browsers";
             //
@@ -272,7 +272,7 @@ namespace BrowserSelect {
             this.host_browsers.Inset = 4;
             this.host_browsers.Location = new System.Drawing.Point(12, 12);
             this.host_browsers.Name = "host_browsers";
-            this.host_browsers.Size = new System.Drawing.Size(448, 374);
+            this.host_browsers.Size = new System.Drawing.Size(448, 354);
             this.host_browsers.TabIndex = 0;
             //
             // browser_filter
@@ -381,7 +381,7 @@ namespace BrowserSelect {
             this.pg_default.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right));
             this.pg_default.Location = new System.Drawing.Point(248, 0);
             this.pg_default.Name = "pg_default";
-            this.pg_default.Size = new System.Drawing.Size(644, 466);
+            this.pg_default.Size = new System.Drawing.Size(644, 446);
             this.pg_default.TabIndex = 2;
             this.pg_default.Visible = false;
             //
@@ -440,7 +440,7 @@ namespace BrowserSelect {
             this.pg_rules.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right));
             this.pg_rules.Location = new System.Drawing.Point(248, 0);
             this.pg_rules.Name = "pg_rules";
-            this.pg_rules.Size = new System.Drawing.Size(644, 466);
+            this.pg_rules.Size = new System.Drawing.Size(644, 446);
             this.pg_rules.TabIndex = 3;
             this.pg_rules.Visible = false;
             //
@@ -462,7 +462,7 @@ namespace BrowserSelect {
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right));
             this.groupBox3.Location = new System.Drawing.Point(4, 60);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(636, 398);
+            this.groupBox3.Size = new System.Drawing.Size(636, 378);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.Text = "Auto Select Filters";
             //
@@ -474,7 +474,7 @@ namespace BrowserSelect {
             this.linkLabel1.UseCompatibleTextRendering = true;
             this.linkLabel1.Location = new System.Drawing.Point(12, 10);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(612, 44);
+            this.linkLabel1.Size = new System.Drawing.Size(612, 48);
             this.linkLabel1.TabIndex = 0;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
@@ -484,9 +484,9 @@ namespace BrowserSelect {
             this.host_rules.Controls.Add(this.gv_filters);
             this.host_rules.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right));
             this.host_rules.Inset = 2;
-            this.host_rules.Location = new System.Drawing.Point(12, 58);
+            this.host_rules.Location = new System.Drawing.Point(12, 62);
             this.host_rules.Name = "host_rules";
-            this.host_rules.Size = new System.Drawing.Size(612, 290);
+            this.host_rules.Size = new System.Drawing.Size(612, 266);
             this.host_rules.TabIndex = 1;
             //
             // gv_filters
@@ -510,7 +510,7 @@ namespace BrowserSelect {
             // button1
             //
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left));
-            this.button1.Location = new System.Drawing.Point(12, 356);
+            this.button1.Location = new System.Drawing.Point(12, 336);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(84, 30);
             this.button1.TabIndex = 2;
@@ -520,7 +520,7 @@ namespace BrowserSelect {
             // btn_move_up
             //
             this.btn_move_up.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left));
-            this.btn_move_up.Location = new System.Drawing.Point(102, 356);
+            this.btn_move_up.Location = new System.Drawing.Point(102, 336);
             this.btn_move_up.Name = "btn_move_up";
             this.btn_move_up.Size = new System.Drawing.Size(100, 30);
             this.btn_move_up.TabIndex = 3;
@@ -530,7 +530,7 @@ namespace BrowserSelect {
             // btn_move_down
             //
             this.btn_move_down.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left));
-            this.btn_move_down.Location = new System.Drawing.Point(208, 356);
+            this.btn_move_down.Location = new System.Drawing.Point(208, 336);
             this.btn_move_down.Name = "btn_move_down";
             this.btn_move_down.Size = new System.Drawing.Size(100, 30);
             this.btn_move_down.TabIndex = 4;
@@ -540,7 +540,7 @@ namespace BrowserSelect {
             // btn_delete
             //
             this.btn_delete.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left));
-            this.btn_delete.Location = new System.Drawing.Point(314, 356);
+            this.btn_delete.Location = new System.Drawing.Point(314, 336);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(84, 30);
             this.btn_delete.TabIndex = 5;
@@ -557,7 +557,7 @@ namespace BrowserSelect {
             this.pg_options.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right));
             this.pg_options.Location = new System.Drawing.Point(248, 0);
             this.pg_options.Name = "pg_options";
-            this.pg_options.Size = new System.Drawing.Size(644, 466);
+            this.pg_options.Size = new System.Drawing.Size(644, 446);
             this.pg_options.TabIndex = 4;
             this.pg_options.Visible = false;
             //
@@ -686,7 +686,7 @@ namespace BrowserSelect {
             this.pg_update.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right));
             this.pg_update.Location = new System.Drawing.Point(248, 0);
             this.pg_update.Name = "pg_update";
-            this.pg_update.Size = new System.Drawing.Size(644, 466);
+            this.pg_update.Size = new System.Drawing.Size(644, 446);
             this.pg_update.TabIndex = 5;
             this.pg_update.Visible = false;
             //
@@ -751,7 +751,7 @@ namespace BrowserSelect {
             this.lbl_source.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right));
             this.lbl_source.AutoEllipsis = true;
             this.lbl_source.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.lbl_source.Location = new System.Drawing.Point(256, 482);
+            this.lbl_source.Location = new System.Drawing.Point(256, 462);
             this.lbl_source.Name = "lbl_source";
             this.lbl_source.Size = new System.Drawing.Size(424, 15);
             this.lbl_source.TabIndex = 6;
@@ -760,7 +760,7 @@ namespace BrowserSelect {
             //
             this.btn_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right));
             this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_cancel.Location = new System.Drawing.Point(700, 474);
+            this.btn_cancel.Location = new System.Drawing.Point(700, 454);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(92, 30);
             this.btn_cancel.TabIndex = 7;
@@ -772,7 +772,7 @@ namespace BrowserSelect {
             this.btn_apply.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right));
             this.btn_apply.Enabled = false;
             this.btn_apply.Accent = true;
-            this.btn_apply.Location = new System.Drawing.Point(798, 474);
+            this.btn_apply.Location = new System.Drawing.Point(798, 454);
             this.btn_apply.Name = "btn_apply";
             this.btn_apply.Size = new System.Drawing.Size(92, 30);
             this.btn_apply.TabIndex = 8;
@@ -828,7 +828,7 @@ namespace BrowserSelect {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;
-            this.ClientSize = new System.Drawing.Size(900, 516);
+            this.ClientSize = new System.Drawing.Size(900, 496);
             this.Controls.Add(this.pnl_nav);
             this.Controls.Add(this.pg_browsers);
             this.Controls.Add(this.pg_default);
@@ -839,7 +839,7 @@ namespace BrowserSelect {
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_apply);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MinimumSize = new System.Drawing.Size(820, 555);
+            this.MinimumSize = new System.Drawing.Size(820, 535);
             this.Name = "frm_settings";
             this.Text = "Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frm_settings_FormClosing);

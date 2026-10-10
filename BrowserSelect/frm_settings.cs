@@ -1071,8 +1071,35 @@ namespace BrowserSelect
             gv_filters.CellToolTipTextNeeded += gv_filters_CellToolTipTextNeeded;
             gv_filters.KeyDown += gv_filters_KeyDown;
             gv_filters.DataBindingComplete += (s, e) => ProtectAddRow();
+            gv_filters.DataBindingComplete += (s, e) => FitColumnHeaders();
+            gv_filters.VisibleChanged += (s, e) => FitColumnHeaders();
+            gv_filters.FontChanged += (s, e) => FitColumnHeaders();
             gv_filters.RowsAdded += (s, e) => ProtectAddRow();
             ProtectAddRow();
+        }
+
+        /// <summary>
+        /// every column is at least as wide as its (translated) header text, e.g. German "Abgleich" or Japanese
+        /// "ブラウザー" (the grid sits on a page that is hidden at first, so this is repeated when it is shown)
+        /// </summary>
+        private void FitColumnHeaders()
+        {
+            try
+            {
+                var font = gv_filters.ColumnHeadersDefaultCellStyle.Font ?? gv_filters.Font;
+                var padding = (int)Math.Ceiling(14 * Fluent.Scale(gv_filters));
+                foreach (DataGridViewColumn column in gv_filters.Columns)
+                {
+                    if (!column.Visible || string.IsNullOrEmpty(column.HeaderText))
+                        continue;
+                    var needed = TextRenderer.MeasureText(column.HeaderText, font).Width + padding;
+                    if (column.MinimumWidth < needed)
+                        column.MinimumWidth = needed;
+                    if (column.Width < needed)
+                        column.Width = needed;
+                }
+            }
+            catch (Exception) { }
         }
 
         /// <summary>the "+" row is read-only (also after a re-binding, e.g. Move Up/Down or Import)</summary>
