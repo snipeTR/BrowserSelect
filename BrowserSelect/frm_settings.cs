@@ -1078,6 +1078,9 @@ namespace BrowserSelect
             gv_filters.DataBindingComplete += (s, e) => FitColumnHeaders();
             gv_filters.VisibleChanged += (s, e) => FitColumnHeaders();
             gv_filters.FontChanged += (s, e) => FitColumnHeaders();
+            gv_filters.HandleCreated += (s, e) => FitColumnHeaders();
+            gv_filters.DpiChangedAfterParent += (s, e) => FitColumnHeaders();
+            gv_filters.SizeChanged += (s, e) => FitColumnHeaders();
             gv_filters.RowsAdded += (s, e) => ProtectAddRow();
             ProtectAddRow();
         }
@@ -1096,7 +1099,12 @@ namespace BrowserSelect
                 {
                     if (!column.Visible || string.IsNullOrEmpty(column.HeaderText))
                         continue;
-                    var needed = TextRenderer.MeasureText(column.HeaderText, font).Width + padding;
+                    // measured on the grid (its DPI) and on the screen, whichever is wider
+                    var width = TextRenderer.MeasureText(column.HeaderText, font).Width;
+                    if (gv_filters.IsHandleCreated)
+                        using (var g = gv_filters.CreateGraphics())
+                            width = Math.Max(width, TextRenderer.MeasureText(g, column.HeaderText, font).Width);
+                    var needed = width + padding;
                     if (column.MinimumWidth < needed)
                         column.MinimumWidth = needed;
                     if (column.Width < needed)
