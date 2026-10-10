@@ -79,6 +79,20 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 
 # Changelog
 
+v1.5.8.0
+- **Windows 11 look in every window** (like Settings in 1.5.7.0; layout and appearance only, every feature, shortcut and message works as before). Window corners are the standard Windows 11 rounded corners (8 px, `DWMWCP_ROUND`) for every window; Windows 10 keeps square corners
+- **Browser picker:** every browser is a rounded **card** (icon, name, shortcut hint, rounded *Always* button). The card is tinted and gets an accent-colored border under the mouse and a stronger tint while pressed. Keyboard shortcuts (1-9, letters, custom keys, Shift for a private window, Esc), the right-click *Open in private window* menu, Alt to skip rules, window size and multi-monitor positioning are unchanged
+- The vertical *About* / *Settings* buttons are now small rounded **icon buttons** (ⓘ About, gear Settings, ? help) with tooltips, so long translations no longer have to fit vertically. When an update is available the ? button shows an accent-colored **download arrow** (tooltip: update available). Without an icon font (Segoe Fluent Icons / Segoe MDL2 Assets) the old vertical text buttons are drawn rounded
+- **About** and **Original project info:** large header, the description, GitHub/contact links and the Bitcoin donation (QR code, address, rounded *Copy address*) in cards; *Original project info...* is a rounded button. Long translations wrap instead of being shrunk
+- **Add / Edit browser:** the fields in a card, rounded text fields (accent line at the bottom while editing; read-only fields are greyed), icon preview in a rounded frame with *Change...* / *Default* beside it, *OK* in the accent color; the label column grows with the translation
+- **Help windows** (? and Settings → Auto Select Filters → Help): the text in a rounded card, rounded *Close* button
+- **Update download window:** thin rounded progress bar in the accent color, rounded *Cancel*; the window now also scales with the display (it stayed at 100 % size before)
+- New drawn controls in `BrowserSelect/UI/Fluent.cs`: FluentTextBoxHost (rounded text field), FluentProgressBar; FluentButton can show an icon. No new texts: tooltips reuse existing translations
+- Help (?, all 12 languages): the browser list section describes the small buttons on the right; the *Display scale* line now says that a window bigger than the screen first becomes narrower (as far as its layout allows) and only then gets scroll bars
+- *UI screenshots (manual)* workflow also captures the hovered browser card, *Add browser*, the rules help and the update download window (with a layout/clipping report)
+- README screenshots of the browser picker replaced with the new design
+- Human test recipe: [Tests/human_test/21-tum-pencereler-yeni-tasarim.md](Tests/human_test/21-tum-pencereler-yeni-tasarim.md)
+
 v1.5.7.0
 - **Settings in the Windows 11 look** (layout and appearance only; every setting, button, shortcut and message works as before): a **navigation pane** on the left with one page per former section — *Browsers*, *Default Browser*, *Auto Select Filters*, *Options*, *Update checker* (same names as before, so "Settings → Options" etc. in the help and README are still valid). The selected page is shown with a rounded highlight and an accent-colored indicator bar; icons from Segoe Fluent Icons (Windows 11) or Segoe MDL2 Assets (Windows 10), no icons if neither font exists. *Language*, *Theme* and *Mica* stay at the bottom left; *Close*, *Apply* and "Link opened from" are at the bottom right on every page
 - Each page has a large header and **cards** (rounded sections with a subtle border, slightly lighter than the page in both Light and Dark) instead of group boxes; the browser list and the rule grid sit in rounded fields
