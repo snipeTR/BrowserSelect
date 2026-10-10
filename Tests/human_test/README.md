@@ -36,6 +36,7 @@ testlerde kullanılan `tools\bs-open.ps1` yardımcı betiği orada anlatılıyor
 | 17 | Tam ekran pencereleri atla (tek ve **çoklu monitör**), "Tüm pencereler tam ekransa" yedek ayarı | [17-tam-ekran-pencere.md](17-tam-ekran-pencere.md) | 30 dk |
 | 18 | 12 arayüz dili, Japonca/Çince yazı tipi, dar butonlarda taşma, yardım pencereleri | [18-arayuz-dilleri.md](18-arayuz-dilleri.md) | 40 dk |
 | 19 | Kural ekleme `+` satırı (otomatik boş satır yok), `Delete` yalnızca seçili kuralı siler | [19-kural-ekleme-arti-satiri.md](19-kural-ekleme-arti-satiri.md) | 20 dk |
+| 20 | Ayarlar penceresinin Windows 11 tasarımı: gezinti bölmesi, kartlar, yuvarlak butonlar, açma/kapama anahtarları, tema/dil/DPI | [20-ayarlar-yeni-tasarim.md](20-ayarlar-yeni-tasarim.md) | 30 dk |
 
 ## Klasör içeriği
 

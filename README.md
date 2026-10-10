@@ -17,7 +17,7 @@ you may also press Esc (or click the X) to not open the URL.
 
 To install, download the installer below then set BrowserSelect as the default browser.
 
-Settings (Set as Default Browser, browser list, auto select rules, language and theme):
+Settings (Windows 11 style: navigation pane with Browsers, Default Browser, Auto Select Filters, Options and Update checker; language and theme at the bottom left):
 
 | Light | Dark |
 |---|---|
@@ -78,6 +78,18 @@ Just a list of some ideas that can be integrated into BrowserSelect.
 - [x] add file associations (e.g. .url files, or .html files)
 
 # Changelog
+
+v1.5.7.0
+- **Settings in the Windows 11 look** (layout and appearance only; every setting, button, shortcut and message works as before): a **navigation pane** on the left with one page per former section — *Browsers*, *Default Browser*, *Auto Select Filters*, *Options*, *Update checker* (same names as before, so "Settings → Options" etc. in the help and README are still valid). The selected page is shown with a rounded highlight and an accent-colored indicator bar; icons from Segoe Fluent Icons (Windows 11) or Segoe MDL2 Assets (Windows 10), no icons if neither font exists. *Language*, *Theme* and *Mica* stay at the bottom left; *Close*, *Apply* and "Link opened from" are at the bottom right on every page
+- Each page has a large header and **cards** (rounded sections with a subtle border, slightly lighter than the page in both Light and Dark) instead of group boxes; the browser list and the rule grid sit in rounded fields
+- **Rounded buttons** with hover, pressed, disabled and keyboard-focus states; *Apply* and *Set as Default Browser* use the **Windows accent color** (read from Windows: accent palette, `AccentColor`, `DwmGetColorizationColor`; default blue as fallback). ▲/▼ show chevron icons
+- **Toggle switches** instead of check boxes for on/off settings: *Show running browsers only*, *Hold Alt on a link to skip rules*, *Avoid full-screen windows*, update checker *enable* and *Mica* (the browser list check boxes and the *Private* column stay check boxes). Drop-downs get a rounded frame and a chevron
+- No third-party UI library: the controls are drawn by the app itself (`BrowserSelect/UI/Fluent.cs`: FluentButton, FluentToggle, FluentNavItem, FluentCard, FluentFieldHost, FluentComboBox, FluentHeader), so the installer stays small and the license stays GPL-2.0. Buttons, toggles and navigation items are still a Button, CheckBox and RadioButton (keyboard, screen readers, Space/arrow keys work)
+- Display scale: everything is drawn in proportion to the window's DPI (tested by the screenshot workflow at 100–200 %); the window is lower than before (fits a 1920x1080 screen at 175 % and 1366x768 at 100 % without scroll bars; bigger than the screen still gets scroll bars). Japanese/Chinese page headers use the bold UI font of the language (Yu Gothic UI / Microsoft YaHei UI), Latin languages Segoe UI Semibold; long navigation names wrap to two lines
+- Page names reuse the existing translated section names, so no new texts were needed in the 12 languages; help texts are unchanged because every path they describe is still valid
+- *UI screenshots (manual)* workflow: captures every Settings page (with a layout/clipping report per page) and has new `languages` and `themes` inputs (e.g. `en,tr,de,ru,pl,ja,zh-Hans`)
+- README screenshots of Settings replaced with the new design
+- Human test recipe: [Tests/human_test/20-ayarlar-yeni-tasarim.md](Tests/human_test/20-ayarlar-yeni-tasarim.md)
 
 v1.5.6.0
 - **Rule list: "+" row instead of the automatic empty row.** Settings → Auto Select Filters no longer adds an empty "new row" at the bottom. Below the last rule there is a row with a **+** in the left (row header) column (tooltip *Add a new rule*, translated in all 12 languages); clicking it inserts a new rule above it (Match = `Domain`) and starts editing its Pattern. The + row is not a rule: it is never saved, validated, exported, moved with Move Up/Down or deleted, and its cells cannot be edited. The + is drawn in the current theme colors (light/dark) and scales with the display (DPI)

@@ -447,7 +447,7 @@ namespace BrowserSelect.UI
             if (string.IsNullOrEmpty(_glyph))
                 return null;
             if (_glyphFont == null)
-                _glyphFont = Fluent.CreateIconFont(8f);
+                _glyphFont = Fluent.CreateIconFont(10f);
             return _glyphFont;
         }
 
