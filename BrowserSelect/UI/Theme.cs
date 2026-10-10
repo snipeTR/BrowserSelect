@@ -548,11 +548,35 @@ namespace BrowserSelect.UI
                 {
                     var client = form.ClientSize;
                     form.MinimumSize = Size.Empty;
+                    // a window with a resizable layout first shrinks down to its layout minimum; scroll bars only
+                    // below that (e.g. Settings at 200 % on a 1600 px wide screen)
+                    object minimum;
+                    if (LayoutMinimums.TryGetValue(form, out minimum))
+                    {
+                        var m = (Size)minimum;
+                        client = new Size(Math.Min(client.Width, m.Width), Math.Min(client.Height, m.Height));
+                    }
                     form.AutoScrollMinSize = client;
                     form.AutoScroll = true;
                     form.Size = new Size(Math.Min(size.Width, area.Width), Math.Min(size.Height, area.Height));
                 }
                 KeepOnScreen(form);
+            }
+            catch (Exception) { }
+        }
+
+        private static readonly ConditionalWeakTable<Form, object> LayoutMinimums = new ConditionalWeakTable<Form, object>();
+
+        /// <summary>
+        /// smallest client size (in current pixels) at which the anchored layout of a window still works; a window
+        /// bigger than the screen is made smaller down to this size before it gets scroll bars
+        /// </summary>
+        public static void SetLayoutMinimum(Form form, Size clientSize)
+        {
+            try
+            {
+                LayoutMinimums.Remove(form);
+                LayoutMinimums.Add(form, clientSize);
             }
             catch (Exception) { }
         }

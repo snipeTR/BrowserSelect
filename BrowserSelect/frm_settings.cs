@@ -165,6 +165,10 @@ namespace BrowserSelect
         private readonly AutoMatchRule AddRuleRow = new AutoMatchRule { Pattern = "", Browser = "" };
         private void frm_settings_Load(object sender, EventArgs e)
         {
+            // the layout is anchored and still works at 780 x 440 (of 900 x 496 at 100 %): on a small screen
+            // (e.g. 200 % on 1600 px) the window gets narrower before it gets scroll bars (see Theme.FitToScreen)
+            Theme.SetLayoutMinimum(this, new Size(ClientSize.Width * 780 / 900, ClientSize.Height * 440 / 496));
+
             //check if browser select is the default browser or not
             //to disable/enable "set Browser select as default" button
             using (RegistryKey key = Registry.CurrentUser.OpenSubKey(
