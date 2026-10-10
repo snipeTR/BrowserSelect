@@ -293,6 +293,27 @@ namespace BrowserSelect.UI
             return CreateFont(size, style);
         }
 
+        /// <summary>true if a font family is installed (used for the Fluent icon fonts)</summary>
+        internal static bool IsFontInstalled(string family)
+        {
+            return IsInstalled(family);
+        }
+
+        /// <summary>
+        /// larger title font (Settings page headers): Segoe UI Semibold for Latin UI languages, the bold UI font
+        /// for Japanese/Chinese (their UI fonts have no semibold face); null if no font can be created
+        /// </summary>
+        public static Font CreateTitleFont(float size)
+        {
+            if (!IsCjk && IsInstalled("Segoe UI Semibold"))
+            {
+                var semibold = CreateFont("Segoe UI Semibold", size, FontStyle.Regular);
+                if (semibold != null)
+                    return semibold;
+            }
+            return CreateFont(size, FontStyle.Bold);
+        }
+
         private static Font _baseFont;
         private static string _baseFontName;
 
@@ -360,7 +381,7 @@ namespace BrowserSelect.UI
                 // the font they would otherwise inherit
                 if (c.HasChildren && !(c is DataGridView))
                     ApplyFonts(c);
-                if (!(c is ContainerControl))
+                if (!(c is ContainerControl) && !(c is IFluentOwnFont))
                     SetModernFont(c);
             }
         }
@@ -657,6 +678,13 @@ namespace BrowserSelect.UI
 
         private static void StyleControl(Control c, Palette p, bool dark)
         {
+            var fluent = c as IFluentControl;
+            if (fluent != null)
+            {
+                // Fluent controls (UI\Fluent.cs) draw themselves in the theme colors
+                fluent.ApplyTheme(p, dark);
+                return;
+            }
             var role = GetRole(c);
             if (c is Button)
             {
@@ -849,6 +877,12 @@ namespace BrowserSelect.UI
         {
             try
             {
+                var fluentButton = b as FluentButton;
+                if (fluentButton != null)
+                {
+                    fluentButton.Busy = busy;
+                    return;
+                }
                 var p = Current;
                 if (busy)
                 {
@@ -955,6 +989,7 @@ namespace BrowserSelect.UI
                 return;
             var p = Current;
             var dark = p == Dark;
+            Fluent.RefreshAccent();
             try
             {
                 ApplyFonts(form);

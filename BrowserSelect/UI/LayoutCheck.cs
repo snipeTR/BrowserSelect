@@ -165,6 +165,15 @@ namespace BrowserSelect.UI
                 return TextRenderer.MeasureText(g, text, c.Font, new Size(Math.Max(1, width), int.MaxValue), flags);
         }
 
+        /// <summary>text wrapped inside a rectangle of the control: null when every line fits</summary>
+        private static string CheckWrapped(Control c, string text, Rectangle r)
+        {
+            var size = Measure(c, text, r.Width, TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+            if (size.Height > r.Height || size.Width > r.Width + 1)
+                return string.Format("needs {0}, text area is {1}", size, r.Size);
+            return null;
+        }
+
         /// <summary>null when the text fits, otherwise what is wrong</summary>
         private static string CheckText(Control c, float scale)
         {
@@ -206,6 +215,13 @@ namespace BrowserSelect.UI
                     return string.Format("needs {0} ({1} single line), button is {2}", size, single, c.Size);
                 return null;
             }
+            // Fluent toggle switches and navigation items draw their (wrapped) text in a part of the control
+            var toggle = c as FluentToggle;
+            if (toggle != null)
+                return CheckWrapped(c, text, toggle.TextBounds);
+            var nav = c as FluentNavItem;
+            if (nav != null)
+                return CheckWrapped(c, text, nav.TextBounds);
             if (c is CheckBox || c is RadioButton)
             {
                 var box = (int)Math.Ceiling(15 * scale);

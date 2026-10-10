@@ -26,32 +26,66 @@ namespace BrowserSelect
             // Windows 10/11 look (fonts, colors, title bar); before the texts so labels are measured with the final font
             Theme.Apply(this);
             ApplyTexts();
-            // translated labels in front of a drop-down can be wider than the English ones
-            KeepRightOf(lbl_sort, cmb_sort);
-            KeepRightOf(lbl_language, cmb_language);
-            KeepRightOf(lbl_theme, cmb_theme);
+            SetupNavigation();
         }
 
+        #region Navigation pane (Windows 11 Settings look)
+
         /// <summary>
-        /// an auto-sized label in front of a field: if the (translated) label grows into the field, the field
-        /// starts right after the label and gets narrower (its right edge stays where it is)
+        /// the navigation pane on the left selects the page shown on the right; every page is one of the former
+        /// group boxes (Browsers, Default Browser, Auto Select Filters, Options, Update checker), so their names
+        /// (and the "Settings &gt; ..." paths in the help) stay the same. The arrow keys move between the items.
         /// </summary>
-        private static void KeepRightOf(Label label, Control field)
+        private void SetupNavigation()
         {
-            EventHandler fit = (s, e) =>
-            {
-                try
-                {
-                    var left = label.Right + 3;
-                    if (label.Visible && left > field.Left && field.Right - left >= 40)
-                        field.SetBounds(left, field.Top, field.Right - left, field.Height);
-                }
-                catch (Exception) { }
-            };
-            label.SizeChanged += fit;
-            label.LocationChanged += fit;
-            fit(label, EventArgs.Empty);
+            nav_browsers.Page = pg_browsers;
+            nav_default.Page = pg_default;
+            nav_rules.Page = pg_rules;
+            nav_options.Page = pg_options;
+            nav_update.Page = pg_update;
+            foreach (var item in NavItems)
+                item.CheckedChanged += NavItem_CheckedChanged;
+            ShowPage(NavItems.FirstOrDefault(i => i.Checked) ?? nav_browsers);
         }
+
+        private FluentNavItem[] NavItems
+        {
+            get { return new[] { nav_browsers, nav_default, nav_rules, nav_options, nav_update }; }
+        }
+
+        private void NavItem_CheckedChanged(object sender, EventArgs e)
+        {
+            var item = (FluentNavItem)sender;
+            if (item.Checked)
+                ShowPage(item);
+        }
+
+        /// <summary>shows the page of a navigation item (and selects the item)</summary>
+        private void ShowPage(FluentNavItem item)
+        {
+            if (!item.Checked)
+                item.Checked = true; // calls ShowPage again via CheckedChanged
+            foreach (var other in NavItems)
+                if (other.Page != null && other.Page != item.Page)
+                    other.Page.Visible = false;
+            if (item.Page != null && !item.Page.Visible)
+                item.Page.Visible = true;
+            // UI screenshot workflow: a layout report (clipping etc.) for every page
+            if (LayoutCheck.Enabled && IsHandleCreated)
+            {
+                var timer = new Timer { Interval = 700 };
+                timer.Tick += (s, a) =>
+                {
+                    timer.Stop();
+                    timer.Dispose();
+                    if (!IsDisposed)
+                        LayoutCheck.Write(this);
+                };
+                timer.Start();
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// sets every visible text from Localization\Strings.resx (current UI language);
@@ -61,7 +95,13 @@ namespace BrowserSelect
         {
             Text = Strings.Settings_Title;
 
-            groupBox1.Text = Strings.Settings_BrowsersGroup;
+            // navigation items, page headers and cards use the (translated) names of the former group boxes
+            nav_browsers.Text = lbl_page_browsers.Text = groupBox1.Text = Strings.Settings_BrowsersGroup;
+            nav_default.Text = lbl_page_default.Text = groupBox2.Text = Strings.Settings_DefaultGroup;
+            nav_rules.Text = lbl_page_rules.Text = groupBox3.Text = Strings.Settings_RulesGroup;
+            nav_options.Text = lbl_page_options.Text = groupBox5.Text = Strings.Settings_OptionsGroup;
+            nav_update.Text = lbl_page_update.Text = groupBox4.Text = Strings.Settings_UpdateGroup;
+
             btn_browser_add.Text = Strings.Settings_BrowserAdd;
             toolTip1.SetToolTip(btn_browser_add, Strings.Settings_BrowserAddTooltip);
             btn_browser_edit.Text = Strings.Settings_BrowserEdit;
@@ -74,13 +114,11 @@ namespace BrowserSelect
             toolTip1.SetToolTip(btn_browser_down, Strings.Settings_BrowserDownTooltip);
             btn_refresh.Text = Strings.Settings_Refresh;
 
-            groupBox2.Text = Strings.Settings_DefaultGroup;
             label1.Text = Strings.Settings_DefaultInfo;
             btn_setdefault.Text = Strings.Settings_SetDefault;
             btn_filetypes.Text = Strings.Settings_FileTypes;
             toolTip1.SetToolTip(btn_filetypes, Strings.Settings_FileTypesTooltip);
 
-            groupBox5.Text = Strings.Settings_OptionsGroup;
             chk_running_only.Text = Strings.Settings_RunningOnly;
             toolTip1.SetToolTip(chk_running_only, Strings.Settings_RunningOnlyTooltip);
             chk_alt_ignore.Text = Strings.Settings_AltIgnore;
@@ -95,12 +133,10 @@ namespace BrowserSelect
             btn_import.Text = Strings.Settings_Import;
             toolTip1.SetToolTip(btn_import, Strings.Settings_ImportTooltip);
 
-            groupBox4.Text = Strings.Settings_UpdateGroup;
             chk_check_update.Text = Strings.Settings_UpdateEnable;
             btn_check_update.Text = Strings.Settings_UpdateCheckNow;
             label2.Text = Strings.Settings_FeedbackInfo;
 
-            groupBox3.Text = Strings.Settings_RulesGroup;
             var info = Strings.Settings_RulesInfo ?? "";
             var link = Strings.Settings_RulesInfoLink ?? "";
             linkLabel1.Text = info;

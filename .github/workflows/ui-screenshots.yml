@@ -13,6 +13,14 @@ on:
         description: 'Display scales in percent (comma separated)'
         required: false
         default: '100,125,150,175,200'
+      languages:
+        description: 'UI languages (comma separated), e.g. en,tr,de,ru,pl,ja,zh-Hans'
+        required: false
+        default: 'en,tr'
+      themes:
+        description: 'Themes (comma separated): Light,Dark'
+        required: false
+        default: 'Light,Dark'
 
 permissions:
   contents: read
@@ -37,8 +45,8 @@ jobs:
       - run: msbuild BrowserSelect\BrowserSelect.csproj /p:Configuration=Release /p:Platform=x64 /m /v:minimal
       - name: Screenshots
         shell: pwsh
-        timeout-minutes: 60
-        run: '& "$env:RUNNER_TEMP\ui-screenshots.ps1" -Mode runtime -Scales "${{ inputs.scales || ''100,125,150,175,200'' }}"'
+        timeout-minutes: 90
+        run: '& "$env:RUNNER_TEMP\ui-screenshots.ps1" -Mode runtime -Scales "${{ inputs.scales || ''100,125,150,175,200'' }}" -Languages "${{ inputs.languages || ''en,tr'' }}" -Themes "${{ inputs.themes || ''Light,Dark'' }}"'
       - uses: actions/upload-artifact@v4
         if: always()
         with:

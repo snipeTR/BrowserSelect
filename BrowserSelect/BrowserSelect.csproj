@@ -152,6 +152,7 @@
     <Compile Include="UpdateInstaller.cs" />
     <Compile Include="UI\Theme.cs" />
     <Compile Include="UI\LayoutCheck.cs" />
+    <Compile Include="UI\Fluent.cs" />
     <Compile Include="VButton.cs">
       <SubType>Component</SubType>
     </Compile>

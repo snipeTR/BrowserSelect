@@ -15,6 +15,8 @@ param(
     [string]$OutDir = "screenshots-ci",
     [ValidateSet("runtime", "session")] [string]$Mode = "runtime",
     [string]$Scales = "100,125,150,175,200",
+    [string]$Languages = "en,tr",
+    [string]$Themes = "Light,Dark",
     [string]$DisplayCs = "$PSScriptRoot\Display.cs",
     [string]$LayoutDir = ""
 )
@@ -169,7 +171,10 @@ $original = Get-Content $config -Raw
 $exe = (Resolve-Path (Join-Path $BuildDir "BrowserSelect.exe")).Path
 
 function RunAll {
-    foreach ($run in @(@("Light", "en"), @("Dark", "en"), @("Light", "tr"), @("Dark", "tr"))) {
+    $runs = @(foreach ($l in ($Languages -split ',' | ForEach-Object { $_.Trim() } | Where-Object { $_ })) {
+        foreach ($t in ($Themes -split ',' | ForEach-Object { $_.Trim() } | Where-Object { $_ })) { ,@($t, $l) }
+    })
+    foreach ($run in $runs) {
         $theme = $run[0]; $lang = $run[1]
         # no user.config: the defaults in BrowserSelect.exe.config are used
         $xml = $original -replace '(<setting name="Theme" serializeAs="String">\s*<value>)[^<]*(</value>)', "`${1}$theme`${2}"
@@ -206,6 +211,17 @@ function RunAll {
                 else { $script:problems.Add("$script:scale/${tag}: Edit browser window did not open") }
             } catch { $script:problems.Add("$script:scale/${tag}: Edit browser: $_") }
             [W]::SetForegroundWindow($settings) | Out-Null
+            Start-Sleep -Milliseconds 500
+            # the other pages of the navigation pane (v1.5.7.0+; the app writes a new layout report per page)
+            if ((Get-Content $script:layouts[[string]$settings].File | Where-Object { $_ -like "#ctl nav_rules *" }) -ne $null) {
+                foreach ($pg in @(@("nav_default", "default"), @("nav_rules", "rules"), @("nav_options", "options"), @("nav_update", "update"), @("nav_browsers", "browsers"))) {
+                    try {
+                        ClickCtl $settings $pg[0]
+                        Start-Sleep -Milliseconds 900
+                        Shot $settings "$tag-2-settings-$($pg[1])" "frm_settings"
+                    } catch { $script:problems.Add("$script:scale/${tag}: Settings page $($pg[1]): $_") }
+                }
+            }
             CloseWindow $settings
         } else { $script:problems.Add("$script:scale/${tag}: Settings window did not open") }
 
