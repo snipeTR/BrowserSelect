@@ -163,7 +163,7 @@ jobs:
           $ver = "${{ steps.version.outputs.version }}"
           $tag = "v$ver-build.${{ github.run_number }}"
           $installer = "BrowserSelect/BrowserSelect-$ver-x64-Setup.exe"
-          $notes = "Automated Windows x64 build of BrowserSelect $ver from commit ${{ github.sha }}.`n`nInstaller: per-user install (no admin rights), requires 64-bit Windows and .NET Framework 4.8.`n`n**Code signing policy:** https://github.com/snipeTR/BrowserSelect/blob/master/docs/code-signing-policy.md"
+          $notes = "Automated Windows x64 build of BrowserSelect $ver from commit ${{ github.sha }}.`n`nInstaller: per-user install (no admin rights), requires 64-bit Windows and .NET Framework 4.8."
           gh release create $tag $installer --draft --target "${{ github.sha }}" --title "BrowserSelect $ver (x64) - $tag" --notes $notes --repo "${{ github.repository }}"
           if ($LASTEXITCODE -ne 0) { throw "gh release create failed" }
           "Draft release **$tag** created for version **$ver**." >> $env:GITHUB_STEP_SUMMARY

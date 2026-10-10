@@ -35,10 +35,6 @@ Latest release: [github.com/snipeTR/BrowserSelect/releases/latest](https://githu
 
 CI builds (MSBuild + NSIS) run on GitHub Actions on every push to `master`. When the version in `BrowserSelect/Properties/AssemblyInfo.cs` changes, a draft release with the installer is created automatically (no manual run needed); published releases are available on the Releases page.
 
-# Code signing policy
-
-Release installers are intended to be signed through the SignPath Foundation free code signing program for open source projects. See the [Code signing policy](docs/code-signing-policy.md) for what is signed, team roles and the privacy policy (BrowserSelect only connects to GitHub when update checking is enabled or the user requests an update).
-
 # Related links
 
 [AlternativeTo](http://alternativeto.net/software/browser-select/)
