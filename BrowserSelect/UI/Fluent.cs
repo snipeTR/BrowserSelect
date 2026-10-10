@@ -217,17 +217,25 @@ namespace BrowserSelect.UI
 
         // ---- drawing helpers ---------------------------------------------------------------------
 
-        /// <summary>DPI scale of a control (1.5 at 150 %)</summary>
+        /// <summary>
+        /// DPI scale of a control (1.5 at 150 %). BrowserSelect is system-DPI aware, where Control.DeviceDpi of
+        /// .NET Framework can stay at 96 although the windows are drawn at 150 or 200 %; the scale is therefore at
+        /// least the system DPI the windows are drawn at (Theme.DpiScale).
+        /// </summary>
         public static float Scale(Control c)
         {
+            float system = 1f;
+            try { system = Theme.DpiScale; }
+            catch (Exception) { }
             try
             {
                 var dpi = c.DeviceDpi;
-                return dpi > 0 ? dpi / 96f : 1f;
+                var own = dpi > 0 ? dpi / 96f : 1f;
+                return Math.Max(own, system);
             }
             catch (Exception)
             {
-                return 1f;
+                return system;
             }
         }
 

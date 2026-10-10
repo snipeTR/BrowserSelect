@@ -855,7 +855,7 @@ namespace BrowserSelect.UI
         private static float _dpiScale;
 
         /// <summary>display scale the windows are drawn at (system DPI / 96; 1.5 at 150 %)</summary>
-        private static float DpiScale
+        internal static float DpiScale
         {
             get
             {
