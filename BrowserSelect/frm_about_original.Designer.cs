@@ -71,6 +71,8 @@ namespace BrowserSelect
             // 
             // lbl_intro
             // 
+            this.lbl_intro.AutoSize = true;
+            this.lbl_intro.MaximumSize = new System.Drawing.Size(428, 0);
             this.lbl_intro.Location = new System.Drawing.Point(16, 16);
             this.lbl_intro.Name = "lbl_intro";
             this.lbl_intro.Size = new System.Drawing.Size(428, 50);

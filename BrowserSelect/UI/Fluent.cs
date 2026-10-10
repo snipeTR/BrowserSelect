@@ -1092,7 +1092,12 @@ namespace BrowserSelect.UI
             var s = Fluent.Scale(this);
             var padX = (int)Math.Round(10 * s);
             var w = Math.Max(1, ClientSize.Width - 2 * padX);
-            var h = _box.PreferredHeight;
+            // a borderless text box is exactly one font height; give it the full measured line height
+            // (descenders are not cut off and LayoutCheck sees no clipping)
+            if (_box.AutoSize)
+                _box.AutoSize = false;
+            var h = Math.Min(Math.Max(1, ClientSize.Height),
+                Math.Max(_box.PreferredHeight, TextRenderer.MeasureText("Ag", _box.Font).Height + 2));
             var y = Math.Max(0, (ClientSize.Height - h) / 2);
             var bounds = new Rectangle(padX, y, w, h);
             if (_box.Bounds != bounds)

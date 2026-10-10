@@ -159,6 +159,8 @@ namespace BrowserSelect
         public frm_update_download(bool preview)
         {
             _preview = preview;
+            // laid out at 96 DPI like the designer forms; ResumeLayout scales it to the display scale
+            SuspendLayout();
             Name = "frm_update_download";
             Text = L10n.T("Update_DownloadTitle");
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -167,6 +169,7 @@ namespace BrowserSelect
             ShowInTaskbar = true;
             StartPosition = FormStartPosition.CenterParent;
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(6F, 13F);
             ClientSize = new Size(440, 132);
             try
             {
@@ -205,6 +208,8 @@ namespace BrowserSelect
             Controls.Add(lbl_status);
             Controls.Add(progress);
             Controls.Add(btn_cancel);
+            ResumeLayout(false);
+            PerformLayout();
             Theme.Apply(this);
             Load += (s, e) =>
             {

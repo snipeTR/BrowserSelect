@@ -736,6 +736,7 @@ The link being opened is shown in the title of the window. You can:
    - press one of the keys shown in parentheses under the icon: 1-9 by position, letters from the name of the browser, or the custom shortcut keys set in Settings &gt; Browsers &gt; Edit...
    - hold Shift while clicking (or pressing the key) to open the link in a private/incognito window; right-click an icon and choose "Open in Private Window" for the same.
 3. Click "Always" under a browser to always open links of this website in that browser. This creates a rule in Settings &gt; Auto Select Filters; to undo it, select the rule there, click Delete and then Apply.
+4. Use the small buttons on the right: (i) About, the gear Settings, ? this help (a download arrow instead of the ? means that an update is available). Hold the mouse over a button to see its name.
 
 AUTO SELECT RULES
 In Settings &gt; Auto Select Filters BrowserSelect can choose the browser automatically, by domain, whole URL, path, keyword, file extension, the application the link was clicked in, or a regular expression. A rule can also open the link in a private window, pass extra arguments to the browser, show the browser list anyway, or ignore the link. Click "Help" in that section for details, or the link above the rule list for examples.
@@ -749,7 +750,7 @@ SETTINGS
 - Update checker: checks the releases of snipeTR/BrowserSelect on GitHub. When a new version is available, this help button turns into an update button; after the update message BrowserSelect offers to download and run the new installer (the setup asks to close BrowserSelect if it is still running).
 - Language (bottom left): user interface language (English, Türkçe, Русский, Deutsch, Français, Español, Português (Brasil), Italiano, Polski, Українська, 简体中文, 日本語); it is used the next time BrowserSelect starts.
 - Theme (bottom left, below Language): Light, Dark or Follow Windows (uses Dark when the Windows app mode is Dark). The new theme is applied at once. Mica: Windows 11 (22H2 or newer) only, adds the Mica effect to the title bar. On Windows 11 the windows also get rounded corners.
-- Display scale (100-200 %): the windows are drawn sharp at the scale you signed in to Windows with. If a window (e.g. Settings at 175 % on a 1920x1080 screen) is bigger than the screen, it gets scroll bars instead of hiding controls below the taskbar.
+- Display scale (100-200 %): the windows are drawn sharp at the scale you signed in to Windows with. If a window is bigger than the screen (e.g. Settings at 200 % on a 1600x1200 screen), it first becomes narrower (and lower) to fit the screen, as far as its layout allows; only if it still does not fit does it get scroll bars, so no controls are hidden below the taskbar.
 
 FULL-SCREEN WINDOWS AND SEVERAL MONITORS
 A browser opens a new link in the window you used last. If that window is playing a full-screen video (e.g. on a second monitor), the link would interrupt it. With Settings &gt; Options &gt; "Avoid full-screen windows" (on by default) BrowserSelect brings the browser's most recently used window that is NOT full screen to the front just before opening the link, so the link opens there (a minimized window is only used, and restored, if there is no other).

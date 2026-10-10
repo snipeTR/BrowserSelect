@@ -37,13 +37,14 @@ testlerde kullanılan `tools\bs-open.ps1` yardımcı betiği orada anlatılıyor
 | 18 | 12 arayüz dili, Japonca/Çince yazı tipi, dar butonlarda taşma, yardım pencereleri | [18-arayuz-dilleri.md](18-arayuz-dilleri.md) | 40 dk |
 | 19 | Kural ekleme `+` satırı (otomatik boş satır yok), `Delete` yalnızca seçili kuralı siler | [19-kural-ekleme-arti-satiri.md](19-kural-ekleme-arti-satiri.md) | 20 dk |
 | 20 | Ayarlar penceresinin Windows 11 tasarımı: gezinti bölmesi, kartlar, yuvarlak butonlar, açma/kapama anahtarları, tema/dil/DPI | [20-ayarlar-yeni-tasarim.md](20-ayarlar-yeni-tasarim.md) | 30 dk |
+| 21 | Tüm pencerelerde Windows 11 tasarımı: tarayıcı kartları, simge butonları, Hakkında, Tarayıcı ekle/düzenle, yardım, güncelleme penceresi | [21-tum-pencereler-yeni-tasarim.md](21-tum-pencereler-yeni-tasarim.md) | 30 dk |
 
 ## Klasör içeriği
 
 ```
 Tests/human_test/
 ├─ README.md                  ← bu dosya (indeks + sonuç tablosu)
-├─ 00-hazirlik.md … 19-*.md   ← reçeteler
+├─ 00-hazirlik.md … 21-*.md   ← reçeteler
 ├─ tools/
 │  └─ bs-open.ps1             ← bir linki BrowserSelect ile açan yardımcı betik
 └─ files/
@@ -119,6 +120,8 @@ Testleri bitirdikçe bu tabloyu kopyalayıp doldurabilirsin (issue açarken ekle
 | 17 | Tam ekran pencereleri atla / çoklu monitör | | |
 | 18 | 12 arayüz dili / CJK yazı tipi | | |
 | 19 | Kural ekleme + satırı / Delete düzeltmesi | | |
+| 20 | Ayarlar penceresi Windows 11 tasarımı | | |
+| 21 | Tüm pencerelerde Windows 11 tasarımı | | |
 
 Test ortamı: Windows sürümü: ______  BrowserSelect sürümü: ______  Yüklü tarayıcılar: ______
 

@@ -199,6 +199,8 @@ function RunAll {
         Set-Content -Path $config -Value $xml -Encoding UTF8
         Remove-Item -Recurse -Force $layoutDir -ErrorAction SilentlyContinue
 
+        # mouse away from the window (no hover state or tooltip left over from the previous run)
+        [W]::SetCursorPos(0, 0) | Out-Null
         $script:p = Start-Process -FilePath $exe -ArgumentList "https://example.com/?bs-test=screenshot" -PassThru
         $p = $script:p
         Start-Sleep -Seconds 6
